@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-12.
+Ultimo update de este blueprint: 2026-03-12 (rediseño frontend minimalista).
 
 ---
 
@@ -110,6 +110,16 @@ Las paginas en `public/region/` y `public/js/regions-data.js` son artefactos gen
 - **Archivo**: `config.json` → referencia `https://calendarioescolar.cl/icons/og-image.png`
 - **Problema**: El archivo `public/icons/og-image.png` no existe. Las previsualizaciones en redes sociales y mensajeria mostraran imagen rota.
 - **Fix pendiente**: Crear og-image.png (1200x630px). Diseno: fondo morado #7c3aed, texto blanco "Calendario Escolar 2026 Chile".
+
+### REDISEÑO FRONTEND (2026-03-12) — COMPLETADO
+- Homepage: countdown → 4 key-facts cards + school-stats bar (semana, días, próximo feriado)
+- Selector dropdown → grid de 16 chips táctiles (<select> oculto para compatibilidad JS)
+- Nueva sección: "Feriados dentro del período escolar 2026" (7 feriados)
+- Template.html: countdown eliminado, key-facts con {{variables}}, tabla 3 cols
+- app.js: initRegionChips(), initSchoolStats() con cálculo de semana y próximo feriado
+- CSS: .key-facts, .key-fact--*, .school-stats, .region-chips, .chip añadidos a components.css
+- 16 páginas de región regeneradas, landings mejoradas
+- Premortem ejecutado: IDs DOM preservados, Schema.org intacto, CLS sin cambios
 
 ### BUG 5 — DEAD CODE api.js
 - **Archivo**: `public/js/api.js`
