@@ -113,65 +113,112 @@
     </div>
   </header>
 
-  <!-- Ad: Top Banner -->
-  <div class="container">
-    <div class="ad-slot ad-slot--banner" aria-hidden="true">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-           data-ad-slot="1234567890"
-           data-ad-format="horizontal"
-           data-full-width-responsive="true"></ins>
-    </div>
-  </div>
-
   <!-- Main -->
   <main id="main">
     <div class="container">
 
       <h1>Calendario Escolar 2026 &mdash; Chile</h1>
+      <p class="hero-sub">Fechas oficiales Mineduc &middot; <a href="/about.html">Fuente</a></p>
 
-      <!-- Countdown to next school event -->
-      <section class="section" aria-label="Cuenta regresiva">
-        <div class="card card--highlight" style="text-align:center;">
-          <p class="card__title" id="countdown-label">Pr&oacute;ximo evento escolar</p>
-          <div id="countdown-home" class="countdown">
-            <div data-unit="days"><span class="countdown__number">--</span><span class="countdown__label">d&iacute;as</span></div>
-            <div data-unit="hours"><span class="countdown__number">--</span><span class="countdown__label">horas</span></div>
-            <div data-unit="minutes"><span class="countdown__number">--</span><span class="countdown__label">min</span></div>
-            <div data-unit="seconds"><span class="countdown__number">--</span><span class="countdown__label">seg</span></div>
-          </div>
-          <p class="card__meta" id="countdown-event-name">Calculando...</p>
+      <!-- Fechas clave -->
+      <section class="key-facts" aria-label="Fechas clave del a&ntilde;o escolar 2026">
+        <div class="key-fact key-fact--primary">
+          <p class="key-fact__label">Inicio de clases</p>
+          <p class="key-fact__date">2 de marzo</p>
+          <p class="key-fact__note">Lunes &middot; Todas las regiones</p>
+        </div>
+        <div class="key-fact key-fact--accent">
+          <p class="key-fact__label">Vacaciones invierno</p>
+          <p class="key-fact__date">11&nbsp;&mdash;&nbsp;24 jul</p>
+          <p class="key-fact__note">14 d&iacute;as &middot; Ays&eacute;n/Mag: 4&mdash;24 jul</p>
+        </div>
+        <div class="key-fact key-fact--warning">
+          <p class="key-fact__label">Fiestas Patrias</p>
+          <p class="key-fact__date">14&nbsp;&mdash;&nbsp;18 sep</p>
+          <p class="key-fact__note">5 d&iacute;as</p>
+        </div>
+        <div class="key-fact key-fact--success">
+          <p class="key-fact__label">Fin de a&ntilde;o escolar</p>
+          <p class="key-fact__date">11 de diciembre</p>
+          <p class="key-fact__note">Viernes &middot; Ays&eacute;n/Mag: 4 dic</p>
         </div>
       </section>
 
-      <!-- Region Selector -->
-      <section class="section" aria-label="Selector de regi&oacute;n">
-        <h2>Consulta por regi&oacute;n</h2>
-        <div class="input-group">
-          <label for="region-select">Selecciona tu regi&oacute;n</label>
-          <select id="region-select" class="input-hero">
-            <option value="">-- Elige una regi&oacute;n --</option>
-            <option value="arica-y-parinacota">Arica y Parinacota</option>
-            <option value="tarapaca">Tarapac&aacute;</option>
-            <option value="antofagasta">Antofagasta</option>
-            <option value="atacama">Atacama</option>
-            <option value="coquimbo">Coquimbo</option>
-            <option value="valparaiso">Valpara&iacute;so</option>
-            <option value="metropolitana">Metropolitana</option>
-            <option value="ohiggins">O&rsquo;Higgins</option>
-            <option value="maule">Maule</option>
-            <option value="nuble">&Ntilde;uble</option>
-            <option value="biobio">Biob&iacute;o</option>
-            <option value="araucania">La Araucan&iacute;a</option>
-            <option value="los-rios">Los R&iacute;os</option>
-            <option value="los-lagos">Los Lagos</option>
-            <option value="aysen">Ays&eacute;n</option>
-            <option value="magallanes">Magallanes</option>
-          </select>
+      <!-- Stats en tiempo real (lo que Google/IA no responde) -->
+      <div class="school-stats" aria-label="Estado actual del a&ntilde;o escolar">
+        <div class="stat-item">
+          <p class="stat-label">Estamos en</p>
+          <p class="stat-value" id="school-week">&mdash;</p>
+          <p class="stat-note">del a&ntilde;o escolar 2026</p>
         </div>
+        <div class="stat-item">
+          <p class="stat-label">Para vacaciones</p>
+          <p class="stat-value" id="days-to-winter">&mdash;</p>
+          <p class="stat-note">d&iacute;as hasta invierno</p>
+        </div>
+        <div class="stat-item">
+          <p class="stat-label">Pr&oacute;ximo feriado</p>
+          <p class="stat-value" id="next-holiday-name">&mdash;</p>
+          <p class="stat-note" id="next-holiday-days">&mdash;</p>
+        </div>
+      </div>
 
-        <!-- Inline region calendar (populated by JS) -->
+      <!-- Ad: Top Banner -->
+      <div class="ad-slot ad-slot--banner" aria-hidden="true">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="1234567890"
+             data-ad-format="horizontal"
+             data-full-width-responsive="true"></ins>
+      </div>
+
+      <!-- Selector de región por chips -->
+      <section class="section" aria-label="Consulta por regi&oacute;n">
+        <h2>Consulta por regi&oacute;n</h2>
+
+        <fieldset class="region-chips" id="region-chips">
+          <legend class="sr-only">Selecciona tu regi&oacute;n</legend>
+          <button type="button" class="chip" data-region="arica-y-parinacota" aria-selected="false">Arica y Parinacota</button>
+          <button type="button" class="chip" data-region="tarapaca" aria-selected="false">Tarapac&aacute;</button>
+          <button type="button" class="chip" data-region="antofagasta" aria-selected="false">Antofagasta</button>
+          <button type="button" class="chip" data-region="atacama" aria-selected="false">Atacama</button>
+          <button type="button" class="chip" data-region="coquimbo" aria-selected="false">Coquimbo</button>
+          <button type="button" class="chip" data-region="valparaiso" aria-selected="false">Valpara&iacute;so</button>
+          <button type="button" class="chip" data-region="metropolitana" aria-selected="false">Metropolitana</button>
+          <button type="button" class="chip" data-region="ohiggins" aria-selected="false">O&rsquo;Higgins</button>
+          <button type="button" class="chip" data-region="maule" aria-selected="false">Maule</button>
+          <button type="button" class="chip" data-region="nuble" aria-selected="false">&Ntilde;uble</button>
+          <button type="button" class="chip" data-region="biobio" aria-selected="false">Biob&iacute;o</button>
+          <button type="button" class="chip" data-region="araucania" aria-selected="false">La Araucan&iacute;a</button>
+          <button type="button" class="chip" data-region="los-rios" aria-selected="false">Los R&iacute;os</button>
+          <button type="button" class="chip" data-region="los-lagos" aria-selected="false">Los Lagos</button>
+          <button type="button" class="chip" data-region="aysen" aria-selected="false">Ays&eacute;n</button>
+          <button type="button" class="chip" data-region="magallanes" aria-selected="false">Magallanes</button>
+        </fieldset>
+
+        <!-- Select oculto para compatibilidad con app.js -->
+        <select id="region-select" aria-hidden="true" style="display:none" tabindex="-1">
+          <option value="">--</option>
+          <option value="arica-y-parinacota">Arica y Parinacota</option>
+          <option value="tarapaca">Tarapac&aacute;</option>
+          <option value="antofagasta">Antofagasta</option>
+          <option value="atacama">Atacama</option>
+          <option value="coquimbo">Coquimbo</option>
+          <option value="valparaiso">Valpara&iacute;so</option>
+          <option value="metropolitana">Metropolitana</option>
+          <option value="ohiggins">O&rsquo;Higgins</option>
+          <option value="maule">Maule</option>
+          <option value="nuble">&Ntilde;uble</option>
+          <option value="biobio">Biob&iacute;o</option>
+          <option value="araucania">La Araucan&iacute;a</option>
+          <option value="los-rios">Los R&iacute;os</option>
+          <option value="los-lagos">Los Lagos</option>
+          <option value="aysen">Ays&eacute;n</option>
+          <option value="magallanes">Magallanes</option>
+        </select>
+
+        <!-- Calendario inline de la región seleccionada -->
         <div id="region-calendar" style="display:none;">
           <div class="card">
             <h3 id="region-title"></h3>
@@ -180,8 +227,7 @@
                 <thead>
                   <tr>
                     <th>Evento</th>
-                    <th>Fecha inicio</th>
-                    <th>Fecha fin</th>
+                    <th>Fechas</th>
                     <th>D&iacute;as</th>
                   </tr>
                 </thead>
@@ -189,7 +235,7 @@
               </table>
             </div>
             <p style="margin-top:var(--space-4); text-align:center;">
-              <a id="region-link" href="#" class="btn btn--secondary">Ver p&aacute;gina completa de la regi&oacute;n</a>
+              <a id="region-link" href="#" class="btn btn--secondary">Ver p&aacute;gina completa &rarr;</a>
             </p>
           </div>
         </div>
@@ -205,112 +251,75 @@
              data-full-width-responsive="true"></ins>
       </div>
 
-      <!-- National Summary Table -->
-      <section class="section" aria-label="Resumen nacional">
-        <h2>Resumen nacional &mdash; Fechas compartidas 2026</h2>
-        <p>Estos eventos son comunes para la mayor&iacute;a de las regiones del pa&iacute;s:</p>
+      <!-- Feriados en período escolar (contenido único) -->
+      <section class="section" aria-label="Feriados en per&iacute;odo escolar 2026">
+        <h2>Feriados dentro del per&iacute;odo escolar 2026</h2>
+        <p>D&iacute;as festivos que caen en per&iacute;odos de clases (excluye vacaciones y fines de semana):</p>
         <div class="table-wrapper">
           <table>
             <thead>
               <tr>
-                <th>Evento</th>
-                <th>Fecha inicio</th>
-                <th>Fecha fin</th>
-                <th>D&iacute;as</th>
+                <th>Fecha</th>
+                <th>Feriado</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td><strong>Inicio a&ntilde;o escolar</strong></td>
-                <td>2 de marzo</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-              </tr>
-              <tr>
-                <td><strong>Vacaciones de invierno</strong></td>
-                <td>11 de julio</td>
-                <td>24 de julio</td>
-                <td>14 d&iacute;as</td>
-              </tr>
-              <tr>
-                <td><strong>Fiestas Patrias</strong></td>
-                <td>14 de septiembre</td>
-                <td>18 de septiembre</td>
-                <td>5 d&iacute;as</td>
-              </tr>
-              <tr>
-                <td><strong>Fin a&ntilde;o escolar</strong></td>
-                <td>11 de diciembre</td>
-                <td>&mdash;</td>
-                <td>&mdash;</td>
-              </tr>
+              <tr><td>Viernes 3 de abril</td><td>Viernes Santo</td></tr>
+              <tr><td>Viernes 1 de mayo</td><td>D&iacute;a del Trabajo</td></tr>
+              <tr><td>Jueves 21 de mayo</td><td>Glorias Navales</td></tr>
+              <tr><td>Lunes 8 de junio</td><td>Corpus Christi</td></tr>
+              <tr><td>Lunes 29 de junio</td><td>San Pedro y San Pablo</td></tr>
+              <tr><td>Lunes 12 de octubre</td><td>Encuentro de Dos Mundos</td></tr>
+              <tr><td>Martes 8 de diciembre</td><td>Inmacula Concepci&oacute;n</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="card__meta">Nota: Las regiones de Ays&eacute;n y Magallanes tienen vacaciones de invierno extendidas (desde el 4 de julio) y fin de a&ntilde;o el 4 de diciembre.</p>
+        <p class="card__meta">Solo feriados irrenunciables en d&iacute;as de clases. Los colegios privados pueden tener variaciones. El 16 de julio (Virgen del Carmen) cae en vacaciones de invierno.</p>
       </section>
 
-      <!-- SEO Content -->
+      <!-- M&aacute;s informaci&oacute;n -->
       <section class="section">
-        <h2>El calendario escolar en Chile</h2>
-        <p>El calendario escolar en Chile es definido cada a&ntilde;o por el Ministerio de Educaci&oacute;n
-           (Mineduc) mediante una resoluci&oacute;n exenta. Este calendario establece las fechas de inicio
-           y t&eacute;rmino del a&ntilde;o escolar, los per&iacute;odos de vacaciones (invierno y Fiestas Patrias),
-           y los d&iacute;as administrativos para los establecimientos educacionales del pa&iacute;s.</p>
-        <p>Para el a&ntilde;o 2026, el calendario escolar sigue la estructura habitual: las clases
-           comienzan a principios de marzo, las vacaciones de invierno se sit&uacute;an en julio, y el
-           a&ntilde;o escolar termina en diciembre. Las regiones australes de Ays&eacute;n y Magallanes suelen
-           tener un periodo de vacaciones de invierno m&aacute;s extenso debido a las condiciones
-           clim&aacute;ticas extremas durante los meses de invierno.</p>
-        <p>Es importante tener en cuenta que cada establecimiento educacional puede realizar
-           ajustes menores dentro del marco establecido por el Mineduc. Por ello, siempre se
-           recomienda confirmar las fechas directamente con el colegio o escuela de su comunidad.</p>
-        <p>Las vacaciones de invierno son uno de los periodos m&aacute;s consultados por las familias
-           chilenas, ya que permiten planificar viajes y actividades recreativas. Del mismo modo,
-           el inicio de clases es una fecha clave para la organizaci&oacute;n familiar, especialmente
-           para la compra de &uacute;tiles escolares y uniformes.</p>
-        <p>El Mineduc tambi&eacute;n establece los d&iacute;as de libre disposici&oacute;n que cada colegio puede
-           utilizar seg&uacute;n sus necesidades internas. Estos d&iacute;as no se reflejan en el calendario
-           nacional, sino que son definidos a nivel de cada establecimiento.</p>
-      </section>
-
-      <!-- SEO Landing Links -->
-      <section class="section">
-        <h2>Fechas m&aacute;s buscadas</h2>
+        <h2>M&aacute;s informaci&oacute;n</h2>
         <div class="card-grid">
           <a href="/vacaciones-invierno-2026.html" class="card" style="text-decoration:none; color:inherit;">
-            <h3 class="card__title" style="color:var(--color-primary);">Vacaciones de Invierno 2026</h3>
-            <p>Fechas de vacaciones de invierno por regi&oacute;n. Desde el 4 al 24 de julio seg&uacute;n la zona.</p>
+            <h3 class="card__title" style="color:var(--color-accent);">Vacaciones de Invierno 2026</h3>
+            <p>Fechas por regi&oacute;n. Desde el 4 al 24 de julio seg&uacute;n la zona.</p>
           </a>
           <a href="/cuando-empiezan-clases-2026.html" class="card" style="text-decoration:none; color:inherit;">
             <h3 class="card__title" style="color:var(--color-primary);">&iquest;Cu&aacute;ndo empiezan las clases 2026?</h3>
-            <p>Fecha de inicio del a&ntilde;o escolar 2026 en cada regi&oacute;n de Chile.</p>
+            <p>Todas las regiones: 2 de marzo. Consulta detalles por establecimiento.</p>
           </a>
         </div>
       </section>
 
       <!-- FAQ -->
       <section class="section" id="faq">
-        <h2>Preguntas Frecuentes</h2>
+        <h2>Preguntas frecuentes</h2>
 
         <details>
           <summary><h3>&iquest;Cu&aacute;ndo empiezan las clases 2026 en Chile?</h3></summary>
           <p>El a&ntilde;o escolar 2026 en Chile comienza el <strong>lunes 2 de marzo</strong> en la
-             mayor&iacute;a de las regiones del pa&iacute;s, seg&uacute;n el calendario oficial del Ministerio
-             de Educaci&oacute;n.</p>
+             mayor&iacute;a de las regiones, seg&uacute;n el calendario oficial del Ministerio de Educaci&oacute;n.</p>
         </details>
 
         <details>
           <summary><h3>&iquest;Cu&aacute;ndo son las vacaciones de invierno 2026?</h3></summary>
-          <p>Las vacaciones de invierno 2026 van desde el <strong>11 de julio hasta el 24 de julio</strong>
-             en la mayor&iacute;a de las regiones. En las regiones de Ays&eacute;n y Magallanes comienzan el
-             4 de julio, ofreciendo una semana adicional de receso.</p>
+          <p>Las vacaciones de invierno 2026 van del <strong>11 al 24 de julio</strong> en la
+             mayor&iacute;a de las regiones (14 d&iacute;as). En Ays&eacute;n y Magallanes comienzan el
+             <strong>4 de julio</strong> (21 d&iacute;as).</p>
         </details>
 
         <details>
           <summary><h3>&iquest;Cu&aacute;ndo termina el a&ntilde;o escolar 2026?</h3></summary>
           <p>El a&ntilde;o escolar 2026 finaliza el <strong>11 de diciembre</strong> en la mayor&iacute;a de las
              regiones. En Ays&eacute;n y Magallanes termina el <strong>4 de diciembre</strong>.</p>
+        </details>
+
+        <details>
+          <summary><h3>&iquest;Pueden los colegios cambiar las fechas del Mineduc?</h3></summary>
+          <p>Los establecimientos educacionales pueden hacer <strong>ajustes menores</strong> dentro del
+             marco que establece el Mineduc, usando los d&iacute;as de libre disposici&oacute;n. Las fechas
+             de este sitio son las oficiales; siempre confirma con tu colegio.</p>
         </details>
       </section>
 
@@ -342,9 +351,8 @@
     </div>
   </footer>
 
-  <!-- JS: defer = descarga paralela, ejecuci&oacute;n en orden -->
+  <!-- JS: defer = descarga paralela, ejecución en orden -->
   <script defer src="/js/theme.js"></script>
-  <script defer src="/js/countdown.js"></script>
   <script defer src="/js/ads.js"></script>
   <script defer src="/js/analytics.js"></script>
   <script defer src="/js/regions-data.js"></script>
