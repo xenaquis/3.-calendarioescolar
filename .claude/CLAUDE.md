@@ -1,5 +1,11 @@
 # calendarioescolar.cl — Instrucciones Claude Code
 
+## ANTES DE CUALQUIER ACCION: Leer el Blueprint
+
+El archivo `BLUEPRINT.md` en la raiz del proyecto es el contexto operativo del sitio.
+Contiene: estado actual, bugs conocidos, deuda tecnica, fuentes de datos, pendientes.
+**Leerlo siempre antes de actuar.** Actualizarlo con cada cambio importante.
+
 ## Que es este proyecto
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico) — paginas generadas desde JSON, sin API real-time.
@@ -48,6 +54,7 @@ config.json      -> Configuracion del sitio
 - `npm run build` -> build + verificacion
 - `npm run generate` -> generar paginas region/ desde data/pages.json + data/template.html
 - `npm run deploy` -> deploy a Cloudflare Pages
+- `update-blueprint` -> No es un script — es una instruccion: actualizar BLUEPRINT.md despues de cada cambio importante
 
 ## Fuente de verdad
 El Google Sheet "Páginas Chicas — Control" es la fuente de verdad para estado,

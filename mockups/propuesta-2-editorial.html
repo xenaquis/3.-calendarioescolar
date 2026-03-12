@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="es-CL" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Propuesta 2: Editorial Escolar — calendarioescolar.cl</title>
+  <meta name="robots" content="noindex, nofollow">
+  <style>
+    /* =========================================================
+       PROPUESTA 2 — "Editorial Escolar"
+       Diseño: Matías Contreras
+       Concepto: Editorial warmth meets data visualization
+       ========================================================= */
+
+    /* --- RESET & BASE --- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      /* Color palette — warm editorial */
+      --bg: #fefcf8;
+      --surface: #ffffff;
+      --surface-alt: #f8f5ef;
+      --primary: #1a5c5c;
+      --primary-light: #e8f0f0;
+      --primary-lighter: #f0f7f7;
+      --secondary: #c8963e;
+      --secondary-light: #fdf6ea;
+      --highlight: #7c3aed;
+      --highlight-light: #f3eeff;
+      --accent-warm: #e8734a;
+      --accent-warm-light: #fef0eb;
+      --text: #1a1a1a;
+      --text-secondary: #6b7280;
+      --text-tertiary: #9ca3af;
+      --divider: #e5e1d8;
+      --divider-strong: #c9c3b8;
+      --shadow-sm: 0 1px 2px rgba(26,26,26,0.04);
+      --shadow-md: 0 4px 12px rgba(26,26,26,0.06);
+      --shadow-lg: 0 8px 30px rgba(26,26,26,0.08);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-xl: 24px;
+
+      /* Spacing scale */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-12: 48px;
+      --space-16: 64px;
+      --space-20: 80px;
+      --space-24: 96px;
+
+      /* Typography */
+      --font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+
+      /* Transitions */
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --duration: 200ms;
+      --duration-slow: 400ms;
+    }
+
+    /* --- DARK MODE --- */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111110;
+        --surface: #1c1c1a;
+        --surface-alt: #222220;
+        --primary: #5fb8b8;
+        --primary-light: #1a2e2e;
+        --primary-lighter: #152525;
+        --secondary: #d4a84e;
+        --secondary-light: #2a2318;
+        --highlight: #a78bfa;
+        --highlight-light: #1e1635;
+        --accent-warm: #f09070;
+        --accent-warm-light: #2a1a14;
+        --text: #eae8e4;
+        --text-secondary: #9ca3af;
+        --text-tertiary: #6b7280;
+        --divider: #2e2d2a;
+        --divider-strong: #3d3c38;
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+        --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+        --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
+      }
+    }
+
+    /* Manual dark mode toggle */
+    html[data-theme="dark"] {
+      --bg: #111110;
+      --surface: #1c1c1a;
+      --surface-alt: #222220;
+      --primary: #5fb8b8;
+      --primary-light: #1a2e2e;
+      --primary-lighter: #152525;
+      --secondary: #d4a84e;
+      --secondary-light: #2a2318;
+      --highlight: #a78bfa;
+      --highlight-light: #1e1635;
+      --accent-warm: #f09070;
+      --accent-warm-light: #2a1a14;
+      --text: #eae8e4;
+      --text-secondary: #9ca3af;
+      --text-tertiary: #6b7280;
+      --divider: #2e2d2a;
+      --divider-strong: #3d3c38;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.3);
+      --shadow-lg: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --- ACCESSIBILITY --- */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--space-4);
+      background: var(--highlight);
+      color: #fff;
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-sm);
+      z-index: 1000;
+      font-weight: 600;
+      text-decoration: none;
+      transition: top var(--duration) var(--ease);
+    }
+    .skip-link:focus {
+      top: var(--space-4);
+    }
+
+    /* Focus visible */
+    :focus-visible {
+      outline: 2px solid var(--highlight);
+      outline-offset: 2px;
+    }
+
+    /* --- LAYOUT --- */
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 var(--space-5);
+    }
+
+    .container--wide {
+      max-width: 1120px;
+    }
+
+    /* --- HEADER --- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--divider);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .site-header__brand {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      transition: opacity var(--duration) var(--ease);
+    }
+    .site-header__brand:hover {
+      opacity: 0.8;
+    }
+
+    .site-header__nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+    }
+
+    .site-header__nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--duration) var(--ease);
+    }
+    .site-header__nav a:hover {
+      color: var(--text);
+    }
+
+    .theme-toggle {
+      appearance: none;
+      border: none;
+      background: var(--surface-alt);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: var(--text-secondary);
+      transition: background var(--duration) var(--ease), color var(--duration) var(--ease), transform var(--duration) var(--ease);
+    }
+    .theme-toggle:hover {
+      background: var(--divider);
+      color: var(--text);
+      transform: rotate(15deg);
+    }
+
+    /* --- EDITORIAL TAG --- */
+    .editorial-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent-warm);
+      padding: var(--space-1) 0;
+    }
+
+    .editorial-tag::before {
+      content: '';
+      display: block;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-warm);
+      border-radius: 50%;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* --- HERO SECTION --- */
+    .hero {
+      padding: var(--space-16) 0 var(--space-12);
+      background: var(--bg);
+      position: relative;
+    }
+
+    .hero__kicker {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--secondary);
+      margin-bottom: var(--space-4);
+    }
+
+    .hero__title {
+      font-size: clamp(36px, 6vw, 64px);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      margin-bottom: var(--space-6);
+      max-width: 700px;
+    }
+
+    .hero__subtitle {
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 540px;
+      margin-bottom: var(--space-10);
+    }
+
+    /* --- COUNTDOWN HERO --- */
+    .countdown-hero {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .countdown-hero__label {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .countdown-hero__event {
+      font-size: clamp(14px, 2vw, 16px);
+      font-weight: 600;
+      color: var(--accent-warm);
+    }
+
+    .countdown-grid {
+      display: flex;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .countdown-unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 72px;
+      padding: var(--space-4) var(--space-5);
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+    }
+
+    .countdown-unit:first-child {
+      background: var(--accent-warm-light);
+      border-color: var(--accent-warm);
+    }
+
+    .countdown-unit:first-child .countdown-unit__number {
+      color: var(--accent-warm);
+    }
+
+    .countdown-unit:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .countdown-unit__number {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-unit__label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+      margin-top: var(--space-1);
+    }
+
+    /* --- SECTION RHYTHM --- */
+    .section {
+      padding: var(--space-16) 0;
+      position: relative;
+    }
+
+    .section--cream {
+      background: var(--bg);
+    }
+
+    .section--white {
+      background: var(--surface);
+      border-top: 1px solid var(--divider);
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .section--teal {
+      background: var(--primary-lighter);
+    }
+
+    .section--warm {
+      background: var(--secondary-light);
+    }
+
+    .section__eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--primary);
+      margin-bottom: var(--space-3);
+    }
+
+    .section__title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: var(--space-3);
+    }
+
+    .section__lead {
+      font-size: clamp(15px, 2vw, 17px);
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-width: 600px;
+      margin-bottom: var(--space-10);
+    }
+
+    /* --- EDITORIAL RULE --- */
+    .editorial-rule {
+      border: none;
+      border-top: 3px solid var(--text);
+      margin: 0 0 var(--space-6) 0;
+      width: 48px;
+    }
+
+    .editorial-rule--wide {
+      width: 100%;
+      border-top-width: 1px;
+      border-color: var(--divider);
+    }
+
+    .editorial-rule--gold {
+      border-color: var(--secondary);
+    }
+
+    /* --- TIMELINE VISUALIZATION --- */
+    .timeline {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: var(--space-4);
+    }
+
+    .timeline__months {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 2px;
+      min-width: 640px;
+      margin-bottom: var(--space-2);
+    }
+
+    .timeline__month-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      text-align: center;
+      padding: var(--space-2) 0;
+    }
+
+    .timeline__bar-row {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 2px;
+      min-width: 640px;
+      margin-bottom: var(--space-3);
+      position: relative;
+    }
+
+    .timeline__cell {
+      height: 44px;
+      border-radius: var(--radius-sm);
+      position: relative;
+      transition: transform var(--duration) var(--ease), opacity var(--duration) var(--ease);
+    }
+
+    .timeline__cell:hover {
+      transform: scaleY(1.15);
+      z-index: 2;
+    }
+
+    .timeline__cell--classes {
+      background: var(--primary);
+      opacity: 0.85;
+    }
+    .timeline__cell--classes:hover { opacity: 1; }
+
+    .timeline__cell--winter {
+      background: var(--highlight);
+      opacity: 0.9;
+    }
+    .timeline__cell--winter:hover { opacity: 1; }
+
+    .timeline__cell--fiestas {
+      background: var(--secondary);
+      opacity: 0.9;
+    }
+    .timeline__cell--fiestas:hover { opacity: 1; }
+
+    .timeline__cell--vacation {
+      background: var(--accent-warm);
+      opacity: 0.85;
+    }
+    .timeline__cell--vacation:hover { opacity: 1; }
+
+    .timeline__cell--empty {
+      background: var(--surface-alt);
+      border: 1px dashed var(--divider);
+    }
+
+    /* Timeline legend */
+    .timeline__legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-5);
+      margin-top: var(--space-6);
+    }
+
+    .timeline__legend-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .timeline__legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* --- DATA CARDS --- */
+    .data-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .data-card {
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      padding: var(--space-6);
+      text-align: center;
+      transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease), border-color var(--duration) var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .data-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform var(--duration-slow) var(--ease);
+    }
+
+    .data-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .data-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .data-card__icon {
+      font-size: 24px;
+      margin-bottom: var(--space-3);
+      display: block;
+    }
+
+    .data-card__number {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--primary);
+    }
+
+    .data-card__number--warm {
+      color: var(--accent-warm);
+    }
+
+    .data-card__number--gold {
+      color: var(--secondary);
+    }
+
+    .data-card__number--purple {
+      color: var(--highlight);
+    }
+
+    .data-card__label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      margin-top: var(--space-2);
+    }
+
+    .data-card__detail {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: var(--space-2);
+    }
+
+    /* --- REGION SELECTOR --- */
+    .region-selector {
+      position: relative;
+      max-width: 480px;
+    }
+
+    .region-selector__label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .region-selector__select {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      padding: var(--space-4) var(--space-12) var(--space-4) var(--space-5);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--surface);
+      border: 2px solid var(--divider);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+
+    .region-selector__select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-light);
+      outline: none;
+    }
+
+    .region-selector__select:hover {
+      border-color: var(--primary);
+    }
+
+    /* --- REGION RESULT CARD --- */
+    .region-result {
+      margin-top: var(--space-8);
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      animation: slideUp var(--duration-slow) var(--ease);
+      display: none;
+    }
+
+    .region-result.is-visible {
+      display: block;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .region-result__header {
+      padding: var(--space-6) var(--space-8);
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .region-result__region-name {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .region-result__body {
+      padding: var(--space-6) var(--space-8);
+    }
+
+    .region-result__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .region-result__datum {
+      text-align: center;
+      padding: var(--space-4);
+    }
+
+    .region-result__datum-number {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.2;
+    }
+
+    .region-result__datum-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-tertiary);
+      margin-top: var(--space-1);
+    }
+
+    .region-result__cta {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      margin-top: var(--space-6);
+      padding: var(--space-3) var(--space-6);
+      background: var(--highlight);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: background var(--duration) var(--ease), transform var(--duration) var(--ease);
+    }
+
+    .region-result__cta:hover {
+      background: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    /* --- NATIONAL SUMMARY TABLE --- */
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 15px;
+    }
+
+    .summary-table thead {
+      position: sticky;
+      top: 56px;
+    }
+
+    .summary-table th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-tertiary);
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 2px solid var(--text);
+      background: var(--surface);
+    }
+
+    .summary-table td {
+      padding: var(--space-4);
+      border-bottom: 1px solid var(--divider);
+      vertical-align: top;
+    }
+
+    .summary-table tr:hover td {
+      background: var(--primary-lighter);
+    }
+
+    .summary-table tr:last-child td {
+      border-bottom: 2px solid var(--text);
+    }
+
+    .summary-table__event {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .summary-table__date {
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+    }
+
+    .summary-table__days {
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+    }
+
+    .summary-table__note {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      font-style: italic;
+    }
+
+    /* --- SEO CONTENT PROSE --- */
+    .prose {
+      max-width: 680px;
+    }
+
+    .prose h2 {
+      font-size: clamp(22px, 3.5vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: var(--space-5);
+      line-height: 1.2;
+    }
+
+    .prose p {
+      font-size: clamp(15px, 2vw, 17px);
+      line-height: 1.75;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-5);
+    }
+
+    .prose p:last-child {
+      margin-bottom: 0;
+    }
+
+    .prose strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* --- LANDING LINKS --- */
+    .landing-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+
+    .landing-link {
+      display: block;
+      padding: var(--space-8);
+      background: var(--surface);
+      border: 1px solid var(--divider);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      color: inherit;
+      transition: transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease), border-color var(--duration) var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .landing-link::after {
+      content: '\2192';
+      position: absolute;
+      right: var(--space-6);
+      top: 50%;
+      transform: translateY(-50%) translateX(-4px);
+      font-size: 20px;
+      color: var(--text-tertiary);
+      transition: transform var(--duration) var(--ease), color var(--duration) var(--ease);
+    }
+
+    .landing-link:hover::after {
+      transform: translateY(-50%) translateX(0);
+      color: var(--highlight);
+    }
+
+    .landing-link:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--highlight);
+    }
+
+    .landing-link__title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--highlight);
+      margin-bottom: var(--space-2);
+      padding-right: var(--space-8);
+    }
+
+    .landing-link__desc {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      padding-right: var(--space-8);
+    }
+
+    /* --- FAQ ACCORDION --- */
+    .faq-list {
+      max-width: 720px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .faq-item:first-child {
+      border-top: 2px solid var(--text);
+    }
+
+    .faq-item:last-child {
+      border-bottom: 2px solid var(--text);
+    }
+
+    .faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5) 0;
+      cursor: pointer;
+      list-style: none;
+      user-select: none;
+      transition: color var(--duration) var(--ease);
+    }
+
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .faq-item summary::after {
+      content: '+';
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--text-tertiary);
+      flex-shrink: 0;
+      margin-left: var(--space-4);
+      transition: transform var(--duration) var(--ease), color var(--duration) var(--ease);
+    }
+
+    .faq-item[open] summary::after {
+      content: '\2212';
+      color: var(--highlight);
+    }
+
+    .faq-item summary:hover {
+      color: var(--highlight);
+    }
+
+    .faq-item summary h3 {
+      font-size: clamp(15px, 2.5vw, 17px);
+      font-weight: 600;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    .faq-item__answer {
+      padding: 0 0 var(--space-6) 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 600px;
+      animation: fadeIn var(--duration) var(--ease);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .faq-item__answer strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* --- FOOTER --- */
+    .site-footer {
+      padding: var(--space-12) 0 var(--space-8);
+      background: var(--surface-alt);
+      border-top: 1px solid var(--divider);
+    }
+
+    .site-footer__top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-8);
+      margin-bottom: var(--space-8);
+    }
+
+    .site-footer__brand {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+    }
+
+    .site-footer__links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-5);
+      list-style: none;
+    }
+
+    .site-footer__links a {
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color var(--duration) var(--ease);
+    }
+    .site-footer__links a:hover {
+      color: var(--text);
+    }
+
+    .site-footer__bottom {
+      padding-top: var(--space-6);
+      border-top: 1px solid var(--divider);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .site-footer__copy,
+    .site-footer__source {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .site-footer__source a {
+      color: var(--text-secondary);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* --- MOBILE ADJUSTMENTS --- */
+    @media (max-width: 640px) {
+      .hero {
+        padding: var(--space-10) 0 var(--space-8);
+      }
+
+      .section {
+        padding: var(--space-10) 0;
+      }
+
+      .countdown-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+      }
+
+      .countdown-unit {
+        min-width: unset;
+      }
+
+      .data-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+      }
+
+      .data-card {
+        padding: var(--space-4);
+      }
+
+      .data-card__number {
+        font-size: 24px;
+      }
+
+      .region-result__body {
+        padding: var(--space-4) var(--space-5);
+      }
+
+      .region-result__header {
+        padding: var(--space-4) var(--space-5);
+      }
+
+      .region-result__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-3);
+      }
+
+      .summary-table {
+        font-size: 14px;
+      }
+
+      .summary-table th,
+      .summary-table td {
+        padding: var(--space-3);
+      }
+
+      .landing-links {
+        grid-template-columns: 1fr;
+      }
+
+      .site-footer__top {
+        flex-direction: column;
+        gap: var(--space-4);
+      }
+
+      .site-footer__bottom {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .container {
+        padding: 0 var(--space-4);
+      }
+
+      .countdown-unit__number {
+        font-size: 28px;
+      }
+
+      .timeline__bar-row,
+      .timeline__months {
+        min-width: 520px;
+      }
+    }
+
+    /* --- PRINT --- */
+    @media print {
+      .site-header,
+      .site-footer,
+      .theme-toggle,
+      .region-selector,
+      .region-result,
+      .landing-links { display: none; }
+
+      .section { padding: 16pt 0; }
+      body { background: #fff; color: #000; font-size: 10pt; }
+      .hero__title { font-size: 24pt; }
+    }
+
+    /* --- SCROLLBAR --- */
+    .timeline::-webkit-scrollbar {
+      height: 6px;
+    }
+    .timeline::-webkit-scrollbar-track {
+      background: var(--surface-alt);
+      border-radius: 3px;
+    }
+    .timeline::-webkit-scrollbar-thumb {
+      background: var(--divider-strong);
+      border-radius: 3px;
+    }
+
+    /* --- UTILITY --- */
+    .text-center { text-align: center; }
+    .mt-2 { margin-top: var(--space-2); }
+    .mt-4 { margin-top: var(--space-4); }
+    .mt-6 { margin-top: var(--space-6); }
+    .mt-8 { margin-top: var(--space-8); }
+    .mb-8 { margin-bottom: var(--space-8); }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+
+    /* Table wrapper for horizontal scroll on mobile */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header">
+    <div class="container container--wide">
+      <a href="/" class="site-header__brand">Calendario Escolar Chile</a>
+      <nav class="site-header__nav" aria-label="Principal">
+        <a href="/">Inicio</a>
+        <a href="/about.html">Fuentes</a>
+        <a href="/contacto.html">Contacto</a>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar tema de color">
+          <span id="theme-icon">&#9790;</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ MAIN ============ -->
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero section--cream">
+      <div class="container">
+        <div class="hero__kicker">Calendario Oficial 2026</div>
+        <h1 class="hero__title">Calendario Escolar Chile 2026</h1>
+        <p class="hero__subtitle">Todas las fechas del a&ntilde;o escolar: inicio de clases, vacaciones de invierno, Fiestas Patrias y cierre. Fuente oficial Mineduc.</p>
+
+        <!-- Countdown -->
+        <div class="countdown-hero" aria-label="Cuenta regresiva al pr&oacute;ximo evento escolar">
+          <div class="countdown-hero__label">
+            <span class="editorial-tag" id="countdown-event">Vacaciones de Invierno</span>
+          </div>
+          <div class="countdown-grid" id="countdown-display">
+            <div class="countdown-unit">
+              <span class="countdown-unit__number" id="cd-days">121</span>
+              <span class="countdown-unit__label">D&iacute;as</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-unit__number" id="cd-hours">08</span>
+              <span class="countdown-unit__label">Horas</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-unit__number" id="cd-minutes">42</span>
+              <span class="countdown-unit__label">Min</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-unit__number" id="cd-seconds">15</span>
+              <span class="countdown-unit__label">Seg</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TIMELINE VISUALIZATION ===== -->
+    <section class="section section--white" aria-label="Visualizaci&oacute;n del a&ntilde;o escolar">
+      <div class="container container--wide">
+        <p class="section__eyebrow">Visualizaci&oacute;n</p>
+        <h2 class="section__title">El a&ntilde;o escolar de un vistazo</h2>
+        <p class="section__lead">Marzo a diciembre 2026 &mdash; cada color representa un per&iacute;odo distinto del calendario escolar.</p>
+
+        <div class="timeline" role="img" aria-label="L&iacute;nea de tiempo del a&ntilde;o escolar 2026: clases de marzo a julio, vacaciones de invierno en julio, clases de julio a septiembre, Fiestas Patrias en septiembre, clases de septiembre a diciembre">
+          <!-- Month labels -->
+          <div class="timeline__months" aria-hidden="true">
+            <div class="timeline__month-label">Mar</div>
+            <div class="timeline__month-label">Abr</div>
+            <div class="timeline__month-label">May</div>
+            <div class="timeline__month-label">Jun</div>
+            <div class="timeline__month-label">Jul</div>
+            <div class="timeline__month-label">Ago</div>
+            <div class="timeline__month-label">Sep</div>
+            <div class="timeline__month-label">Oct</div>
+            <div class="timeline__month-label">Nov</div>
+            <div class="timeline__month-label">Dic</div>
+          </div>
+
+          <!-- National timeline bar (14 regions) -->
+          <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:var(--space-1);padding-left:2px;">14 regiones</div>
+          <div class="timeline__bar-row">
+            <div class="timeline__cell timeline__cell--classes" title="Clases: 2 marzo &ndash; 10 julio"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: abril"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: mayo"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: junio"></div>
+            <div class="timeline__cell timeline__cell--winter" title="Vacaciones de Invierno: 11&ndash;24 julio"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: 25 julio &ndash; 13 septiembre"></div>
+            <div class="timeline__cell timeline__cell--fiestas" title="Fiestas Patrias: 14&ndash;18 septiembre"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: octubre"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: noviembre"></div>
+            <div class="timeline__cell timeline__cell--vacation" title="Vacaciones verano: desde 12 diciembre"></div>
+          </div>
+
+          <!-- Ays&eacute;n & Magallanes bar -->
+          <div style="font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:var(--space-1);margin-top:var(--space-2);padding-left:2px;">Ays&eacute;n y Magallanes</div>
+          <div class="timeline__bar-row">
+            <div class="timeline__cell timeline__cell--classes" title="Clases: 2 marzo &ndash; 3 julio"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: abril"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: mayo"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: junio"></div>
+            <div class="timeline__cell timeline__cell--winter" title="Vacaciones de Invierno: 4&ndash;24 julio (21 d&iacute;as)"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: 25 julio &ndash; 13 septiembre"></div>
+            <div class="timeline__cell timeline__cell--fiestas" title="Fiestas Patrias: 14&ndash;18 septiembre"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: octubre"></div>
+            <div class="timeline__cell timeline__cell--classes" title="Clases: noviembre"></div>
+            <div class="timeline__cell timeline__cell--vacation" title="Vacaciones verano: desde 5 diciembre"></div>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="timeline__legend">
+          <div class="timeline__legend-item">
+            <span class="timeline__legend-dot" style="background:var(--primary);opacity:0.85;"></span>
+            Per&iacute;odo de clases
+          </div>
+          <div class="timeline__legend-item">
+            <span class="timeline__legend-dot" style="background:var(--highlight);opacity:0.9;"></span>
+            Vacaciones de invierno
+          </div>
+          <div class="timeline__legend-item">
+            <span class="timeline__legend-dot" style="background:var(--secondary);opacity:0.9;"></span>
+            Fiestas Patrias
+          </div>
+          <div class="timeline__legend-item">
+            <span class="timeline__legend-dot" style="background:var(--accent-warm);opacity:0.85;"></span>
+            Vacaciones de verano
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DATA CARDS ===== -->
+    <section class="section section--cream" aria-label="Fechas clave del a&ntilde;o escolar">
+      <div class="container">
+        <p class="section__eyebrow">Fechas clave</p>
+        <h2 class="section__title">N&uacute;meros del a&ntilde;o escolar</h2>
+        <p class="section__lead">Las cifras que importan para organizar el a&ntilde;o de tu familia.</p>
+
+        <div class="data-cards">
+          <div class="data-card">
+            <span class="data-card__icon" aria-hidden="true">&#128218;</span>
+            <div class="data-card__number">2 Mar</div>
+            <div class="data-card__label">Inicio de Clases</div>
+            <div class="data-card__detail">Lunes, todas las regiones</div>
+          </div>
+          <div class="data-card">
+            <span class="data-card__icon" aria-hidden="true">&#10052;&#65039;</span>
+            <div class="data-card__number data-card__number--purple">14</div>
+            <div class="data-card__label">D&iacute;as vac. invierno</div>
+            <div class="data-card__detail">11&ndash;24 julio (21 en zona austral)</div>
+          </div>
+          <div class="data-card">
+            <span class="data-card__icon" aria-hidden="true">&#127464;&#127473;</span>
+            <div class="data-card__number data-card__number--gold">5</div>
+            <div class="data-card__label">D&iacute;as Fiestas Patrias</div>
+            <div class="data-card__detail">14&ndash;18 septiembre</div>
+          </div>
+          <div class="data-card">
+            <span class="data-card__icon" aria-hidden="true">&#127891;</span>
+            <div class="data-card__number data-card__number--warm">11 Dic</div>
+            <div class="data-card__label">Fin a&ntilde;o escolar</div>
+            <div class="data-card__detail">4 dic en Ays&eacute;n y Magallanes</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REGION SELECTOR ===== -->
+    <section class="section section--teal" aria-label="Consulta por regi&oacute;n">
+      <div class="container">
+        <hr class="editorial-rule editorial-rule--gold">
+        <p class="section__eyebrow">Tu regi&oacute;n</p>
+        <h2 class="section__title">Consulta por regi&oacute;n</h2>
+        <p class="section__lead">Selecciona tu regi&oacute;n para ver las fechas espec&iacute;ficas del calendario escolar 2026.</p>
+
+        <div class="region-selector">
+          <label for="region-select" class="region-selector__label">Regi&oacute;n</label>
+          <select id="region-select" class="region-selector__select">
+            <option value="">Elige una regi&oacute;n</option>
+            <option value="arica-y-parinacota">Arica y Parinacota</option>
+            <option value="tarapaca">Tarapac&aacute;</option>
+            <option value="antofagasta">Antofagasta</option>
+            <option value="atacama">Atacama</option>
+            <option value="coquimbo">Coquimbo</option>
+            <option value="valparaiso">Valpara&iacute;so</option>
+            <option value="metropolitana">Metropolitana</option>
+            <option value="ohiggins">O&rsquo;Higgins</option>
+            <option value="maule">Maule</option>
+            <option value="nuble">&Ntilde;uble</option>
+            <option value="biobio">Biob&iacute;o</option>
+            <option value="araucania">La Araucan&iacute;a</option>
+            <option value="los-rios">Los R&iacute;os</option>
+            <option value="los-lagos">Los Lagos</option>
+            <option value="aysen">Ays&eacute;n</option>
+            <option value="magallanes">Magallanes</option>
+          </select>
+        </div>
+
+        <!-- Region result card -->
+        <div class="region-result" id="region-result">
+          <div class="region-result__header">
+            <div class="region-result__region-name" id="rr-name">Regi&oacute;n Metropolitana</div>
+          </div>
+          <div class="region-result__body">
+            <div class="region-result__grid">
+              <div class="region-result__datum">
+                <div class="region-result__datum-number" id="rr-inicio">2 de marzo</div>
+                <div class="region-result__datum-label">Inicio clases</div>
+              </div>
+              <div class="region-result__datum">
+                <div class="region-result__datum-number" id="rr-vac-inicio">11 de julio</div>
+                <div class="region-result__datum-label">Inicio vac. invierno</div>
+              </div>
+              <div class="region-result__datum">
+                <div class="region-result__datum-number" id="rr-vac-fin">24 de julio</div>
+                <div class="region-result__datum-label">Fin vac. invierno</div>
+              </div>
+              <div class="region-result__datum">
+                <div class="region-result__datum-number" id="rr-fin">11 de diciembre</div>
+                <div class="region-result__datum-label">Fin a&ntilde;o escolar</div>
+              </div>
+            </div>
+            <div class="text-center mt-6">
+              <a href="#" class="region-result__cta" id="rr-link">Ver p&aacute;gina completa &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== NATIONAL SUMMARY TABLE ===== -->
+    <section class="section section--white" aria-label="Resumen nacional">
+      <div class="container">
+        <hr class="editorial-rule">
+        <p class="section__eyebrow">Resumen nacional</p>
+        <h2 class="section__title">Fechas compartidas 2026</h2>
+        <p class="section__lead">Estos eventos son comunes para la mayor&iacute;a de las 16 regiones del pa&iacute;s.</p>
+
+        <div class="table-wrap">
+          <table class="summary-table">
+            <thead>
+              <tr>
+                <th scope="col">Evento</th>
+                <th scope="col">Fecha inicio</th>
+                <th scope="col">Fecha fin</th>
+                <th scope="col">D&iacute;as</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="summary-table__event">Inicio a&ntilde;o escolar</td>
+                <td class="summary-table__date">Lunes 2 de marzo</td>
+                <td class="summary-table__date">&mdash;</td>
+                <td class="summary-table__days">&mdash;</td>
+              </tr>
+              <tr>
+                <td class="summary-table__event">Vacaciones de invierno</td>
+                <td class="summary-table__date">11 de julio</td>
+                <td class="summary-table__date">24 de julio</td>
+                <td class="summary-table__days">14</td>
+              </tr>
+              <tr>
+                <td class="summary-table__event">Fiestas Patrias</td>
+                <td class="summary-table__date">14 de septiembre</td>
+                <td class="summary-table__date">18 de septiembre</td>
+                <td class="summary-table__days">5</td>
+              </tr>
+              <tr>
+                <td class="summary-table__event">Fin a&ntilde;o escolar</td>
+                <td class="summary-table__date">11 de diciembre</td>
+                <td class="summary-table__date">&mdash;</td>
+                <td class="summary-table__days">&mdash;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="summary-table__note mt-4">
+          * Las regiones de Ays&eacute;n y Magallanes tienen vacaciones de invierno extendidas (desde el 4 de julio, 21 d&iacute;as) y fin de a&ntilde;o el 4 de diciembre.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== SEO CONTENT ===== -->
+    <section class="section section--cream" aria-label="Informaci&oacute;n sobre el calendario escolar">
+      <div class="container">
+        <div class="prose">
+          <hr class="editorial-rule editorial-rule--gold">
+          <h2>El calendario escolar en Chile</h2>
+          <p>El calendario escolar en Chile es definido cada a&ntilde;o por el <strong>Ministerio de Educaci&oacute;n (Mineduc)</strong> mediante una resoluci&oacute;n exenta. Este calendario establece las fechas de inicio y t&eacute;rmino del a&ntilde;o escolar, los per&iacute;odos de vacaciones (invierno y Fiestas Patrias), y los d&iacute;as administrativos para los establecimientos educacionales del pa&iacute;s.</p>
+          <p>Para el a&ntilde;o <strong>2026</strong>, el calendario escolar sigue la estructura habitual: las clases comienzan a principios de marzo, las vacaciones de invierno se sit&uacute;an en julio, y el a&ntilde;o escolar termina en diciembre. Las regiones australes de <strong>Ays&eacute;n y Magallanes</strong> suelen tener un per&iacute;odo de vacaciones de invierno m&aacute;s extenso debido a las condiciones clim&aacute;ticas extremas durante los meses de invierno.</p>
+          <p>Es importante tener en cuenta que cada establecimiento educacional puede realizar ajustes menores dentro del marco establecido por el Mineduc. Por ello, siempre se recomienda confirmar las fechas directamente con el colegio o escuela de su comunidad.</p>
+          <p>Las vacaciones de invierno son uno de los per&iacute;odos m&aacute;s consultados por las familias chilenas, ya que permiten planificar viajes y actividades recreativas. Del mismo modo, el inicio de clases es una fecha clave para la organizaci&oacute;n familiar, especialmente para la compra de &uacute;tiles escolares y uniformes.</p>
+          <p>El Mineduc tambi&eacute;n establece los <strong>d&iacute;as de libre disposici&oacute;n</strong> que cada colegio puede utilizar seg&uacute;n sus necesidades internas. Estos d&iacute;as no se reflejan en el calendario nacional, sino que son definidos a nivel de cada establecimiento.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SEO LANDING LINKS ===== -->
+    <section class="section section--white" aria-label="Fechas m&aacute;s buscadas">
+      <div class="container">
+        <hr class="editorial-rule">
+        <p class="section__eyebrow">Fechas m&aacute;s buscadas</p>
+        <h2 class="section__title">Art&iacute;culos destacados</h2>
+        <p class="section__lead">Las consultas m&aacute;s frecuentes sobre el calendario escolar 2026.</p>
+
+        <div class="landing-links">
+          <a href="/vacaciones-invierno-2026.html" class="landing-link">
+            <div class="landing-link__title">Vacaciones de Invierno 2026</div>
+            <div class="landing-link__desc">Fechas de vacaciones de invierno por regi&oacute;n. Desde el 4 al 24 de julio seg&uacute;n la zona.</div>
+          </a>
+          <a href="/cuando-empiezan-clases-2026.html" class="landing-link">
+            <div class="landing-link__title">&iquest;Cu&aacute;ndo empiezan las clases 2026?</div>
+            <div class="landing-link__desc">Fecha de inicio del a&ntilde;o escolar 2026 en cada regi&oacute;n de Chile. Lunes 2 de marzo.</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section section--cream" id="faq" aria-label="Preguntas frecuentes">
+      <div class="container">
+        <hr class="editorial-rule editorial-rule--gold">
+        <p class="section__eyebrow">FAQ</p>
+        <h2 class="section__title">Preguntas frecuentes</h2>
+        <p class="section__lead">Lo que m&aacute;s buscan las familias sobre el calendario escolar 2026.</p>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary><h3>&iquest;Cu&aacute;ndo empiezan las clases 2026 en Chile?</h3></summary>
+            <div class="faq-item__answer">
+              <p>El a&ntilde;o escolar 2026 en Chile comienza el <strong>lunes 2 de marzo</strong> en la mayor&iacute;a de las regiones del pa&iacute;s, seg&uacute;n el calendario oficial del Ministerio de Educaci&oacute;n.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><h3>&iquest;Cu&aacute;ndo son las vacaciones de invierno 2026?</h3></summary>
+            <div class="faq-item__answer">
+              <p>Las vacaciones de invierno 2026 van desde el <strong>11 de julio hasta el 24 de julio</strong> en la mayor&iacute;a de las regiones (14 d&iacute;as). En las regiones de <strong>Ays&eacute;n y Magallanes</strong> comienzan el 4 de julio, ofreciendo una semana adicional de receso (21 d&iacute;as).</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><h3>&iquest;Cu&aacute;ndo termina el a&ntilde;o escolar 2026?</h3></summary>
+            <div class="faq-item__answer">
+              <p>El a&ntilde;o escolar 2026 finaliza el <strong>11 de diciembre</strong> en la mayor&iacute;a de las regiones. En <strong>Ays&eacute;n y Magallanes</strong> termina el <strong>4 de diciembre</strong>.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><h3>&iquest;Cu&aacute;ntos d&iacute;as duran las Fiestas Patrias 2026?</h3></summary>
+            <div class="faq-item__answer">
+              <p>El receso de Fiestas Patrias 2026 dura <strong>5 d&iacute;as</strong>, desde el <strong>14 hasta el 18 de septiembre</strong>. Este per&iacute;odo es igual para todas las regiones del pa&iacute;s.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><h3>&iquest;Por qu&eacute; Ays&eacute;n y Magallanes tienen fechas distintas?</h3></summary>
+            <div class="faq-item__answer">
+              <p>Las regiones de Ays&eacute;n y Magallanes tienen un calendario diferenciado debido a las <strong>condiciones clim&aacute;ticas extremas</strong> durante el invierno austral. El Mineduc les otorga una semana adicional de vacaciones de invierno y adelanta el cierre del a&ntilde;o escolar al 4 de diciembre.</p>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary><h3>&iquest;De d&oacute;nde provienen los datos de este sitio?</h3></summary>
+            <div class="faq-item__answer">
+              <p>Todos los datos provienen de la <strong>resoluci&oacute;n exenta del Ministerio de Educaci&oacute;n de Chile (Mineduc)</strong>, publicada cada a&ntilde;o. Siempre recomendamos verificar directamente con el establecimiento educacional, ya que pueden existir ajustes menores a nivel local.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">Calendario Escolar Chile</div>
+        <ul class="site-footer__links">
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/about.html">Acerca de</a></li>
+          <li><a href="/privacidad.html">Privacidad</a></li>
+          <li><a href="/contacto.html">Contacto</a></li>
+          <li><a href="https://dolaruf.cl" rel="noopener">Valor UF hoy</a></li>
+        </ul>
+      </div>
+      <div class="site-footer__bottom">
+        <p class="site-footer__copy">&copy; 2026 Calendario Escolar Chile</p>
+        <p class="site-footer__source">Fuente: <a href="https://www.mineduc.cl" rel="noopener">Ministerio de Educaci&oacute;n de Chile (Mineduc)</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ---- Theme toggle ----
+      var toggle = document.getElementById('theme-toggle');
+      var icon = document.getElementById('theme-icon');
+      var html = document.documentElement;
+
+      function getPreferred() {
+        var stored = localStorage.getItem('theme');
+        if (stored) return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function applyTheme(theme) {
+        if (theme === 'dark') {
+          html.setAttribute('data-theme', 'dark');
+          icon.innerHTML = '&#9788;';
+          toggle.setAttribute('aria-label', 'Cambiar a modo claro');
+        } else {
+          html.removeAttribute('data-theme');
+          icon.innerHTML = '&#9790;';
+          toggle.setAttribute('aria-label', 'Cambiar a modo oscuro');
+        }
+      }
+
+      applyTheme(getPreferred());
+
+      toggle.addEventListener('click', function() {
+        var current = html.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+        var next = current === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        applyTheme(next);
+      });
+
+      // ---- Countdown ----
+      var EVENTS = [
+        { name: 'Inicio de Clases', date: new Date('2026-03-02T08:00:00-03:00') },
+        { name: 'Vacaciones de Invierno', date: new Date('2026-07-11T00:00:00-04:00') },
+        { name: 'Fiestas Patrias', date: new Date('2026-09-14T00:00:00-04:00') },
+        { name: 'Fin del A\u00f1o Escolar', date: new Date('2026-12-11T00:00:00-03:00') }
+      ];
+
+      function getNextEvent() {
+        var now = new Date();
+        for (var i = 0; i < EVENTS.length; i++) {
+          if (EVENTS[i].date > now) return EVENTS[i];
+        }
+        // If all events passed, show next year's start
+        return { name: 'Inicio de Clases 2027', date: new Date('2027-03-01T08:00:00-03:00') };
+      }
+
+      function updateCountdown() {
+        var evt = getNextEvent();
+        var now = new Date();
+        var diff = evt.date - now;
+
+        if (diff <= 0) { diff = 0; }
+
+        var days = Math.floor(diff / 86400000);
+        var hours = Math.floor((diff % 86400000) / 3600000);
+        var minutes = Math.floor((diff % 3600000) / 60000);
+        var seconds = Math.floor((diff % 60000) / 1000);
+
+        document.getElementById('cd-days').textContent = days;
+        document.getElementById('cd-hours').textContent = hours < 10 ? '0' + hours : hours;
+        document.getElementById('cd-minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('cd-seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+        document.getElementById('countdown-event').textContent = evt.name;
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+
+      // ---- Region selector ----
+      var REGIONS = {
+        'arica-y-parinacota': { name: 'Arica y Parinacota', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'tarapaca': { name: 'Tarapac\u00e1', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'antofagasta': { name: 'Antofagasta', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'atacama': { name: 'Atacama', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'coquimbo': { name: 'Coquimbo', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'valparaiso': { name: 'Valpara\u00edso', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'metropolitana': { name: 'Metropolitana', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'ohiggins': { name: 'O\u2019Higgins', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'maule': { name: 'Maule', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'nuble': { name: '\u00d1uble', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'biobio': { name: 'Biob\u00edo', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'araucania': { name: 'La Araucan\u00eda', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'los-rios': { name: 'Los R\u00edos', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'los-lagos': { name: 'Los Lagos', inicio: '2 de marzo', vacInicio: '11 de julio', vacFin: '24 de julio', fin: '11 de diciembre' },
+        'aysen': { name: 'Ays\u00e9n', inicio: '2 de marzo', vacInicio: '4 de julio', vacFin: '24 de julio', fin: '4 de diciembre' },
+        'magallanes': { name: 'Magallanes', inicio: '2 de marzo', vacInicio: '4 de julio', vacFin: '24 de julio', fin: '4 de diciembre' }
+      };
+
+      var select = document.getElementById('region-select');
+      var result = document.getElementById('region-result');
+
+      select.addEventListener('change', function() {
+        var slug = this.value;
+        if (!slug || !REGIONS[slug]) {
+          result.classList.remove('is-visible');
+          return;
+        }
+
+        var r = REGIONS[slug];
+        document.getElementById('rr-name').textContent = 'Regi\u00f3n de ' + r.name;
+        document.getElementById('rr-inicio').textContent = r.inicio;
+        document.getElementById('rr-vac-inicio').textContent = r.vacInicio;
+        document.getElementById('rr-vac-fin').textContent = r.vacFin;
+        document.getElementById('rr-fin').textContent = r.fin;
+        document.getElementById('rr-link').href = '/region/' + slug + '/';
+
+        result.classList.add('is-visible');
+        result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>

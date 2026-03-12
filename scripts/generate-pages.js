@@ -102,6 +102,29 @@ fs.writeFileSync(SITEMAP_FILE, sitemap);
 
 console.log('Generadas ' + generated + ' páginas + sitemap (' + sitemapUrls.length + ' URLs)');
 
+// Generar public/js/regions-data.js (elimina duplicacion con app.js)
+var regionsData = {};
+pages.forEach(function (page) {
+  if (!page.regionSlug) return;
+  regionsData[page.regionSlug] = {
+    name: page.region,
+    inicio: page.inicio,
+    vacIni: page.vacacionesInicio,
+    vacFin: page.vacacionesFin,
+    fpIni: page.fiestasPatriasInicio,
+    fpFin: page.fiestasPatriasFin,
+    fin: page.finAno,
+    diasVac: page.diasVacacionesInvierno,
+    diasFP: page.diasFiestasPatrias
+  };
+});
+var regionsJs = '/* regions-data.js — generado automaticamente por scripts/generate-pages.js\n' +
+  '   NO EDITAR DIRECTAMENTE — editar data/pages.json y ejecutar: npm run generate */\n' +
+  'window.REGIONS_DATA = ' + JSON.stringify(regionsData, null, 2) + ';\n';
+var regionsJsPath = path.join(OUTPUT_DIR, 'js', 'regions-data.js');
+fs.writeFileSync(regionsJsPath, regionsJs);
+console.log('Generado public/js/regions-data.js (' + Object.keys(regionsData).length + ' regiones)');
+
 function defaultTemplate() {
   return '<!DOCTYPE html>\n<html lang="es-CL">\n<head>\n' +
     '  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
