@@ -13,16 +13,25 @@ Tecnologia: vanilla HTML/CSS/JS + Cloudflare Pages.
 
 ## Arquitectura
 ```
-public/          -> Desplegado a Cloudflare Pages (HTML estatico)
-data/            -> JSON fuente para generar paginas regionales
-  pages.json     -> 16 regiones con fechas escolares
-  template.html  -> Plantilla HTML para paginas de region
-scripts/         -> Build, generacion de paginas
-config.json      -> Configuracion del sitio
+public/                  -> Desplegado a Cloudflare Pages (HTML estatico)
+data/
+  pages.json             -> 16 regiones con fechas escolares (FUENTE DE VERDAD regional)
+  calendar-config.json   -> Fechas del año escolar + feriados (FUENTE DE VERDAD temporal)
+  template.html          -> Plantilla HTML para paginas de region
+  SHEET-SETUP.md         -> Instrucciones para configurar el Google Sheet
+scripts/
+  generate-pages.js      -> pages.json + calendar-config.json → HTML + JS + health.json
+  validate.js            -> Valida integridad de datos (bloquea build si hay errores)
+  sync-from-sheet.js     -> Lee Google Sheet via REST API → actualiza los JSON
+  build.sh               -> validate.js + verificaciones
+.github/workflows/
+  deploy.yml             -> push a main → build → deploy
+  sync-deploy.yml        -> cron semanal + manual: sync Sheet → generate → validate → deploy
+config.json              -> Configuracion del sitio (IDs servicios, Sheet structure)
 ```
 
 ## Paginas del sitio
-- **index.html** — Selector de region + resumen nacional + countdown
+- **index.html** — Key-facts, school-stats, chips selector de region, feriados
 - **region/[slug]/index.html** (x16) — Calendario por region, generadas desde JSON
 - **vacaciones-invierno-2026.html** — Landing SEO vacaciones de invierno
 - **cuando-empiezan-clases-2026.html** — Landing SEO inicio de clases
@@ -30,8 +39,10 @@ config.json      -> Configuracion del sitio
 - **contacto.html**, **privacidad.html** — Paginas legales
 
 ## Fuente de datos
-- Ministerio de Educacion de Chile (Mineduc)
-- Datos en data/pages.json, actualizacion anual (una vez al ano cuando Mineduc publica el calendario)
+- Google Sheet (fuente de verdad operativa) → sync automatico via GitHub Action
+- Mineduc Chile (fuente primaria, PDF anual ~noviembre)
+- Datos locales: data/pages.json + data/calendar-config.json
+- Actualizacion anual: editar Sheet → GitHub Action sincroniza y deploya
 
 ## Cross-links
 - dolaruf.cl (valor UF, UTM para multas)
@@ -50,10 +61,12 @@ config.json      -> Configuracion del sitio
 - Naming: kebab-case archivos, camelCase JS, BEM CSS.
 
 ## Comandos
-- `npm run dev` -> servidor local (wrangler pages dev)
-- `npm run build` -> build + verificacion
-- `npm run generate` -> generar paginas region/ desde data/pages.json + data/template.html
-- `npm run deploy` -> deploy a Cloudflare Pages
+- `npm run dev`      -> servidor local (wrangler pages dev)
+- `npm run generate` -> genera HTML + regions-data.js + calendar-config.js + health.json
+- `npm run build`    -> validate.js + verificaciones de integridad (bloquea si hay errores)
+- `npm run deploy`   -> deploy a Cloudflare Pages
+- `node scripts/validate.js`        -> solo validacion de datos (exit 0=OK, 1=error)
+- `node scripts/sync-from-sheet.js` -> sync manual desde Sheet (requiere GOOGLE_API_KEY)
 - `update-blueprint` -> No es un script — es una instruccion: actualizar BLUEPRINT.md despues de cada cambio importante
 
 ## Fuente de verdad

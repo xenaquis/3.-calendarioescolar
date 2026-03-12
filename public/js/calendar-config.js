@@ -1,0 +1,40 @@
+/* calendar-config.js — generado automaticamente por scripts/generate-pages.js
+   NO EDITAR DIRECTAMENTE — editar data/calendar-config.json y ejecutar: npm run generate */
+window.CALENDAR_CONFIG = {
+  "_comment": "Fuente de verdad para fechas del año escolar. Sincronizar con data/pages.json y el Google Sheet. Actualizar cada noviembre cuando Mineduc publique el calendario del año siguiente.",
+  "year": 2026,
+  "schoolStart": "2026-03-02",
+  "winterStart": "2026-07-11",
+  "winterEnd": "2026-07-25",
+  "schoolEnd": "2026-12-12",
+  "feriados": [
+    {
+      "date": "2026-04-03",
+      "nombre": "Viernes Santo"
+    },
+    {
+      "date": "2026-05-01",
+      "nombre": "1 de mayo"
+    },
+    {
+      "date": "2026-05-21",
+      "nombre": "Glorias Navales"
+    },
+    {
+      "date": "2026-06-08",
+      "nombre": "Corpus Christi"
+    },
+    {
+      "date": "2026-06-29",
+      "nombre": "San Pedro y San Pablo"
+    },
+    {
+      "date": "2026-10-12",
+      "nombre": "Enc. Dos Mundos"
+    },
+    {
+      "date": "2026-12-08",
+      "nombre": "8 de diciembre"
+    }
+  ]
+};

@@ -6,35 +6,38 @@
      node scripts/generate-pages.js
 
    Lee:
-     - data/pages.json (array de objetos con datos por página)
-     - data/template.html (plantilla HTML con {{placeholders}})
+     - data/pages.json          (array de objetos con datos por región)
+     - data/template.html       (plantilla HTML con {{placeholders}})
+     - data/calendar-config.json (fechas del año escolar y feriados)
+     - config.json
 
    Genera:
      - public/[slug]/index.html por cada entrada en pages.json
-     - Actualiza public/sitemap.xml
+     - public/sitemap.xml
+     - public/js/regions-data.js   (window.REGIONS_DATA para app.js)
+     - public/js/calendar-config.js (window.CALENDAR_CONFIG para app.js)
+     - public/health.json          (metadata para monitoreo automatico)
 */
 
 var fs = require('fs');
 var path = require('path');
+var crypto = require('crypto');
 
-var DATA_FILE = path.join(__dirname, '..', 'data', 'pages.json');
-var TEMPLATE_FILE = path.join(__dirname, '..', 'data', 'template.html');
-var OUTPUT_DIR = path.join(__dirname, '..', 'public');
-var SITEMAP_FILE = path.join(OUTPUT_DIR, 'sitemap.xml');
+var DATA_FILE          = path.join(__dirname, '..', 'data', 'pages.json');
+var TEMPLATE_FILE      = path.join(__dirname, '..', 'data', 'template.html');
+var CAL_CONFIG_FILE    = path.join(__dirname, '..', 'data', 'calendar-config.json');
+var OUTPUT_DIR         = path.join(__dirname, '..', 'public');
+var SITEMAP_FILE       = path.join(OUTPUT_DIR, 'sitemap.xml');
 
 // Verificar archivos
 if (!fs.existsSync(DATA_FILE)) {
-  console.log('No se encontró data/pages.json — nada que generar.');
-  console.log('Crear el archivo con formato:');
-  console.log('[{ "slug": "ejemplo", "title": "Título", "content": "HTML..." }]');
+  console.log('No se encontro data/pages.json — nada que generar.');
   process.exit(0);
 }
 
 if (!fs.existsSync(TEMPLATE_FILE)) {
-  console.log('No se encontró data/template.html — creando plantilla base.');
-  fs.writeFileSync(TEMPLATE_FILE, defaultTemplate());
-  console.log('Editar data/template.html y volver a ejecutar.');
-  process.exit(0);
+  console.log('No se encontro data/template.html.');
+  process.exit(1);
 }
 
 // Leer datos y template
@@ -44,6 +47,13 @@ var config = {};
 try {
   config = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'config.json'), 'utf8'));
 } catch (e) { /* sin config */ }
+
+var calConfig = null;
+try {
+  calConfig = JSON.parse(fs.readFileSync(CAL_CONFIG_FILE, 'utf8'));
+} catch (e) {
+  console.log('ADVERTENCIA: No se encontro data/calendar-config.json — calendar-config.js no se generara.');
+}
 
 var domain = config.domain || 'DOMAIN.cl';
 var generated = 0;
@@ -100,9 +110,9 @@ sitemapUrls.forEach(function (u) {
 sitemap += '</urlset>\n';
 fs.writeFileSync(SITEMAP_FILE, sitemap);
 
-console.log('Generadas ' + generated + ' páginas + sitemap (' + sitemapUrls.length + ' URLs)');
+console.log('Generadas ' + generated + ' paginas + sitemap (' + sitemapUrls.length + ' URLs)');
 
-// Generar public/js/regions-data.js (elimina duplicacion con app.js)
+// Generar public/js/regions-data.js
 var regionsData = {};
 pages.forEach(function (page) {
   if (!page.regionSlug) return;
@@ -125,29 +135,41 @@ var regionsJsPath = path.join(OUTPUT_DIR, 'js', 'regions-data.js');
 fs.writeFileSync(regionsJsPath, regionsJs);
 console.log('Generado public/js/regions-data.js (' + Object.keys(regionsData).length + ' regiones)');
 
-function defaultTemplate() {
-  return '<!DOCTYPE html>\n<html lang="es-CL">\n<head>\n' +
-    '  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-width, initial-scale=1">\n' +
-    '  <title>{{title}} — {{siteName}}</title>\n' +
-    '  <meta name="description" content="{{description}}">\n' +
-    '  <link rel="canonical" href="https://{{domain}}/{{slug}}/">\n' +
-    '  <link rel="stylesheet" href="/css/tokens.css">\n' +
-    '  <link rel="stylesheet" href="/css/base.css">\n' +
-    '  <link rel="stylesheet" href="/css/components.css">\n' +
-    '  <link rel="stylesheet" href="/css/ads.css">\n' +
-    '</head>\n<body>\n' +
-    '  <header class="site-header"><div class="container">\n' +
-    '    <a href="/" class="site-header__brand">{{siteName}}</a>\n' +
-    '  </div></header>\n' +
-    '  <main id="main"><div class="container">\n' +
-    '    <nav class="breadcrumb"><a href="/">Inicio</a> <span>&rsaquo;</span> {{title}}</nav>\n' +
-    '    <h1>{{title}}</h1>\n' +
-    '    {{content}}\n' +
-    '  </div></main>\n' +
-    '  <footer class="site-footer"><div class="container">\n' +
-    '    <p class="site-footer__copy">&copy; 2026 {{siteName}}</p>\n' +
-    '  </div></footer>\n' +
-    '  <script defer src="/js/theme.js"></script>\n' +
-    '  <script defer src="/js/ads.js"></script>\n' +
-    '</body>\n</html>';
+// Generar public/js/calendar-config.js (elimina fechas hardcodeadas en app.js)
+if (calConfig) {
+  var calJs = '/* calendar-config.js — generado automaticamente por scripts/generate-pages.js\n' +
+    '   NO EDITAR DIRECTAMENTE — editar data/calendar-config.json y ejecutar: npm run generate */\n' +
+    'window.CALENDAR_CONFIG = ' + JSON.stringify(calConfig, null, 2) + ';\n';
+  var calJsPath = path.join(OUTPUT_DIR, 'js', 'calendar-config.js');
+  fs.writeFileSync(calJsPath, calJs);
+  console.log('Generado public/js/calendar-config.js (year: ' + calConfig.year + ', feriados: ' + calConfig.feriados.length + ')');
 }
+
+// Generar public/health.json (para monitoreo automatico por agente)
+var pagesHash = crypto.createHash('md5').update(fs.readFileSync(DATA_FILE)).digest('hex');
+var calHash = calConfig
+  ? crypto.createHash('md5').update(fs.readFileSync(CAL_CONFIG_FILE)).digest('hex')
+  : null;
+
+var health = {
+  generatedAt: new Date().toISOString(),
+  generatedDate: today,
+  dataYear: calConfig ? calConfig.year : null,
+  regionsCount: Object.keys(regionsData).length,
+  pagesCount: generated,
+  sitemap: sitemapUrls.length + ' URLs',
+  dataFingerprint: {
+    pagesJson: pagesHash,
+    calendarConfigJson: calHash
+  },
+  calendarConfig: calConfig ? {
+    schoolStart: calConfig.schoolStart,
+    winterStart: calConfig.winterStart,
+    winterEnd: calConfig.winterEnd,
+    schoolEnd: calConfig.schoolEnd,
+    feriadosCount: calConfig.feriados.length
+  } : null,
+  status: 'ok'
+};
+fs.writeFileSync(path.join(OUTPUT_DIR, 'health.json'), JSON.stringify(health, null, 2));
+console.log('Generado public/health.json (status: ok, regiones: ' + health.regionsCount + ')');
