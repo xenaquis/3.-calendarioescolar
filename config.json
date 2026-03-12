@@ -3,7 +3,7 @@
   "domain": "calendarioescolar.cl",
   "lang": "es-CL",
   "archetype": "catalog",
-  "description": "Calendario escolar 2026 Chile: fechas de inicio de clases, vacaciones de invierno y fin de a\u00f1o por regi\u00f3n. Fuente oficial Mineduc.",
+  "description": "Calendario escolar 2026 Chile: fechas de inicio de clases, vacaciones de invierno y fin de año por región. Fuente oficial Mineduc.",
   "themeColor": "#7c3aed",
   "adsense": {
     "client": "ca-pub-XXXXXXXXXXXXXXXX",
@@ -24,15 +24,20 @@
     "external": []
   },
   "seo": {
-    "title": "Calendario Escolar 2026 Chile \u2014 calendarioescolar.cl",
+    "title": "Calendario Escolar 2026 Chile — calendarioescolar.cl",
     "ogImage": "https://calendarioescolar.cl/icons/og-image.png",
     "keywords": ["calendario escolar 2026", "vacaciones de invierno 2026", "inicio clases 2026 chile", "calendario escolar chile"]
   },
   "sheet": {
+    "_instrucciones": "Ver data/SHEET-SETUP.md para instrucciones de configuración del Google Sheet",
     "spreadsheetId": "PLACEHOLDER_SHEET_ID",
+    "regionsTab": "Regiones",
+    "configTab": "Config",
     "siteTab": "calendarioescolar.cl",
     "dashboardTab": "Dashboard",
     "healthLogTab": "Health Log",
-    "maintenanceTab": "Maintenance"
+    "maintenanceTab": "Maintenance",
+    "_regionsTabStructure": "Fila 1=headers | Col A:slug B:region C:regionSlug D:inicio E:vacIni F:vacFin G:fpIni H:fpFin I:finAno J:diasVac K:diasFP L:title M:description N:priority",
+    "_configTabStructure": "KEY|VALUE|NOTAS — Claves: year,schoolStart,winterStart,winterEnd,schoolEnd | Luego sección FERIADOS con DATE|NOMBRE"
   }
 }

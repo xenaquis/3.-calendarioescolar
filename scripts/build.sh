@@ -5,6 +5,13 @@ set -e
 
 echo "=== Build: $(basename $(pwd)) ==="
 
+# Validar integridad de datos ANTES de todo
+echo "  Validando datos..."
+if ! node scripts/validate.js; then
+  echo "ERROR: Validacion de datos fallo. Corregir errores antes de continuar."
+  exit 1
+fi
+
 # Actualizar fecha en sitemap
 TODAY=$(date +%Y-%m-%d)
 if [ -f public/sitemap.xml ]; then

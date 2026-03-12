@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-12 (rediseño frontend minimalista completo).
+Ultimo update de este blueprint: 2026-03-12 (refactor backend: centralización de fechas + sync Google Sheet).
 
 ---
 
@@ -20,8 +20,10 @@ Ultimo update de este blueprint: 2026-03-12 (rediseño frontend minimalista comp
 | Search Console        | PENDIENTE       | Verificar tras registrar dominio                   |
 | OG Image              | PENDIENTE       | Archivo `/icons/og-image.png` referenciado pero no existe |
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
-| Datos Mineduc 2026    | Cargados        | En data/pages.json — verificar cada noviembre      |
+| Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — verificar cada noviembre |
+| Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
 | Frontend              | REDISEÑADO      | Minimalista utility-first (2026-03-12)             |
+| Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
 
 ---
 
@@ -44,30 +46,38 @@ Ultimo update de este blueprint: 2026-03-12 (rediseño frontend minimalista comp
 │   │   ├── components.css          -> Componentes: cards, tablas, badges, key-facts, school-stats, chips
 │   │   └── ads.css                 -> Estilos para unidades AdSense — NO TOCAR ALTURAS (CLS)
 │   ├── js/
-│   │   ├── app.js                  -> Stats en tiempo real (semana, días vacaciones, feriado) + chips selector + region selector
+│   │   ├── app.js                  -> Stats en tiempo real + chips selector + region selector
 │   │   ├── regions-data.js         -> GENERADO — window.REGIONS_DATA (datos de regiones para app.js)
-│   │   ├── countdown.js            -> DEAD CODE — ya no se carga en ningun HTML (ver BUG 8)
+│   │   ├── calendar-config.js      -> GENERADO — window.CALENDAR_CONFIG (fechas año escolar para app.js)
 │   │   ├── theme.js                -> Dark mode toggle
 │   │   ├── ads.js                  -> Inicializacion AdSense
 │   │   ├── analytics.js            -> Google Analytics init
-│   │   ├── export-image.js         -> Exportar tabla como imagen (solo paginas de region)
-│   │   └── api.js                  -> DEAD CODE — archivo huerfano (ver BUG 5)
+│   │   └── export-image.js         -> Exportar tabla como imagen (solo paginas de region)
 │   ├── icons/
 │   │   └── og-image.png            -> FALTA — referenciado en HTML pero no existe (ver BUG 4)
+│   ├── health.json                 -> GENERADO — metadata para monitoreo automatico
 │   └── sitemap.xml                 -> GENERADO por scripts/generate-pages.js
 │
 ├── data/
-│   ├── pages.json                  -> FUENTE DE VERDAD de contenido: 16 regiones, fechas
-│   └── template.html               -> Plantilla HTML para paginas de region (usa {{variables}})
+│   ├── pages.json                  -> FUENTE DE VERDAD regional: 16 regiones, fechas por region
+│   ├── calendar-config.json        -> FUENTE DE VERDAD temporal: fechas del año escolar, feriados
+│   ├── template.html               -> Plantilla HTML para paginas de region (usa {{variables}})
+│   └── SHEET-SETUP.md              -> Instrucciones para configurar el Google Sheet
 │
 ├── scripts/
-│   └── generate-pages.js           -> Lee pages.json + template.html → escribe region/*/index.html + sitemap.xml + js/regions-data.js
+│   ├── generate-pages.js           -> Lee pages.json + template.html + calendar-config.json
+│   │                                  → escribe region/*/index.html + sitemap.xml
+│   │                                  → escribe js/regions-data.js + js/calendar-config.js + health.json
+│   ├── validate.js                 -> Valida integridad de datos antes de deploy (sale con 1 si hay errores)
+│   ├── sync-from-sheet.js          -> Lee Google Sheet via REST API → actualiza pages.json + calendar-config.json
+│   └── build.sh                    -> Corre validate.js + verificaciones + cuenta archivos
 │
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml              -> CI/CD: push a main → build → deploy a Cloudflare Pages
+│       ├── deploy.yml              -> CI/CD: push a main → build → deploy a Cloudflare Pages
+│       └── sync-deploy.yml         -> Cron semanal + manual: sync Sheet → generate → validate → deploy
 │
-├── config.json                     -> Config del sitio (URLs, IDs de servicios, AdSense, GA4)
+├── config.json                     -> Config del sitio (URLs, IDs de servicios, AdSense, GA4, Sheet)
 ├── BLUEPRINT.md                    -> Este archivo
 └── .claude/
     ├── CLAUDE.md                   -> Instrucciones para Claude Code
@@ -148,61 +158,57 @@ Ultimo update de este blueprint: 2026-03-12 (rediseño frontend minimalista comp
 ## Flujo de datos
 
 ```
-data/pages.json
+Google Sheet (fuente de verdad — editar aquí)
       |
-      v
-scripts/generate-pages.js   (npm run generate)
+      v  (GitHub Action: sync-deploy.yml — cron lunes 06:00 UTC o trigger manual)
+scripts/sync-from-sheet.js
+      |
+      |---> data/pages.json           (16 regiones con fechas)
+      |---> data/calendar-config.json (fechas año escolar + feriados)
+      |
+      v  (npm run generate)
+scripts/generate-pages.js
       |
       |---> public/region/[slug]/index.html  (x16 archivos)
       |---> public/sitemap.xml
       |---> public/js/regions-data.js        (window.REGIONS_DATA para app.js)
+      |---> public/js/calendar-config.js     (window.CALENDAR_CONFIG para app.js)
+      |---> public/health.json               (metadata para monitoreo)
+      |
+      v  (npm run build)
+scripts/validate.js  ← bloquea deploy si hay errores
+      |
+      v
+Cloudflare Pages (deploy)
 ```
 
-**Regla**: editar datos SOLO en `data/pages.json`, luego correr `npm run generate`.
-Las paginas en `public/region/` y `public/js/regions-data.js` son artefactos generados — nunca editar a mano.
+**Regla**: editar datos SOLO en el Google Sheet (o en `data/pages.json` + `data/calendar-config.json` si se prefiere manual).
+Las páginas en `public/region/` y `public/js/` son artefactos generados — nunca editar a mano.
 
 ---
 
 ## Bugs conocidos y deuda tecnica
-
-### ~~BUG 1 — DATA DUPLICATION~~ RESUELTO (2026-03-12)
-- generate-pages.js ahora genera `public/js/regions-data.js` con `window.REGIONS_DATA`
-- app.js usa `var REGIONS = window.REGIONS_DATA || {}` — sin duplicacion
-
-### ~~BUG 2 — ISO DATES TRIPLICADAS~~ RESUELTO PARCIALMENTE (2026-03-12)
-- El countdown fue eliminado de homepage y páginas de región
-- Las fechas ISO del array EVENTS en app.js fueron eliminadas con el rediseño
-- **Deuda residual**: las fechas en `initSchoolStats()` y el array `FERIADOS` en app.js están hardcodeadas como `new Date(2026, ...)`. Requieren actualización manual cada año escolar junto con `data/pages.json`.
-
-### ~~BUG 3 — UNICODE ESCAPES EN app.js~~ RESUELTO (2026-03-12)
 
 ### BUG 4 — OG IMAGE FALTANTE
 - **Archivo**: `config.json` → referencia `https://calendarioescolar.cl/icons/og-image.png`
 - **Problema**: El archivo `public/icons/og-image.png` no existe.
 - **Fix pendiente**: Crear og-image.png (1200x630px). Diseño: fondo #7c3aed, texto blanco "Calendario Escolar 2026 Chile".
 
-### BUG 5 — DEAD CODE api.js
-- **Archivo**: `public/js/api.js`
-- **Problema**: No se carga en ningún HTML. Es código huérfano.
-- **Fix pendiente**: Eliminar el archivo.
-
 ### BUG 6 — IDS PLACEHOLDER EN config.json
 - **Archivo**: `config.json`
 - **Problema**: `ca-pub-XXXXXXXXXXXXXXXX` (AdSense) y `G-XXXXXXXXXX` (GA4) son placeholders.
-- **Fix pendiente**: Obtener IDs reales (ver Pendientes Críticos) y actualizar config.json + todos los HTML.
+- **Fix pendiente**: Obtener IDs reales y actualizar config.json + todos los HTML.
 
-### ~~BUG 7 — COUNTDOWN SOLO FECHAS NACIONALES~~ RESUELTO (2026-03-12)
-- El countdown fue eliminado del homepage y páginas de región con el rediseño.
-
-### BUG 8 — DEAD CODE countdown.js (NUEVO, post-rediseño 2026-03-12)
-- **Archivo**: `public/js/countdown.js`
-- **Problema**: El rediseño eliminó el countdown de todas las páginas. El archivo existe pero ya NO se carga en ningún HTML.
-- **Fix pendiente**: Eliminar `public/js/countdown.js`. No hay `<script src>` que remover.
-- **Nota**: Si en el futuro se quiere reintroducir un countdown, el archivo está bien implementado (acepta cualquier ID y fecha).
-
-### ~~DEUDA TECNICA — TIMEZONE app.js~~ RESUELTA (2026-03-12)
-- El array EVENTS con fechas ISO fue eliminado del rediseño. Ya no aplica.
-- **Nueva nota**: `initSchoolStats()` usa `new Date(2026, mes, dia)` (hora local del browser). Es aceptable para cálculos de días. No requiere timezone explícito.
+### ~~BUG 1 — DATA DUPLICATION~~ RESUELTO (2026-03-12)
+### ~~BUG 2 — ISO DATES~~ RESUELTO (2026-03-12)
+### ~~BUG 3 — UNICODE ESCAPES~~ RESUELTO (2026-03-12)
+### ~~BUG 5 — DEAD CODE api.js~~ RESUELTO (2026-03-12)
+### ~~BUG 7 — COUNTDOWN~~ RESUELTO (2026-03-12)
+### ~~BUG 8 — DEAD CODE countdown.js~~ RESUELTO (2026-03-12)
+### ~~DEUDA — FECHAS HARDCODEADAS EN app.js~~ RESUELTO (2026-03-12)
+- Todas las fechas del año escolar están en `data/calendar-config.json`
+- `app.js` lee `window.CALENDAR_CONFIG` generado automáticamente
+- Actualización anual = solo editar el Google Sheet
 
 ---
 
@@ -211,37 +217,29 @@ Las paginas en `public/region/` y `public/js/regions-data.js` son artefactos gen
 Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios externos.
 
 1. **Registrar dominio `calendarioescolar.cl`**
-   - URL: https://www.nic.cl
-   - Costo: ~$18 USD/año
-   - Requisito: RUT chileno del titular
-   - Prioridad: ALTA — sin dominio no hay sitio
+   - URL: https://www.nic.cl | Costo: ~$18 USD/año | Requiere RUT chileno
 
 2. **Configurar DNS en Cloudflare**
-   - Después de registrar el dominio en nic.cl, apuntar nameservers a Cloudflare
-   - Cloudflare dashboard: https://dash.cloudflare.com
+   - Después de registrar dominio, apuntar nameservers a Cloudflare
 
-3. **Crear propiedad GA4**
-   - URL: https://analytics.google.com
-   - Obtener ID `G-XXXXXXXXXX`
+3. **Configurar Google Sheet + API Key** ← NUEVO
+   - Seguir instrucciones en `data/SHEET-SETUP.md`
+   - Agregar GitHub Secret: `GOOGLE_API_KEY`
+   - Actualizar `config.json` → `sheet.spreadsheetId`
+
+4. **Crear propiedad GA4**
+   - URL: https://analytics.google.com → obtener ID `G-XXXXXXXXXX`
    - Reemplazar placeholder en config.json y en todos los HTML
 
-4. **Solicitar AdSense**
-   - URL: https://www.google.com/adsense
-   - Requiere tráfico real primero (meses de indexación)
-   - Cuando se apruebe: reemplazar `ca-pub-XXXXXXXXXXXXXXXX` en config.json y HTML
+5. **Solicitar AdSense**
+   - URL: https://www.google.com/adsense (requiere tráfico real primero)
 
-5. **Verificar en Google Search Console**
-   - URL: https://search.google.com/search-console
-   - Hacer después de tener dominio activo y DNS configurado
-   - Subir sitemap: `https://calendarioescolar.cl/sitemap.xml`
+6. **Verificar en Google Search Console**
+   - Hacer después de tener dominio activo → subir sitemap
 
-6. **Activar Bot Fight Mode en Cloudflare**
-   - URL: https://dash.cloudflare.com → sitio → Security → Bots
+7. **Activar Bot Fight Mode en Cloudflare**
 
-7. **Crear og-image.png**
-   - Tamaño: 1200x630px
-   - Diseño: fondo #7c3aed, texto blanco "Calendario Escolar 2026 Chile"
-   - Guardar en: `public/icons/og-image.png`
+8. **Crear og-image.png** (1200x630px, fondo #7c3aed, texto blanco)
 
 ---
 
@@ -251,26 +249,28 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 - **Mineduc oficial**: https://www.mineduc.cl → Documentos → Calendario Escolar
   - Buscar "Resolución Exenta" del año correspondiente (publicada ~noviembre)
   - No hay API — requiere descarga manual del PDF
-- **Skill disponible**: `.claude/skills/update-data/SKILL.md`
 
-### Actualizacion anual de datos (cada noviembre)
+### Actualizacion anual de datos (cada noviembre) — flujo optimizado
+
 1. Descargar PDF Mineduc → extraer fechas de las 16 regiones
-2. Actualizar `data/pages.json`
-3. Actualizar fechas hardcodeadas en `public/js/app.js`:
-   - `var schoolStart`, `var winterStart`, `var winterEnd`, `var schoolEnd` en `initSchoolStats()`
-   - Array `FERIADOS` con los nuevos feriados del año escolar
-4. Correr `npm run generate`
-5. Verificar páginas de región (especialmente Aysén y Magallanes)
-6. Actualizar año en todos los `<title>`, `<meta description>`, H1, Schema.org, sitemap
-7. Deploy
+2. **Actualizar tab "Regiones"** del Google Sheet
+3. **Actualizar tab "Config"** del Google Sheet (year, fechas, feriados)
+4. Disparar GitHub Action **"Sync desde Sheet + Deploy"** manualmente (o esperar al lunes)
+5. Verificar `https://calendarioescolar.cl/health.json` → `dataYear` correcto
+6. Actualizar año en landings estáticas: `vacaciones-invierno-2026.html`, `cuando-empiezan-clases-2026.html`
+
+**Sin Google Sheet (fallback manual):**
+Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` → `node scripts/validate.js` → deploy
+
+### Monitoreo automatico por agente
+- `GET https://calendarioescolar.cl/health.json`
+- Verificar: `status: "ok"`, `dataYear` correcto, `generatedDate` reciente (< 30 días)
+- Si `dataYear` incorrecto: actualización pendiente → notificar humano
 
 ### Servicios del sitio
-- Cloudflare Pages dashboard: https://dash.cloudflare.com
-- Google Search Console: https://search.google.com/search-console
-- Google Analytics: https://analytics.google.com
-
-### Cross-links (sitios hermanos)
-- dolaruf.cl — valor UF y UTM para multas (mismo ecosistema "Paginas Chicas")
+- Cloudflare Pages: https://dash.cloudflare.com
+- Search Console: https://search.google.com/search-console
+- Analytics: https://analytics.google.com
 
 ---
 
@@ -289,10 +289,13 @@ Para invocar un skill: escribir `/deploy`, `/seo-audit`, `/update-data` en el ch
 ## Comandos utiles
 
 ```bash
-npm run dev       # Servidor local en localhost (wrangler pages dev)
-npm run build     # Build + verificación de integridad
-npm run generate  # Genera public/region/*/index.html + sitemap.xml + regions-data.js desde data/pages.json + data/template.html
-npm run deploy    # Deploy a Cloudflare Pages
+npm run dev             # Servidor local en localhost (wrangler pages dev)
+npm run generate        # Genera todo: HTML, sitemap, regions-data.js, calendar-config.js, health.json
+npm run build           # Valida datos + verificaciones de integridad
+npm run deploy          # Deploy a Cloudflare Pages
+
+node scripts/validate.js        # Solo validación de datos (0=OK, 1=error)
+node scripts/sync-from-sheet.js # Solo sync desde Sheet (requiere GOOGLE_API_KEY env var)
 ```
 
 `update-blueprint` — No es un script. Es una instrucción: actualizar este archivo después de cada cambio importante al sitio.
@@ -302,9 +305,13 @@ npm run deploy    # Deploy a Cloudflare Pages
 ## Checklist antes de deploy
 
 - [ ] `data/pages.json` tiene datos correctos y completos para las 16 regiones
-- [ ] Se corrió `npm run generate` después del último cambio a pages.json o template.html
-- [ ] `public/js/regions-data.js` fue regenerado (se genera automáticamente con `npm run generate`)
-- [ ] Las fechas en `app.js` (initSchoolStats, FERIADOS) corresponden al año escolar vigente
+- [ ] `data/calendar-config.json` tiene fechas del año escolar correcto
+- [ ] Se corrió `npm run generate` después del último cambio
+- [ ] `node scripts/validate.js` pasa sin errores (warnings de placeholder son OK)
+- [ ] `public/js/calendar-config.js` fue regenerado
+- [ ] `public/js/regions-data.js` fue regenerado
+- [ ] `public/health.json` fue regenerado
+- [ ] Las landings estáticas tienen el año correcto en title/H1
 - [ ] No hay IDs placeholder visibles en el HTML final (GA4, AdSense)
 - [ ] `npm run build` pasa sin errores
 - [ ] Sitemap en `public/sitemap.xml` fue regenerado

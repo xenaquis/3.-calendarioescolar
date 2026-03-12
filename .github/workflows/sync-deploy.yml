@@ -1,0 +1,104 @@
+name: Sync desde Sheet + Deploy
+
+# Ejecuta automáticamente cada lunes a las 6:00 UTC (03:00 Chile)
+# También disponible como trigger manual desde GitHub Actions UI
+# NUNCA disparado por push (eso lo maneja deploy.yml)
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: 'Deploy incluso si no hay cambios de datos'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  sync-and-deploy:
+    name: Sync Sheet → Generar → Validar → Deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write      # Para commitear cambios en data/
+      deployments: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # ── Paso 1: Sync datos desde Google Sheet ──────────────────────────
+      - name: Sync datos desde Google Sheet
+        id: sync
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+        run: |
+          node scripts/sync-from-sheet.js 2>&1 | tee /tmp/sync-output.txt
+          # Detectar si hubo cambios (script escribe "ACTUALIZADO" si cambió)
+          if grep -q "ACTUALIZADO" /tmp/sync-output.txt; then
+            echo "data_changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "data_changed=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true  # Si falla el sync, usar datos del repo (no bloquear)
+
+      - name: Advertencia si sync falló
+        if: steps.sync.outcome == 'failure'
+        run: |
+          echo "::warning::Sync desde Google Sheet falló. Usando datos existentes en el repo."
+          echo "::warning::Verificar GOOGLE_API_KEY y sheet.spreadsheetId en config.json"
+
+      # ── Paso 2: Generar páginas ─────────────────────────────────────────
+      - name: Generar páginas
+        run: node scripts/generate-pages.js
+
+      # ── Paso 3: Validar integridad ─────────────────────────────────────
+      - name: Validar datos
+        run: node scripts/validate.js
+
+      # ── Paso 4: Build ──────────────────────────────────────────────────
+      - name: Build
+        run: bash scripts/build.sh
+
+      # ── Paso 5: Commitear datos si cambiaron ───────────────────────────
+      - name: Commitear cambios de datos
+        if: steps.sync.outputs.data_changed == 'true'
+        run: |
+          git config user.name "calendarioescolar-bot"
+          git config user.email "bot@calendarioescolar.cl"
+          git add data/pages.json data/calendar-config.json
+          if git diff --staged --quiet; then
+            echo "No hay cambios staged para commitear"
+          else
+            git commit -m "chore: sync datos desde Google Sheet [skip ci]"
+            git push origin ${{ github.ref_name }}
+          fi
+
+      # ── Paso 6: Deploy a Cloudflare Pages ─────────────────────────────
+      - name: Deploy a Cloudflare Pages
+        if: steps.sync.outputs.data_changed == 'true' || github.event.inputs.force_deploy == 'true' || github.event_name == 'schedule'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages deploy public --project-name=${{ vars.CF_PROJECT_NAME }}
+
+      # ── Paso 7: Notificación de resultado ─────────────────────────────
+      - name: Resumen del sync
+        if: always()
+        run: |
+          echo "=== Resumen ==="
+          echo "Sync Sheet:    ${{ steps.sync.outcome }}"
+          echo "Datos cambiaron: ${{ steps.sync.outputs.data_changed }}"
+          echo "Trigger:       ${{ github.event_name }}"
+          if [ -f public/health.json ]; then
+            echo "Health JSON:"
+            cat public/health.json
+          fi

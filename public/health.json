@@ -1,0 +1,20 @@
+{
+  "generatedAt": "2026-03-12T13:27:19.535Z",
+  "generatedDate": "2026-03-12",
+  "dataYear": 2026,
+  "regionsCount": 16,
+  "pagesCount": 16,
+  "sitemap": "21 URLs",
+  "dataFingerprint": {
+    "pagesJson": "b14b83f42a27cf10812459d2d15592c9",
+    "calendarConfigJson": "26e292bfe68a0701cca00e605a648be9"
+  },
+  "calendarConfig": {
+    "schoolStart": "2026-03-02",
+    "winterStart": "2026-07-11",
+    "winterEnd": "2026-07-25",
+    "schoolEnd": "2026-12-12",
+    "feriadosCount": 7
+  },
+  "status": "ok"
+}

@@ -1,5 +1,11 @@
 /* app.js — calendarioescolar.cl
-   Selector de región + stats en tiempo real */
+   Selector de región + stats en tiempo real
+
+   Depende de (cargados antes en HTML):
+     - public/js/regions-data.js    → window.REGIONS_DATA
+     - public/js/calendar-config.js → window.CALENDAR_CONFIG
+   Ambos generados por: npm run generate
+*/
 
 document.addEventListener('DOMContentLoaded', function () {
   // Módulos compartidos
@@ -12,26 +18,23 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 var App = (function () {
-  // Datos de regiones — cargados desde public/js/regions-data.js (generado por scripts/generate-pages.js)
-  // Si regions-data.js no está disponible, el selector de región no funcionará — ejecutar: npm run generate
+  // Datos de regiones — cargados desde public/js/regions-data.js
+  // Si no está disponible: ejecutar npm run generate
   var REGIONS = window.REGIONS_DATA || {};
 
-  // Feriados irrenunciables que caen en período escolar 2026 (excluye fin de semana y vacaciones)
-  // Timezone Chile: verano -03:00, invierno -04:00
-  var FERIADOS = [
-    { date: new Date(2026, 3, 3),  nombre: 'Viernes Santo' },    // abril = mes 3
-    { date: new Date(2026, 4, 1),  nombre: '1 de mayo' },
-    { date: new Date(2026, 4, 21), nombre: 'Glorias Navales' },
-    { date: new Date(2026, 5, 8),  nombre: 'Corpus Christi' },
-    { date: new Date(2026, 5, 29), nombre: 'San Pedro y San Pablo' },
-    { date: new Date(2026, 9, 12), nombre: 'Enc. Dos Mundos' },  // octubre = mes 9
-    { date: new Date(2026, 11, 8), nombre: '8 de diciembre' }    // diciembre = mes 11
-  ];
+  // Config del calendario — cargada desde public/js/calendar-config.js
+  // Fuente de verdad: data/calendar-config.json
+  // Si no está disponible: ejecutar npm run generate
+  var CAL = window.CALENDAR_CONFIG || null;
 
   function init() {
     initRegionSelector();
     initRegionChips();
-    initSchoolStats();
+    if (CAL) {
+      initSchoolStats();
+    } else {
+      console.warn('[app.js] CALENDAR_CONFIG no disponible — ejecutar: npm run generate');
+    }
   }
 
   // Selector de región oculto (mantiene compatibilidad con el DOM esperado)
@@ -52,7 +55,7 @@ var App = (function () {
       var tbody = document.getElementById('region-table-body');
       var link  = document.getElementById('region-link');
 
-      if (title) title.textContent = 'Calendario Escolar 2026 \u2014 Regi\u00f3n ' + r.name;
+      if (title) title.textContent = 'Calendario Escolar ' + (CAL ? CAL.year : '') + ' \u2014 Regi\u00f3n ' + r.name;
 
       if (tbody) {
         tbody.innerHTML =
@@ -95,15 +98,27 @@ var App = (function () {
   }
 
   // Stats en tiempo real: semana del año escolar, días para vacaciones, próximo feriado
+  // Lee fechas desde window.CALENDAR_CONFIG (data/calendar-config.json)
   function initSchoolStats() {
-    // Año escolar 2026: inicio 2 marzo, inicio vacaciones 11 julio, fin 11 diciembre
-    var schoolStart = new Date(2026, 2, 2);   // marzo = mes 2
-    var winterStart = new Date(2026, 6, 11);  // julio = mes 6
-    var winterEnd   = new Date(2026, 6, 25);  // 25 julio
-    var schoolEnd   = new Date(2026, 11, 12); // 12 dic (día siguiente al último día)
+    // Parsear fechas ISO desde calendar-config.json
+    // Nota: parseamos con hora 12:00 UTC para evitar desfase de timezone (Chile -3/-4)
+    function parseDate(isoStr) {
+      var parts = isoStr.split('-');
+      return new Date(Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]), 12, 0, 0));
+    }
 
-    var today = new Date();
-    today.setHours(0, 0, 0, 0);
+    var schoolStart = parseDate(CAL.schoolStart);
+    var winterStart = parseDate(CAL.winterStart);
+    var winterEnd   = parseDate(CAL.winterEnd);
+    var schoolEnd   = parseDate(CAL.schoolEnd);
+
+    // Feriados desde calendar-config.json (ya no hardcodeados)
+    var FERIADOS = CAL.feriados.map(function (f) {
+      return { date: parseDate(f.date), nombre: f.nombre };
+    });
+
+    var now = new Date();
+    var today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0));
 
     // Semana del año escolar
     var weekEl = document.getElementById('school-week');
@@ -126,7 +141,7 @@ var App = (function () {
       if (daysToWinter > 0) {
         winterEl.textContent = daysToWinter + '\u00a0d\u00edas';
       } else if (today < winterEnd) {
-        winterEl.textContent = '¡En\u00a0curso!';
+        winterEl.textContent = '\u00a1En\u00a0curso!';
       } else {
         winterEl.textContent = 'Pasadas';
       }
