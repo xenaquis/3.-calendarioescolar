@@ -21,7 +21,7 @@ window.CALENDAR_CONFIG = {
       "nombre": "Glorias Navales"
     },
     {
-      "date": "2026-06-08",
+      "date": "2026-06-04",
       "nombre": "Corpus Christi"
     },
     {

@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-12 (refactor backend: centralización de fechas + sync Google Sheet).
+Ultimo update de este blueprint: 2026-03-12 (auditoría de fuentes + corrección Corpus Christi + FUENTES-VERDAD.md).
 
 ---
 
@@ -20,7 +20,7 @@ Ultimo update de este blueprint: 2026-03-12 (refactor backend: centralización d
 | Search Console        | PENDIENTE       | Verificar tras registrar dominio                   |
 | OG Image              | PENDIENTE       | Archivo `/icons/og-image.png` referenciado pero no existe |
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
-| Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — verificar cada noviembre |
+| Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — Corpus Christi corregido 2026-03-12 |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
 | Frontend              | REDISEÑADO      | Minimalista utility-first (2026-03-12)             |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
@@ -62,7 +62,8 @@ Ultimo update de este blueprint: 2026-03-12 (refactor backend: centralización d
 │   ├── pages.json                  -> FUENTE DE VERDAD regional: 16 regiones, fechas por region
 │   ├── calendar-config.json        -> FUENTE DE VERDAD temporal: fechas del año escolar, feriados
 │   ├── template.html               -> Plantilla HTML para paginas de region (usa {{variables}})
-│   └── SHEET-SETUP.md              -> Instrucciones para configurar el Google Sheet
+│   ├── SHEET-SETUP.md              -> Instrucciones para configurar el Google Sheet
+│   └── FUENTES-VERDAD.md           -> Auditoría de fuentes oficiales, protocolo anual, riesgos
 │
 ├── scripts/
 │   ├── generate-pages.js           -> Lee pages.json + template.html + calendar-config.json
@@ -200,6 +201,13 @@ Las páginas en `public/region/` y `public/js/` son artefactos generados — nun
 - **Problema**: `ca-pub-XXXXXXXXXXXXXXXX` (AdSense) y `G-XXXXXXXXXX` (GA4) son placeholders.
 - **Fix pendiente**: Obtener IDs reales y actualizar config.json + todos los HTML.
 
+### ~~BUG 9 — CORPUS CHRISTI INCORRECTO~~ RESUELTO (2026-03-12)
+- **Archivos**: `data/calendar-config.json` + `public/index.html`
+- **Problema**: Corpus Christi aparecía como "8 de junio" (dato copiado de 2023 sin recalcular)
+- **Causa raíz**: Pascua 2023 = 9 abril → CC 2023 = 8 junio. Pascua 2026 = 5 abril → CC 2026 = **4 junio**
+- **Fix**: Corregido a `2026-06-04` en calendar-config.json y "Jueves 4 de junio" en index.html
+- **Prevención**: Calcular Corpus Christi con algoritmo Meeus/Jones/Butcher cada año (ver FUENTES-VERDAD.md)
+
 ### ~~BUG 1 — DATA DUPLICATION~~ RESUELTO (2026-03-12)
 ### ~~BUG 2 — ISO DATES~~ RESUELTO (2026-03-12)
 ### ~~BUG 3 — UNICODE ESCAPES~~ RESUELTO (2026-03-12)
@@ -247,18 +255,31 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 ## Fuentes de informacion
 
 ### Datos del calendario escolar
-- **Mineduc oficial**: https://www.mineduc.cl → Documentos → Calendario Escolar
-  - Buscar "Resolución Exenta" del año correspondiente (publicada ~noviembre)
-  - No hay API — requiere descarga manual del PDF
+
+**FUENTE ÚLTIMA DE VERDAD:** `data/FUENTES-VERDAD.md` — leer antes de cualquier actualización de datos.
+
+- **Mineduc portal centralizado**: `https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-{AÑO}/`
+  - Portal de ayuda: `https://www.ayudamineduc.cl/ficha/calendarios-escolares-regionales`
+  - PDFs regionales: `https://[region].mineduc.cl/wp-content/uploads/sites/[N]/YYYY/MM/...`
+  - No hay API — requiere descarga manual del PDF + lectura humana
+- **Diario Oficial** (fuente legal suprema): `https://www.diarioficial.cl/`
+- **BCN — feriados** (texto legal): `https://www.bcn.cl/leychile/navegar?idNorma=22209`
+- **FeriadosApp** (cross-validación): `https://www.feriadosapp.com/api`
 
 ### Actualizacion anual de datos (cada noviembre) — flujo optimizado
 
-1. Descargar PDF Mineduc → extraer fechas de las 16 regiones
-2. **Actualizar tab "Regiones"** del Google Sheet
-3. **Actualizar tab "Config"** del Google Sheet (year, fechas, feriados)
-4. Disparar GitHub Action **"Sync desde Sheet + Deploy"** manualmente (o esperar al lunes)
-5. Verificar `https://calendarioescolar.cl/health.json` → `dataYear` correcto
-6. Actualizar año en landings estáticas: `vacaciones-invierno-2026.html`, `cuando-empiezan-clases-2026.html`
+1. Detectar publicación en `https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-{AÑO+1}/`
+2. Descargar PDFs regionales → extraer fechas de las 16 regiones
+3. **Verificar Corpus Christi** con algoritmo Pascua (NO copiar del año anterior — bug histórico)
+4. **Verificar San Pedro y San Pablo** (29 jun: si cae sáb/dom → mover al lunes)
+5. **Verificar qué otros feriados** (Pueblos Indígenas, Asunción, Iglesias Evangélicas) caen en días de clases ese año
+6. **Actualizar tab "Regiones"** del Google Sheet
+7. **Actualizar tab "Config"** del Google Sheet (year, fechas, feriados)
+8. Actualizar **FAQ hardcodeadas** en `public/index.html` (texto dentro de `<details>`)
+9. Actualizar **Schema.org JSON-LD** en `public/index.html` (fechas en `acceptedAnswer`)
+10. Disparar GitHub Action **"Sync desde Sheet + Deploy"** manualmente (o esperar al lunes)
+11. Verificar `https://calendarioescolar.cl/health.json` → `dataYear` correcto
+12. Actualizar año en landings estáticas: `vacaciones-invierno-{AÑO}.html`, `cuando-empiezan-clases-{AÑO}.html`
 
 **Sin Google Sheet (fallback manual):**
 Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` → `node scripts/validate.js` → deploy
@@ -267,6 +288,8 @@ Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` �
 - `GET https://calendarioescolar.cl/health.json`
 - Verificar: `status: "ok"`, `dataYear` correcto, `generatedDate` reciente (< 30 días)
 - Si `dataYear` incorrecto: actualización pendiente → notificar humano
+- **Octubre-enero**: monitorear `https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-{AÑO+1}/`
+  → Si la página aparece con PDFs → ESCALADA HUMANA INMEDIATA
 
 ### Servicios del sitio
 - Cloudflare Pages: https://dash.cloudflare.com
