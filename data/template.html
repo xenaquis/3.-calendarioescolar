@@ -5,10 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- SEO -->
-  <title>{{title}} — calendarioescolar.cl</title>
+  <title>{{title}}</title>
   <meta name="description" content="{{description}}">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, noai, noimageai">
   <link rel="canonical" href="https://calendarioescolar.cl/{{slug}}/">
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="es-CL" href="https://calendarioescolar.cl/{{slug}}/">
+  <link rel="alternate" hreflang="es" href="https://calendarioescolar.cl/{{slug}}/">
+  <link rel="alternate" hreflang="x-default" href="https://calendarioescolar.cl/{{slug}}/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="article">
@@ -44,28 +49,28 @@
       },
       {
         "@type": "Event",
-        "name": "Inicio a\u00f1o escolar 2026 \u2014 {{region}}",
+        "name": "Inicio año escolar 2026 — {{region}}",
         "startDate": "2026-03-02",
-        "location": { "@type": "Place", "name": "Regi\u00f3n {{region}}, Chile" },
-        "organizer": { "@type": "Organization", "name": "Ministerio de Educaci\u00f3n de Chile" }
+        "location": { "@type": "Place", "name": "Región {{region}}, Chile" },
+        "organizer": { "@type": "Organization", "name": "Ministerio de Educación de Chile" }
       },
       {
         "@type": "FAQPage",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "\u00bfCu\u00e1ndo empiezan las clases 2026 en la Regi\u00f3n {{region}}?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Las clases en la Regi\u00f3n {{region}} comienzan el {{inicio}} de 2026, seg\u00fan el calendario del Ministerio de Educaci\u00f3n." }
+            "name": "¿Cuándo empiezan las clases 2026 en la Región {{region}}?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Las clases en la Región {{region}} comienzan el {{inicio}} de 2026, según el calendario del Ministerio de Educación." }
           },
           {
             "@type": "Question",
-            "name": "\u00bfCu\u00e1ndo son las vacaciones de invierno 2026 en la Regi\u00f3n {{region}}?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Las vacaciones de invierno 2026 en la Regi\u00f3n {{region}} van desde el {{vacacionesInicio}} hasta el {{vacacionesFin}}, un total de {{diasVacacionesInvierno}} d\u00edas." }
+            "name": "¿Cuándo son las vacaciones de invierno 2026 en la Región {{region}}?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Las vacaciones de invierno 2026 en la Región {{region}} van desde el {{vacacionesInicio}} hasta el {{vacacionesFin}}, un total de {{diasVacacionesInvierno}} días." }
           },
           {
             "@type": "Question",
-            "name": "\u00bfCu\u00e1ndo termina el a\u00f1o escolar 2026 en la Regi\u00f3n {{region}}?",
-            "acceptedAnswer": { "@type": "Answer", "text": "El a\u00f1o escolar 2026 en la Regi\u00f3n {{region}} finaliza el {{finAno}}." }
+            "name": "¿Cuándo termina el año escolar 2026 en la Región {{region}}?",
+            "acceptedAnswer": { "@type": "Answer", "text": "El año escolar 2026 en la Región {{region}} finaliza el {{finAno}}." }
           }
         ]
       }
@@ -115,9 +120,9 @@
       <!-- Countdown -->
       <section class="section" aria-label="Cuenta regresiva">
         <div class="card card--highlight" style="text-align:center;">
-          <p class="card__title">Pr\u00f3ximo evento escolar</p>
+          <p class="card__title">Próximo evento escolar</p>
           <div id="countdown-region" class="countdown">
-            <div data-unit="days"><span class="countdown__number">--</span><span class="countdown__label">d\u00edas</span></div>
+            <div data-unit="days"><span class="countdown__number">--</span><span class="countdown__label">días</span></div>
             <div data-unit="hours"><span class="countdown__number">--</span><span class="countdown__label">horas</span></div>
             <div data-unit="minutes"><span class="countdown__number">--</span><span class="countdown__label">min</span></div>
             <div data-unit="seconds"><span class="countdown__number">--</span><span class="countdown__label">seg</span></div>
@@ -128,7 +133,7 @@
 
       <!-- Calendar Table -->
       <section class="section" aria-label="Tabla calendario escolar">
-        <h2>Fechas del a\u00f1o escolar 2026</h2>
+        <h2>Fechas del año escolar 2026</h2>
         <div class="table-wrapper" id="tabla-region">
           <table>
             <thead>
@@ -136,12 +141,12 @@
                 <th>Evento</th>
                 <th>Fecha inicio</th>
                 <th>Fecha fin</th>
-                <th>D\u00edas</th>
+                <th>Días</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Inicio a\u00f1o escolar</strong></td>
+                <td><strong>Inicio año escolar</strong></td>
                 <td>{{inicio}}</td>
                 <td>&mdash;</td>
                 <td>&mdash;</td>
@@ -150,16 +155,16 @@
                 <td><strong>Vacaciones de invierno</strong></td>
                 <td>{{vacacionesInicio}}</td>
                 <td>{{vacacionesFin}}</td>
-                <td>{{diasVacacionesInvierno}} d\u00edas</td>
+                <td>{{diasVacacionesInvierno}} días</td>
               </tr>
               <tr>
                 <td><strong>Fiestas Patrias</strong></td>
                 <td>{{fiestasPatriasInicio}}</td>
                 <td>{{fiestasPatriasFin}}</td>
-                <td>{{diasFiestasPatrias}} d\u00edas</td>
+                <td>{{diasFiestasPatrias}} días</td>
               </tr>
               <tr>
-                <td><strong>Fin a\u00f1o escolar</strong></td>
+                <td><strong>Fin año escolar</strong></td>
                 <td>{{finAno}}</td>
                 <td>&mdash;</td>
                 <td>&mdash;</td>
@@ -189,9 +194,9 @@
       <!-- Info -->
       <section class="section">
         <h2>Sobre el calendario escolar en {{region}}</h2>
-        <p>El calendario escolar para la Regi\u00f3n {{region}} es establecido cada a\u00f1o por el
-           Ministerio de Educaci\u00f3n (Mineduc) a trav\u00e9s de una resoluci\u00f3n exenta. Las fechas
-           incluyen el inicio y t\u00e9rmino de clases, per\u00edodos de vacaciones y d\u00edas administrativos.</p>
+        <p>El calendario escolar para la Región {{region}} es establecido cada año por el
+           Ministerio de Educación (Mineduc) a través de una resolución exenta. Las fechas
+           incluyen el inicio y término de clases, períodos de vacaciones y días administrativos.</p>
         <p>Los establecimientos educacionales pueden ajustar levemente las fechas dentro del
            marco que establece el Mineduc, por lo que se recomienda siempre confirmar con el
            colegio o escuela correspondiente.</p>
@@ -202,31 +207,31 @@
         <h2>Preguntas Frecuentes</h2>
 
         <details>
-          <summary><h3>\u00bfCu\u00e1ndo empiezan las clases 2026 en {{region}}?</h3></summary>
-          <p>Las clases en la Regi\u00f3n {{region}} comienzan el <strong>{{inicio}} de 2026</strong>,
-             seg\u00fan el calendario oficial del Ministerio de Educaci\u00f3n.</p>
+          <summary><h3>¿Cuándo empiezan las clases 2026 en {{region}}?</h3></summary>
+          <p>Las clases en la Región {{region}} comienzan el <strong>{{inicio}} de 2026</strong>,
+             según el calendario oficial del Ministerio de Educación.</p>
         </details>
 
         <details>
-          <summary><h3>\u00bfCu\u00e1ndo son las vacaciones de invierno 2026 en {{region}}?</h3></summary>
-          <p>Las vacaciones de invierno 2026 en la Regi\u00f3n {{region}} van desde el
+          <summary><h3>¿Cuándo son las vacaciones de invierno 2026 en {{region}}?</h3></summary>
+          <p>Las vacaciones de invierno 2026 en la Región {{region}} van desde el
              <strong>{{vacacionesInicio}}</strong> hasta el <strong>{{vacacionesFin}}</strong>,
-             un total de <strong>{{diasVacacionesInvierno}} d\u00edas</strong>.</p>
+             un total de <strong>{{diasVacacionesInvierno}} días</strong>.</p>
         </details>
 
         <details>
-          <summary><h3>\u00bfCu\u00e1ndo termina el a\u00f1o escolar 2026 en {{region}}?</h3></summary>
-          <p>El a\u00f1o escolar 2026 en la Regi\u00f3n {{region}} finaliza el
+          <summary><h3>¿Cuándo termina el año escolar 2026 en {{region}}?</h3></summary>
+          <p>El año escolar 2026 en la Región {{region}} finaliza el
              <strong>{{finAno}}</strong>.</p>
         </details>
       </section>
 
       <!-- Related links -->
       <section class="section">
-        <h2>Consulta tambi\u00e9n</h2>
+        <h2>Consulta también</h2>
         <ul>
-          <li><a href="/vacaciones-invierno-2026.html">Vacaciones de Invierno 2026: Fechas por Regi\u00f3n</a></li>
-          <li><a href="/cuando-empiezan-clases-2026.html">\u00bfCu\u00e1ndo Empiezan las Clases 2026?</a></li>
+          <li><a href="/vacaciones-invierno-2026.html">Vacaciones de Invierno 2026: Fechas por Región</a></li>
+          <li><a href="/cuando-empiezan-clases-2026.html">¿Cuándo Empiezan las Clases 2026?</a></li>
           <li><a href="/">Ver todas las regiones</a></li>
         </ul>
       </section>
@@ -248,13 +253,14 @@
   <footer class="site-footer">
     <div class="container">
       <ul class="site-footer__links">
+        <li><a href="/">Inicio</a></li>
         <li><a href="/about.html">Acerca de</a></li>
         <li><a href="/privacidad.html">Privacidad</a></li>
         <li><a href="/contacto.html">Contacto</a></li>
         <li><a href="https://dolaruf.cl" rel="noopener">Valor UF hoy</a></li>
       </ul>
       <p class="site-footer__copy">&copy; 2026 Calendario Escolar Chile</p>
-      <p class="site-footer__source">Fuente: Ministerio de Educaci\u00f3n de Chile (Mineduc)</p>
+      <p class="site-footer__source">Fuente: Ministerio de Educación de Chile (Mineduc)</p>
     </div>
   </footer>
 
@@ -268,6 +274,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     Theme.init();
     Ads.init();
+    Analytics.init('G-XXXXXXXXXX');
 
     // Countdown to next school event for this region
     var events = [
@@ -276,7 +283,7 @@
       { date: '2026-07-25T08:00:00-04:00', label: 'Vuelta de vacaciones de invierno' },
       { date: '2026-09-14T00:00:00-04:00', label: 'Fiestas Patrias' },
       { date: '2026-09-19T08:00:00-04:00', label: 'Vuelta de Fiestas Patrias' },
-      { date: '2026-12-11T00:00:00-03:00', label: 'Fin del a\u00f1o escolar' }
+      { date: '2026-12-11T00:00:00-03:00', label: 'Fin del año escolar' }
     ];
     var now = Date.now();
     var next = null;
@@ -288,7 +295,7 @@
       Countdown.init('countdown-region', next.date);
       if (labelEl) labelEl.textContent = 'para ' + next.label;
     } else {
-      if (labelEl) labelEl.textContent = 'El a\u00f1o escolar 2026 ha finalizado';
+      if (labelEl) labelEl.textContent = 'El año escolar 2026 ha finalizado';
     }
 
     // Download button

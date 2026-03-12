@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Modulos compartidos
   Theme.init();
   Ads.init();
-  // Analytics.init('G-XXXXXXXXXX'); // Descomentar con ID real
+  Analytics.init('G-XXXXXXXXXX');
 
   // Logica del sitio
   App.init();
