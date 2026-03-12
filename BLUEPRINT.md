@@ -175,9 +175,10 @@ scripts/generate-pages.js
       |---> public/js/calendar-config.js     (window.CALENDAR_CONFIG para app.js)
       |---> public/health.json               (metadata para monitoreo)
       |
-      v  (npm run build)
-scripts/validate.js  ← bloquea deploy si hay errores
-      |
+      v  (npm run build = scripts/build.sh)
+      |   → scripts/validate.js (bloquea build si hay errores criticos)
+      |   → actualiza fechas en sitemap.xml
+      |   → verifica archivos y placeholders
       v
 Cloudflare Pages (deploy)
 ```
