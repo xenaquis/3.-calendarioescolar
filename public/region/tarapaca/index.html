@@ -94,18 +94,6 @@
     </div>
   </header>
 
-  <!-- Ad: Top Banner -->
-  <div class="container">
-    <div class="ad-slot ad-slot--banner" aria-hidden="true">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-           data-ad-slot="1234567890"
-           data-ad-format="horizontal"
-           data-full-width-responsive="true"></ins>
-    </div>
-  </div>
-
   <!-- Main -->
   <main id="main">
     <div class="container">
@@ -116,67 +104,82 @@
       </nav>
 
       <h1>Calendario Escolar 2026 — Región de Tarapacá</h1>
+      <p class="hero-sub">Fuente oficial Mineduc &middot; <a href="/about.html">Acerca de los datos</a></p>
 
-      <!-- Countdown -->
-      <section class="section" aria-label="Cuenta regresiva">
-        <div class="card card--highlight" style="text-align:center;">
-          <p class="card__title">Próximo evento escolar</p>
-          <div id="countdown-region" class="countdown">
-            <div data-unit="days"><span class="countdown__number">--</span><span class="countdown__label">días</span></div>
-            <div data-unit="hours"><span class="countdown__number">--</span><span class="countdown__label">horas</span></div>
-            <div data-unit="minutes"><span class="countdown__number">--</span><span class="countdown__label">min</span></div>
-            <div data-unit="seconds"><span class="countdown__number">--</span><span class="countdown__label">seg</span></div>
-          </div>
-          <p class="card__meta" id="countdown-region-label">Calculando...</p>
+      <!-- Fechas clave de la región -->
+      <section class="key-facts" aria-label="Fechas clave Tarapacá 2026">
+        <div class="key-fact key-fact--primary">
+          <p class="key-fact__label">Inicio de clases</p>
+          <p class="key-fact__date">2 de marzo</p>
+          <p class="key-fact__note">Lunes, 2026</p>
+        </div>
+        <div class="key-fact key-fact--accent">
+          <p class="key-fact__label">Vacaciones invierno</p>
+          <p class="key-fact__date">11 de julio</p>
+          <p class="key-fact__note">hasta 24 de julio &middot; 14 d&iacute;as</p>
+        </div>
+        <div class="key-fact key-fact--warning">
+          <p class="key-fact__label">Fiestas Patrias</p>
+          <p class="key-fact__date">14 de septiembre</p>
+          <p class="key-fact__note">hasta 18 de septiembre &middot; 5 d&iacute;as</p>
+        </div>
+        <div class="key-fact key-fact--success">
+          <p class="key-fact__label">Fin de a&ntilde;o</p>
+          <p class="key-fact__date">11 de diciembre</p>
+          <p class="key-fact__note">&Uacute;ltimo d&iacute;a de clases</p>
         </div>
       </section>
 
-      <!-- Calendar Table -->
-      <section class="section" aria-label="Tabla calendario escolar">
-        <h2>Fechas del año escolar 2026</h2>
+      <!-- Ad: Top Banner -->
+      <div class="ad-slot ad-slot--banner" aria-hidden="true">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="1234567890"
+             data-ad-format="horizontal"
+             data-full-width-responsive="true"></ins>
+      </div>
+
+      <!-- Tabla completa del calendario -->
+      <section class="section" aria-label="Tabla calendario escolar Tarapacá">
+        <h2>Calendario completo &mdash; Tarapacá 2026</h2>
         <div class="table-wrapper" id="tabla-region">
           <table>
             <thead>
               <tr>
                 <th>Evento</th>
-                <th>Fecha inicio</th>
-                <th>Fecha fin</th>
-                <th>Días</th>
+                <th>Fechas</th>
+                <th>D&iacute;as</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Inicio año escolar</strong></td>
-                <td>2 de marzo</td>
-                <td>&mdash;</td>
+                <td><strong>Inicio a&ntilde;o escolar</strong></td>
+                <td>2 de marzo de 2026</td>
                 <td>&mdash;</td>
               </tr>
               <tr>
                 <td><strong>Vacaciones de invierno</strong></td>
-                <td>11 de julio</td>
-                <td>24 de julio</td>
-                <td>14 días</td>
+                <td>11 de julio &mdash; 24 de julio</td>
+                <td>14</td>
               </tr>
               <tr>
                 <td><strong>Fiestas Patrias</strong></td>
-                <td>14 de septiembre</td>
-                <td>18 de septiembre</td>
-                <td>5 días</td>
+                <td>14 de septiembre &mdash; 18 de septiembre</td>
+                <td>5</td>
               </tr>
               <tr>
-                <td><strong>Fin año escolar</strong></td>
-                <td>11 de diciembre</td>
-                <td>&mdash;</td>
+                <td><strong>Fin a&ntilde;o escolar</strong></td>
+                <td>11 de diciembre de 2026</td>
                 <td>&mdash;</td>
               </tr>
             </tbody>
           </table>
         </div>
 
-        <!-- Download button -->
         <div style="text-align:center; margin-top:var(--space-4);">
-          <button class="btn btn--primary" id="btn-descargar" type="button">
-            Descargar como imagen
+          <button class="btn btn--secondary" id="btn-descargar" type="button">
+            &darr; Descargar como imagen
           </button>
         </div>
       </section>
@@ -191,47 +194,43 @@
              data-full-width-responsive="true"></ins>
       </div>
 
-      <!-- Info -->
+      <!-- Info mínima -->
       <section class="section">
-        <h2>Sobre el calendario escolar en Tarapacá</h2>
-        <p>El calendario escolar para la Región Tarapacá es establecido cada año por el
-           Ministerio de Educación (Mineduc) a través de una resolución exenta. Las fechas
-           incluyen el inicio y término de clases, períodos de vacaciones y días administrativos.</p>
-        <p>Los establecimientos educacionales pueden ajustar levemente las fechas dentro del
-           marco que establece el Mineduc, por lo que se recomienda siempre confirmar con el
-           colegio o escuela correspondiente.</p>
+        <h2>Sobre este calendario</h2>
+        <p>Fechas oficiales del Ministerio de Educaci&oacute;n (Mineduc) para la Regi&oacute;n Tarapacá, a&ntilde;o escolar 2026.
+           Los establecimientos pueden tener ajustes menores dentro del marco establecido. Confirma con tu colegio.</p>
       </section>
 
       <!-- FAQ -->
       <section class="section" id="faq">
-        <h2>Preguntas Frecuentes</h2>
+        <h2>Preguntas frecuentes</h2>
 
         <details>
-          <summary><h3>¿Cuándo empiezan las clases 2026 en Tarapacá?</h3></summary>
-          <p>Las clases en la Región Tarapacá comienzan el <strong>2 de marzo de 2026</strong>,
-             según el calendario oficial del Ministerio de Educación.</p>
+          <summary><h3>&iquest;Cu&aacute;ndo empiezan las clases 2026 en Tarapacá?</h3></summary>
+          <p>Las clases en la Regi&oacute;n Tarapacá comienzan el <strong>2 de marzo de 2026</strong>,
+             seg&uacute;n el calendario oficial del Ministerio de Educaci&oacute;n.</p>
         </details>
 
         <details>
-          <summary><h3>¿Cuándo son las vacaciones de invierno 2026 en Tarapacá?</h3></summary>
-          <p>Las vacaciones de invierno 2026 en la Región Tarapacá van desde el
+          <summary><h3>&iquest;Cu&aacute;ndo son las vacaciones de invierno 2026 en Tarapacá?</h3></summary>
+          <p>Las vacaciones de invierno 2026 en la Regi&oacute;n Tarapacá van desde el
              <strong>11 de julio</strong> hasta el <strong>24 de julio</strong>,
-             un total de <strong>14 días</strong>.</p>
+             un total de <strong>14 d&iacute;as</strong>.</p>
         </details>
 
         <details>
-          <summary><h3>¿Cuándo termina el año escolar 2026 en Tarapacá?</h3></summary>
-          <p>El año escolar 2026 en la Región Tarapacá finaliza el
+          <summary><h3>&iquest;Cu&aacute;ndo termina el a&ntilde;o escolar 2026 en Tarapacá?</h3></summary>
+          <p>El a&ntilde;o escolar 2026 en la Regi&oacute;n Tarapacá finaliza el
              <strong>11 de diciembre</strong>.</p>
         </details>
       </section>
 
-      <!-- Related links -->
+      <!-- Consulta también -->
       <section class="section">
-        <h2>Consulta también</h2>
+        <h2>Consulta tambi&eacute;n</h2>
         <ul>
-          <li><a href="/vacaciones-invierno-2026.html">Vacaciones de Invierno 2026: Fechas por Región</a></li>
-          <li><a href="/cuando-empiezan-clases-2026.html">¿Cuándo Empiezan las Clases 2026?</a></li>
+          <li><a href="/vacaciones-invierno-2026.html">Vacaciones de Invierno 2026: Fechas por Regi&oacute;n</a></li>
+          <li><a href="/cuando-empiezan-clases-2026.html">&iquest;Cu&aacute;ndo Empiezan las Clases 2026?</a></li>
           <li><a href="/">Ver todas las regiones</a></li>
         </ul>
       </section>
@@ -260,13 +259,12 @@
         <li><a href="https://dolaruf.cl" rel="noopener">Valor UF hoy</a></li>
       </ul>
       <p class="site-footer__copy">&copy; 2026 Calendario Escolar Chile</p>
-      <p class="site-footer__source">Fuente: Ministerio de Educación de Chile (Mineduc)</p>
+      <p class="site-footer__source">Fuente: Ministerio de Educaci&oacute;n de Chile (Mineduc)</p>
     </div>
   </footer>
 
   <!-- JS -->
   <script defer src="/js/theme.js"></script>
-  <script defer src="/js/countdown.js"></script>
   <script defer src="/js/ads.js"></script>
   <script defer src="/js/analytics.js"></script>
   <script defer src="/js/export-image.js"></script>
@@ -276,29 +274,7 @@
     Ads.init();
     Analytics.init('G-XXXXXXXXXX');
 
-    // Countdown to next school event for this region
-    var events = [
-      { date: '2026-03-02T08:00:00-03:00', label: 'Inicio de clases' },
-      { date: '2026-07-11T00:00:00-04:00', label: 'Vacaciones de invierno' },
-      { date: '2026-07-25T08:00:00-04:00', label: 'Vuelta de vacaciones de invierno' },
-      { date: '2026-09-14T00:00:00-04:00', label: 'Fiestas Patrias' },
-      { date: '2026-09-19T08:00:00-04:00', label: 'Vuelta de Fiestas Patrias' },
-      { date: '2026-12-11T00:00:00-03:00', label: 'Fin del año escolar' }
-    ];
-    var now = Date.now();
-    var next = null;
-    for (var i = 0; i < events.length; i++) {
-      if (new Date(events[i].date).getTime() > now) { next = events[i]; break; }
-    }
-    var labelEl = document.getElementById('countdown-region-label');
-    if (next) {
-      Countdown.init('countdown-region', next.date);
-      if (labelEl) labelEl.textContent = 'para ' + next.label;
-    } else {
-      if (labelEl) labelEl.textContent = 'El año escolar 2026 ha finalizado';
-    }
-
-    // Download button
+    // Botón descargar como imagen
     var btnDl = document.getElementById('btn-descargar');
     if (btnDl) {
       btnDl.addEventListener('click', function () {
