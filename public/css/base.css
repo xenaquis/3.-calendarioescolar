@@ -32,9 +32,10 @@ h1, h2, h3, h4 {
   line-height: var(--leading-tight);
   color: var(--color-text);
   font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
-h1 { font-size: var(--text-3xl); margin-bottom: var(--space-4); }
+h1 { font-size: var(--text-3xl); margin-bottom: var(--space-4); letter-spacing: -0.03em; }
 h2 { font-size: var(--text-2xl); margin-bottom: var(--space-3); margin-top: var(--space-10); }
 h3 { font-size: var(--text-xl); margin-bottom: var(--space-2); margin-top: var(--space-6); }
 h4 { font-size: var(--text-lg); margin-bottom: var(--space-2); margin-top: var(--space-4); }
@@ -97,12 +98,13 @@ main {
 
 /* Header */
 .site-header {
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+  border-bottom: 2px solid var(--color-primary);
   padding: var(--space-3) 0;
   position: sticky;
   top: 0;
   z-index: 100;
+  box-shadow: var(--shadow-sm);
 }
 
 .site-header .container {
@@ -115,10 +117,11 @@ main {
 .site-header__brand {
   font-size: var(--text-lg);
   font-weight: 700;
-  color: var(--color-text);
+  color: var(--color-primary);
   text-decoration: none;
+  letter-spacing: -0.01em;
 }
-.site-header__brand:hover { color: var(--color-primary); }
+.site-header__brand:hover { color: var(--color-primary-dark); }
 
 .site-header__nav {
   display: flex;
@@ -136,7 +139,7 @@ main {
 /* Footer */
 .site-footer {
   background: var(--color-surface);
-  border-top: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-border);
   padding: var(--space-8) 0 var(--space-6);
   margin-top: auto;
 }
