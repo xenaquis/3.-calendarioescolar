@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="20" fill="#7c3aed"/>
+  <!-- Book base -->
+  <path d="M20 28 C20 24,24 20,28 20 L50 20 L50 75 C50 75,28 72,28 72 L20 72 Z" fill="#ede9fe" opacity="0.9"/>
+  <path d="M80 28 C80 24,76 20,72 20 L50 20 L50 75 C50 75,72 72,72 72 L80 72 Z" fill="#dbeafe" opacity="0.9"/>
+  <!-- Calendar lines on left page -->
+  <line x1="28" y1="32" x2="46" y2="32" stroke="#7c3aed" stroke-width="2" stroke-linecap="round"/>
+  <line x1="28" y1="40" x2="44" y2="40" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="28" y1="48" x2="42" y2="48" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <line x1="28" y1="56" x2="44" y2="56" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+  <!-- Calendar grid dots on right page -->
+  <circle cx="58" cy="32" r="2" fill="#2563eb"/>
+  <circle cx="66" cy="32" r="2" fill="#2563eb"/>
+  <circle cx="74" cy="32" r="2" fill="#2563eb"/>
+  <circle cx="58" cy="40" r="2" fill="#2563eb" opacity="0.6"/>
+  <circle cx="66" cy="40" r="2" fill="#7c3aed"/>
+  <circle cx="74" cy="40" r="2" fill="#2563eb" opacity="0.6"/>
+  <circle cx="58" cy="48" r="2" fill="#2563eb" opacity="0.6"/>
+  <circle cx="66" cy="48" r="2" fill="#2563eb" opacity="0.6"/>
+  <circle cx="74" cy="48" r="2" fill="#2563eb" opacity="0.6"/>
+  <circle cx="58" cy="56" r="2" fill="#2563eb" opacity="0.4"/>
+  <circle cx="66" cy="56" r="2" fill="#2563eb" opacity="0.4"/>
+  <!-- Spine -->
+  <line x1="50" y1="20" x2="50" y2="75" stroke="#7c3aed" stroke-width="2"/>
+</svg>

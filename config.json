@@ -1,0 +1,38 @@
+{
+  "siteName": "Calendario Escolar Chile",
+  "domain": "calendarioescolar.cl",
+  "lang": "es-CL",
+  "archetype": "catalog",
+  "description": "Calendario escolar 2026 Chile: fechas de inicio de clases, vacaciones de invierno y fin de a\u00f1o por regi\u00f3n. Fuente oficial Mineduc.",
+  "themeColor": "#7c3aed",
+  "adsense": {
+    "client": "ca-pub-XXXXXXXXXXXXXXXX",
+    "slots": {
+      "top": "1234567890",
+      "mid": "0987654321",
+      "bottom": "1122334455"
+    }
+  },
+  "analytics": {
+    "ga4": "G-XXXXXXXXXX"
+  },
+  "crossLinks": [
+    { "url": "https://dolaruf.cl", "text": "Valor UF hoy", "context": "footer" }
+  ],
+  "apis": {
+    "worker": "",
+    "external": []
+  },
+  "seo": {
+    "title": "Calendario Escolar 2026 Chile \u2014 calendarioescolar.cl",
+    "ogImage": "https://calendarioescolar.cl/icons/og-image.png",
+    "keywords": ["calendario escolar 2026", "vacaciones de invierno 2026", "inicio clases 2026 chile", "calendario escolar chile"]
+  },
+  "sheet": {
+    "spreadsheetId": "PLACEHOLDER_SHEET_ID",
+    "siteTab": "calendarioescolar.cl",
+    "dashboardTab": "Dashboard",
+    "healthLogTab": "Health Log",
+    "maintenanceTab": "Maintenance"
+  }
+}

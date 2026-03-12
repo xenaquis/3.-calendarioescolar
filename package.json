@@ -1,0 +1,13 @@
+{
+  "name": "calendarioescolar-cl",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Calendario Escolar 2026 Chile — fechas por region, vanilla HTML/CSS/JS + Cloudflare Pages",
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "generate": "node scripts/generate-pages.js",
+    "dev": "npx wrangler pages dev public --port 8788",
+    "new-site": "bash scripts/new-site.sh",
+    "deploy": "npx wrangler pages deploy public"
+  }
+}

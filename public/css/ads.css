@@ -1,0 +1,47 @@
+/* ============================================
+   ads.css — Ad slots con altura fija para CLS=0
+   NO tocar alturas sin testear Lighthouse.
+   ============================================ */
+
+.ad-slot {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius);
+  margin: var(--space-6) 0;
+  contain: layout style;
+}
+
+/* Banner horizontal (top) */
+.ad-slot--banner {
+  min-height: var(--ad-height-banner);
+}
+
+/* Rectángulo (mid/bottom) */
+.ad-slot--rect {
+  min-height: var(--ad-height-rect);
+}
+
+/* Mobile: banner más pequeño */
+@media (max-width: 640px) {
+  .ad-slot--banner {
+    min-height: var(--ad-height-banner-mobile);
+  }
+}
+
+/* Ocultar en print */
+@media print {
+  .ad-slot { display: none !important; }
+}
+
+/* Placeholder mientras carga */
+.ad-slot::before {
+  content: '';
+  display: block;
+}
+
+/* Cuando el ad cargó, quitar background placeholder */
+.ad-slot:has(iframe) {
+  background: transparent;
+}
