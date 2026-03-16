@@ -18,7 +18,7 @@ id = "545a6671deb24021b70fa859dea576fd"
 ENVIRONMENT = "production"
 # URL pública del worker (para construir botones inline de Telegram)
 # Reemplazar con la URL real: https://calendar-monitor.<tu-subdominio>.workers.dev
-WORKER_URL = ""
+WORKER_URL = "https://calendar-monitor.thevalis.workers.dev"
 # Repo GitHub donde vive el proyecto: "usuario/repo"
 GITHUB_REPO = "xenaquis/3.-calendarioescolar"
 
