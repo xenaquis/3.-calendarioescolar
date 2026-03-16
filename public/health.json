@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-03-12T17:35:20.775Z",
-  "generatedDate": "2026-03-12",
+  "generatedAt": "2026-03-16T21:17:27.198Z",
+  "generatedDate": "2026-03-16",
   "dataYear": 2026,
   "regionsCount": 16,
   "pagesCount": 16,
   "sitemap": "21 URLs",
   "dataFingerprint": {
     "pagesJson": "b14b83f42a27cf10812459d2d15592c9",
-    "calendarConfigJson": "dc55ec2b49591aada4c4c22d25655c2c"
+    "calendarConfigJson": "17f460d0f7d7d95600c9b3d7863e2743"
   },
   "calendarConfig": {
     "schoolStart": "2026-03-02",

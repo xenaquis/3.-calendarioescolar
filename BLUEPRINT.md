@@ -22,7 +22,7 @@ Ultimo update de este blueprint: 2026-03-12 (auditoría de fuentes + corrección
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
 | Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — Corpus Christi corregido 2026-03-12 |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
-| Frontend              | REDISEÑADO      | Minimalista utility-first (2026-03-12)             |
+| Frontend              | ACTUALIZADO     | +página feriados-2026.html con filtros interactivos (2026-03-16) |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
 
 ---
@@ -33,6 +33,7 @@ Ultimo update de este blueprint: 2026-03-12 (auditoría de fuentes + corrección
 /
 ├── public/                         -> Root del sitio estatico (Cloudflare Pages)
 │   ├── index.html                  -> Homepage: key-facts, school-stats, chips selector de región, feriados escolares
+│   ├── feriados-2026.html          -> Landing feriados: tabla filtrable + timeline + FAQ (generada a mano)
 │   ├── vacaciones-invierno-2026.html -> Landing SEO: fechas vacaciones por región
 │   ├── cuando-empiezan-clases-2026.html -> Landing SEO: inicio de clases
 │   ├── about.html
