@@ -396,10 +396,10 @@ details h3 {
   transform: translateY(-1px);
 }
 
-.key-fact--primary { border-left-color: var(--color-primary); }
-.key-fact--accent  { border-left-color: var(--color-accent); }
-.key-fact--warning { border-left-color: var(--color-warning); }
-.key-fact--success { border-left-color: var(--color-success); }
+.key-fact--primary { border-left-color: var(--color-primary); background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-bg) 60%); }
+.key-fact--accent  { border-left-color: var(--color-accent);  background: linear-gradient(135deg, var(--color-accent-light) 0%, var(--color-bg) 60%); }
+.key-fact--warning { border-left-color: var(--color-warning); background: linear-gradient(135deg, var(--color-warning-light) 0%, var(--color-bg) 60%); }
+.key-fact--success { border-left-color: var(--color-success); background: linear-gradient(135deg, var(--color-success-light) 0%, var(--color-bg) 60%); }
 
 .key-fact__label {
   font-size: var(--text-xs);
@@ -411,7 +411,7 @@ details h3 {
 }
 
 .key-fact__date {
-  font-size: var(--text-xl);
+  font-size: var(--text-2xl);
   font-weight: 700;
   color: var(--color-text);
   margin-bottom: var(--space-1);
@@ -429,6 +429,20 @@ details h3 {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* Dark mode: desactivar gradientes tinted (las variables *-light son colores claros) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .key-fact--primary,
+  :root:not([data-theme="light"]) .key-fact--accent,
+  :root:not([data-theme="light"]) .key-fact--warning,
+  :root:not([data-theme="light"]) .key-fact--success { background: var(--color-surface); }
+  :root:not([data-theme="light"]) .hero-section { background: none; }
+}
+[data-theme="dark"] .key-fact--primary,
+[data-theme="dark"] .key-fact--accent,
+[data-theme="dark"] .key-fact--warning,
+[data-theme="dark"] .key-fact--success { background: var(--color-surface); }
+[data-theme="dark"] .hero-section { background: none; }
 
 /* ============================================
    School Stats — barra de datos en tiempo real
@@ -527,6 +541,20 @@ details h3 {
   .region-chips {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+/* ============================================
+   Hero section — bloque H1 con fondo sutil
+   ============================================ */
+.hero-section {
+  background: linear-gradient(160deg, var(--color-primary-light) 0%, transparent 60%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-4) var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+.hero-section h1 {
+  margin-bottom: var(--space-2);
 }
 
 /* ============================================

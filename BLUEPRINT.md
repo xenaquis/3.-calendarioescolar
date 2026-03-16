@@ -22,7 +22,7 @@ Ultimo update de este blueprint: 2026-03-12 (auditoría de fuentes + corrección
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
 | Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — Corpus Christi corregido 2026-03-12 |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
-| Frontend              | ACTUALIZADO     | +página feriados-2026.html con filtros interactivos (2026-03-16) |
+| Frontend              | EN PROGRESO     | Rediseño UX iniciado 2026-03-16: index.html + feriados-2026.html completos |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
 
 ---
@@ -92,6 +92,30 @@ Ultimo update de este blueprint: 2026-03-12 (auditoría de fuentes + corrección
         ├── seo-audit/SKILL.md
         └── update-data/SKILL.md
 ```
+
+---
+
+## Rediseño UX en progreso (2026-03-16)
+
+Metodología: debate de agentes especializados + premortem + enjambre supervisado por UI expert.
+Prioridad: facilidad de búsqueda y lectura primero, estética segundo.
+
+### Páginas completadas
+- **index.html** ✓ — key-facts estáticas primero, school-stats JS después; hero-section gradiente; key-facts fondos tinted; dark mode override; H2 región "Busca tu región"; fix typo "Inmaculada"
+- **feriados-2026.html** ✓ — badge--civil/conmemorativo/clases con dark mode; timeline 8px; columna Tipo oculta en mobile; H2 simplificado
+
+### Páginas pendientes (en orden)
+- vacaciones-invierno-2026.html
+- cuando-empiezan-clases-2026.html
+- about.html
+- privacidad.html / avisolegal.html
+- data/template.html → regenerar x16 páginas de región
+
+### CSS modificado (components.css)
+- `.key-fact__date`: text-xl → text-2xl
+- `.key-fact--*`: fondos degradados tinted por variante
+- `.hero-section`: nueva clase (gradiente + padding mínimo)
+- Dark mode overrides para key-fact gradients y hero-section
 
 ---
 
