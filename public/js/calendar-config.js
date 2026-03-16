@@ -102,7 +102,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "religioso",
       "contexto": "en-clases",
       "notaContexto": null,
-      "nota": "Móvil · Pascua + 60 días"
+      "nota": "Móvil · Pascua + 60 días · <a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=23639\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 2.977 (BCN)</a>"
     },
     {
       "date": "2026-06-29",
@@ -113,7 +113,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "religioso",
       "contexto": "en-clases",
       "notaContexto": null,
-      "nota": "Traslado legal si cae sáb/dom"
+      "nota": "Traslado legal si cae sáb/dom · <a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=160270\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 19.668 (BCN)</a>"
     },
     {
       "date": "2026-07-16",
@@ -157,7 +157,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "conmemorativo",
       "contexto": "en-clases",
       "notaContexto": null,
-      "nota": null
+      "nota": "<a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=160270\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 19.668 (BCN)</a>"
     },
     {
       "date": "2026-12-08",

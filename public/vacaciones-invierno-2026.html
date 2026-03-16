@@ -92,11 +92,11 @@
 
       <div class="hero-section">
         <h1>Vacaciones de Invierno 2026: Fechas por Regi&oacute;n</h1>
-        <p class="hero-sub">Fuente oficial Mineduc &middot; <span id="countdown-vac"></span></p>
+        <p class="hero-sub"><strong><span id="countdown-vac"></span></strong><span id="countdown-vac-sep"> &middot; </span>Fuente: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Mineduc</a></p>
       </div>
 
       <!-- Key facts: los dos grupos de fechas -->
-      <section class="key-facts" aria-label="Fechas de vacaciones de invierno 2026">
+      <section class="key-facts key-facts--2col" aria-label="Fechas de vacaciones de invierno 2026">
         <div class="key-fact key-fact--accent">
           <p class="key-fact__label">Resto del pa&iacute;s (14 regiones)</p>
           <p class="key-fact__date">11 &mdash; 24 de julio</p>
@@ -152,6 +152,9 @@
             </tbody>
           </table>
         </div>
+        <p class="card__meta" style="margin-top:var(--space-3);">
+          Fuente: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones de Calendarios Escolares Regionales 2026 &mdash; Ministerio de Educaci&oacute;n de Chile</a>
+        </p>
       </section>
 
       <!-- Ad: Mid -->
@@ -169,7 +172,8 @@
         <h2>&iquest;Por qu&eacute; Ays&eacute;n y Magallanes tienen m&aacute;s vacaciones?</h2>
         <p>Las regiones australes tienen inviernos m&aacute;s cr&uacute;dos. El Mineduc les otorga una semana adicional
            (del 4 al 10 de julio) por las condiciones clim&aacute;ticas extremas que dificultan el traslado seguro
-           de los estudiantes. El t&eacute;rmino de las vacaciones es el mismo para todas las regiones: 24 de julio.</p>
+           de los estudiantes. El t&eacute;rmino de las vacaciones es el mismo para todas las regiones: 24 de julio.
+           Fuente: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones Calendarios Escolares 2026 &mdash; Mineduc</a>.</p>
         <p class="card__meta">Los establecimientos particulares pueden tener variaciones menores dentro del marco del Mineduc. Confirma con tu colegio.</p>
       </section>
 
@@ -178,19 +182,21 @@
         <h2>Preguntas frecuentes</h2>
 
         <details>
-          <summary><h3>&iquest;Cu&aacute;ndo empiezan las vacaciones de invierno 2026?</h3></summary>
+          <summary>&iquest;Cu&aacute;ndo empiezan las vacaciones de invierno 2026?</summary>
           <p>El <strong>11 de julio</strong> en la mayor&iacute;a de las regiones.
-             En Ays&eacute;n y Magallanes comienzan el <strong>4 de julio</strong>.</p>
+             En Ays&eacute;n y Magallanes comienzan el <strong>4 de julio</strong>.
+             Fuente: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones Calendarios Escolares 2026 &mdash; Mineduc</a>.</p>
         </details>
 
         <details>
-          <summary><h3>&iquest;Cu&aacute;nto duran las vacaciones de invierno 2026?</h3></summary>
+          <summary>&iquest;Cu&aacute;nto duran las vacaciones de invierno 2026?</summary>
           <p><strong>14 d&iacute;as</strong> en la mayor&iacute;a de las regiones (11&mdash;24 jul).
-             <strong>21 d&iacute;as</strong> en Ays&eacute;n y Magallanes (4&mdash;24 jul).</p>
+             <strong>21 d&iacute;as</strong> en Ays&eacute;n y Magallanes (4&mdash;24 jul).
+             Seg&uacute;n las <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones de Calendarios Escolares Regionales 2026 (Mineduc)</a>.</p>
         </details>
 
         <details>
-          <summary><h3>&iquest;Las vacaciones son iguales en todos los colegios?</h3></summary>
+          <summary>&iquest;Las vacaciones son iguales en todos los colegios?</summary>
           <p>Las fechas del Mineduc son las mismas para colegios p&uacute;blicos y subvencionados.
              Los establecimientos particulares pagados pueden tener fechas distintas seg&uacute;n su calendario propio.</p>
         </details>
@@ -223,6 +229,7 @@
     <div class="container">
       <ul class="site-footer__links">
         <li><a href="/">Inicio</a></li>
+        <li><a href="/feriados-2026.html">Feriados 2026</a></li>
         <li><a href="/about.html">Acerca de</a></li>
         <li><a href="/privacidad.html">Privacidad</a></li>
         <li><a href="/avisolegal.html">Aviso Legal</a></li>
@@ -240,6 +247,7 @@
   <script>
   (function() {
     var el = document.getElementById('countdown-vac');
+    var sep = document.getElementById('countdown-vac-sep');
     if (!el) return;
     var hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
@@ -248,11 +256,13 @@
     if (diff > 0) {
       el.textContent = 'Faltan ' + diff + ' d\u00eda' + (diff === 1 ? '' : 's');
     } else if (diff === 0) {
-      el.textContent = '\u00a1Hoy empiezan las vacaciones!';
+      el.textContent = '\u00a1Hoy empiezan!';
     } else {
       var fin = new Date(2026, 6, 24);
       if (hoy <= fin) {
         el.textContent = '\u00a1Vacaciones en curso!';
+      } else {
+        if (sep) sep.style.display = 'none';
       }
     }
   })();

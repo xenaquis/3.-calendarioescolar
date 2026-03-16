@@ -283,6 +283,7 @@ details[open] {
 summary {
   padding: var(--space-4);
   cursor: pointer;
+  font-size: var(--text-base);
   font-weight: 600;
   background: var(--color-surface);
   transition: background var(--transition-fast), color var(--transition-fast);
@@ -424,9 +425,20 @@ details h3 {
   margin: 0;
 }
 
+/* Fuente Mineduc bajo el grid de key-facts */
+.key-facts .card__meta {
+  grid-column: 1 / -1;
+  text-align: center;
+  margin-top: 0;
+}
+
 @media (min-width: 640px) {
   .key-facts {
     grid-template-columns: repeat(4, 1fr);
+  }
+  .key-facts--2col {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 36rem;
   }
 }
 

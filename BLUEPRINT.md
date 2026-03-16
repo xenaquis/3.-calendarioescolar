@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-12 (auditoría de fuentes + corrección Corpus Christi + FUENTES-VERDAD.md).
+Ultimo update de este blueprint: 2026-03-16 (citas inline a fuentes oficiales en todas las páginas — Mineduc + BCN).
 
 ---
 
@@ -101,15 +101,23 @@ Metodología: debate de agentes especializados + premortem + enjambre supervisad
 Prioridad: facilidad de búsqueda y lectura primero, estética segundo.
 
 ### Páginas completadas
-- **index.html** ✓ — key-facts estáticas primero, school-stats JS después; hero-section gradiente; key-facts fondos tinted; dark mode override; H2 región "Busca tu región"; fix typo "Inmaculada"
+- **index.html** ✓ — key-facts, school-stats, region chips, FAQ. Fix: card__meta grid-column 1/-1; stats fallback estático (sem 3 / 117 días / V.Santo); H2 región → "¿De qué región eres?"; FAQ sin h3 en summary
 - **feriados-2026.html** ✓ — badge--civil/conmemorativo/clases con dark mode; timeline 8px; columna Tipo oculta en mobile; H2 simplificado
+- **vacaciones-invierno-2026.html** ✓ — countdown primero en hero-sub; key-facts--2col; FAQ sin h3 en summary; footer Feriados 2026
+- **cuando-empiezan-clases-2026.html** ✓ — countdown primero en hero-sub; FAQ sin h3 en summary; footer Feriados 2026
+- **avisolegal.html** ✓ — footer Feriados 2026
+- **about.html** ✓ — footer Feriados 2026
+- **data/template.html + 16 páginas de región** ✓ — FAQ sin h3 en summary; regeneradas con npm run generate
+
+### CSS modificado (components.css)
+- `.key-facts .card__meta { grid-column: 1 / -1; }` — fuente Mineduc abarca fila completa
+- `.key-facts--2col` — para páginas con solo 2 key-facts (vacaciones)
+- `summary { font-size: var(--text-base); }` — explícito, sin depender del h3 interno
+
+- **privacidad.html** ✓ — footer Feriados 2026
 
 ### Páginas pendientes (en orden)
-- vacaciones-invierno-2026.html
-- cuando-empiezan-clases-2026.html
-- about.html
-- privacidad.html / avisolegal.html
-- data/template.html → regenerar x16 páginas de región
+- ninguna — rediseño UX completado 2026-03-16
 
 ### CSS modificado (components.css)
 - `.key-fact__date`: text-xl → text-2xl
