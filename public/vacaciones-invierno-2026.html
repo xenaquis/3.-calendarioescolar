@@ -90,17 +90,19 @@
         <a href="/">Inicio</a> <span>&rsaquo;</span> Vacaciones de Invierno 2026
       </nav>
 
-      <h1>Vacaciones de Invierno 2026: Fechas por Regi&oacute;n</h1>
-      <p class="hero-sub">Fuente oficial Mineduc</p>
+      <div class="hero-section">
+        <h1>Vacaciones de Invierno 2026: Fechas por Regi&oacute;n</h1>
+        <p class="hero-sub">Fuente oficial Mineduc &middot; <span id="countdown-vac"></span></p>
+      </div>
 
       <!-- Key facts: los dos grupos de fechas -->
       <section class="key-facts" aria-label="Fechas de vacaciones de invierno 2026">
-        <div class="key-fact key-fact--accent" style="grid-column: span 1;">
+        <div class="key-fact key-fact--accent">
           <p class="key-fact__label">Resto del pa&iacute;s (14 regiones)</p>
           <p class="key-fact__date">11 &mdash; 24 de julio</p>
           <p class="key-fact__note">14 d&iacute;as &middot; Termina el 24 jul</p>
         </div>
-        <div class="key-fact key-fact--primary" style="grid-column: span 1;">
+        <div class="key-fact key-fact--primary">
           <p class="key-fact__label">Ays&eacute;n y Magallanes</p>
           <p class="key-fact__date">4 &mdash; 24 de julio</p>
           <p class="key-fact__note">21 d&iacute;as &middot; Una semana antes</p>
@@ -235,6 +237,26 @@
   <script defer src="/js/ads.js"></script>
   <script defer src="/js/analytics.js"></script>
   <script defer>document.addEventListener('DOMContentLoaded', function() { Theme.init(); Ads.init(); Analytics.init('G-XXXXXXXXXX'); });</script>
+  <script>
+  (function() {
+    var el = document.getElementById('countdown-vac');
+    if (!el) return;
+    var hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    var inicio = new Date(2026, 6, 11); // 11 de julio 2026 (mes 0-indexed)
+    var diff = Math.round((inicio - hoy) / 86400000);
+    if (diff > 0) {
+      el.textContent = 'Faltan ' + diff + ' d\u00eda' + (diff === 1 ? '' : 's');
+    } else if (diff === 0) {
+      el.textContent = '\u00a1Hoy empiezan las vacaciones!';
+    } else {
+      var fin = new Date(2026, 6, 24);
+      if (hoy <= fin) {
+        el.textContent = '\u00a1Vacaciones en curso!';
+      }
+    }
+  })();
+  </script>
 
 </body>
 </html>
