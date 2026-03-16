@@ -14,7 +14,7 @@ window.CALENDAR_CONFIG = {
     },
     {
       "date": "2026-05-01",
-      "nombre": "1 de mayo"
+      "nombre": "Día del Trabajo"
     },
     {
       "date": "2026-05-21",
@@ -30,11 +30,11 @@ window.CALENDAR_CONFIG = {
     },
     {
       "date": "2026-10-12",
-      "nombre": "Enc. Dos Mundos"
+      "nombre": "Encuentro Dos Mundos"
     },
     {
       "date": "2026-12-08",
-      "nombre": "8 de diciembre"
+      "nombre": "Inmaculada Concepción"
     }
   ],
   "feriadosCompletos": [
