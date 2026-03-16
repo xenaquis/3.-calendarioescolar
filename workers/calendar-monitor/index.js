@@ -76,8 +76,14 @@ var MONITORED_LAWS = {
   'ley-19668-traslado': {
     idNorma: '160270',
     sourceName: 'Ley 19.668 — Traslado de feriados a lunes',
-    description: 'Traslada a lunes los feriados 29 junio (San Pedro/Pablo) y 12 octubre (Enc. Dos Mundos) cuando caen martes-viernes',
+    description: 'Traslada a lunes los feriados 29 junio (San Pedro/Pablo) y 12 octubre (Enc. Dos Mundos) cuando caen sábado o domingo',
     actionIfChanged: 'Verificar si cambia la regla de traslado de San Pedro/Pablo y 12 octubre. Recalcular fechas reales en calendar-config.json.'
+  },
+  'ley-20148-virgen-carmen': {
+    idNorma: '257080',
+    sourceName: 'Ley 20.148 — Virgen del Carmen / Corpus Christi',
+    description: 'Estableció el 16 de julio (Virgen del Carmen) como feriado irrenunciable en reemplazo de Corpus Christi para efectos laborales. Corpus Christi sigue en calendarios escolares.',
+    actionIfChanged: 'Verificar si cambia la relación entre Corpus Christi y Virgen del Carmen. Revisar el calendario escolar y si afecta la tabla de feriados del sitio.'
   },
   'ley-21357-pueblos-indigenas': {
     idNorma: '1161743',
@@ -322,7 +328,7 @@ async function checkSiteHealth() {
   if (health.generatedDate) {
     var generated = new Date(health.generatedDate);
     var daysDiff = Math.floor((Date.now() - generated.getTime()) / (1000 * 60 * 60 * 24));
-    if (daysDiff > 45) {
+    if (daysDiff > 30) {
       warnings.push('Sin regenerar hace ' + daysDiff + ' dias');
     }
   } else {
