@@ -78,6 +78,10 @@ Ultimo update de este blueprint: 2026-03-12 (auditoría de fuentes + corrección
 │       ├── deploy.yml              -> CI/CD: push a main → build → deploy a Cloudflare Pages
 │       └── sync-deploy.yml         -> Cron semanal + manual: sync Sheet → generate → validate → deploy
 │
+├── workers/
+│   └── calendar-monitor/
+│       ├── index.js                -> Cloudflare Worker: monitoreo automatico semanal
+│       └── wrangler.toml           -> Config del worker (cron, KV binding)
 ├── config.json                     -> Config del sitio (URLs, IDs de servicios, AdSense, GA4, Sheet)
 ├── BLUEPRINT.md                    -> Este archivo
 └── .claude/
@@ -284,12 +288,21 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 **Sin Google Sheet (fallback manual):**
 Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` → `node scripts/validate.js` → deploy
 
-### Monitoreo automatico por agente
-- `GET https://calendarioescolar.cl/health.json`
-- Verificar: `status: "ok"`, `dataYear` correcto, `generatedDate` reciente (< 30 días)
-- Si `dataYear` incorrecto: actualización pendiente → notificar humano
-- **Octubre-enero**: monitorear `https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-{AÑO+1}/`
-  → Si la página aparece con PDFs → ESCALADA HUMANA INMEDIATA
+### Monitoreo automatico — Calendar Monitor Worker
+- **Archivo**: `workers/calendar-monitor/index.js`
+- **Cron**: lunes 08:00 UTC (automatico via Cloudflare)
+- **Test manual**: `GET https://calendar-monitor.TU_SUBDOMINIO.workers.dev/trigger?secret=X`
+- **Health**: `GET https://calendar-monitor.TU_SUBDOMINIO.workers.dev/health`
+- **Pendientes**: `GET https://calendar-monitor.TU_SUBDOMINIO.workers.dev/pending?secret=X`
+
+Que monitorea:
+1. `health.json` del sitio → dataYear correcto + generatedDate < 45 dias
+2. BCN — Ley 2.977 (feriados) → cambio en articulos = alerta + analisis DeepSeek
+3. BCN — Ley 19.668 (Encuentro Dos Mundos) + Ley 21.357 (Pueblos Indigenas)
+4. Mineduc URL año siguiente → aparece = ESCALADA CRITICA inmediata
+5. FeriadosApp API → cross-validar los 7 feriados del sitio
+
+Deploy: ver seccion "Comandos utiles" abajo.
 
 ### Servicios del sitio
 - Cloudflare Pages: https://dash.cloudflare.com
@@ -320,6 +333,15 @@ npm run deploy          # Deploy a Cloudflare Pages
 
 node scripts/validate.js        # Solo validación de datos (0=OK, 1=error)
 node scripts/sync-from-sheet.js # Solo sync desde Sheet (requiere GOOGLE_API_KEY env var)
+
+# Calendar Monitor Worker (desde workers/calendar-monitor/)
+cd workers/calendar-monitor
+npx wrangler kv namespace create CALENDAR_KV    # 1. Crear KV → anotar ID → pegar en wrangler.toml
+npx wrangler secret put DEEPSEEK_API_KEY        # 2. API key DeepSeek
+npx wrangler secret put MONITOR_SECRET          # 3. Contraseña para /trigger
+npx wrangler secret put ALERT_WEBHOOK_URL       # 4. Webhook alertas (o TELEGRAM_*)
+npx wrangler deploy                             # 5. Deploy
+# Test: curl "https://calendar-monitor.TU.workers.dev/trigger?secret=TU_SECRET"
 ```
 
 `update-blueprint` — No es un script. Es una instrucción: actualizar este archivo después de cada cambio importante al sitio.

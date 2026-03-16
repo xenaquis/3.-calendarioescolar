@@ -1,0 +1,31 @@
+name = "calendar-monitor"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# Cron: todos los lunes a las 08:00 UTC (05:00 Chile horario invierno, 04:00 verano)
+[triggers]
+crons = ["0 8 * * 1"]
+
+# KV Namespace para almacenar hashes, estado y sugerencias pendientes
+# Crear con: npx wrangler kv namespace create CALENDAR_KV
+# Luego reemplazar REPLACE_WITH_KV_ID con el ID que retorna el comando
+[[kv_namespaces]]
+binding = "CALENDAR_KV"
+id = "545a6671deb24021b70fa859dea576fd"
+
+# Variables no secretas
+[vars]
+ENVIRONMENT = "production"
+
+# Secrets — configurar via Cloudflare Dashboard o:
+#   npx wrangler secret put DEEPSEEK_API_KEY
+#   npx wrangler secret put MONITOR_SECRET
+#   npx wrangler secret put ALERT_WEBHOOK_URL
+#
+# Alternativa Telegram (en vez de ALERT_WEBHOOK_URL):
+#   npx wrangler secret put TELEGRAM_BOT_TOKEN
+#   npx wrangler secret put TELEGRAM_CHAT_ID
+#
+# DEEPSEEK_API_KEY  : API key de DeepSeek (https://platform.deepseek.com)
+# MONITOR_SECRET    : Contraseña para /trigger y /pending (cualquier string seguro)
+# ALERT_WEBHOOK_URL : Webhook de Discord/Slack/ntfy.sh
