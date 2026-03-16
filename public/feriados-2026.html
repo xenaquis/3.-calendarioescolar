@@ -278,12 +278,14 @@
         <a href="/">Inicio</a> <span>&rsaquo;</span> Feriados 2026
       </nav>
 
-      <h1>Feriados 2026 Chile</h1>
-      <p class="hero-sub">
-        Cu&aacute;les suspenden clases y cu&aacute;les no &middot;
-        Fuente: <a href="https://www.bcn.cl/leychile/Navegar?idNorma=23639" rel="noopener noreferrer" target="_blank">Ley 2.977 (BCN)</a> y
-        <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Calendario Escolar Mineduc 2026</a>
-      </p>
+      <div class="hero-section">
+        <h1>Feriados 2026 Chile</h1>
+        <p class="hero-sub">
+          Cu&aacute;les suspenden clases y cu&aacute;les no &middot;
+          Fuente: <a href="https://www.bcn.cl/leychile/Navegar?idNorma=23639" rel="noopener noreferrer" target="_blank">Ley 2.977 (BCN)</a> y
+          <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Calendario Escolar Mineduc 2026</a>
+        </p>
+      </div>
 
       <!-- Key facts -->
       <section class="key-facts" aria-label="Resumen feriados 2026">
@@ -514,7 +516,7 @@
         <h2>Preguntas frecuentes</h2>
 
         <details>
-          <summary><h3>&iquest;Cu&aacute;les feriados suspenden clases en 2026?</h3></summary>
+          <summary>&iquest;Cu&aacute;les feriados suspenden clases en 2026?</summary>
           <p>Son 7: <strong>Viernes Santo</strong> (3 abr), <strong>D&iacute;a del Trabajo</strong> (1 may),
           <strong>Glorias Navales</strong> (21 may), <strong>Corpus Christi</strong> (4 jun),
           <strong>San Pedro y San Pablo</strong> (29 jun), <strong>Encuentro de Dos Mundos</strong> (12 oct)
@@ -522,13 +524,13 @@
         </details>
 
         <details>
-          <summary><h3>&iquest;Por qu&eacute; la Virgen del Carmen no afecta el colegio?</h3></summary>
+          <summary>&iquest;Por qu&eacute; la Virgen del Carmen no afecta el colegio?</summary>
           <p>El 16 de julio cae dentro de las vacaciones de invierno 2026 (11 al 24 de julio), por lo que los
           colegios ya est&aacute;n cerrados ese d&iacute;a. No es un feriado que &ldquo;regale&rdquo; un d&iacute;a libre adicional.</p>
         </details>
 
         <details>
-          <summary><h3>&iquest;Cu&aacute;ndo es Corpus Christi 2026 y por qu&eacute; cambia cada a&ntilde;o?</h3></summary>
+          <summary>&iquest;Cu&aacute;ndo es Corpus Christi 2026 y por qu&eacute; cambia cada a&ntilde;o?</summary>
           <p>Corpus Christi es un <strong>feriado m&oacute;vil</strong>: siempre cae 60 d&iacute;as despu&eacute;s del
           Domingo de Pascua. Como Pascua 2026 es el 5 de abril, Corpus Christi queda el
           <strong>jueves 4 de junio</strong>. Se calcula con el algoritmo Meeus/Jones/Butcher.
@@ -536,13 +538,13 @@
         </details>
 
         <details>
-          <summary><h3>&iquest;Qu&eacute; pasa si San Pedro y San Pablo cae en fin de semana?</h3></summary>
+          <summary>&iquest;Qu&eacute; pasa si San Pedro y San Pablo cae en fin de semana?</summary>
           <p>Por ley (<a href="https://www.bcn.cl/leychile/Navegar?idNorma=23639" rel="noopener noreferrer" target="_blank">Ley 20.148 &mdash; BCN</a>), si San Pedro y San Pablo (29 junio) cae s&aacute;bado o domingo, se traslada al
           lunes siguiente. En 2026 cae el <strong>lunes 29 de junio</strong>, por lo que no hay traslado.</p>
         </details>
 
         <details>
-          <summary><h3>&iquest;Los colegios privados deben respetar estos feriados?</h3></summary>
+          <summary>&iquest;Los colegios privados deben respetar estos feriados?</summary>
           <p>Los feriados <strong>irrenunciables</strong> (Viernes Santo, Glorias Navales, San Pedro y San Pablo,
           Encuentro de Dos Mundos, Inmaculada Concepci&oacute;n) deben ser respetados por todos los establecimientos,
           seg&uacute;n la <a href="https://www.bcn.cl/leychile/Navegar?idNorma=23639" rel="noopener noreferrer" target="_blank">Ley 2.977 y sus modificaciones (BCN)</a>.
@@ -608,14 +610,6 @@
   (function () {
     'use strict';
 
-    // Lee desde window.CALENDAR_CONFIG generado por generate-pages.js
-    // Fallback vacío si el script aún no cargó (no debería ocurrir con defer)
-    var FERIADOS = (window.CALENDAR_CONFIG && window.CALENDAR_CONFIG.feriadosCompletos)
-      ? window.CALENDAR_CONFIG.feriadosCompletos.map(function (f) {
-          return { date: f.date, nombre: f.nombre, contexto: f.contexto };
-        })
-      : [];
-
     var MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
 
     function parseDate(str) {
@@ -631,7 +625,7 @@
       return Math.round((b - a) / 86400000);
     }
 
-    function initStats() {
+    function initStats(FERIADOS) {
       var today = new Date();
       today.setHours(0, 0, 0, 0);
 
@@ -713,7 +707,16 @@
       if (typeof Theme !== 'undefined') Theme.init();
       if (typeof Ads   !== 'undefined') Ads.init();
       if (typeof Analytics !== 'undefined') Analytics.init('G-XXXXXXXXXX');
-      initStats();
+
+      // FERIADOS se inicializa aquí (dentro de DOMContentLoaded) para garantizar
+      // que calendar-config.js (defer) ya haya corrido y window.CALENDAR_CONFIG esté disponible.
+      var FERIADOS = (window.CALENDAR_CONFIG && window.CALENDAR_CONFIG.feriadosCompletos)
+        ? window.CALENDAR_CONFIG.feriadosCompletos.map(function (f) {
+            return { date: f.date, nombre: f.nombre, contexto: f.contexto };
+          })
+        : [];
+
+      initStats(FERIADOS);
       initFilters();
     });
   }());
