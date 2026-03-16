@@ -7,19 +7,29 @@
 //   2. Monitorea Ley 2.977 de feriados en BCN via XML API
 //   3. Detecta cuando Mineduc publica calendarios del ano siguiente
 //
-// No publica nada. Solo detecta, analiza y alerta.
-// El humano siempre decide si actualizar data/calendar-config.json.
+// Cuando detecta un feriado nuevo/modificado:
+//   - DeepSeek analiza el cambio y genera feriadosSugeridos
+//   - Guarda sugerencia en KV (pending:lawKey)
+//   - Envia alerta Telegram con botones inline:
+//       [✅ Aplicar automáticamente]  [❌ Ignorar]
+//   - Boton Aplicar llama /apply-update → commit en GitHub → deploy.yml → generate → deploy
+//   - El humano siempre aprueba con un tap antes de que se aplique nada
 //
 // Setup:
 //   cd workers/calendar-monitor
 //   npx wrangler kv namespace create CALENDAR_KV   <- anotar el ID → pegar en wrangler.toml
 //   npx wrangler secret put DEEPSEEK_API_KEY
 //   npx wrangler secret put MONITOR_SECRET
+//   npx wrangler secret put GITHUB_TOKEN           <- PAT con scope contents:write
 //   npx wrangler secret put ALERT_WEBHOOK_URL      (o TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID)
 //   npx wrangler deploy
 //
-// Test:   GET https://tu-worker.workers.dev/trigger?secret=TU_SECRET
-// Health: GET https://tu-worker.workers.dev/health
+// Endpoints:
+//   GET /health                        — estado del monitor
+//   GET /trigger?secret=X              — ejecutar manualmente
+//   GET /pending?secret=X              — ver sugerencias pendientes
+//   GET /apply-update?secret=X&key=K  — aplicar sugerencia pendiente (abre en browser)
+//   GET /dismiss?secret=X&key=K       — descartar sugerencia pendiente (abre en browser)
 //
 // ACTUALIZACION ANUAL (cada noviembre cuando cambia el ano escolar):
 //   1. Actualizar CURRENT_YEAR, SCHOOL_START, SCHOOL_END, WINTER_START, WINTER_END
@@ -27,7 +37,7 @@
 //   3. Resetear KV key 'url:mineduc-calendarios-siguiente:status' (eliminarla)
 //      para que el monitor vuelva a alertar cuando publiquen los calendarios del ano +2
 
-var VERSION = '1.0.0';
+var VERSION = '1.1.0';
 var CURRENT_YEAR = 2026;
 var NEXT_YEAR = CURRENT_YEAR + 1;
 var RATE_LIMIT_MS = 2000; // ms entre requests a BCN
@@ -40,7 +50,7 @@ var WINTER_END    = '2026-07-25';
 
 // ============================================================
 // FERIADOS ACTUALES DEL SITIO
-// Mantener sincronizado con data/calendar-config.json
+// Mantener sincronizado con data/calendar-config.json → feriados[]
 // Estos son los feriados que caen en periodo escolar
 // ============================================================
 var SITE_FERIADOS = [
@@ -55,20 +65,6 @@ var SITE_FERIADOS = [
 
 // ============================================================
 // LEYES A MONITOREAR VIA BCN XML API
-//
-// URL texto: https://www.bcn.cl/leychile/navegar?idNorma={id}
-// URL XML:   https://www.bcn.cl/leychile/consulta/obtxml?opt=7&idNorma={id}
-//
-// idNorma VERIFICADOS (no editar sin comprobar en bcn.cl/leychile):
-//   Ley 2.977  → idNorma=23639  → https://www.bcn.cl/leychile/navegar?idNorma=23639
-//   Ley 19.668 → idNorma=160270 → https://www.bcn.cl/leychile/navegar?idNorma=160270
-//   Ley 21.357 → idNorma=1161743 → https://www.bcn.cl/leychile/navegar?idNorma=1161743
-//
-// FORMATO XML REAL DE BCN (verificado):
-//   Leyes modernas: <EstructuraFuncional tipoParte="Artículo"><Texto>...</Texto></EstructuraFuncional>
-//   Leyes antiguas: <ESTRUCTURA_FUNCIONAL nombre_parte="PRIMERO"><TEXTOS><TEXTO>...</TEXTO></TEXTOS></ESTRUCTURA_FUNCIONAL>
-//   No hay tag <ARTICULO NUM="N"> — los articulos van en EstructuraFuncional/Texto
-//   Por esto se hashea TODO el contenido textual, no articulos individuales
 // ============================================================
 var MONITORED_LAWS = {
   'ley-2977-feriados': {
@@ -95,10 +91,12 @@ var MONITORED_LAWS = {
 // URL MINEDUC AÑO SIGUIENTE
 // ============================================================
 var MINEDUC_NEXT_URL = 'https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-' + NEXT_YEAR + '/';
-// Si aparecen al menos 2 de estos keywords en la pagina = calendarios publicados
 var MINEDUC_POSITIVE_KEYWORDS = ['.pdf', 'resolucion', 'descargar', 'calendario regional', 'exenta'];
-// Si aparece alguno de estos = pagina de error que retorna 200 (falso positivo)
 var MINEDUC_NEGATIVE_KEYWORDS = ['no encontrado', '404', 'page not found', 'error 404'];
+
+// GitHub repo donde vive el proyecto — configurable via env.GITHUB_REPO
+var GITHUB_REPO_DEFAULT = 'xenaquis/3.-calendarioescolar';
+var CAL_CONFIG_PATH = 'data/calendar-config.json';
 
 // ============================================================
 // EXPORT DEFAULT — Cloudflare Workers ES modules
@@ -107,39 +105,98 @@ export default {
   async fetch(request, env, ctx) {
     var url = new URL(request.url);
 
+    // ── GET /health ───────────────────────────────────────────
     if (url.pathname === '/health') {
       return handleHealthEndpoint(env);
     }
 
+    // ── GET /trigger?secret=X ─────────────────────────────────
     if (url.pathname === '/trigger') {
       var secret = url.searchParams.get('secret');
       if (!env.MONITOR_SECRET || secret !== env.MONITOR_SECRET) {
         return new Response('Unauthorized', { status: 401 });
       }
-      ctx.waitUntil(runMonitor(env));
+      ctx.waitUntil(runMonitor(env, request));
       return new Response(
         JSON.stringify({ ok: true, message: 'Monitor iniciado', version: VERSION }),
         { headers: { 'Content-Type': 'application/json' } }
       );
     }
 
+    // ── GET /pending?secret=X ─────────────────────────────────
+    if (url.pathname === '/pending') {
+      var pendingSecret = url.searchParams.get('secret');
+      if (!env.MONITOR_SECRET || pendingSecret !== env.MONITOR_SECRET) {
+        return new Response('Unauthorized', { status: 401 });
+      }
+      var pendingList = {};
+      var lawKeys = Object.keys(MONITORED_LAWS);
+      for (var pi = 0; pi < lawKeys.length; pi++) {
+        var pv = env.CALENDAR_KV ? await env.CALENDAR_KV.get('pending:' + lawKeys[pi]) : null;
+        if (pv) pendingList[lawKeys[pi]] = JSON.parse(pv);
+      }
+      return new Response(JSON.stringify(pendingList, null, 2), {
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
+
+    // ── GET /apply-update?secret=X&key=K ─────────────────────
+    if (url.pathname === '/apply-update') {
+      var applySecret = url.searchParams.get('secret');
+      if (!env.MONITOR_SECRET || applySecret !== env.MONITOR_SECRET) {
+        return htmlResponse('401 — No autorizado', '❌ No autorizado', 'El enlace no es válido.', 401);
+      }
+      var applyKey = url.searchParams.get('key');
+      if (!applyKey) {
+        return htmlResponse('400 — Falta parámetro', '⚠️ Falta parámetro', 'Falta el parámetro key.', 400);
+      }
+      var applyResult = await handleApplyUpdate(applyKey, env);
+      return applyResult;
+    }
+
+    // ── GET /dismiss?secret=X&key=K ──────────────────────────
+    if (url.pathname === '/dismiss') {
+      var dismissSecret = url.searchParams.get('secret');
+      if (!env.MONITOR_SECRET || dismissSecret !== env.MONITOR_SECRET) {
+        return htmlResponse('401 — No autorizado', '❌ No autorizado', 'El enlace no es válido.', 401);
+      }
+      var dismissKey = url.searchParams.get('key');
+      if (!dismissKey) {
+        return htmlResponse('400 — Falta parámetro', '⚠️ Falta parámetro', 'Falta el parámetro key.', 400);
+      }
+      if (env.CALENDAR_KV) {
+        try { await env.CALENDAR_KV.delete('pending:' + dismissKey); } catch (e) { /* ignore */ }
+      }
+      return htmlResponse(
+        'Sugerencia ignorada',
+        '🗑️ Sugerencia descartada',
+        'La sugerencia para <code>' + escapeHtml(dismissKey) + '</code> fue descartada.<br>No se realizaron cambios en el sitio.',
+        200
+      );
+    }
+
     return new Response(
       'Calendar Monitor v' + VERSION + '\n' +
-      'GET /health           — estado del monitor\n' +
-      'GET /trigger?secret=X — ejecutar manualmente',
+      'GET /health                        — estado del monitor\n' +
+      'GET /trigger?secret=X              — ejecutar manualmente\n' +
+      'GET /pending?secret=X              — ver sugerencias pendientes\n' +
+      'GET /apply-update?secret=X&key=K  — aplicar sugerencia\n' +
+      'GET /dismiss?secret=X&key=K       — descartar sugerencia',
       { status: 200, headers: { 'Content-Type': 'text/plain' } }
     );
   },
 
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runMonitor(env));
+    ctx.waitUntil(runMonitor(env, null));
   }
 };
 
 // ============================================================
 // MAIN ORCHESTRATION
 // ============================================================
-async function runMonitor(env) {
+async function runMonitor(env, request) {
+  var workerUrl = getWorkerUrl(env, request);
+
   var report = {
     version: VERSION,
     timestamp: new Date().toISOString(),
@@ -156,10 +213,10 @@ async function runMonitor(env) {
     report.checks.siteHealth = healthResult;
 
     if (healthResult.status === 'error') {
-      await sendAlert('[SITIO] health.json ERROR: ' + healthResult.message, 'HIGH', env);
+      await sendAlert('[SITIO] health.json ERROR: ' + healthResult.message, 'HIGH', env, null);
       report.alerts.push({ type: 'SITE_HEALTH_ERROR', urgency: 'HIGH' });
     } else if (healthResult.status === 'warning') {
-      await sendAlert('[SITIO] health.json ADVERTENCIA: ' + healthResult.message, 'MEDIUM', env);
+      await sendAlert('[SITIO] health.json ADVERTENCIA: ' + healthResult.message, 'MEDIUM', env, null);
       report.alerts.push({ type: 'SITE_HEALTH_WARNING', urgency: 'MEDIUM' });
     }
   } catch (e) {
@@ -176,7 +233,7 @@ async function runMonitor(env) {
     if (i > 0) await sleep(RATE_LIMIT_MS);
 
     try {
-      var lawResult = await checkBcnLaw(lawKey, lawConfig, env);
+      var lawResult = await checkBcnLaw(lawKey, lawConfig, env, workerUrl);
       report.checks[lawKey] = lawResult;
 
       if (lawResult.status === 'changed_action_required') {
@@ -205,7 +262,8 @@ async function runMonitor(env) {
         '4. Verificar San Pedro y San Pablo: si cae sabado/domingo → mover al lunes\n' +
         '5. Actualizar Google Sheet → disparar sync-deploy.yml',
         'CRITICAL',
-        env
+        env,
+        null
       );
     }
   } catch (e) {
@@ -285,10 +343,9 @@ async function checkSiteHealth() {
 // ============================================================
 // CHECK 2: LEYES BCN
 // ============================================================
-async function checkBcnLaw(lawKey, lawConfig, env) {
+async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
   console.log('[calendar-monitor] Verificando ' + lawKey + ' (idNorma=' + lawConfig.idNorma + ')');
 
-  // 1. Fetch XML de BCN
   var xml = await fetchBcnXml(lawConfig.idNorma);
   if (!xml) {
     await sendAlert(
@@ -296,12 +353,12 @@ async function checkBcnLaw(lawKey, lawConfig, env) {
       'idNorma: ' + lawConfig.idNorma + '\n' +
       'Puede ser problema temporal de BCN. Si persiste, verificar idNorma.',
       'MEDIUM',
-      env
+      env,
+      null
     );
     return { status: 'fetch_failed', lawKey: lawKey };
   }
 
-  // 2. Extraer texto de articulos
   var extracted = extractLawText(xml);
   if (!extracted) {
     await sendAlert(
@@ -309,12 +366,12 @@ async function checkBcnLaw(lawKey, lawConfig, env) {
       'El XML no tiene estructura reconocible. BCN puede haber cambiado el formato.\n' +
       'Revisar extractLawText() en el worker.',
       'MEDIUM',
-      env
+      env,
+      null
     );
     return { status: 'extraction_failed', lawKey: lawKey };
   }
 
-  // 3. Hash SHA-256 del texto extraido
   var currentHash = await hashText(extracted);
   var kvKey = 'law:' + lawKey + ':hash';
   var storedHash = null;
@@ -327,7 +384,6 @@ async function checkBcnLaw(lawKey, lawConfig, env) {
     }
   }
 
-  // Primera ejecucion: guardar hash base y salir
   if (!storedHash) {
     console.log('[calendar-monitor] Primera ejecucion para ' + lawKey + ' — guardando hash base');
     if (env.CALENDAR_KV) {
@@ -341,24 +397,23 @@ async function checkBcnLaw(lawKey, lawConfig, env) {
     return { status: 'unchanged', lawKey: lawKey };
   }
 
-  // 4. Hash cambio — analizar con DeepSeek
+  // Hash cambio — analizar con DeepSeek
   console.log('[calendar-monitor] Cambio detectado en ' + lawKey + ' — analizando...');
   var cleanText = cleanForLlm(extracted, 3000);
   var analysis = await analyzeChange(lawConfig, cleanText, env);
 
-  // Guardar nuevo hash independientemente del resultado del LLM
   if (env.CALENDAR_KV) {
     try { await env.CALENDAR_KV.put(kvKey, currentHash); } catch (e) { /* ignore */ }
   }
 
   if (!analysis) {
-    // Sin LLM: alerta conservadora con el texto crudo
     await sendAlert(
       '[LEY] Cambio en texto de ' + lawConfig.sourceName + '\n' +
       'No se pudo analizar (sin DEEPSEEK_API_KEY o error de API).\n\n' +
       'Accion: ' + lawConfig.actionIfChanged,
       'MEDIUM',
-      env
+      env,
+      null
     );
     return { status: 'changed_no_analysis', lawKey: lawKey };
   }
@@ -370,17 +425,19 @@ async function checkBcnLaw(lawKey, lawConfig, env) {
       'Razon: ' + analysis.reason + '\n\n' +
       'Conclusion: No requiere actualizar el sitio.',
       'LOW',
-      env
+      env,
+      null
     );
     return { status: 'changed_no_action', lawKey: lawKey, analysis: analysis };
   }
 
-  // 5. REQUIERE ACTUALIZACION — segunda llamada DeepSeek para sugerencia
+  // REQUIERE ACTUALIZACION — segunda llamada DeepSeek para sugerencia
   var suggestion = await generateUpdateSuggestion(lawConfig, cleanText, analysis, env);
 
   var suggestionText = '';
+  var alertButtons = null;
+
   if (suggestion) {
-    // Guardar en KV para referencia
     if (env.CALENDAR_KV) {
       try {
         await env.CALENDAR_KV.put(
@@ -390,13 +447,27 @@ async function checkBcnLaw(lawKey, lawConfig, env) {
         );
       } catch (e) { /* ignore */ }
     }
-    // Incluir sugerencia en la alerta directamente
-    suggestionText = '\n\nSUGERENCIA DE ACTUALIZACION:\n' +
+
+    suggestionText = '\n\nSUGERENCIA DEEPSEEK:\n' +
       JSON.stringify(suggestion.feriadosSugeridos || [], null, 2) + '\n\n' +
       'Checklist humano:\n' +
       (suggestion.humanChecklist || []).map(function(s) { return '- ' + s; }).join('\n') + '\n\n' +
       'Confianza: ' + (suggestion.confidence || '?') + '\n' +
-      'Advertencia: ' + (suggestion.warning || '');
+      'Advertencia: ' + (suggestion.warning || 'ninguna');
+
+    // Botones inline solo si hay workerUrl + secret configurados
+    if (workerUrl && env.MONITOR_SECRET) {
+      alertButtons = [[
+        {
+          text: '\u2705 Aplicar autom\u00e1ticamente',
+          url: workerUrl + '/apply-update?secret=' + env.MONITOR_SECRET + '&key=' + encodeURIComponent(lawKey)
+        },
+        {
+          text: '\u274c Ignorar',
+          url: workerUrl + '/dismiss?secret=' + env.MONITOR_SECRET + '&key=' + encodeURIComponent(lawKey)
+        }
+      ]];
+    }
   }
 
   await sendAlert(
@@ -409,7 +480,8 @@ async function checkBcnLaw(lawKey, lawConfig, env) {
     SITE_FERIADOS.map(function(f) { return f.date + ' ' + f.nombre; }).join('\n') +
     suggestionText,
     'HIGH',
-    env
+    env,
+    alertButtons
   );
 
   return { status: 'changed_action_required', lawKey: lawKey, urgency: analysis.urgency || 'HIGH' };
@@ -428,7 +500,6 @@ async function checkMineducUrl(env) {
     try { storedStatus = await env.CALENDAR_KV.get(kvKey); } catch (e) { /* ignore */ }
   }
 
-  // Ya alertado — no re-alertar hasta que el humano resetee la key en KV
   if (storedStatus === 'PUBLISHED') {
     console.log('[calendar-monitor] Mineduc ' + NEXT_YEAR + ' ya fue marcado PUBLISHED — no re-alertar');
     return { status: 'already_published', published: false };
@@ -444,7 +515,6 @@ async function checkMineducUrl(env) {
     return { status: 'fetch_error', error: e.message, published: false };
   }
 
-  // 404 o similar = pagina no existe todavia = normal hasta noviembre
   if (!response.ok) {
     console.log('[calendar-monitor] Mineduc ' + NEXT_YEAR + ' HTTP ' + response.status + ' — aun no publicado');
     return { status: 'not_published', httpStatus: response.status, published: false };
@@ -453,14 +523,12 @@ async function checkMineducUrl(env) {
   var html = await response.text();
   var htmlLower = html.toLowerCase();
 
-  // Verificar keywords negativos (pagina de error que retorna 200)
   for (var n = 0; n < MINEDUC_NEGATIVE_KEYWORDS.length; n++) {
     if (htmlLower.indexOf(MINEDUC_NEGATIVE_KEYWORDS[n]) !== -1) {
       return { status: 'not_published', reason: 'keyword negativo encontrado', published: false };
     }
   }
 
-  // Contar keywords positivos — umbral: al menos 2
   var foundKeywords = [];
   for (var p = 0; p < MINEDUC_POSITIVE_KEYWORDS.length; p++) {
     if (htmlLower.indexOf(MINEDUC_POSITIVE_KEYWORDS[p]) !== -1) {
@@ -502,50 +570,27 @@ async function fetchBcnXml(idNorma) {
   }
 }
 
-// Extrae el contenido textual de los articulos del XML de BCN.
-//
-// El formato XML de BCN varia segun la epoca de digitacion:
-//
-//   Leyes modernas (ej: 19.668, 21.357):
-//     <EstructuraFuncional tipoParte="Artículo" idParte="XXXXXXX">
-//       <Texto>contenido del articulo</Texto>
-//     </EstructuraFuncional>
-//
-//   Leyes antiguas (ej: 2.977 de 1915):
-//     <ESTRUCTURA_FUNCIONAL nombre_parte="PRIMERO">
-//       <TEXTOS><TEXTO>ART. PRIMERO.- contenido</TEXTO></TEXTOS>
-//     </ESTRUCTURA_FUNCIONAL>
-//
-// Estrategia: extraer TODO el contenido de articulos (no filtrar por numero),
-// concatenar y hashear. Si el hash cambia en cualquier articulo, se detecta.
-// DeepSeek determina si el cambio es relevante para el sitio.
-//
-// Retorna null solo si el XML no tiene estructura reconocible (alerta de formato roto).
 function extractLawText(xml) {
   if (!xml) return null;
   var parts = [];
 
-  // Patron 1: formato moderno — <EstructuraFuncional tipoParte="Artículo">...<Texto>...</Texto>
   var re1 = /<EstructuraFuncional[^>]*tipoParte="Art[^"]*"[^>]*>([\s\S]*?)<\/EstructuraFuncional>/gi;
   var m1;
   while ((m1 = re1.exec(xml)) !== null) {
-    // Extraer contenido de <Texto> dentro del EstructuraFuncional
     var textoMatch = m1[1].match(/<Texto>([\s\S]*?)<\/Texto>/i);
     if (textoMatch) parts.push(textoMatch[1].trim());
   }
 
   if (parts.length === 0) {
-    // Patron 2: formato antiguo — <ESTRUCTURA_FUNCIONAL>...<TEXTO>...</TEXTO>
     var re2 = /<TEXTO>([\s\S]*?)<\/TEXTO>/gi;
     var m2;
     while ((m2 = re2.exec(xml)) !== null) {
       var content = m2[1].trim();
-      if (content.length > 10) parts.push(content); // filtrar tags vacios
+      if (content.length > 10) parts.push(content);
     }
   }
 
   if (parts.length === 0) {
-    // Patron 3: cualquier tag <Texto> o <texto> (variante mixta)
     var re3 = /<[Tt]exto>([\s\S]*?)<\/[Tt]exto>/g;
     var m3;
     while ((m3 = re3.exec(xml)) !== null) {
@@ -557,7 +602,6 @@ function extractLawText(xml) {
   return parts.length > 0 ? parts.join('\n\n') : null;
 }
 
-// Strip tags XML, decode entidades, colapsar whitespace, truncar
 function cleanForLlm(text, maxChars) {
   var clean = text
     .replace(/<[^>]+>/g, ' ')
@@ -579,8 +623,7 @@ async function hashText(text) {
 }
 
 // ============================================================
-// LLM — DeepSeek
-// Call #1: ¿Requiere actualizar el sitio?
+// LLM — DeepSeek Call #1: ¿Requiere actualizar el sitio?
 // ============================================================
 async function analyzeChange(lawConfig, cleanText, env) {
   if (!env.DEEPSEEK_API_KEY) {
@@ -640,9 +683,9 @@ async function analyzeChange(lawConfig, cleanText, env) {
 }
 
 // ============================================================
-// LLM — DeepSeek
-// Call #2: Sugerencia de actualizacion del JSON
-// Solo se llama si analyzeChange devuelve requiresUpdate: true
+// LLM — DeepSeek Call #2: Sugerencia de actualizacion del JSON
+// Pide el formato completo de feriadosCompletos para poder
+// aplicar el cambio automáticamente via /apply-update
 // ============================================================
 async function generateUpdateSuggestion(lawConfig, cleanText, analysis, env) {
   if (!env.DEEPSEEK_API_KEY) return null;
@@ -652,21 +695,32 @@ async function generateUpdateSuggestion(lawConfig, cleanText, analysis, env) {
     'Analisis: ' + analysis.summary + '\n' +
     'Feriados afectados: ' + (analysis.affectedFeriados || []).join(', ') + '\n\n' +
     'Texto legal:\n' + cleanText + '\n\n' +
-    'Estructura actual de data/calendar-config.json:\n' +
-    '{\n' +
-    '  "year": ' + CURRENT_YEAR + ',\n' +
-    '  "schoolStart": "' + SCHOOL_START + '",\n' +
-    '  "winterStart": "' + WINTER_START + '",\n' +
-    '  "winterEnd": "' + WINTER_END + '",\n' +
-    '  "schoolEnd": "' + SCHOOL_END + '",\n' +
-    '  "feriados": ' + JSON.stringify(SITE_FERIADOS) + '\n' +
-    '}\n\n' +
+    'Estructura actual de data/calendar-config.json (feriados en periodo escolar):\n' +
+    JSON.stringify(SITE_FERIADOS, null, 2) + '\n\n' +
+    'Ano escolar: ' + SCHOOL_START + ' a ' + SCHOOL_END + '\n' +
+    'Vacaciones invierno: ' + WINTER_START + ' a ' + WINTER_END + '\n\n' +
+    'Para cada feriado a agregar/modificar/eliminar, necesito el formato COMPLETO:\n' +
+    '  date: "YYYY-MM-DD"\n' +
+    '  nombre: "Nombre del feriado"\n' +
+    '  accion: "AGREGAR | MODIFICAR | ELIMINAR"\n' +
+    '  contexto: "en-clases | sin-impacto" (segun si cae en periodo escolar o no)\n' +
+    '  tipo: "civil | laboral | patrio | conmemorativo | religioso"\n' +
+    '  diaSemana: "Lunes | Martes | Miercoles | Jueves | Viernes | Sabado | Domingo"\n' +
+    '  diaNum: numero del dia del mes (int)\n' +
+    '  mes: "enero | febrero | marzo | ... | diciembre"\n' +
+    '  notaContexto: "texto explicativo si sin-impacto, o null"\n' +
+    '  nota: "nota legal o calculo (ej: Movil, Pascua+60 dias), o null"\n\n' +
     'Responde SOLO con JSON valido:\n' +
     '{\n' +
-    '  "feriadosSugeridos": [{"date": "YYYY-MM-DD", "nombre": "...", "accion": "AGREGAR o MODIFICAR o ELIMINAR"}],\n' +
-    '  "humanChecklist": ["pasos que el humano debe verificar antes de actualizar"],\n' +
+    '  "feriadosSugeridos": [{\n' +
+    '    "date": "YYYY-MM-DD", "nombre": "...", "accion": "AGREGAR|MODIFICAR|ELIMINAR",\n' +
+    '    "contexto": "en-clases|sin-impacto", "tipo": "...",\n' +
+    '    "diaSemana": "...", "diaNum": N, "mes": "...",\n' +
+    '    "notaContexto": "...", "nota": "..."\n' +
+    '  }],\n' +
+    '  "humanChecklist": ["pasos que el humano debe verificar antes de aplicar"],\n' +
     '  "warning": "advertencias importantes",\n' +
-    '  "confidence": "HIGH o MEDIUM o LOW"\n' +
+    '  "confidence": "HIGH|MEDIUM|LOW"\n' +
     '}';
 
   try {
@@ -679,7 +733,7 @@ async function generateUpdateSuggestion(lawConfig, cleanText, analysis, env) {
       body: JSON.stringify({
         model: 'deepseek-chat',
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 600,
+        max_tokens: 800,
         temperature: 0.1,
         response_format: { type: 'json_object' }
       })
@@ -695,35 +749,252 @@ async function generateUpdateSuggestion(lawConfig, cleanText, analysis, env) {
 }
 
 // ============================================================
-// ALERTAS
-// Soporta: Telegram (texto plano), Discord, Slack, ntfy.sh
+// APPLY UPDATE via GitHub API
+// Endpoint: GET /apply-update?secret=X&key=lawKey
+// Flujo: KV pending → GitHub GET file → apply suggestion → GitHub PUT commit
+//        → deploy.yml se dispara → generate → build → deploy
 // ============================================================
-async function sendAlert(message, urgency, env) {
+async function handleApplyUpdate(lawKey, env) {
+  var repo   = env.GITHUB_REPO  || GITHUB_REPO_DEFAULT;
+  var token  = env.GITHUB_TOKEN;
+
+  if (!token) {
+    return htmlResponse(
+      'Error de configuración',
+      '⚠️ Falta GITHUB_TOKEN',
+      'El secret GITHUB_TOKEN no está configurado en el worker.<br>' +
+      'Configurar con: <code>npx wrangler secret put GITHUB_TOKEN</code>',
+      500
+    );
+  }
+
+  // 1. Leer sugerencia pendiente de KV
+  var pendingRaw = null;
+  if (env.CALENDAR_KV) {
+    try { pendingRaw = await env.CALENDAR_KV.get('pending:' + lawKey); } catch (e) { /* ignore */ }
+  }
+
+  if (!pendingRaw) {
+    return htmlResponse(
+      'Sin pendiente',
+      '🤷 No hay sugerencia pendiente',
+      'No se encontró una sugerencia pendiente para <code>' + escapeHtml(lawKey) + '</code>.<br>' +
+      'Puede que ya fue aplicada o descartada.',
+      404
+    );
+  }
+
+  var pendingData;
+  try {
+    pendingData = JSON.parse(pendingRaw);
+  } catch (e) {
+    return htmlResponse('Error', '❌ Error al parsear sugerencia', 'Datos en KV corruptos: ' + e.message, 500);
+  }
+
+  var feriadosSugeridos = (pendingData.suggestion && pendingData.suggestion.feriadosSugeridos) || [];
+  if (feriadosSugeridos.length === 0) {
+    return htmlResponse('Sin cambios', '⚠️ Sugerencia vacía', 'La sugerencia no contiene feriados a modificar.', 400);
+  }
+
+  // 2. Leer calendar-config.json desde GitHub
+  var apiUrl = 'https://api.github.com/repos/' + repo + '/contents/' + CAL_CONFIG_PATH;
+  var getRes;
+  try {
+    getRes = await fetch(apiUrl, {
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github+json',
+        'User-Agent': 'calendar-monitor/' + VERSION
+      }
+    });
+  } catch (e) {
+    return htmlResponse('Error de red', '❌ Error al leer GitHub', 'No se pudo conectar a la API de GitHub: ' + e.message, 500);
+  }
+
+  if (!getRes.ok) {
+    var getErr = await getRes.text();
+    return htmlResponse('Error GitHub', '❌ Error al leer archivo', 'HTTP ' + getRes.status + ': ' + getErr, 500);
+  }
+
+  var fileData;
+  try {
+    fileData = await getRes.json();
+  } catch (e) {
+    return htmlResponse('Error', '❌ Respuesta inválida', 'La API de GitHub respondió con formato inesperado.', 500);
+  }
+
+  var currentJson;
+  try {
+    var decoded = base64ToUtf8(fileData.content);
+    currentJson = JSON.parse(decoded);
+  } catch (e) {
+    return htmlResponse('Error', '❌ JSON inválido', 'No se pudo parsear calendar-config.json: ' + e.message, 500);
+  }
+
+  // 3. Aplicar cambios
+  var updatedJson = applyFeriadosSuggestion(currentJson, feriadosSugeridos);
+
+  // 4. Commit via GitHub API
+  var newContent = utf8ToBase64(JSON.stringify(updatedJson, null, 2));
+  var commitMessage = 'fix(feriados): apply calendar-monitor suggestion [' + lawKey + ']\n\n' +
+    'Cambios sugeridos por DeepSeek, aprobados via Telegram.\n' +
+    'Feriados modificados: ' + feriadosSugeridos.map(function(f) {
+      return f.accion + ' ' + f.date + ' (' + f.nombre + ')';
+    }).join(', ');
+
+  var putRes;
+  try {
+    putRes = await fetch(apiUrl, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+        'User-Agent': 'calendar-monitor/' + VERSION
+      },
+      body: JSON.stringify({
+        message: commitMessage,
+        content: newContent,
+        sha: fileData.sha
+      })
+    });
+  } catch (e) {
+    return htmlResponse('Error de red', '❌ Error al commitear', 'No se pudo conectar a la API de GitHub: ' + e.message, 500);
+  }
+
+  if (!putRes.ok) {
+    var putErr = await putRes.text();
+    return htmlResponse('Error GitHub', '❌ Error al commitear', 'HTTP ' + putRes.status + ': ' + putErr, 500);
+  }
+
+  // 5. Limpiar KV
+  if (env.CALENDAR_KV) {
+    try { await env.CALENDAR_KV.delete('pending:' + lawKey); } catch (e) { /* ignore */ }
+  }
+
+  // 6. Notificar resultado via Telegram
+  var cambiosList = feriadosSugeridos.map(function(f) {
+    return f.accion + ' ' + f.date + ' — ' + f.nombre;
+  }).join('\n');
+
+  await sendAlert(
+    '\u2705 Actualizacion aplicada automaticamente\n\n' +
+    'Ley: ' + lawKey + '\n\n' +
+    'Cambios commiteados a GitHub:\n' + cambiosList + '\n\n' +
+    'El deploy se iniciara en segundos (deploy.yml).\n' +
+    'La tabla de feriados-2026.html se regenerara automaticamente.',
+    'LOW',
+    env,
+    null
+  );
+
+  // 7. Respuesta HTML al browser
+  return htmlResponse(
+    '✅ Actualización aplicada',
+    '✅ Cambio commiteado con éxito',
+    '<p>Los siguientes cambios fueron aplicados a <code>data/calendar-config.json</code>:</p>' +
+    '<ul>' + feriadosSugeridos.map(function(f) {
+      return '<li><strong>' + escapeHtml(f.accion) + '</strong> ' + escapeHtml(f.date) + ' — ' + escapeHtml(f.nombre) + '</li>';
+    }).join('') + '</ul>' +
+    '<p>El deploy se inició automáticamente vía <code>deploy.yml</code>.<br>' +
+    'La tabla de <code>feriados-2026.html</code> se regenerará en el proceso.</p>' +
+    '<p style="color:#6b7280;font-size:0.875rem">Ley monitoreada: ' + escapeHtml(lawKey) + '</p>',
+    200
+  );
+}
+
+// Aplica feriadosSugeridos al objeto JSON de calendar-config
+function applyFeriadosSuggestion(config, feriadosSugeridos) {
+  var updated = JSON.parse(JSON.stringify(config)); // deep clone
+
+  if (!updated.feriadosCompletos) updated.feriadosCompletos = [];
+  if (!updated.feriados) updated.feriados = [];
+
+  feriadosSugeridos.forEach(function(s) {
+    var iC = updated.feriadosCompletos.findIndex(function(f) { return f.date === s.date; });
+    var iF = updated.feriados.findIndex(function(f) { return f.date === s.date; });
+
+    if (s.accion === 'AGREGAR') {
+      if (iC === -1) {
+        updated.feriadosCompletos.push({
+          date:          s.date,
+          nombre:        s.nombre,
+          diaSemana:     s.diaSemana  || '',
+          diaNum:        s.diaNum     || 0,
+          mes:           s.mes        || '',
+          tipo:          s.tipo       || 'civil',
+          contexto:      s.contexto   || 'en-clases',
+          notaContexto:  s.notaContexto !== undefined ? s.notaContexto : null,
+          nota:          s.nota       !== undefined ? s.nota : null
+        });
+      }
+      if (iF === -1 && s.contexto === 'en-clases') {
+        updated.feriados.push({ date: s.date, nombre: s.nombre });
+      }
+
+    } else if (s.accion === 'MODIFICAR') {
+      if (iC !== -1) {
+        var entry = updated.feriadosCompletos[iC];
+        if (s.nombre)        entry.nombre        = s.nombre;
+        if (s.diaSemana)     entry.diaSemana     = s.diaSemana;
+        if (s.diaNum)        entry.diaNum        = s.diaNum;
+        if (s.mes)           entry.mes           = s.mes;
+        if (s.tipo)          entry.tipo          = s.tipo;
+        if (s.contexto)      entry.contexto      = s.contexto;
+        if (s.notaContexto !== undefined) entry.notaContexto = s.notaContexto;
+        if (s.nota        !== undefined) entry.nota        = s.nota;
+      }
+      if (iF !== -1 && s.nombre) {
+        updated.feriados[iF].nombre = s.nombre;
+      }
+
+    } else if (s.accion === 'ELIMINAR') {
+      if (iC !== -1) updated.feriadosCompletos.splice(iC, 1);
+      if (iF !== -1) updated.feriados.splice(iF, 1);
+    }
+  });
+
+  // Ordenar por fecha
+  updated.feriadosCompletos.sort(function(a, b) { return a.date.localeCompare(b.date); });
+  updated.feriados.sort(function(a, b) { return a.date.localeCompare(b.date); });
+
+  return updated;
+}
+
+// ============================================================
+// ALERTAS
+// Soporta: Telegram (con botones inline), Discord, Slack, ntfy.sh
+// buttons: array de inline_keyboard rows para Telegram, o null
+// ============================================================
+async function sendAlert(message, urgency, env, buttons) {
   if (!env) return;
   urgency = urgency || 'INFO';
 
-  var emojis = { CRITICAL: '🚨', HIGH: '⚠️', MEDIUM: '📋', LOW: '📝', INFO: 'ℹ️' };
-  var emoji = emojis[urgency] || 'ℹ️';
+  var emojis = { CRITICAL: '\uD83D\uDEA8', HIGH: '\u26A0\uFE0F', MEDIUM: '\uD83D\uDCCB', LOW: '\uD83D\uDCDD', INFO: '\u2139\uFE0F' };
+  var emoji = emojis[urgency] || '\u2139\uFE0F';
   var fullMessage = emoji + ' [Calendar Monitor — calendarioescolar.cl]\n\n' + message;
 
-  // Telegram — texto plano (sin parse_mode para evitar errores de escape en mensajes dinamicos)
+  // Telegram — texto plano + botones inline opcionales
   if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID) {
     try {
+      var tgPayload = {
+        chat_id: env.TELEGRAM_CHAT_ID,
+        text: fullMessage
+      };
+      if (buttons && buttons.length > 0) {
+        tgPayload.reply_markup = JSON.stringify({ inline_keyboard: buttons });
+      }
       await fetch('https://api.telegram.org/bot' + env.TELEGRAM_BOT_TOKEN + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          chat_id: env.TELEGRAM_CHAT_ID,
-          text: fullMessage
-          // Sin parse_mode: texto plano, nunca falla por escaping
-        })
+        body: JSON.stringify(tgPayload)
       });
     } catch (e) {
       console.error('[calendar-monitor] Telegram error: ' + e.message);
     }
   }
 
-  // Webhook generico (Discord, Slack, ntfy.sh)
+  // Webhook generico (Discord, Slack, ntfy.sh) — sin botones
   if (env.ALERT_WEBHOOK_URL) {
     var webhookUrl = env.ALERT_WEBHOOK_URL;
     try {
@@ -740,7 +1011,6 @@ async function sendAlert(message, urgency, env) {
           body: JSON.stringify({ text: fullMessage })
         });
       } else {
-        // ntfy.sh o webhook generico
         var priority = urgency === 'CRITICAL' ? 'urgent' : urgency === 'HIGH' ? 'high' : 'default';
         await fetch(webhookUrl, {
           method: 'POST',
@@ -786,6 +1056,63 @@ async function handleHealthEndpoint(env) {
 // ============================================================
 // UTILS
 // ============================================================
+
+// Deriva la URL base del worker para construir botones
+function getWorkerUrl(env, request) {
+  if (env.WORKER_URL) return env.WORKER_URL.replace(/\/$/, '');
+  if (request) {
+    var u = new URL(request.url);
+    return u.protocol + '//' + u.host;
+  }
+  return null;
+}
+
+// Decode GitHub base64 → UTF-8 string (soporta caracteres especiales)
+function base64ToUtf8(b64) {
+  var binary = atob(b64.replace(/\n/g, ''));
+  var bytes = new Uint8Array(binary.length);
+  for (var i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+// Encode UTF-8 string → base64 para GitHub API
+function utf8ToBase64(str) {
+  var bytes = new TextEncoder().encode(str);
+  var binary = '';
+  bytes.forEach(function(b) { binary += String.fromCharCode(b); });
+  return btoa(binary);
+}
+
+// Escapar HTML para respuestas browser
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Generar respuesta HTML para endpoints que abren en browser
+function htmlResponse(title, heading, body, status) {
+  var ok = status < 400;
+  var color = ok ? '#16a34a' : '#dc2626';
+  var html = '<!DOCTYPE html><html lang="es"><head>' +
+    '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">' +
+    '<title>' + escapeHtml(title) + ' — Calendar Monitor</title>' +
+    '<style>body{font-family:system-ui,sans-serif;max-width:560px;margin:4rem auto;padding:1rem;line-height:1.6}' +
+    'h2{color:' + color + '}code{background:#f3f4f6;padding:2px 6px;border-radius:4px}' +
+    'ul{padding-left:1.5rem}li{margin-bottom:0.5rem}</style></head><body>' +
+    '<h2>' + heading + '</h2>' + body +
+    '<p style="margin-top:2rem;color:#6b7280;font-size:0.8rem">Calendar Monitor v' + VERSION + '</p>' +
+    '</body></html>';
+  return new Response(html, {
+    status: status,
+    headers: { 'Content-Type': 'text/html; charset=utf-8' }
+  });
+}
+
 function sleep(ms) {
   return new Promise(function(resolve) { setTimeout(resolve, ms); });
 }

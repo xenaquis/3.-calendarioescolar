@@ -16,16 +16,24 @@ id = "545a6671deb24021b70fa859dea576fd"
 # Variables no secretas
 [vars]
 ENVIRONMENT = "production"
+# URL pública del worker (para construir botones inline de Telegram)
+# Reemplazar con la URL real: https://calendar-monitor.<tu-subdominio>.workers.dev
+WORKER_URL = ""
+# Repo GitHub donde vive el proyecto: "usuario/repo"
+GITHUB_REPO = "xenaquis/3.-calendarioescolar"
 
 # Secrets — configurar via Cloudflare Dashboard o:
 #   npx wrangler secret put DEEPSEEK_API_KEY
 #   npx wrangler secret put MONITOR_SECRET
-#   npx wrangler secret put ALERT_WEBHOOK_URL
-#
-# Alternativa Telegram (en vez de ALERT_WEBHOOK_URL):
 #   npx wrangler secret put TELEGRAM_BOT_TOKEN
 #   npx wrangler secret put TELEGRAM_CHAT_ID
+#   npx wrangler secret put GITHUB_TOKEN
 #
 # DEEPSEEK_API_KEY  : API key de DeepSeek (https://platform.deepseek.com)
-# MONITOR_SECRET    : Contraseña para /trigger y /pending (cualquier string seguro)
-# ALERT_WEBHOOK_URL : Webhook de Discord/Slack/ntfy.sh
+# MONITOR_SECRET    : Contraseña para /trigger, /pending, /apply-update, /dismiss
+# TELEGRAM_BOT_TOKEN: Token del bot de Telegram (BotFather)
+# TELEGRAM_CHAT_ID  : ID del chat/canal donde enviar alertas
+# GITHUB_TOKEN      : Personal Access Token con permiso contents:write
+#                     Crear en: GitHub → Settings → Developer settings → PATs
+#                     Scopes necesarios: repo (o contents:write en fine-grained PAT)
+# ALERT_WEBHOOK_URL : (Opcional) Webhook de Discord/Slack/ntfy.sh
