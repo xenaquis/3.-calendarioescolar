@@ -53,15 +53,20 @@ Patrón general: `https://[region].mineduc.cl/wp-content/uploads/sites/[N]/YYYY/
 
 #### B1. Reglas de cálculo
 
-| Feriado | Tipo | Regla de Cálculo | Fuente Legal |
-|---------|------|-----------------|-------------|
-| Viernes Santo | **Movible** | Pascua − 2 días | Ley 2.977 |
-| Corpus Christi | **Movible** | Pascua + 60 días (siempre jueves) | Ley 2.977 + Ley 20.357 (2009) |
-| San Pedro y San Pablo | Semi-movible | 29 jun; si cae sáb/dom → lunes siguiente | Ley 20.148 (2006) |
-| Día del Trabajo | Fijo | 1 de mayo | Ley 2.977 |
-| Glorias Navales | Fijo | 21 de mayo | Ley 2.977 |
-| Encuentro de Dos Mundos | Fijo | 12 de octubre | Ley 19.668 |
-| Inmaculada Concepción | Fijo | 8 de diciembre | Ley 2.977 |
+| Feriado | Tipo | Regla de Cálculo | Fuente Legal | URL BCN |
+|---------|------|-----------------|-------------|---------|
+| Viernes Santo | **Movible** | Pascua − 2 días | Ley 2.977 | `https://www.bcn.cl/leychile/Navegar?idNorma=23639` |
+| Corpus Christi | **Movible** | Pascua + 60 días (siempre jueves) | Ley 2.977 (Ley 20.148 reemplazó CC por Virgen del Carmen, pero sigue en calendario escolar) | `https://www.bcn.cl/leychile/Navegar?idNorma=23639` |
+| San Pedro y San Pablo | Semi-movible | 29 jun; si cae sáb/dom → lunes siguiente | Ley 19.668 (traslado) | `https://www.bcn.cl/leychile/Navegar?idNorma=160270` |
+| Día del Trabajo | Fijo | 1 de mayo | Ley 2.977 | `https://www.bcn.cl/leychile/Navegar?idNorma=23639` |
+| Glorias Navales | Fijo | 21 de mayo | Ley 2.977 | `https://www.bcn.cl/leychile/Navegar?idNorma=23639` |
+| Encuentro de Dos Mundos | Fijo | 12 de octubre | Ley 19.668 (traslado a lunes) | `https://www.bcn.cl/leychile/Navegar?idNorma=160270` |
+| Inmaculada Concepción | Fijo | 8 de diciembre | Ley 2.977 | `https://www.bcn.cl/leychile/Navegar?idNorma=23639` |
+
+**NOTA (corregido 2026-03-16):** El idNorma=22209 referenciado anteriormente para Ley 2.977 era INCORRECTO. El correcto es idNorma=23639.
+Ley 20.357 NO es de feriados — es la Ley de Crímenes de Lesa Humanidad (error histórico en este documento).
+Ley 20.148 (idNorma=257080) estableció el 16 de julio (Virgen del Carmen) en reemplazo de Corpus Christi.
+Ley 19.668 (idNorma=160270) estableció el traslado a lunes de San Pedro y San Pablo + Encuentro de Dos Mundos.
 
 **Algoritmo de Pascua (Computus — Meeus/Jones/Butcher):**
 Implementado en `scripts/validate.js` como validación automática.
@@ -90,7 +95,7 @@ En otros años estos feriados SÍ pueden caer en días de clases → revisar cad
 #### B3. Fuente última para feriados
 
 **Fuente definitiva:** BCN — Biblioteca del Congreso Nacional, texto vigente de Ley 2.977 y modificaciones.
-- URL: `https://www.bcn.cl/leychile/navegar?idNorma=22209`
+- URL: `https://www.bcn.cl/leychile/Navegar?idNorma=23639` (idNorma correcto — el 22209 era incorrecto)
 
 **Cross-validación automatizable:** FeriadosApp API (tercero confiable, no oficial)
 - URL: `https://www.feriadosapp.com/api`
@@ -263,6 +268,6 @@ Los 4 feriados que inicialmente parecían "faltantes" (Pueblos Indígenas, Asunc
 - Mineduc: `https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/`
 - Ayuda Mineduc: `https://www.ayudamineduc.cl/ficha/calendarios-escolares-regionales`
 - Diario Oficial: `https://www.diarioficial.cl/`
-- BCN — Ley 2.977: `https://www.bcn.cl/leychile/navegar?idNorma=22209`
+- BCN — Ley 2.977: `https://www.bcn.cl/leychile/Navegar?idNorma=23639`
 - FeriadosApp API: `https://www.feriadosapp.com/api`
 - Datos abiertos Mineduc: `https://centroestudios.mineduc.cl/datos-abiertos/`
