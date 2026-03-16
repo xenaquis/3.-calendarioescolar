@@ -60,7 +60,7 @@ var generated = 0;
 var sitemapUrls = [];
 
 // Agregar páginas estáticas al sitemap
-['index.html', 'about.html', 'contacto.html', 'vacaciones-invierno-2026.html', 'cuando-empiezan-clases-2026.html'].forEach(function (f) {
+['index.html', 'about.html', 'contacto.html', 'feriados-2026.html', 'vacaciones-invierno-2026.html', 'cuando-empiezan-clases-2026.html'].forEach(function (f) {
   if (fs.existsSync(path.join(OUTPUT_DIR, f))) {
     var slug = f === 'index.html' ? '' : f;
     var pri = '0.3';
@@ -143,6 +143,61 @@ if (calConfig) {
   var calJsPath = path.join(OUTPUT_DIR, 'js', 'calendar-config.js');
   fs.writeFileSync(calJsPath, calJs);
   console.log('Generado public/js/calendar-config.js (year: ' + calConfig.year + ', feriados: ' + calConfig.feriados.length + ')');
+}
+
+// Generar tabla de feriados en public/feriados-2026.html desde feriadosCompletos
+var feriadosPagePath = path.join(OUTPUT_DIR, 'feriados-2026.html');
+if (calConfig && calConfig.feriadosCompletos && fs.existsSync(feriadosPagePath)) {
+  var TIPO_LABEL = {
+    'civil':         'Civil',
+    'laboral':       'Laboral',
+    'patrio':        'Patrio',
+    'conmemorativo': 'Conmemorativo',
+    'religioso':     'Religioso'
+  };
+
+  var rows = calConfig.feriadosCompletos.map(function (f) {
+    var fechaDisplay = f.diaSemana + ' ' + f.diaNum + ' de ' + f.mes;
+    var tipoLabel = TIPO_LABEL[f.tipo] || f.tipo;
+    var tipoBadgeClass = 'badge--' + f.tipo;
+
+    var nombreCell = '<strong>' + f.nombre + '</strong>';
+    if (f.nota) {
+      nombreCell += '\n                  <br><small style="color:var(--color-text-tertiary)">' + f.nota + '</small>';
+    }
+
+    var impactoBadge, impactoClass;
+    if (f.contexto === 'en-clases') {
+      impactoBadge = 'Suspende clases';
+      impactoClass = 'badge--clases';
+    } else {
+      impactoBadge = f.notaContexto || 'Sin impacto escolar';
+      impactoClass = 'badge--sin-impacto';
+    }
+
+    return '              <tr data-contexto="' + f.contexto + '">\n' +
+           '                <td><time datetime="' + f.date + '">' + fechaDisplay + '</time></td>\n' +
+           '                <td>' + nombreCell + '</td>\n' +
+           '                <td><span class="badge ' + tipoBadgeClass + '">' + tipoLabel + '</span></td>\n' +
+           '                <td><span class="badge ' + impactoClass + '">' + impactoBadge + '</span></td>\n' +
+           '              </tr>';
+  }).join('\n');
+
+  var feriadosHtml = fs.readFileSync(feriadosPagePath, 'utf8');
+  var markerStart = '<!-- GENERATED:feriados-tbody-start -->';
+  var markerEnd   = '<!-- GENERATED:feriados-tbody-end -->';
+  var iStart = feriadosHtml.indexOf(markerStart);
+  var iEnd   = feriadosHtml.indexOf(markerEnd);
+
+  if (iStart !== -1 && iEnd !== -1) {
+    feriadosHtml = feriadosHtml.slice(0, iStart + markerStart.length) +
+      '\n' + rows + '\n              ' +
+      feriadosHtml.slice(iEnd);
+    fs.writeFileSync(feriadosPagePath, feriadosHtml);
+    console.log('Actualizado public/feriados-2026.html (' + calConfig.feriadosCompletos.length + ' feriados)');
+  } else {
+    console.log('ADVERTENCIA: No se encontraron markers en feriados-2026.html — tabla no actualizada.');
+  }
 }
 
 // Generar public/health.json (para monitoreo automatico por agente)
