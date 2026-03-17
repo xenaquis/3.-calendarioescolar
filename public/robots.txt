@@ -2,8 +2,20 @@
 # robots.txt — Calendario Escolar Chile
 # Ultima actualizacion: marzo 2026
 # ============================
+#
+# ESTRATEGIA ANTI-CANIBALIZACION IA:
+# 1. Motores de busqueda tradicionales: PERMITIDOS (indexar para SERP)
+# 2. Bots de entrenamiento IA / scraping: BLOQUEADOS (no usar contenido para training)
+# 3. Bots de busqueda IA (OAI-SearchBot, etc.): BLOQUEADOS (queremos trafico directo,
+#    no que una IA responda con nuestros datos sin atribucion)
+# 4. llms.txt disponible para citacion voluntaria con atribucion
+#
+# Cada bot de IA que NO tiene bloque explicito hereda User-agent: * (Allow),
+# asi que agregamos cada uno explicitamente para maximo control.
 
-# PERMITIR: Motores de busqueda
+# -----------------------------------------------
+# PERMITIR: Motores de busqueda tradicionales
+# -----------------------------------------------
 User-agent: Googlebot
 Allow: /
 
@@ -19,7 +31,15 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-# BLOQUEAR: OpenAI
+User-agent: Baiduspider
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+# -----------------------------------------------
+# BLOQUEAR: OpenAI (training + search)
+# -----------------------------------------------
 User-agent: GPTBot
 Disallow: /
 
@@ -29,7 +49,9 @@ Disallow: /
 User-agent: OAI-SearchBot
 Disallow: /
 
-# BLOQUEAR: Anthropic
+# -----------------------------------------------
+# BLOQUEAR: Anthropic (training + search)
+# -----------------------------------------------
 User-agent: anthropic-ai
 Disallow: /
 
@@ -42,7 +64,9 @@ Disallow: /
 User-agent: Claude-SearchBot
 Disallow: /
 
-# BLOQUEAR: Google AI Training
+# -----------------------------------------------
+# BLOQUEAR: Google AI (training, not search)
+# -----------------------------------------------
 User-agent: Google-Extended
 Disallow: /
 
@@ -58,11 +82,15 @@ Disallow: /
 User-agent: Google-NotebookLM
 Disallow: /
 
+# -----------------------------------------------
 # BLOQUEAR: Apple AI
+# -----------------------------------------------
 User-agent: Applebot-Extended
 Disallow: /
 
-# BLOQUEAR: Meta
+# -----------------------------------------------
+# BLOQUEAR: Meta (training + agents)
+# -----------------------------------------------
 User-agent: FacebookBot
 Disallow: /
 
@@ -72,18 +100,24 @@ Disallow: /
 User-agent: meta-externalfetcher
 Disallow: /
 
-# BLOQUEAR: ByteDance
+# -----------------------------------------------
+# BLOQUEAR: ByteDance / TikTok
+# -----------------------------------------------
 User-agent: Bytespider
 Disallow: /
 
-# BLOQUEAR: Perplexity
+# -----------------------------------------------
+# BLOQUEAR: Perplexity (search IA)
+# -----------------------------------------------
 User-agent: PerplexityBot
 Disallow: /
 
 User-agent: Perplexity-User
 Disallow: /
 
-# BLOQUEAR: Amazon
+# -----------------------------------------------
+# BLOQUEAR: Amazon (training + agents)
+# -----------------------------------------------
 User-agent: Amazonbot
 Disallow: /
 
@@ -93,26 +127,51 @@ Disallow: /
 User-agent: NovaAct
 Disallow: /
 
+# -----------------------------------------------
 # BLOQUEAR: Microsoft AI
+# -----------------------------------------------
 User-agent: AzureAI-SearchBot
 Disallow: /
 
-# BLOQUEAR: Common Crawl
+# -----------------------------------------------
+# BLOQUEAR: Common Crawl (fuente de training datasets)
+# -----------------------------------------------
 User-agent: CCBot
 Disallow: /
 
+# -----------------------------------------------
 # BLOQUEAR: Cohere
+# -----------------------------------------------
 User-agent: cohere-ai
 Disallow: /
 
-# BLOQUEAR: Huawei
+User-agent: cohere-training-data-crawler
+Disallow: /
+
+# -----------------------------------------------
+# BLOQUEAR: Huawei / PanGu
+# -----------------------------------------------
 User-agent: PanguBot
 Disallow: /
 
 User-agent: PetalBot
 Disallow: /
 
-# BLOQUEAR: Otros AI
+# -----------------------------------------------
+# BLOQUEAR: DeepSeek
+# -----------------------------------------------
+User-agent: DeepSeekBot
+Disallow: /
+
+# -----------------------------------------------
+# BLOQUEAR: xAI / Grok
+# -----------------------------------------------
+User-agent: xAI-Grok
+Disallow: /
+
+# -----------------------------------------------
+# BLOQUEAR: Otros bots IA / scraping
+# -----------------------------------------------
 User-agent: Diffbot
 Disallow: /
 
@@ -154,5 +213,30 @@ Disallow: /
 
 User-agent: LinkupBot
 Disallow: /
+
+User-agent: Timpibot
+Disallow: /
+
+User-agent: VelenPublicWebCrawler
+Disallow: /
+
+User-agent: Webzio-Extended
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
+
+User-agent: omgili
+Disallow: /
+
+User-agent: SentiBot
+Disallow: /
+
+# -----------------------------------------------
+# FALLBACK: Cualquier otro bot no listado
+# -----------------------------------------------
+User-agent: *
+Allow: /
+Disallow: /api/
 
 Sitemap: https://calendarioescolar.cl/sitemap.xml

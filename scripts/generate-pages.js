@@ -60,13 +60,18 @@ var generated = 0;
 var sitemapUrls = [];
 
 // Agregar páginas estáticas al sitemap
-['index.html', 'about.html', 'contacto.html', 'feriados-2026.html', 'vacaciones-invierno-2026.html', 'cuando-empiezan-clases-2026.html'].forEach(function (f) {
-  if (fs.existsSync(path.join(OUTPUT_DIR, f))) {
-    var slug = f === 'index.html' ? '' : f;
-    var pri = '0.3';
-    if (f === 'index.html') pri = '1.0';
-    else if (f.indexOf('vacaciones') !== -1 || f.indexOf('cuando') !== -1) pri = '0.9';
-    sitemapUrls.push({ loc: 'https://' + domain + '/' + slug, priority: pri });
+var STATIC_PAGES = [
+  { file: 'index.html',                      pri: '1.0', freq: 'weekly' },
+  { file: 'feriados-2026.html',              pri: '0.8', freq: 'monthly' },
+  { file: 'vacaciones-invierno-2026.html',   pri: '0.9', freq: 'monthly' },
+  { file: 'cuando-empiezan-clases-2026.html',pri: '0.9', freq: 'monthly' },
+  { file: 'about.html',                      pri: '0.3', freq: 'monthly' },
+  { file: 'contacto.html',                   pri: '0.3', freq: 'yearly' }
+];
+STATIC_PAGES.forEach(function (p) {
+  if (fs.existsSync(path.join(OUTPUT_DIR, p.file))) {
+    var slug = p.file === 'index.html' ? '' : p.file;
+    sitemapUrls.push({ loc: 'https://' + domain + '/' + slug, priority: p.pri, changefreq: p.freq });
   }
 });
 
@@ -92,7 +97,8 @@ pages.forEach(function (page) {
 
   sitemapUrls.push({
     loc: 'https://' + domain + '/' + page.slug + '/',
-    priority: page.priority || '0.6'
+    priority: page.priority || '0.6',
+    changefreq: 'monthly'
   });
 });
 
@@ -104,6 +110,7 @@ sitemapUrls.forEach(function (u) {
   sitemap += '  <url>\n';
   sitemap += '    <loc>' + u.loc + '</loc>\n';
   sitemap += '    <lastmod>' + today + '</lastmod>\n';
+  if (u.changefreq) sitemap += '    <changefreq>' + u.changefreq + '</changefreq>\n';
   sitemap += '    <priority>' + u.priority + '</priority>\n';
   sitemap += '  </url>\n';
 });

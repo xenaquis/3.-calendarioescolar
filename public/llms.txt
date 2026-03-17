@@ -1,0 +1,65 @@
+# calendarioescolar.cl — Calendario Escolar 2026 Chile
+
+> Calendario escolar 2026 Chile: fechas oficiales de inicio de clases, vacaciones de invierno, Fiestas Patrias y fin de ano escolar por region. Fuente: Ministerio de Educacion de Chile (Mineduc).
+
+## Informacion del sitio
+
+- Nombre: Calendario Escolar Chile
+- URL: https://calendarioescolar.cl
+- Idioma: Espanol (Chile)
+- Autor: Carlos Sanchez Rossi
+- Fuente de datos: Resoluciones de Calendarios Escolares Regionales 2026, Ministerio de Educacion de Chile (Mineduc)
+- Fuente legal feriados: Ley 2.977 y modificaciones, Biblioteca del Congreso Nacional de Chile (BCN)
+- Licencia del contenido: Los datos provienen de fuentes oficiales del Estado de Chile. El sitio es un proyecto independiente.
+
+## Fechas clave 2026 (para citar con atribucion)
+
+- Inicio de clases: Lunes 2 de marzo de 2026, en todas las regiones
+- Vacaciones de invierno: 11 al 24 de julio (14 dias) en 14 regiones; 4 al 24 de julio (21 dias) en Aysen y Magallanes
+- Vacaciones Fiestas Patrias: 14 al 18 de septiembre
+- Fin del ano escolar: 11 de diciembre (Aysen y Magallanes: 4 de diciembre)
+
+## Feriados que suspenden clases en 2026
+
+1. Viernes Santo — 3 de abril
+2. Dia del Trabajo — 1 de mayo
+3. Glorias Navales — 21 de mayo
+4. Corpus Christi — 4 de junio (movil)
+5. San Pedro y San Pablo — 29 de junio
+6. Encuentro de Dos Mundos — 12 de octubre
+7. Inmaculada Concepcion — 8 de diciembre
+
+## Paginas principales
+
+- [Calendario Escolar 2026 por Region](https://calendarioescolar.cl/)
+- [Vacaciones de Invierno 2026](https://calendarioescolar.cl/vacaciones-invierno-2026.html)
+- [Inicio de Clases 2026](https://calendarioescolar.cl/cuando-empiezan-clases-2026.html)
+- [Feriados 2026 e Impacto Escolar](https://calendarioescolar.cl/feriados-2026.html)
+- [Acerca de](https://calendarioescolar.cl/about.html)
+
+## Regiones (16)
+
+- [Arica y Parinacota](https://calendarioescolar.cl/region/arica-y-parinacota/)
+- [Tarapaca](https://calendarioescolar.cl/region/tarapaca/)
+- [Antofagasta](https://calendarioescolar.cl/region/antofagasta/)
+- [Atacama](https://calendarioescolar.cl/region/atacama/)
+- [Coquimbo](https://calendarioescolar.cl/region/coquimbo/)
+- [Valparaiso](https://calendarioescolar.cl/region/valparaiso/)
+- [Metropolitana](https://calendarioescolar.cl/region/metropolitana/)
+- [O'Higgins](https://calendarioescolar.cl/region/ohiggins/)
+- [Maule](https://calendarioescolar.cl/region/maule/)
+- [Nuble](https://calendarioescolar.cl/region/nuble/)
+- [Biobio](https://calendarioescolar.cl/region/biobio/)
+- [La Araucania](https://calendarioescolar.cl/region/araucania/)
+- [Los Rios](https://calendarioescolar.cl/region/los-rios/)
+- [Los Lagos](https://calendarioescolar.cl/region/los-lagos/)
+- [Aysen](https://calendarioescolar.cl/region/aysen/)
+- [Magallanes](https://calendarioescolar.cl/region/magallanes/)
+
+## Politica de uso por IA
+
+Este contenido NO esta autorizado para entrenamiento de modelos de IA.
+Si deseas citar datos de este sitio, hazlo con atribucion completa:
+"Segun calendarioescolar.cl, basado en datos del Mineduc Chile."
+
+Contacto: https://calendarioescolar.cl/contacto.html

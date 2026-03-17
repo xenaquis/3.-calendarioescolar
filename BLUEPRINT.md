@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-16 (análisis comparativo + correcciones: schoolEnd 11 dic, +2 feriados faltantes, irrenunciables FAQ).
+Ultimo update de este blueprint: 2026-03-17 (auditoría SEO 360° + anti-canibalización IA: author E-E-A-T, llms.txt, robots.txt ampliado, schemas enriquecidos, cache headers, noscript fallback).
 
 ---
 

@@ -4,7 +4,44 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: interest-cohort=()
+  Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com; connect-src 'self' https://pagead2.googlesyndication.com https://www.google-analytics.com
+
+# HTML pages: cache short, revalidate often (content can change with Mineduc updates)
+/*.html
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+# Region pages: same strategy
+/region/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+# Static assets: long cache, immutable (fingerprinted via content)
+/css/*
+  Cache-Control: public, max-age=2592000, immutable
+
+/js/*
+  Cache-Control: public, max-age=2592000, immutable
+
+/icons/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# SEO files: cache moderately
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml; charset=utf-8
+
+/robots.txt
+  Cache-Control: public, max-age=86400
+
+/llms.txt
+  Cache-Control: public, max-age=86400
+
+# Health endpoint: no cache
+/health.json
+  Cache-Control: no-cache, must-revalidate
 
 /api/*
   Access-Control-Allow-Origin: https://calendarioescolar.cl
