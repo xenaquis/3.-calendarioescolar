@@ -22,8 +22,9 @@ Ultimo update de este blueprint: 2026-03-17 (auditoría SEO 360° + anti-canibal
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
 | Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — Corpus Christi corregido 2026-03-12 |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
-| Frontend              | EN PROGRESO     | Rediseño UX iniciado 2026-03-16: index.html + feriados-2026.html completos |
+| Frontend              | COMPLETADO      | Rediseño UX completado 2026-03-16                  |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
+| SEO / Anti-IA         | COMPLETADO      | Auditoría 360° 2026-03-17: E-E-A-T, llms.txt, schemas, cache — commit 3df7917 |
 
 ---
 
@@ -344,6 +345,52 @@ Deploy: ver seccion "Comandos utiles" abajo.
 - Cloudflare Pages: https://dash.cloudflare.com
 - Search Console: https://search.google.com/search-console
 - Analytics: https://analytics.google.com
+
+---
+
+## SEO — Estado post-auditoría 2026-03-17
+
+### Anti-canibalización IA (COMPLETO)
+- `public/robots.txt` — 50+ bots bloqueados (OpenAI, Anthropic, Google-Extended, DeepSeek, xAI/Grok, Cohere, CCBot, ByteDance, Perplexity, Amazon, Apple, Meta, + 8 nuevos 2026)
+- `public/llms.txt` (NUEVO) — archivo de citación controlada; LLMs pueden citar con atribución obligatoria
+- `public/_headers` — `X-Robots-Tag: noai, noimageai` (HTTP header layer) + cache strategy por tipo
+- Meta robots `noai, noimageai` en todas las páginas HTML
+
+### E-E-A-T / Author markup (COMPLETO, invisible en UI)
+- Person schema: Carlos Sánchez Rossi → LinkedIn (`cl.linkedin.com/in/csanchezrossi`) + Google Scholar
+  - `worksFor`: Dirección de Estudios, Corte Suprema → Poder Judicial de Chile
+  - `alumniOf`: UC Berkeley School of Law
+- Presente en: `index.html` (Person + Organization founder), `about.html` (AboutPage + Person), todas las páginas vía `@id` reference
+- **No aparece en el UI** — solo en JSON-LD structured data
+
+### Schemas enriquecidos (COMPLETO)
+- `index.html`: WebSite + Organization + **Person** + WebApplication + **ItemList (16 regiones)** + FAQPage
+- `data/template.html` → 16 regiones: BreadcrumbList + **Article (author/publisher/dates)** + Event (endDate + eventStatus) + FAQPage
+- Landing pages: BreadcrumbList + **Article (author/dates)** + FAQPage
+- `about.html`: BreadcrumbList + **AboutPage** + Organization + **Person**
+
+### Twitter cards (COMPLETO)
+- Agregadas a: `vacaciones-invierno-2026.html`, `cuando-empiezan-clases-2026.html`, `data/template.html`
+- `article:published_time`, `article:modified_time`, `article:author`, `article:tag` en todas las landing pages
+
+### Sitemap (COMPLETO)
+- `changefreq` agregado: weekly (home), monthly (regiones + contenido), yearly (legal)
+- `feriados-2026.html`: prioridad 0.3 → 0.8
+- `scripts/generate-pages.js` actualizado para propagar changefreq en builds futuros
+
+### Cache strategy `_headers` (COMPLETO)
+- HTML: `max-age=3600, stale-while-revalidate=86400`
+- CSS/JS: `max-age=2592000, immutable`
+- Icons: `max-age=31536000, immutable`
+- HSTS preload agregado
+
+### Noscript fallback (COMPLETO)
+- `index.html`: bloque `<noscript>` con 16 regiones + fechas clave en texto plano para crawlers sin JS
+
+### Pendiente SEO (requiere dominio)
+- Google Search Console: verificar propiedad + enviar sitemap.xml
+- OG Image: crear `public/icons/og-image.png` 1200×630px (fondo #7c3aed, texto blanco)
+- Core Web Vitals: verificar con PageSpeed Insights post-deploy
 
 ---
 
