@@ -357,14 +357,25 @@ async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
 
   var xml = await fetchBcnXml(lawConfig.idNorma);
   if (!xml) {
-    await sendAlert(
-      '[BCN] No se pudo obtener XML para ' + lawConfig.sourceName + '\n' +
-      'idNorma: ' + lawConfig.idNorma + '\n' +
-      'Puede ser problema temporal de BCN. Si persiste, verificar idNorma.',
-      'MEDIUM',
-      env,
-      null
-    );
+    // Dedup: solo alertar una vez cada 30 dias para no generar ruido semanal
+    var failKvKey = 'law:' + lawKey + ':fetch-fail-notified';
+    var alreadyNotified = env.CALENDAR_KV ? await env.CALENDAR_KV.get(failKvKey) : null;
+    if (!alreadyNotified) {
+      await sendAlert(
+        '[BCN] No se pudo obtener XML para ' + lawConfig.sourceName + '\n' +
+        'idNorma: ' + lawConfig.idNorma + '\n' +
+        'BCN puede no tener XML disponible para esta norma, o es un problema temporal.\n' +
+        'Si persiste, verificar si BCN cambio el idNorma o el formato de export.',
+        'MEDIUM',
+        env,
+        null
+      );
+      if (env.CALENDAR_KV) {
+        try { await env.CALENDAR_KV.put(failKvKey, '1', { expirationTtl: 60 * 60 * 24 * 30 }); } catch (e) { /* ignore */ }
+      }
+    } else {
+      console.log('[calendar-monitor] BCN sin XML para ' + lawKey + ' — ya notificado, saltando alerta');
+    }
     return { status: 'fetch_failed', lawKey: lawKey };
   }
 
@@ -601,7 +612,13 @@ async function fetchBcnXml(idNorma) {
       console.error('[calendar-monitor] BCN HTTP ' + response.status + ' para idNorma=' + idNorma);
       return null;
     }
-    return await response.text();
+    var text = await response.text();
+    // Validar que BCN devolvio XML real (algunas normas no tienen export XML disponible)
+    if (text.indexOf('<?xml') === -1 && text.indexOf('<Norma') === -1) {
+      console.warn('[calendar-monitor] BCN no devolvio XML para idNorma=' + idNorma + ' — norma sin XML disponible o formato no reconocido');
+      return null;
+    }
+    return text;
   } catch (e) {
     console.error('[calendar-monitor] fetchBcnXml error: ' + e.message);
     return null;
