@@ -403,11 +403,11 @@ details h3 {
 .key-fact--success { border-left-color: var(--color-success); background: linear-gradient(135deg, var(--color-success-light) 0%, var(--color-bg) 60%); }
 
 .key-fact__label {
-  font-size: var(--text-xs);
+  font-size: 0.8125rem;
   font-weight: 600;
   color: var(--color-text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   margin-bottom: var(--space-1);
 }
 
@@ -478,7 +478,7 @@ details h3 {
 
 .stat-label {
   font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin-bottom: var(--space-1);
@@ -494,7 +494,7 @@ details h3 {
 
 .stat-note {
   font-size: var(--text-xs);
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.90);
   margin: 0;
 }
 

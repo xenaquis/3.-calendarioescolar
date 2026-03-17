@@ -33,6 +33,26 @@
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/ads.css">
 
+  <style>
+    .region-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-1) var(--space-6);
+      list-style: none;
+      padding: 0;
+      margin: var(--space-4) 0;
+    }
+    @media (min-width: 480px) {
+      .region-list { grid-template-columns: repeat(3, 1fr); }
+    }
+    .region-list li a {
+      display: block;
+      padding: var(--space-2) 0;
+      font-size: var(--text-sm);
+      border-bottom: 1px solid var(--color-border);
+    }
+  </style>
+
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
   {
@@ -114,38 +134,29 @@
              data-full-width-responsive="true"></ins>
       </div>
 
-      <!-- Tabla inicio por región -->
+      <!-- Links por región -->
       <section class="section" aria-label="Inicio de clases 2026 por regi&oacute;n">
         <h2>Inicio de clases 2026 por regi&oacute;n</h2>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Regi&oacute;n</th>
-                <th>Fecha de inicio</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td><a href="/region/arica-y-parinacota/">Arica y Parinacota</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/tarapaca/">Tarapac&aacute;</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/antofagasta/">Antofagasta</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/atacama/">Atacama</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/coquimbo/">Coquimbo</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/valparaiso/">Valpara&iacute;so</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/metropolitana/">Metropolitana</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/ohiggins/">O&rsquo;Higgins</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/maule/">Maule</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/nuble/">&Ntilde;uble</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/biobio/">Biob&iacute;o</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/araucania/">La Araucan&iacute;a</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/los-rios/">Los R&iacute;os</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/los-lagos/">Los Lagos</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/aysen/">Ays&eacute;n</a></td><td>2 de marzo</td></tr>
-              <tr><td><a href="/region/magallanes/">Magallanes</a></td><td>2 de marzo</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="card__meta" style="margin-top:var(--space-3);">
+        <p>El <strong>2 de marzo</strong> es la fecha de inicio en las 16 regiones, sin excepci&oacute;n. Selecciona la tuya para ver el calendario completo del a&ntilde;o:</p>
+        <ul class="region-list" aria-label="Regiones de Chile">
+          <li><a href="/region/arica-y-parinacota/">Arica y Parinacota</a></li>
+          <li><a href="/region/tarapaca/">Tarapac&aacute;</a></li>
+          <li><a href="/region/antofagasta/">Antofagasta</a></li>
+          <li><a href="/region/atacama/">Atacama</a></li>
+          <li><a href="/region/coquimbo/">Coquimbo</a></li>
+          <li><a href="/region/valparaiso/">Valpara&iacute;so</a></li>
+          <li><a href="/region/metropolitana/">Metropolitana</a></li>
+          <li><a href="/region/ohiggins/">O&rsquo;Higgins</a></li>
+          <li><a href="/region/maule/">Maule</a></li>
+          <li><a href="/region/nuble/">&Ntilde;uble</a></li>
+          <li><a href="/region/biobio/">Biob&iacute;o</a></li>
+          <li><a href="/region/araucania/">La Araucan&iacute;a</a></li>
+          <li><a href="/region/los-rios/">Los R&iacute;os</a></li>
+          <li><a href="/region/los-lagos/">Los Lagos</a></li>
+          <li><a href="/region/aysen/">Ays&eacute;n</a></li>
+          <li><a href="/region/magallanes/">Magallanes</a></li>
+        </ul>
+        <p class="card__meta">
           Fuente: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones de Calendarios Escolares Regionales 2026 &mdash; Ministerio de Educaci&oacute;n de Chile</a>
         </p>
       </section>
@@ -163,9 +174,8 @@
       <!-- Info breve -->
       <section class="section">
         <h2>Sobre el inicio del a&ntilde;o escolar</h2>
-        <p>El a&ntilde;o escolar 2026 en Chile comienza el <strong>lunes 2 de marzo</strong> en las 16 regiones.
-           Esta fecha es establecida por el <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Ministerio de Educaci&oacute;n (Mineduc) a trav&eacute;s de las Resoluciones de Calendarios Escolares Regionales 2026</a>.</p>
-        <p>Los establecimientos particulares pagados pueden tener fechas distintas seg&uacute;n su propio calendario. Confirma con tu colegio.</p>
+        <p>La fecha del 2 de marzo es fijada por las <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones de Calendarios Escolares Regionales 2026 del Ministerio de Educaci&oacute;n</a>.
+           Los establecimientos particulares pagados pueden tener fechas distintas seg&uacute;n su propio calendario. Confirma siempre con tu colegio.</p>
       </section>
 
       <!-- FAQ -->
@@ -197,6 +207,7 @@
         <h2>Consulta tambi&eacute;n</h2>
         <ul>
           <li><a href="/vacaciones-invierno-2026.html">Vacaciones de Invierno 2026: Fechas por Regi&oacute;n</a></li>
+          <li><a href="/feriados-2026.html">Feriados 2026 que afectan el calendario escolar</a></li>
           <li><a href="/">Calendario escolar completo por regi&oacute;n</a></li>
         </ul>
       </section>

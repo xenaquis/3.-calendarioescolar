@@ -69,7 +69,7 @@ var App = (function () {
 
       if (container) {
         container.style.display = 'block';
-        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   }

@@ -62,7 +62,7 @@
       color: var(--color-text-secondary);
       cursor: pointer;
       transition: all var(--transition-fast);
-      min-height: 36px;
+      min-height: 44px;
     }
     .filter-tab:hover {
       border-color: var(--color-primary);
@@ -340,51 +340,6 @@
              data-full-width-responsive="true"></ins>
       </div>
 
-      <!-- Timeline visual -->
-      <section class="section" aria-label="L&iacute;nea de tiempo de feriados 2026">
-        <h2>Distribuci&oacute;n en el a&ntilde;o</h2>
-        <p>Posici&oacute;n de cada feriado en el calendario 2026. La banda morada es el per&iacute;odo escolar (mar&ndash;dic).</p>
-
-        <div class="timeline-bar" role="img" aria-label="L&iacute;nea de tiempo de feriados 2026">
-          <div class="timeline-school"></div>
-          <!-- Nodos posicionados por % del año (día/365 × 100) -->
-          <!-- Ene 1 = día 1 → 0.3% -->
-          <div class="timeline-node timeline-node--outside" style="left:0.3%" title="Año Nuevo — 1 ene"></div>
-          <!-- Abr 3 = día 93 → 25.5% -->
-          <div class="timeline-node timeline-node--clases" style="left:25.5%" title="Viernes Santo — 3 abr"></div>
-          <!-- Abr 4 = día 94 → 25.8% -->
-          <div class="timeline-node timeline-node--neutral" style="left:25.8%" title="Sábado Santo — 4 abr"></div>
-          <!-- May 1 = día 121 → 33.2% -->
-          <div class="timeline-node timeline-node--clases" style="left:33.2%" title="Día del Trabajo — 1 may"></div>
-          <!-- May 21 = día 141 → 38.6% -->
-          <div class="timeline-node timeline-node--clases" style="left:38.6%" title="Glorias Navales — 21 may"></div>
-          <!-- Jun 4 = día 155 → 42.5% -->
-          <div class="timeline-node timeline-node--clases" style="left:42.5%" title="Corpus Christi — 4 jun"></div>
-          <!-- Jun 29 = día 180 → 49.3% -->
-          <div class="timeline-node timeline-node--clases" style="left:49.3%" title="San Pedro y San Pablo — 29 jun"></div>
-          <!-- Jul 16 = día 197 → 54.0% -->
-          <div class="timeline-node timeline-node--neutral" style="left:54.0%" title="Virgen del Carmen — 16 jul (vacaciones)"></div>
-          <!-- Sep 18 = día 261 → 71.5% -->
-          <div class="timeline-node timeline-node--neutral" style="left:71.5%" title="Fiestas Patrias — 18 sep (vacaciones)"></div>
-          <!-- Sep 19 = día 262 → 71.8% -->
-          <div class="timeline-node timeline-node--neutral" style="left:71.8%" title="Glorias del Ejército — 19 sep (vacaciones)"></div>
-          <!-- Oct 12 = día 285 → 78.1% -->
-          <div class="timeline-node timeline-node--clases" style="left:78.1%" title="Encuentro Dos Mundos — 12 oct"></div>
-          <!-- Dic 8 = día 342 → 93.7% -->
-          <div class="timeline-node timeline-node--clases" style="left:93.7%" title="Inmaculada Concepción — 8 dic"></div>
-          <!-- Dic 25 = día 359 → 98.4% -->
-          <div class="timeline-node timeline-node--outside" style="left:98.4%" title="Navidad — 25 dic"></div>
-        </div>
-        <div class="timeline-labels" aria-hidden="true">
-          <span>Ene</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span><span>Dic</span>
-        </div>
-        <div class="timeline-legend" aria-hidden="true">
-          <span><span class="legend-dot" style="background:#dc2626"></span> Suspende clases</span>
-          <span><span class="legend-dot" style="background:#16a34a"></span> Sin impacto escolar</span>
-          <span><span class="legend-dot" style="background:#d4d0ca"></span> Fuera del a&ntilde;o escolar</span>
-        </div>
-      </section>
-
       <!-- Filtros -->
       <section class="section" aria-label="Lista de feriados 2026">
         <h2>Feriados 2026</h2>
@@ -501,6 +456,51 @@
         </p>
       </section>
 
+      <!-- Timeline visual -->
+      <section class="section" aria-label="L&iacute;nea de tiempo de feriados 2026">
+        <h2>Distribuci&oacute;n en el a&ntilde;o</h2>
+        <p>Posici&oacute;n de cada feriado en el calendario 2026. La banda morada es el per&iacute;odo escolar (mar&ndash;dic).</p>
+
+        <div class="timeline-bar" role="img" aria-label="L&iacute;nea de tiempo de feriados 2026">
+          <div class="timeline-school"></div>
+          <!-- Nodos posicionados por % del año (día/365 × 100) -->
+          <!-- Ene 1 = día 1 → 0.3% -->
+          <div class="timeline-node timeline-node--outside" style="left:0.3%" title="Año Nuevo — 1 ene"></div>
+          <!-- Abr 3 = día 93 → 25.5% -->
+          <div class="timeline-node timeline-node--clases" style="left:25.5%" title="Viernes Santo — 3 abr"></div>
+          <!-- Abr 4 = día 94 → 25.8% -->
+          <div class="timeline-node timeline-node--neutral" style="left:25.8%" title="Sábado Santo — 4 abr"></div>
+          <!-- May 1 = día 121 → 33.2% -->
+          <div class="timeline-node timeline-node--clases" style="left:33.2%" title="Día del Trabajo — 1 may"></div>
+          <!-- May 21 = día 141 → 38.6% -->
+          <div class="timeline-node timeline-node--clases" style="left:38.6%" title="Glorias Navales — 21 may"></div>
+          <!-- Jun 4 = día 155 → 42.5% -->
+          <div class="timeline-node timeline-node--clases" style="left:42.5%" title="Corpus Christi — 4 jun"></div>
+          <!-- Jun 29 = día 180 → 49.3% -->
+          <div class="timeline-node timeline-node--clases" style="left:49.3%" title="San Pedro y San Pablo — 29 jun"></div>
+          <!-- Jul 16 = día 197 → 54.0% -->
+          <div class="timeline-node timeline-node--neutral" style="left:54.0%" title="Virgen del Carmen — 16 jul (vacaciones)"></div>
+          <!-- Sep 18 = día 261 → 71.5% -->
+          <div class="timeline-node timeline-node--neutral" style="left:71.5%" title="Fiestas Patrias — 18 sep (vacaciones)"></div>
+          <!-- Sep 19 = día 262 → 71.8% -->
+          <div class="timeline-node timeline-node--neutral" style="left:71.8%" title="Glorias del Ejército — 19 sep (vacaciones)"></div>
+          <!-- Oct 12 = día 285 → 78.1% -->
+          <div class="timeline-node timeline-node--clases" style="left:78.1%" title="Encuentro Dos Mundos — 12 oct"></div>
+          <!-- Dic 8 = día 342 → 93.7% -->
+          <div class="timeline-node timeline-node--clases" style="left:93.7%" title="Inmaculada Concepción — 8 dic"></div>
+          <!-- Dic 25 = día 359 → 98.4% -->
+          <div class="timeline-node timeline-node--outside" style="left:98.4%" title="Navidad — 25 dic"></div>
+        </div>
+        <div class="timeline-labels" aria-hidden="true">
+          <span>Ene</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span><span>Dic</span>
+        </div>
+        <div class="timeline-legend" aria-hidden="true">
+          <span><span class="legend-dot" style="background:#dc2626"></span> Suspende clases</span>
+          <span><span class="legend-dot" style="background:#16a34a"></span> Sin impacto escolar</span>
+          <span><span class="legend-dot" style="background:#d4d0ca"></span> Fuera del a&ntilde;o escolar</span>
+        </div>
+      </section>
+
       <!-- Ad: Mid -->
       <div class="ad-slot ad-slot--rect" aria-hidden="true">
         <ins class="adsbygoogle"
@@ -554,19 +554,19 @@
 
       <!-- Consulta también -->
       <section class="section">
-        <h2>M&aacute;s informaci&oacute;n</h2>
+        <h2>Consulta tambi&eacute;n</h2>
         <div class="card-grid">
           <a href="/vacaciones-invierno-2026.html" class="card" style="text-decoration:none; color:inherit;">
             <h3 class="card__title" style="color:var(--color-accent);">Vacaciones de Invierno 2026</h3>
-            <p>Fechas por regi&oacute;n &mdash; del 11 al 24 de julio en la mayor&iacute;a del pa&iacute;s.</p>
+            <p>Fechas exactas por regi&oacute;n, countdown y comparativa norte&nbsp;/&nbsp;centro&nbsp;/&nbsp;sur.</p>
           </a>
           <a href="/cuando-empiezan-clases-2026.html" class="card" style="text-decoration:none; color:inherit;">
             <h3 class="card__title" style="color:var(--color-primary);">&iquest;Cu&aacute;ndo empiezan las clases 2026?</h3>
-            <p>Todas las regiones comenzaron el lunes 2 de marzo.</p>
+            <p>D&iacute;a y mes por regi&oacute;n, preguntas frecuentes y fechas de regreso.</p>
           </a>
           <a href="/" class="card" style="text-decoration:none; color:inherit;">
             <h3 class="card__title" style="color:var(--color-success);">Calendario por regi&oacute;n</h3>
-            <p>Consulta las fechas exactas de inicio, invierno y fin de a&ntilde;o en tu regi&oacute;n.</p>
+            <p>Selecciona tu regi&oacute;n para ver las fechas exactas de inicio, invierno y fin de a&ntilde;o.</p>
           </a>
         </div>
       </section>
