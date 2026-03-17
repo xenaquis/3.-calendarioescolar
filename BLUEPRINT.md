@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-17 (auditoría SEO 360° + anti-canibalización IA: author E-E-A-T, llms.txt, robots.txt ampliado, schemas enriquecidos, cache headers, noscript fallback).
+Ultimo update de este blueprint: 2026-03-17 (DOMINIO ACTIVO — calendarioescolar.cl HTTP 200; SEO 360° completado).
 
 ---
 
@@ -12,12 +12,12 @@ Ultimo update de este blueprint: 2026-03-17 (auditoría SEO 360° + anti-canibal
 
 | Item                  | Estado          | Notas                                              |
 |-----------------------|-----------------|----------------------------------------------------|
-| Dominio               | PENDIENTE       | calendarioescolar.cl — registrar en nic.cl (~$18 USD) |
-| Cloudflare Pages      | Configurado     | Deploy via GitHub Actions                          |
-| DNS                   | PENDIENTE       | Requiere dominio primero                           |
+| Dominio               | ACTIVO          | calendarioescolar.cl — HTTP 200 verificado 2026-03-17 |
+| Cloudflare Pages      | ACTIVO          | Deploy via GitHub Actions — en producción          |
+| DNS                   | ACTIVO          | Cloudflare DNS configurado y propagado             |
 | GA4                   | PENDIENTE       | ID placeholder `G-XXXXXXXXXX` en config.json       |
 | AdSense               | PENDIENTE       | ID placeholder `ca-pub-XXXXXXXXXXXXXXXX` en config.json |
-| Search Console        | PENDIENTE       | Verificar tras registrar dominio                   |
+| Search Console        | PENDIENTE       | Verificar propiedad + enviar sitemap               |
 | OG Image              | PENDIENTE       | Archivo `/icons/og-image.png` referenciado pero no existe |
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
 | Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — Corpus Christi corregido 2026-03-12 |
@@ -263,13 +263,11 @@ Las páginas en `public/region/` y `public/js/` son artefactos generados — nun
 
 Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios externos.
 
-1. **Registrar dominio `calendarioescolar.cl`**
-   - URL: https://www.nic.cl | Costo: ~$18 USD/año | Requiere RUT chileno
+1. ~~**Registrar dominio `calendarioescolar.cl`**~~ COMPLETADO — HTTP 200 verificado 2026-03-17
 
-2. **Configurar DNS en Cloudflare**
-   - Después de registrar dominio, apuntar nameservers a Cloudflare
+2. ~~**Configurar DNS en Cloudflare**~~ COMPLETADO — dominio en producción
 
-3. **Configurar Google Sheet + API Key** ← NUEVO
+3. **Configurar Google Sheet + API Key** ← SIGUIENTE
    - Seguir instrucciones en `data/SHEET-SETUP.md`
    - Agregar GitHub Secret: `GOOGLE_API_KEY`
    - Actualizar `config.json` → `sheet.spreadsheetId`
@@ -387,7 +385,20 @@ Deploy: ver seccion "Comandos utiles" abajo.
 ### Noscript fallback (COMPLETO)
 - `index.html`: bloque `<noscript>` con 16 regiones + fechas clave en texto plano para crawlers sin JS
 
-### Pendiente SEO (requiere dominio)
+### Cloudflare Pretty URLs (ACTIVO — comportamiento esperado)
+Cloudflare Pages redirige `.html` → sin extensión con 308 Permanent Redirect:
+- `/vacaciones-invierno-2026.html` → `/vacaciones-invierno-2026` (308 → 200)
+- `/feriados-2026.html` → `/feriados-2026` (308 → 200)
+- `/about.html` → `/about` (308 → 200)
+- Regiones `/region/slug/` y homepage `/` → 200 directo (sin redirect)
+- **Impacto SEO**: positivo — Google indexa la URL limpia y el 308 es permanente
+- **Canonical tags**: apuntan a `.html` pero Google las resuelve correctamente via 308
+- **Robots.txt, sitemap.xml, llms.txt, health.json** → 200 directo
+
+### Robots.txt en producción
+Cloudflare prepende su propia sección "Managed Content" con `Content-Signal: search=yes,ai-train=no` antes de nuestro robots.txt. Efecto: **doble capa de protección anti-training**. No requiere acción.
+
+### Pendiente SEO (requiere acción humana)
 - Google Search Console: verificar propiedad + enviar sitemap.xml
 - OG Image: crear `public/icons/og-image.png` 1200×630px (fondo #7c3aed, texto blanco)
 - Core Web Vitals: verificar con PageSpeed Insights post-deploy
