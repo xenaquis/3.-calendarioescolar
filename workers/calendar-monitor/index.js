@@ -4,7 +4,10 @@
 //
 // Que hace:
 //   1. Verifica health.json del sitio (dataYear, antiguedad)
-//   2. Monitorea Ley 2.977 de feriados en BCN via XML API
+//   2. Monitorea leyes de feriados via BCN XML API (fuente: Diario Oficial)
+//      - Compara fechaVersion del XML (= fecha publicacion en DO) en vez de hash de texto
+//      - Separa articulos transitorios para detectar vigencia futura
+//      - Incluye numero de edicion DO en alertas
 //   3. Detecta cuando Mineduc publica calendarios del ano siguiente
 //
 // Cuando detecta un feriado nuevo/modificado:
@@ -37,14 +40,14 @@
 //   3. Resetear KV key 'url:mineduc-calendarios-siguiente:status' (eliminarla)
 //      para que el monitor vuelva a alertar cuando publiquen los calendarios del ano +2
 
-var VERSION = '1.1.0';
+var VERSION = '1.2.0';
 var CURRENT_YEAR = 2026;
 var NEXT_YEAR = CURRENT_YEAR + 1;
 var RATE_LIMIT_MS = 2000; // ms entre requests a BCN
 
 // Periodo escolar actual — actualizar cada noviembre
 var SCHOOL_START  = '2026-03-02';
-var SCHOOL_END    = '2026-12-12';
+var SCHOOL_END    = '2026-12-11';
 var WINTER_START  = '2026-07-11';
 var WINTER_END    = '2026-07-25';
 
@@ -365,6 +368,50 @@ async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
     return { status: 'fetch_failed', lawKey: lawKey };
   }
 
+  // fechaVersion = fecha de publicacion en DO de la ultima modificacion legal
+  var currentFechaVersion = extractFechaVersion(xml);
+  var doMeta = extractDoMetadata(xml);
+
+  if (!currentFechaVersion) {
+    await sendAlert(
+      '[BCN] Fallo en extraccion de fechaVersion para ' + lawConfig.sourceName + '\n' +
+      'idNorma: ' + lawConfig.idNorma + '\n' +
+      'El XML no tiene el atributo fechaVersion esperado. BCN puede haber cambiado su formato.\n' +
+      'Revisar extractFechaVersion() en el worker.',
+      'MEDIUM',
+      env,
+      null
+    );
+    return { status: 'extraction_failed', lawKey: lawKey };
+  }
+
+  var kvKey = 'law:' + lawKey + ':fecha-version';
+  var storedFechaVersion = null;
+
+  if (env.CALENDAR_KV) {
+    try {
+      storedFechaVersion = await env.CALENDAR_KV.get(kvKey);
+    } catch (e) {
+      console.error('[calendar-monitor] KV get error: ' + e.message);
+    }
+  }
+
+  if (!storedFechaVersion) {
+    console.log('[calendar-monitor] Primera ejecucion para ' + lawKey + ' — guardando fechaVersion base: ' + currentFechaVersion);
+    if (env.CALENDAR_KV) {
+      try { await env.CALENDAR_KV.put(kvKey, currentFechaVersion); } catch (e) { /* ignore */ }
+    }
+    return { status: 'initialized', lawKey: lawKey, fechaVersion: currentFechaVersion };
+  }
+
+  if (storedFechaVersion === currentFechaVersion) {
+    console.log('[calendar-monitor] Sin cambios en ' + lawKey + ' (fechaVersion=' + currentFechaVersion + ')');
+    return { status: 'unchanged', lawKey: lawKey };
+  }
+
+  // fechaVersion cambio — modificacion legal real publicada en DO
+  console.log('[calendar-monitor] Cambio detectado en ' + lawKey + ': ' + storedFechaVersion + ' \u2192 ' + currentFechaVersion);
+
   var extracted = extractLawText(xml);
   if (!extracted) {
     await sendAlert(
@@ -378,43 +425,21 @@ async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
     return { status: 'extraction_failed', lawKey: lawKey };
   }
 
-  var currentHash = await hashText(extracted);
-  var kvKey = 'law:' + lawKey + ':hash';
-  var storedHash = null;
+  var cleanArticulos = cleanForLlm(extracted.articulos, 2500);
+  var cleanTransitorios = extracted.transitorios ? cleanForLlm(extracted.transitorios, 800) : '';
 
+  // Actualizar KV con la nueva fechaVersion
   if (env.CALENDAR_KV) {
-    try {
-      storedHash = await env.CALENDAR_KV.get(kvKey);
-    } catch (e) {
-      console.error('[calendar-monitor] KV get error: ' + e.message);
-    }
+    try { await env.CALENDAR_KV.put(kvKey, currentFechaVersion); } catch (e) { /* ignore */ }
   }
 
-  if (!storedHash) {
-    console.log('[calendar-monitor] Primera ejecucion para ' + lawKey + ' — guardando hash base');
-    if (env.CALENDAR_KV) {
-      try { await env.CALENDAR_KV.put(kvKey, currentHash); } catch (e) { /* ignore */ }
-    }
-    return { status: 'initialized', lawKey: lawKey };
-  }
-
-  if (storedHash === currentHash) {
-    console.log('[calendar-monitor] Sin cambios en ' + lawKey);
-    return { status: 'unchanged', lawKey: lawKey };
-  }
-
-  // Hash cambio — analizar con DeepSeek
-  console.log('[calendar-monitor] Cambio detectado en ' + lawKey + ' — analizando...');
-  var cleanText = cleanForLlm(extracted, 3000);
-  var analysis = await analyzeChange(lawConfig, cleanText, env);
-
-  if (env.CALENDAR_KV) {
-    try { await env.CALENDAR_KV.put(kvKey, currentHash); } catch (e) { /* ignore */ }
-  }
+  var analysis = await analyzeChange(lawConfig, cleanArticulos, cleanTransitorios, doMeta, env);
 
   if (!analysis) {
     await sendAlert(
-      '[LEY] Cambio en texto de ' + lawConfig.sourceName + '\n' +
+      '[LEY] Cambio detectado en ' + lawConfig.sourceName + '\n' +
+      'Modificacion: ' + storedFechaVersion + ' \u2192 ' + currentFechaVersion + '\n' +
+      (doMeta.numeroFuente ? 'Edicion DO: ' + doMeta.numeroFuente + '\n' : '') +
       'No se pudo analizar (sin DEEPSEEK_API_KEY o error de API).\n\n' +
       'Accion: ' + lawConfig.actionIfChanged,
       'MEDIUM',
@@ -427,7 +452,11 @@ async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
   if (!analysis.requiresUpdate) {
     await sendAlert(
       '[INFO] Cambio en ' + lawConfig.sourceName + '\n\n' +
-      'Resumen: ' + analysis.summary + '\n' +
+      'Modificacion detectada: ' + storedFechaVersion + ' \u2192 ' + currentFechaVersion + '\n' +
+      (doMeta.numeroFuente ? 'Edicion DO: ' + doMeta.numeroFuente + '\n' : '') +
+      (analysis.hasTransitorias ? '\u26A0\uFE0F Contiene disposiciones transitorias\n' : '') +
+      (analysis.esCambioFuturo ? '\uD83D\uDCC5 Vigencia futura: ' + (analysis.vigenciaDesde || 'ver analisis') + '\n' : '') +
+      '\nResumen: ' + analysis.summary + '\n' +
       'Razon: ' + analysis.reason + '\n\n' +
       'Conclusion: No requiere actualizar el sitio.',
       'LOW',
@@ -438,7 +467,7 @@ async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
   }
 
   // REQUIERE ACTUALIZACION — segunda llamada DeepSeek para sugerencia
-  var suggestion = await generateUpdateSuggestion(lawConfig, cleanText, analysis, env);
+  var suggestion = await generateUpdateSuggestion(lawConfig, cleanArticulos, cleanTransitorios, doMeta, analysis, env);
 
   var suggestionText = '';
   var alertButtons = null;
@@ -461,7 +490,6 @@ async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
       'Confianza: ' + (suggestion.confidence || '?') + '\n' +
       'Advertencia: ' + (suggestion.warning || 'ninguna');
 
-    // Botones inline solo si hay workerUrl + secret configurados
     if (workerUrl && env.MONITOR_SECRET) {
       alertButtons = [[
         {
@@ -479,6 +507,10 @@ async function checkBcnLaw(lawKey, lawConfig, env, workerUrl) {
   await sendAlert(
     '[URGENTE] Cambio en feriados que requiere actualizar el sitio\n\n' +
     'Ley: ' + lawConfig.sourceName + '\n' +
+    'Modificacion detectada: ' + storedFechaVersion + ' \u2192 ' + currentFechaVersion + '\n' +
+    (doMeta.numeroFuente ? 'Edicion DO: ' + doMeta.numeroFuente + '\n' : '') +
+    (analysis.hasTransitorias ? '\u26A0\uFE0F Disposiciones transitorias: SI\n' : '') +
+    (analysis.esCambioFuturo ? '\uD83D\uDCC5 Vigencia futura: ' + (analysis.vigenciaDesde || 'ver analisis') + '\n' : '') +
     'Resumen: ' + analysis.summary + '\n' +
     'Urgencia: ' + (analysis.urgency || 'HIGH') + '\n\n' +
     'Accion: ' + lawConfig.actionIfChanged + '\n\n' +
@@ -578,34 +610,43 @@ async function fetchBcnXml(idNorma) {
 
 function extractLawText(xml) {
   if (!xml) return null;
-  var parts = [];
+  var articulosParts = [];
+  var transitoriosParts = [];
 
-  var re1 = /<EstructuraFuncional[^>]*tipoParte="Art[^"]*"[^>]*>([\s\S]*?)<\/EstructuraFuncional>/gi;
-  var m1;
-  while ((m1 = re1.exec(xml)) !== null) {
-    var textoMatch = m1[1].match(/<Texto>([\s\S]*?)<\/Texto>/i);
-    if (textoMatch) parts.push(textoMatch[1].trim());
+  var re = /<EstructuraFuncional([^>]*)>([\s\S]*?)<\/EstructuraFuncional>/gi;
+  var m;
+  while ((m = re.exec(xml)) !== null) {
+    var attrs = m[1];
+    var inner = m[2];
+    var transAttr = attrs.match(/transitorio="([^"]*)"/i);
+    var isTransitorio = transAttr && transAttr[1] !== 'no transitorio' && transAttr[1].length > 0;
+    var textoMatch = inner.match(/<Texto>([\s\S]*?)<\/Texto>/i);
+    if (textoMatch) {
+      var text = textoMatch[1].trim();
+      if (isTransitorio) {
+        transitoriosParts.push(text);
+      } else {
+        articulosParts.push(text);
+      }
+    }
   }
 
-  if (parts.length === 0) {
-    var re2 = /<TEXTO>([\s\S]*?)<\/TEXTO>/gi;
+  // Fallback: XMLs sin EstructuraFuncional
+  if (articulosParts.length === 0 && transitoriosParts.length === 0) {
+    var re2 = /<[Tt]exto>([\s\S]*?)<\/[Tt]exto>/g;
     var m2;
     while ((m2 = re2.exec(xml)) !== null) {
-      var content = m2[1].trim();
-      if (content.length > 10) parts.push(content);
+      var c = m2[1].trim();
+      if (c.length > 10) articulosParts.push(c);
     }
   }
 
-  if (parts.length === 0) {
-    var re3 = /<[Tt]exto>([\s\S]*?)<\/[Tt]exto>/g;
-    var m3;
-    while ((m3 = re3.exec(xml)) !== null) {
-      var c = m3[1].trim();
-      if (c.length > 10) parts.push(c);
-    }
-  }
+  if (articulosParts.length === 0 && transitoriosParts.length === 0) return null;
 
-  return parts.length > 0 ? parts.join('\n\n') : null;
+  return {
+    articulos: articulosParts.join('\n\n'),
+    transitorios: transitoriosParts.join('\n\n')
+  };
 }
 
 function cleanForLlm(text, maxChars) {
@@ -620,18 +661,27 @@ function cleanForLlm(text, maxChars) {
   return clean.length > maxChars ? clean.substring(0, maxChars) + '...[truncado]' : clean;
 }
 
-async function hashText(text) {
-  var encoder = new TextEncoder();
-  var hashBuffer = await crypto.subtle.digest('SHA-256', encoder.encode(text));
-  return Array.from(new Uint8Array(hashBuffer))
-    .map(function(b) { return b.toString(16).padStart(2, '0'); })
-    .join('');
+// Extrae el atributo fechaVersion del tag raiz <Norma>
+// Equivale a la fecha de publicacion en DO de la ultima modificacion legal
+function extractFechaVersion(xml) {
+  if (!xml) return null;
+  var m = xml.match(/fechaVersion="([^"]+)"/);
+  return m ? m[1] : null;
+}
+
+// Extrae numero de edicion del Diario Oficial desde los metadatos BCN
+function extractDoMetadata(xml) {
+  if (!xml) return {};
+  var meta = {};
+  var mFuente = xml.match(/<NumeroFuente>([^<]+)<\/NumeroFuente>/);
+  if (mFuente) meta.numeroFuente = mFuente[1].trim();
+  return meta;
 }
 
 // ============================================================
 // LLM — DeepSeek Call #1: ¿Requiere actualizar el sitio?
 // ============================================================
-async function analyzeChange(lawConfig, cleanText, env) {
+async function analyzeChange(lawConfig, cleanArticulos, cleanTransitorios, doMeta, env) {
   if (!env.DEEPSEEK_API_KEY) {
     console.warn('[calendar-monitor] Sin DEEPSEEK_API_KEY — saltando analisis LLM');
     return null;
@@ -648,15 +698,23 @@ async function analyzeChange(lawConfig, cleanText, env) {
     'Vacaciones invierno: ' + WINTER_START + ' a ' + WINTER_END + '\n\n' +
     'Se detecto un cambio en el texto legal de:\n' +
     lawConfig.sourceName + '\n' +
-    'La ley afecta: ' + lawConfig.description + '\n\n' +
-    'Texto legal actual (puede estar truncado):\n' + cleanText + '\n\n' +
+    'La ley afecta: ' + lawConfig.description + '\n' +
+    (doMeta.numeroFuente ? 'Publicado en Diario Oficial edicion: ' + doMeta.numeroFuente + '\n' : '') +
+    '\nARTICULOS VIGENTES:\n' + cleanArticulos + '\n\n' +
+    (cleanTransitorios ? 'ARTICULOS TRANSITORIOS (pueden aplicar solo a ciertos anos):\n' + cleanTransitorios + '\n\n' : '') +
+    'INSTRUCCION CRITICA sobre disposiciones transitorias:\n' +
+    '  Si hay articulos transitorios, identifica EXPLICITAMENTE su fecha de vigencia.\n' +
+    '  Si el cambio rige solo para un ano futuro, urgency debe ser "LOW".\n\n' +
     'Responde SOLO con JSON valido:\n' +
     '{\n' +
     '  "requiresUpdate": true o false,\n' +
     '  "affectedFeriados": ["YYYY-MM-DD de feriados del sitio potencialmente afectados"],\n' +
     '  "urgency": "HIGH o MEDIUM o LOW",\n' +
     '  "summary": "resumen del cambio en maximo 2 oraciones",\n' +
-    '  "reason": "por que requiere o no actualizacion"\n' +
+    '  "reason": "por que requiere o no actualizacion",\n' +
+    '  "hasTransitorias": true o false,\n' +
+    '  "vigenciaDesde": "YYYY o YYYY-MM-DD si aplica, o null si es inmediata",\n' +
+    '  "esCambioFuturo": true o false\n' +
     '}';
 
   try {
@@ -693,14 +751,18 @@ async function analyzeChange(lawConfig, cleanText, env) {
 // Pide el formato completo de feriadosCompletos para poder
 // aplicar el cambio automáticamente via /apply-update
 // ============================================================
-async function generateUpdateSuggestion(lawConfig, cleanText, analysis, env) {
+async function generateUpdateSuggestion(lawConfig, cleanArticulos, cleanTransitorios, doMeta, analysis, env) {
   if (!env.DEEPSEEK_API_KEY) return null;
 
   var prompt = 'El sitio calendarioescolar.cl necesita actualizar sus datos de feriados.\n\n' +
     'Cambio detectado en: ' + lawConfig.sourceName + '\n' +
     'Analisis: ' + analysis.summary + '\n' +
-    'Feriados afectados: ' + (analysis.affectedFeriados || []).join(', ') + '\n\n' +
-    'Texto legal:\n' + cleanText + '\n\n' +
+    'Feriados afectados: ' + (analysis.affectedFeriados || []).join(', ') + '\n' +
+    (doMeta.numeroFuente ? 'Diario Oficial edicion: ' + doMeta.numeroFuente + '\n' : '') +
+    (analysis.hasTransitorias ? 'ATENCION: Contiene disposiciones transitorias\n' : '') +
+    (analysis.esCambioFuturo ? 'Vigencia futura: ' + (analysis.vigenciaDesde || 'ver analisis') + '\n' : '') +
+    '\nARTICULOS VIGENTES:\n' + cleanArticulos + '\n\n' +
+    (cleanTransitorios ? 'ARTICULOS TRANSITORIOS:\n' + cleanTransitorios + '\n\n' : '') +
     'Estructura actual de data/calendar-config.json (feriados en periodo escolar):\n' +
     JSON.stringify(SITE_FERIADOS, null, 2) + '\n\n' +
     'Ano escolar: ' + SCHOOL_START + ' a ' + SCHOOL_END + '\n' +

@@ -4,7 +4,7 @@
   "schoolStart": "2026-03-02",
   "winterStart": "2026-07-11",
   "winterEnd": "2026-07-25",
-  "schoolEnd": "2026-12-12",
+  "schoolEnd": "2026-12-11",
   "feriados": [
     {
       "date": "2026-04-03",
@@ -103,6 +103,17 @@
       "nota": "Móvil · Pascua + 60 días · <a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=23639\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 2.977 (BCN)</a>"
     },
     {
+      "date": "2026-06-21",
+      "nombre": "Día de los Pueblos Indígenas",
+      "diaSemana": "Domingo",
+      "diaNum": 21,
+      "mes": "junio",
+      "tipo": "conmemorativo",
+      "contexto": "sin-impacto",
+      "notaContexto": "Fin de semana",
+      "nota": "Solsticio de invierno &middot; <a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=1161743\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 21.357 (BCN)</a>"
+    },
+    {
       "date": "2026-06-29",
       "nombre": "San Pedro y San Pablo",
       "diaSemana": "Lunes",
@@ -156,6 +167,17 @@
       "contexto": "en-clases",
       "notaContexto": null,
       "nota": "<a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=160270\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 19.668 (BCN)</a>"
+    },
+    {
+      "date": "2026-10-31",
+      "nombre": "Día Iglesias Evangélicas y Protestantes",
+      "diaSemana": "Sábado",
+      "diaNum": 31,
+      "mes": "octubre",
+      "tipo": "religioso",
+      "contexto": "sin-impacto",
+      "notaContexto": "Fin de semana",
+      "nota": null
     },
     {
       "date": "2026-12-08",

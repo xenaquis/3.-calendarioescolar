@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-16 (citas inline a fuentes oficiales en todas las páginas — Mineduc + BCN).
+Ultimo update de este blueprint: 2026-03-16 (análisis comparativo + correcciones: schoolEnd 11 dic, +2 feriados faltantes, irrenunciables FAQ).
 
 ---
 
@@ -322,7 +322,7 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` → `node scripts/validate.js` → deploy
 
 ### Monitoreo automatico — Calendar Monitor Worker
-- **Archivo**: `workers/calendar-monitor/index.js`
+- **Archivo**: `workers/calendar-monitor/index.js` (v1.2.0)
 - **Cron**: lunes 08:00 UTC (automatico via Cloudflare)
 - **Test manual**: `GET https://calendar-monitor.TU_SUBDOMINIO.workers.dev/trigger?secret=X`
 - **Health**: `GET https://calendar-monitor.TU_SUBDOMINIO.workers.dev/health`
@@ -330,10 +330,13 @@ Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` �
 
 Que monitorea:
 1. `health.json` del sitio → dataYear correcto + generatedDate < 45 dias
-2. BCN — Ley 2.977 (feriados) → cambio en articulos = alerta + analisis DeepSeek
-3. BCN — Ley 19.668 (Encuentro Dos Mundos) + Ley 21.357 (Pueblos Indigenas)
-4. Mineduc URL año siguiente → aparece = ESCALADA CRITICA inmediata
-5. FeriadosApp API → cross-validar los 7 feriados del sitio
+2. Leyes de feriados via BCN XML API → compara `fechaVersion` del XML (= fecha publicacion en DO)
+   - Solo alerta cuando hay modificacion legal real (no falsos positivos por ediciones editoriales)
+   - Separa articulos transitorios → LLM identifica vigencia futura y baja urgencia si aplica
+   - Alerta incluye numero de edicion DO para verificacion directa
+3. Mineduc URL año siguiente → aparece = ESCALADA CRITICA inmediata
+
+KV keys usadas: `law:LAWKEY:fecha-version` (antes era `:hash` — se inicializan solas en el primer run)
 
 Deploy: ver seccion "Comandos utiles" abajo.
 
