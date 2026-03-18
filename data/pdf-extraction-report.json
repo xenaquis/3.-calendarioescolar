@@ -1,0 +1,2769 @@
+{
+  "generated_at": "2026-03-18T02:51:48.071Z",
+  "pipeline_version": "3.0 (catalog-first)",
+  "summary": {
+    "regions_ok": 8,
+    "regions_failed": 5,
+    "failed_regions": [
+      "araucania",
+      "atacama",
+      "biobio",
+      "nuble",
+      "tarapaca"
+    ]
+  },
+  "catalogs": [
+    {
+      "regionSlug": "antofagasta",
+      "status": "ok",
+      "totalPages": 46,
+      "catalog": null,
+      "validation": null,
+      "checks": []
+    },
+    {
+      "regionSlug": "araucania",
+      "status": "text_extraction_failed",
+      "catalog": null
+    },
+    {
+      "regionSlug": "atacama",
+      "status": "text_extraction_failed",
+      "catalog": null
+    },
+    {
+      "regionSlug": "aysen",
+      "status": "ok",
+      "totalPages": 9,
+      "catalog": {
+        "region": "Aysén",
+        "year": 2026,
+        "semestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio del año escolar: Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Ingreso de docentes: Lunes 02 de marzo",
+            "day_of_week": "Lunes - martes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": "2026-03-02 a 2026-03-03",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jornada de planificación: Lunes 02 - martes 03 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-06-25",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Jueves 25 de junio (semana 17)",
+            "day_of_week": "Jueves",
+            "notes": "semana 17"
+          },
+          {
+            "label": "Último día de clases del primer semestre",
+            "date": "2026-06-26",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 26 de junio.",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación, y planificación y análisis curricular",
+            "date": "2026-06-29 a 2026-07-17",
+            "date_start": "2026-06-29",
+            "date_end": "2026-07-17",
+            "raw_text": "Jornada de evaluación, y planificación y análisis curricular: Lunes 29 de junio - viernes 17 de julio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "Receso de invierno régimen semestral",
+            "date": "2026-07-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Receso de invierno régimen semestral: Lunes 20 de julio.",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo semestre",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases segundo semestre: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Día del Profesor y Profesora",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del Profesor y Profesora: Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-12-11",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Cierre actas 4° Medio: Viernes 11 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos con JEC (38 semanas)",
+            "date": "2026-12-23",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases establecimientos con JEC (38 semanas): Martes 23 de diciembre",
+            "day_of_week": "Martes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+            "date": "2026-11-27",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases establecimiento sin JEC (40 semanas): Viernes 27 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": null,
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases EPJA (36 semanas): [no especificado en el texto]",
+            "day_of_week": null,
+            "notes": "Etiqueta presente pero fecha no especificada en tabla semestral"
+          }
+        ],
+        "trimestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de docentes: Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": "2026-03-02 a 2026-03-03",
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Jornada de planificación: Lunes 02 - martes 03 de marzo",
+            "day_of_week": "Lunes - martes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases primer trimestre",
+            "date": "2026-06-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases primer trimestre: Jueves 04 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del primer trimestre y planificación del segundo trimestre",
+            "date": "2026-06-05",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jornada de evaluación del primer trimestre y planificación del segundo trimestre: Viernes 05 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Receso de invierno semestral",
+            "date": "2026-06-29 a 2026-07-17",
+            "date_start": "2026-06-29",
+            "date_end": "2026-07-17",
+            "raw_text": "Receso de invierno semestral: Lunes 29 de junio - viernes 17 de julio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases segundo trimestre",
+            "date": "2026-09-10",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases segundo trimestre: Jueves 10 de septiembre",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del segundo trimestre, y planificación del tercer trimestre",
+            "date": "2026-09-11",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jornada de evaluación del segundo trimestre, y planificación del tercer trimestre: Viernes 11 de septiembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases tercer trimestre",
+            "date": "2026-09-14",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases tercer trimestre: Lunes 14 de septiembre",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Día del profesor",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Cierre actas 4° Medio: Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos (con JEC 38 semanas)",
+            "date": "2026-12-11",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases establecimientos (con JEC 38 semanas): Viernes 11 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento (sin JEC 40 semanas)",
+            "date": "2026-12-23",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases establecimiento (sin JEC 40 semanas): Miércoles 23 de diciembre",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": "2026-11-27",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases EPJA (36 semanas): Viernes 27 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          }
+        ],
+        "notas_generales": [
+          "El año escolar inicia el 2 de marzo de 2026 y finaliza el 31 de diciembre del año 2026, ambas fechas inclusive.",
+          "Los establecimientos con régimen trimestral pueden tener recesos trimestrales (una semana al término del primer trimestre y una semana al término del segundo trimestre) o vacaciones semestrales. Las vacaciones de invierno, tanto para el régimen trimestral como semestral serán desde: 29 de junio al 17 de julio.",
+          "El término anticipado de clases para estudiantes de 4to año de enseñanza media y de 2do nivel medio de EPJA y 3er. nivel de Educación Media Técnico Profesional de EPJA, dos (2) semanas antes de la fecha de rendición de la prueba de admisión a la educación superior (PAES).",
+          "La fecha de receso de invierno fue establecida considerando recomendaciones de la Secretaría Regional Ministerial del Medio Ambiente, según las semanas con episodios más críticos. Por lo tanto, los establecimientos educacionales con régimen trimestral y semestral tendrán las mismas fechas del receso de invierno."
+        ],
+        "articulo_1": "El año escolar inicia el 2 de marzo de 2026 y finaliza el 31 de diciembre del año 2026, ambas fechas inclusive. No obstante, la Secretaría Regional Ministerial de Educación podrá fijar fechas diferentes para establecimientos educacionales que por su situación geográfica u otros factores no pudieren iniciar o terminar sus actividades en dichas fechas.",
+        "confidence": 0.95
+      },
+      "validation": {
+        "corrections": [
+          {
+            "ref": "SEM[0]",
+            "issue": "etiqueta duplicada",
+            "correct_date": "2026-03-02",
+            "correct_raw": "Inicio del año escolar: Lunes 02 de marzo"
+          },
+          {
+            "ref": "SEM[1]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-02",
+            "correct_raw": "Ingreso de docentes: Lunes 02 de marzo"
+          },
+          {
+            "ref": "SEM[2]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-02 a 2026-03-03",
+            "correct_raw": "Jornada de planificación: Lunes 02 - martes 03 de marzo"
+          },
+          {
+            "ref": "SEM[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-25",
+            "correct_raw": "Ingreso de estudiantes EPJA: Jueves 25 de junio (semana 17)"
+          },
+          {
+            "ref": "SEM[6]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-29 a 2026-07-17",
+            "correct_raw": "Jornada de evaluación, y planificación y análisis curricular: Lunes 29 de junio - viernes 17 de julio"
+          },
+          {
+            "ref": "SEM[7]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-07-20",
+            "correct_raw": "Receso de invierno régimen semestral: Lunes 20 de julio."
+          },
+          {
+            "ref": "SEM[8]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Inicio de clases segundo semestre: Viernes 16 de octubre (sin clases)"
+          },
+          {
+            "ref": "SEM[9]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-11-20",
+            "correct_raw": "Día del Profesor y Profesora: Viernes 20 de noviembre"
+          },
+          {
+            "ref": "SEM[10]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-12-11",
+            "correct_raw": "Cierre actas 4° Medio: Viernes 11 de diciembre"
+          },
+          {
+            "ref": "SEM[11]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-12-23",
+            "correct_raw": "Último día de clases establecimientos con JEC (38 semanas): Martes 23 de diciembre"
+          },
+          {
+            "ref": "SEM[12]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-11-27",
+            "correct_raw": "Último día de clases establecimiento sin JEC (40 semanas): Viernes 27 de noviembre"
+          },
+          {
+            "ref": "SEM[13]",
+            "issue": "fecha faltante en el texto",
+            "correct_date": null,
+            "correct_raw": "Último día de clases EPJA (36 semanas): [no especificado en el texto]"
+          },
+          {
+            "ref": "TRI[1]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-02",
+            "correct_raw": "Ingreso de docentes: Lunes 02 de marzo"
+          },
+          {
+            "ref": "TRI[2]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-02 a 2026-03-03",
+            "correct_raw": "Jornada de planificación: Lunes 02 - martes 03 de marzo"
+          },
+          {
+            "ref": "TRI[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-04",
+            "correct_raw": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo"
+          },
+          {
+            "ref": "TRI[5]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-04",
+            "correct_raw": "Último día de clases primer trimestre: Jueves 04 de junio"
+          },
+          {
+            "ref": "TRI[6]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-05",
+            "correct_raw": "Jornada de evaluación del primer trimestre y planificación del segundo trimestre: Viernes 05 de junio"
+          },
+          {
+            "ref": "TRI[7]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-29 a 2026-07-17",
+            "correct_raw": "Receso de invierno semestral: Lunes 29 de junio - viernes 17 de julio"
+          },
+          {
+            "ref": "TRI[8]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-09-10",
+            "correct_raw": "Último día de clases segundo trimestre: Jueves 10 de septiembre"
+          },
+          {
+            "ref": "TRI[9]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-09-11",
+            "correct_raw": "Jornada de evaluación del segundo trimestre, y planificación del tercer trimestre: Viernes 11 de septiembre"
+          },
+          {
+            "ref": "TRI[10]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-09-14",
+            "correct_raw": "Inicio de clases tercer trimestre: Lunes 14 de septiembre"
+          },
+          {
+            "ref": "TRI[11]",
+            "issue": "etiqueta y fecha incorrectas",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          },
+          {
+            "ref": "TRI[12]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-11-20",
+            "correct_raw": "Cierre actas 4° Medio: Viernes 20 de noviembre"
+          },
+          {
+            "ref": "TRI[13]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-12-11",
+            "correct_raw": "Último día de clases establecimientos (con JEC 38 semanas): Viernes 11 de diciembre"
+          },
+          {
+            "ref": "TRI[14]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-12-23",
+            "correct_raw": "Último día de clases establecimiento (sin JEC 40 semanas): Miércoles 23 de diciembre"
+          },
+          {
+            "ref": "TRI[15]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-11-27",
+            "correct_raw": "Último día de clases EPJA (36 semanas): Viernes 27 de noviembre"
+          }
+        ],
+        "missing": [],
+        "all_correct": false
+      },
+      "checks": [
+        {
+          "pass": false,
+          "message": "Jornada de planificación: formato fecha invalido \"2026-03-02 a 2026-03-03\""
+        },
+        {
+          "pass": false,
+          "message": "Jornada de evaluación, y planificación y análisis curricular: formato fecha invalido \"2026-06-29 a 2026-07-17\""
+        },
+        {
+          "pass": false,
+          "message": "Jornada de planificación: formato fecha invalido \"2026-03-02 a 2026-03-03\""
+        },
+        {
+          "pass": false,
+          "message": "Receso de invierno semestral: formato fecha invalido \"2026-06-29 a 2026-07-17\""
+        },
+        {
+          "pass": false,
+          "message": "Jornada de planificación: dice Miércoles pero 2026-03-02 a 2026-03-03 es undefined"
+        },
+        {
+          "pass": false,
+          "message": "Último día de clases establecimientos con JEC (38 semanas): dice Martes pero 2026-12-23 es miercoles"
+        }
+      ]
+    },
+    {
+      "regionSlug": "biobio",
+      "status": "text_extraction_failed",
+      "catalog": null
+    },
+    {
+      "regionSlug": "coquimbo",
+      "status": "ok",
+      "totalPages": 12,
+      "catalog": {
+        "region": "Coquimbo",
+        "year": 2026,
+        "semestral": [
+          {
+            "label": "INICIO DEL AÑO ESCOLAR",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "INGRESO DE DOCENTES",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "JORNADA DE PLANIFICACIÓN",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 de marzo - martes 03 de marzo",
+            "day_of_week": "Lunes - martes",
+            "notes": null
+          },
+          {
+            "label": "INGRESO DE ESTUDIANTES NT 1 A 4° MEDIO",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "INGRESO DE ESTUDIANTES EPJA",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES DEL PRIMER SEMESTRE",
+            "date": "2026-06-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 18 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "JORNADA DE EVALUACIÓN, PLANIFICACIÓN Y ANÁLISIS CURRICULAR",
+            "date": "2026-06-19",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 19 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "RECESO DE INVIERNO RÉGIMEN SEMESTRAL",
+            "date": null,
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "INICIO DE CLASES SEGUNDO SEMESTRE",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "DÍA DEL PROFESOR",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "CIERRE ACTAS 4° MEDIO",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES ESTABLECIMIENTOS CON JEC (38 SEMANAS)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES ESTABLECIMIENTOS SIN JEC (40 SEMANAS)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES EPJA (36 SEMANAS)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          }
+        ],
+        "trimestral": [
+          {
+            "label": "INICIO DEL AÑO ESCOLAR",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "INGRESO DE DOCENTES",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 - martes 03 de marzo",
+            "day_of_week": "Lunes - martes",
+            "notes": null
+          },
+          {
+            "label": "JORNADA DE PLANIFICACIÓN",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "INGRESO DE ESTUDIANTES NT 1 A 4° MEDIO",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "INGRESO DE ESTUDIANTES EPJA",
+            "date": "2026-06-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 04 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES PRIMER TRIMESTRE",
+            "date": "2026-06-05",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 05 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "JORNADA DE EVALUACIÓN DEL PRIMER TRIMESTRE Y PLANIFICACIÓN DEL SEGUNDO TRIMESTRE",
+            "date": "2026-06-08 a 2026-06-12",
+            "date_start": "2026-06-08",
+            "date_end": "2026-06-12",
+            "raw_text": "Lunes 08 - viernes 12 de junio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "PRIMER RECESO DE INVIERNO TRIMESTRAL",
+            "date": "2026-06-15",
+            "date_start": "2026-06-15",
+            "date_end": null,
+            "raw_text": "Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio",
+            "day_of_week": "Lunes",
+            "notes": "Establecimientos que optaron por receso de invierno trimestral"
+          },
+          {
+            "label": "INICIO DE CLASES SEGUNDO TRIMESTRE",
+            "date": "2026-06-08",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "day_of_week": "Lunes",
+            "notes": "Establecimientos que optaron por receso de invierno semestral"
+          },
+          {
+            "label": "RECESO DE INVIERNO SEMESTRAL",
+            "date": null,
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "INICIO DE CLASES POSTERIOR AL RECESO DE INVIERNO SEMESTRAL",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES SEGUNDO TRIMESTRE",
+            "date": "2026-09-10",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 10 de septiembre",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "JORNADA DE EVALUACIÓN DEL SEGUNDO TRIMESTRE, Y PLANIFICACIÓN DEL TERCER TRIMESTRE",
+            "date": "2026-09-14 a 2026-09-18",
+            "date_start": "2026-09-14",
+            "date_end": "2026-09-18",
+            "raw_text": "Lunes 14 - viernes 18 de septiembre",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "SEGUNDO RECESO TRIMESTRAL",
+            "date": "2026-09-21",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre",
+            "day_of_week": "Lunes",
+            "notes": "Establecimientos que optaron por receso de invierno trimestral"
+          },
+          {
+            "label": "INICIO DE CLASES TERCER TRIMESTRE",
+            "date": "2026-09-14",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "day_of_week": "Lunes",
+            "notes": "Establecimientos que optaron por receso de invierno semestral"
+          },
+          {
+            "label": "DÍA DEL PROFESOR",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "CIERRE ACTAS 4° MEDIO",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES ESTABLECIMIENTOS (CON JEC 38 SEMANAS)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES ESTABLECIMIENTO (SIN JEC 40 SEMANAS)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "ÚLTIMO DÍA DE CLASES EPJA (36 SEMANAS)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "JORNADA DE EVALUACIÓN DEL SEGUNDO TRIMESTRE, Y PLANIFICACIÓN DEL TERCER TRIMESTRE",
+            "date": "Viernes 11 de septiembre",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "JORNADA DE EVALUACIÓN DEL SEGUNDO TRIMESTRE, Y PLANIFICACIÓN DEL TERCER TRIMESTRE: Viernes 11 de septiembre",
+            "notes": "added by validation pass"
+          }
+        ],
+        "notas_generales": [
+          "Los establecimientos con régimen trimestral pueden tener recesos trimestrales (una semana al término del primer trimestre y una semana al término del segundo trimestre) o vacaciones semestrales. Si optan por vacaciones semestrales, deben ser en el mismo periodo que los establecimientos con régimen semestral: 22 de junio al 03 de julio.",
+          "El término anticipado de clases para estudiantes de 4° medio, de 2° nivel medio de EPJA y tercer nivel de Educación Media Técnico Profesional de EPJA, será dos (2) semanas antes de la fecha de rendición de la prueba de admisión a la educación superior (PAES).",
+          "La fecha de receso de invierno fue establecida considerando recomendaciones del Ministerio de Salud según las semanas que son más críticas con relación a la circulación viral y enfermedades del periodo invernal. Sin embargo, en caso de existir criterios regionales distintos, acorde a variables territoriales y a lo reportado por dicha cartera ministerial, podrán quedar expresados en la resolución dictada a nivel regional.",
+          "En el caso de las regiones de Aysén y de Magallanes, se sugiere comenzar el receso de invierno una semana después y agregar una semana adicional, postergando en una semana el último día de clases de estudiantes. De este modo, se recomienda considerar la semana del 29 de junio como la primera de vacaciones. La jornada de docentes (evaluación, proyección y análisis curricular), se sugiere realizarla la semana previa, el día 26 de junio."
+        ],
+        "articulo_1": "El año escolar inicia el 2 de marzo de 2026 y finaliza el 31 de diciembre del año 2026, ambas fechas inclusive. No obstante, la Secretaría Regional Ministerial de Educación podrá fijar fechas diferentes para establecimientos educacionales que por su situación geográfica u otros factores no pudieren iniciar o terminar sus actividades en dichas fechas.",
+        "confidence": 0.95
+      },
+      "validation": {
+        "corrections": [
+          {
+            "ref": "SEM[9]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Viernes 16 de octubre (sin clases)"
+          },
+          {
+            "ref": "TRI[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-04",
+            "correct_raw": "Jueves 04 de junio"
+          },
+          {
+            "ref": "TRI[5]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-05",
+            "correct_raw": "Viernes 05 de junio"
+          },
+          {
+            "ref": "TRI[6]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-08 a 2026-06-12",
+            "correct_raw": "Lunes 08 - viernes 12 de junio"
+          },
+          {
+            "ref": "TRI[7]",
+            "issue": "etiqueta y fecha incorrectas",
+            "correct_date": "2026-06-15",
+            "correct_raw": "Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio"
+          },
+          {
+            "ref": "TRI[8]",
+            "issue": "etiqueta y fecha incorrectas",
+            "correct_date": "2026-06-08",
+            "correct_raw": "Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio"
+          },
+          {
+            "ref": "TRI[11]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-09-10",
+            "correct_raw": "Jueves 10 de septiembre"
+          },
+          {
+            "ref": "TRI[12]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-09-14 a 2026-09-18",
+            "correct_raw": "Lunes 14 - viernes 18 de septiembre"
+          },
+          {
+            "ref": "TRI[13]",
+            "issue": "etiqueta y fecha incorrectas",
+            "correct_date": "2026-09-21",
+            "correct_raw": "Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre"
+          },
+          {
+            "ref": "TRI[14]",
+            "issue": "etiqueta y fecha incorrectas",
+            "correct_date": "2026-09-14",
+            "correct_raw": "Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre"
+          },
+          {
+            "ref": "TRI[15]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Viernes 16 de octubre (sin clases)"
+          }
+        ],
+        "missing": [
+          {
+            "regime": "trimestral",
+            "label": "JORNADA DE EVALUACIÓN DEL SEGUNDO TRIMESTRE, Y PLANIFICACIÓN DEL TERCER TRIMESTRE",
+            "date": "Viernes 11 de septiembre",
+            "raw_text": "JORNADA DE EVALUACIÓN DEL SEGUNDO TRIMESTRE, Y PLANIFICACIÓN DEL TERCER TRIMESTRE: Viernes 11 de septiembre"
+          }
+        ],
+        "all_correct": false
+      },
+      "checks": [
+        {
+          "pass": false,
+          "message": "JORNADA DE EVALUACIÓN DEL PRIMER TRIMESTRE Y PLANIFICACIÓN DEL SEGUNDO TRIMESTRE: formato fecha invalido \"2026-06-08 a 2026-06-12\""
+        },
+        {
+          "pass": false,
+          "message": "JORNADA DE EVALUACIÓN DEL SEGUNDO TRIMESTRE, Y PLANIFICACIÓN DEL TERCER TRIMESTRE: formato fecha invalido \"2026-09-14 a 2026-09-18\""
+        },
+        {
+          "pass": false,
+          "message": "JORNADA DE EVALUACIÓN DEL SEGUNDO TRIMESTRE, Y PLANIFICACIÓN DEL TERCER TRIMESTRE: formato fecha invalido \"Viernes 11 de septiembre\""
+        }
+      ]
+    },
+    {
+      "regionSlug": "magallanes",
+      "status": "ok",
+      "totalPages": 11,
+      "catalog": null,
+      "validation": null,
+      "checks": []
+    },
+    {
+      "regionSlug": "maule",
+      "status": "ok",
+      "totalPages": 17,
+      "catalog": null,
+      "validation": null,
+      "checks": []
+    },
+    {
+      "regionSlug": "metropolitana",
+      "status": "ok",
+      "totalPages": 10,
+      "catalog": {
+        "region": "Metropolitana de Santiago",
+        "year": 2026,
+        "semestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 de marzo - martes 03 de marzo",
+            "day_of_week": "Lunes - Martes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-06-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Jueves 18 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación, planificación y análisis curricular",
+            "date": "2026-06-19",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jornada de evaluación, planificación y análisis curricular: Viernes 19 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Receso de invierno régimen semestral",
+            "date": null,
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes - Viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo semestre",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Día del profesor",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos con JEC (38 semanas)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases del primer semestre",
+            "date": null,
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases del primer semestre",
+            "notes": "added by validation pass"
+          }
+        ],
+        "trimestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 - martes 03 de marzo",
+            "day_of_week": "Lunes - Martes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-06-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Jueves 18 de junio",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases primer trimestre",
+            "date": "2026-06-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 04 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del primer trimestre y planificación del segundo trimestre",
+            "date": "2026-06-05",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 05 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Primer receso de invierno trimestral",
+            "date": null,
+            "date_start": "2026-06-08",
+            "date_end": "2026-06-12",
+            "raw_text": "Lunes 08 - viernes 12 de junio",
+            "day_of_week": "Lunes - Viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo trimestre",
+            "date": "2026-06-15",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio",
+            "day_of_week": "Lunes",
+            "notes": "Establecimientos que optaron por receso de invierno trimestral"
+          },
+          {
+            "label": "Receso de invierno semestral",
+            "date": null,
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes - Viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases posterior al receso de invierno semestral",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases posterior al receso de invierno semestral: Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases segundo trimestre",
+            "date": "2026-09-10",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 10 de septiembre",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del segundo trimestre, y planificación del tercer trimestre",
+            "date": "2026-09-11",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 11 de septiembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Segundo receso trimestral",
+            "date": null,
+            "date_start": "2026-09-14",
+            "date_end": "2026-09-18",
+            "raw_text": "Lunes 14 - viernes 18 de septiembre",
+            "day_of_week": "Lunes - Viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases tercer trimestre",
+            "date": "2026-09-21",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre",
+            "day_of_week": "Lunes",
+            "notes": "Establecimientos que optaron por receso de invierno trimestral"
+          },
+          {
+            "label": "Día del profesor",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos (con JEC 38 semanas)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento (sin JEC 40 semanas)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases posterior al receso de invierno semestral",
+            "date": "Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases posterior al receso de invierno semestral: Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "notes": "added by validation pass"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Cierre actas 4° Medio: Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "notes": "added by validation pass"
+          }
+        ],
+        "notas_generales": [
+          "Los establecimientos con régimen trimestral pueden tener recesos trimestrales (una semana al término del primer trimestre y una semana al término del segundo trimestre) o vacaciones semestrales. Si optan por vacaciones semestrales, deben ser en el mismo periodo que los establecimientos con régimen semestral: 22 de junio al 03 de julio.",
+          "El término anticipado de clases para estudiantes de 4° medio, de 2° nivel medio de EPJA y tercer nivel de Educación Media Técnico Profesional de EPJA, será dos (2) semanas antes de la fecha de rendición de la prueba de admisión a la educación superior (PAES).",
+          "La fecha de receso de invierno fue establecida considerando recomendaciones del Ministerio de Salud según las semanas que son más críticas con relación a la circulación viral y enfermedades del período invernal. Sin embargo, en caso de existir criterios regionales distintos, acorde a variables territoriales y a lo reportado por dicha cartera ministerial, podrán quedar expresados en la resolución dictada a nivel regional."
+        ],
+        "articulo_1": "Artículo 1.- El año escolar inicia el 2 de marzo de 2026 y finaliza el 31 de diciembre del año 2026, ambas fechas inclusive. No obstante, la Secretaría Regional Ministerial de Educación podrá fijar fechas diferentes para establecimientos educacionales que por su situación geográfica u otros factores no pudieren iniciar o terminar sus actividades en dichas fechas.",
+        "confidence": 0.95
+      },
+      "validation": {
+        "corrections": [
+          {
+            "ref": "SEM[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-18",
+            "correct_raw": "Ingreso de estudiantes EPJA: Jueves 18 de junio"
+          },
+          {
+            "ref": "SEM[5]",
+            "issue": "etiqueta incorrecta",
+            "correct_date": "2026-06-19",
+            "correct_raw": "Jornada de evaluación, planificación y análisis curricular: Viernes 19 de junio"
+          },
+          {
+            "ref": "SEM[8]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          },
+          {
+            "ref": "TRI[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-18",
+            "correct_raw": "Ingreso de estudiantes EPJA: Jueves 18 de junio"
+          },
+          {
+            "ref": "TRI[8]",
+            "issue": "etiqueta incorrecta",
+            "correct_date": "2026-06-15",
+            "correct_raw": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio"
+          },
+          {
+            "ref": "TRI[10]",
+            "issue": "etiqueta incorrecta",
+            "correct_date": "2026-07-06",
+            "correct_raw": "Inicio de clases posterior al receso de invierno semestral: Lunes 06 de julio"
+          },
+          {
+            "ref": "TRI[14]",
+            "issue": "etiqueta incorrecta",
+            "correct_date": "2026-09-21",
+            "correct_raw": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre"
+          },
+          {
+            "ref": "TRI[15]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          }
+        ],
+        "missing": [
+          {
+            "regime": "semestral",
+            "label": "Último día de clases del primer semestre",
+            "date": "",
+            "raw_text": "Último día de clases del primer semestre"
+          },
+          {
+            "regime": "trimestral",
+            "label": "Inicio de clases posterior al receso de invierno semestral",
+            "date": "Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "raw_text": "Inicio de clases posterior al receso de invierno semestral: Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio"
+          },
+          {
+            "regime": "trimestral",
+            "label": "Cierre actas 4° Medio",
+            "date": "Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "raw_text": "Cierre actas 4° Medio: Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre"
+          }
+        ],
+        "all_correct": false
+      },
+      "checks": [
+        {
+          "pass": false,
+          "message": "Inicio de clases posterior al receso de invierno semestral: formato fecha invalido \"Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio\""
+        },
+        {
+          "pass": false,
+          "message": "Cierre actas 4° Medio: formato fecha invalido \"Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre\""
+        }
+      ]
+    },
+    {
+      "regionSlug": "nuble",
+      "status": "text_extraction_failed",
+      "catalog": null
+    },
+    {
+      "regionSlug": "ohiggins",
+      "status": "ok",
+      "totalPages": 13,
+      "catalog": {
+        "region": "O'HIGGINS",
+        "year": 2026,
+        "semestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 de marzo - martes 03 de marzo",
+            "day_of_week": "Lunes - martes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-06-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 18 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases del primer semestre",
+            "date": null,
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases del primer semestre: [fecha no especificada en el texto original]",
+            "day_of_week": null,
+            "notes": "Fecha no especificada en la tabla"
+          },
+          {
+            "label": "Jornada de evaluación, planificación y análisis curricular",
+            "date": "2026-06-19",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 19 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Receso de invierno régimen semestral",
+            "date": null,
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo semestre",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Día del profesor",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Cierre actas 4° Medio: Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos con JEC (38 semanas)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          }
+        ],
+        "trimestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 - martes 03 de marzo",
+            "day_of_week": "Lunes - martes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases primer trimestre",
+            "date": "2026-06-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 04 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del primer trimestre y planificación del segundo trimestre",
+            "date": "2026-06-05",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 05 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Primer receso de invierno trimestral",
+            "date": null,
+            "date_start": "2026-06-08",
+            "date_end": "2026-06-12",
+            "raw_text": "Lunes 08 - viernes 12 de junio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo trimestre",
+            "date": "2026-06-15",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio",
+            "day_of_week": "lunes",
+            "notes": "Establecimientos que optaron por receso de invierno trimestral"
+          },
+          {
+            "label": "Receso de invierno semestral",
+            "date": "2026-06-22 a 2026-07-03",
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Receso de invierno semestral: Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases posterior al receso de invierno semestral",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases segundo trimestre",
+            "date": "2026-09-10",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 10 de septiembre",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del segundo trimestre, y planificación del tercer trimestre",
+            "date": "2026-09-11",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 11 de septiembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Segundo receso trimestral",
+            "date": null,
+            "date_start": "2026-09-14",
+            "date_end": "2026-09-18",
+            "raw_text": "Lunes 14 - viernes 18 de septiembre",
+            "day_of_week": "Lunes - viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases tercer trimestre",
+            "date": "2026-09-21",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre",
+            "day_of_week": "lunes",
+            "notes": "Establecimientos que optaron por receso de invierno trimestral"
+          },
+          {
+            "label": "Día del profesor",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Cierre actas 4° Medio: Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos (con JEC 38 semanas)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento (sin JEC 40 semanas)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo trimestre",
+            "date": "Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "notes": "added by validation pass"
+          },
+          {
+            "label": "Inicio de clases tercer trimestre",
+            "date": "Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "notes": "added by validation pass"
+          }
+        ],
+        "notas_generales": [
+          "Los establecimientos con régimen trimestral pueden tener recesos trimestrales (una semana al término del primer trimestre y una semana al término del segundo trimestre) o vacaciones semestrales. Si optan por vacaciones semestrales, deben ser en el mismo periodo que los establecimientos con régimen semestral: 22 de junio al 03 de julio.",
+          "El término anticipado de clases para estudiantes de 4to medio y de 2do nivel medio de EPJA y tercer nivel de Educación Media Técnico Profesional de EPJA, dos (2) semanas antes de la fecha de rendición de la prueba de admisión a la educación superior (PAES).",
+          "La fecha de receso de invierno fue acordada con el Ministerio de Salud considerando las semanas que son más críticas con relación a la circulación viral y enfermedades del periodo invernal. Sin embargo, en caso de existir criterios regionales distintos, acorde a variables territoriales y a lo reportado por dicha cartera ministerial, podrán quedar expresados en la resolución dictada a nivel regional."
+        ],
+        "articulo_1": "El año escolar inicia el 2 de marzo de 2026 y finaliza el 31 de diciembre del año 2026, ambas fechas inclusive. No obstante, la Secretaría Regional Ministerial de Educación podrá fijar fechas diferentes para establecimientos educacionales que por su situación geográfica u otros factores no pudieren iniciar o terminar sus actividades en dichas fechas.",
+        "confidence": 0.95
+      },
+      "validation": {
+        "corrections": [
+          {
+            "ref": "SEM[5]",
+            "issue": "fecha faltante en datos extraídos",
+            "correct_date": null,
+            "correct_raw": "Último día de clases del primer semestre: [fecha no especificada en el texto original]"
+          },
+          {
+            "ref": "SEM[9]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          },
+          {
+            "ref": "SEM[10]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-11-20",
+            "correct_raw": "Cierre actas 4° Medio: Viernes 20 de noviembre"
+          },
+          {
+            "ref": "TRI[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-04",
+            "correct_raw": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo"
+          },
+          {
+            "ref": "TRI[8]",
+            "issue": "descripción incompleta",
+            "correct_date": "2026-06-15",
+            "correct_raw": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio"
+          },
+          {
+            "ref": "TRI[9]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-22 a 2026-07-03",
+            "correct_raw": "Receso de invierno semestral: Lunes 22 de junio - viernes 03 de julio"
+          },
+          {
+            "ref": "TRI[14]",
+            "issue": "descripción incompleta",
+            "correct_date": "2026-09-21",
+            "correct_raw": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre"
+          },
+          {
+            "ref": "TRI[15]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          },
+          {
+            "ref": "TRI[16]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-11-20",
+            "correct_raw": "Cierre actas 4° Medio: Viernes 20 de noviembre"
+          }
+        ],
+        "missing": [
+          {
+            "regime": "trimestral",
+            "label": "Inicio de clases segundo trimestre",
+            "date": "Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "raw_text": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio"
+          },
+          {
+            "regime": "trimestral",
+            "label": "Inicio de clases tercer trimestre",
+            "date": "Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "raw_text": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre"
+          }
+        ],
+        "all_correct": false
+      },
+      "checks": [
+        {
+          "pass": false,
+          "message": "Receso de invierno semestral: formato fecha invalido \"2026-06-22 a 2026-07-03\""
+        },
+        {
+          "pass": false,
+          "message": "Inicio de clases segundo trimestre: formato fecha invalido \"Establecimientos que optaron por receso de invierno semestral: lunes 08 de junio\""
+        },
+        {
+          "pass": false,
+          "message": "Inicio de clases tercer trimestre: formato fecha invalido \"Establecimientos que optaron por receso de invierno semestral lunes 14 de septiembre\""
+        }
+      ]
+    },
+    {
+      "regionSlug": "tarapaca",
+      "status": "text_extraction_failed",
+      "catalog": null
+    },
+    {
+      "regionSlug": "valparaiso",
+      "status": "ok",
+      "totalPages": 27,
+      "catalog": {
+        "region": "Valparaíso",
+        "year": 2026,
+        "semestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 de marzo - martes 03 de marzo",
+            "day_of_week": "Lunes a martes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases del primer semestre",
+            "date": "2026-06-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases del primer semestre: Jueves 18 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación, planificación y análisis curricular",
+            "date": "2026-06-19",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 19 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Receso de invierno régimen semestral",
+            "date": null,
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes a viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo semestre",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases segundo semestre: Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Día del profesor",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos con JEC (38 semanas)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "Miércoles 04 de marzo",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo",
+            "notes": "added by validation pass"
+          },
+          {
+            "label": "Último día de clases del primer semestre",
+            "date": "Jueves 18 de junio",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Último día de clases del primer semestre: Jueves 18 de junio",
+            "notes": "added by validation pass"
+          },
+          {
+            "label": "Inicio de clases segundo semestre",
+            "date": "Lunes 06 de julio",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases segundo semestre: Lunes 06 de julio",
+            "notes": "added by validation pass"
+          },
+          {
+            "label": "Día del profesor",
+            "date": "Viernes 16 de octubre (sin clases)",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "notes": "added by validation pass"
+          }
+        ],
+        "trimestral": [
+          {
+            "label": "Inicio del año escolar",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de docentes",
+            "date": "2026-03-02",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 02 de marzo",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Jornada de planificación",
+            "date": null,
+            "date_start": "2026-03-02",
+            "date_end": "2026-03-03",
+            "raw_text": "Lunes 02 - martes 03 de marzo",
+            "day_of_week": "Lunes a martes",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "2026-03-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo",
+            "day_of_week": "Miércoles",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases primer trimestre",
+            "date": "2026-06-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 04 de junio",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del primer trimestre y planificación del segundo trimestre",
+            "date": "2026-06-05",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 05 de junio",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Primer receso de invierno trimestral",
+            "date": null,
+            "date_start": "2026-06-08",
+            "date_end": "2026-06-12",
+            "raw_text": "Lunes 08 - viernes 12 de junio",
+            "day_of_week": "Lunes a viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases segundo trimestre",
+            "date": "2026-06-08",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio\nEstablecimientos que optaron por receso de invierno semestral: lunes 08 de junio",
+            "day_of_week": "Lunes",
+            "notes": "Dos opciones según elección de receso"
+          },
+          {
+            "label": "Receso de invierno semestral",
+            "date": null,
+            "date_start": "2026-06-22",
+            "date_end": "2026-07-03",
+            "raw_text": "Lunes 22 de junio - viernes 03 de julio",
+            "day_of_week": "Lunes a viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases posterior al receso de invierno semestral",
+            "date": "2026-07-06",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Lunes 06 de julio",
+            "day_of_week": "Lunes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases segundo trimestre",
+            "date": "2026-09-10",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Jueves 10 de septiembre",
+            "day_of_week": "Jueves",
+            "notes": null
+          },
+          {
+            "label": "Jornada de evaluación del segundo trimestre, y planificación del tercer trimestre",
+            "date": "2026-09-11",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 11 de septiembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Segundo receso trimestral",
+            "date": null,
+            "date_start": "2026-09-14",
+            "date_end": "2026-09-18",
+            "raw_text": "Lunes 14 - viernes 18 de septiembre",
+            "day_of_week": "Lunes a viernes",
+            "notes": null
+          },
+          {
+            "label": "Inicio de clases tercer trimestre",
+            "date": "2026-09-14",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre\nEstablecimientos que optaron por receso de invierno semestral lunes 14 de septiembre",
+            "day_of_week": "Lunes",
+            "notes": "Dos opciones según elección de receso"
+          },
+          {
+            "label": "Día del profesor",
+            "date": "2026-10-16",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)",
+            "day_of_week": "Viernes",
+            "notes": "sin clases"
+          },
+          {
+            "label": "Cierre actas 4° Medio",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimientos (con JEC 38 semanas)",
+            "date": "2026-12-04",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 04 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases establecimiento (sin JEC 40 semanas)",
+            "date": "2026-12-18",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 18 de diciembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          },
+          {
+            "label": "Último día de clases EPJA (36 semanas)",
+            "date": "2026-11-20",
+            "date_start": null,
+            "date_end": null,
+            "raw_text": "Viernes 20 de noviembre",
+            "day_of_week": "Viernes",
+            "notes": null
+          }
+        ],
+        "notas_generales": [
+          "El año escolar inicia el 2 de marzo de 2026 y finaliza el 31 de diciembre del año 2026, ambas fechas inclusive.",
+          "Los establecimientos con régimen trimestral pueden tener recesos trimestrales (una semana al término del primer trimestre y una semana al término del segundo trimestre) o vacaciones semestrales. Si optan por vacaciones semestrales, deben ser en el mismo periodo que los establecimientos con régimen semestral: 22 de junio al 03 de julio.",
+          "El término anticipado de clases para estudiantes de 4° medio, de 2° nivel medio de EPJA y tercer nivel de Educación Media Técnico Profesional de EPJA, será dos (2) semanas antes de la fecha de rendición de la prueba de admisión a la educación superior (PAES).",
+          "La fecha de receso de invierno fue establecida considerando recomendaciones del Ministerio de Salud según las semanas que son más críticas con relación a la circulación viral y enfermedades del periodo invernal.",
+          "En el caso de las regiones de Aysén y de Magallanes, se sugiere comenzar el receso de invierno una semana después y agregar una semana adicional, postergando en una semana el último día de clases de estudiantes. De este modo, se recomienda considerar la semana del 29 de junio como la primera de vacaciones. La jornada de docentes (evaluación, proyección y análisis curricular), se sugiere realizarla la semana previa, el día 26 de junio."
+        ],
+        "articulo_1": "Artículo 1.- El año escolar inicia el 2 de marzo de 2026 y finaliza el 31 de diciembre del año 2026, ambas fechas inclusive. No obstante, la Secretaría Regional Ministerial de Educación podrá fijar fechas diferentes para establecimientos educacionales que por su situación geográfica u otros factores no pudieren iniciar o terminar sus actividades en dichas fechas.",
+        "confidence": 0.95
+      },
+      "validation": {
+        "corrections": [
+          {
+            "ref": "SEM[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-04",
+            "correct_raw": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo"
+          },
+          {
+            "ref": "SEM[5]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-06-18",
+            "correct_raw": "Último día de clases del primer semestre: Jueves 18 de junio"
+          },
+          {
+            "ref": "SEM[8]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-07-06",
+            "correct_raw": "Inicio de clases segundo semestre: Lunes 06 de julio"
+          },
+          {
+            "ref": "SEM[9]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          },
+          {
+            "ref": "TRI[4]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-03-04",
+            "correct_raw": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo"
+          },
+          {
+            "ref": "TRI[8]",
+            "issue": "etiqueta incorrecta",
+            "correct_date": "2026-06-08",
+            "correct_raw": "Inicio de clases segundo trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 15 de junio\nEstablecimientos que optaron por receso de invierno semestral: lunes 08 de junio"
+          },
+          {
+            "ref": "TRI[14]",
+            "issue": "etiqueta incorrecta",
+            "correct_date": "2026-09-14",
+            "correct_raw": "Inicio de clases tercer trimestre: Establecimientos que optaron por receso de invierno trimestral: lunes 21 de septiembre\nEstablecimientos que optaron por receso de invierno semestral lunes 14 de septiembre"
+          },
+          {
+            "ref": "TRI[15]",
+            "issue": "fecha incorrecta",
+            "correct_date": "2026-10-16",
+            "correct_raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          }
+        ],
+        "missing": [
+          {
+            "regime": "semestral",
+            "label": "Ingreso de estudiantes EPJA",
+            "date": "Miércoles 04 de marzo",
+            "raw_text": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo"
+          },
+          {
+            "regime": "semestral",
+            "label": "Último día de clases del primer semestre",
+            "date": "Jueves 18 de junio",
+            "raw_text": "Último día de clases del primer semestre: Jueves 18 de junio"
+          },
+          {
+            "regime": "semestral",
+            "label": "Inicio de clases segundo semestre",
+            "date": "Lunes 06 de julio",
+            "raw_text": "Inicio de clases segundo semestre: Lunes 06 de julio"
+          },
+          {
+            "regime": "semestral",
+            "label": "Día del profesor",
+            "date": "Viernes 16 de octubre (sin clases)",
+            "raw_text": "Día del profesor: Viernes 16 de octubre (sin clases)"
+          }
+        ],
+        "all_correct": false
+      },
+      "checks": [
+        {
+          "pass": false,
+          "message": "Ingreso de estudiantes EPJA: formato fecha invalido \"Miércoles 04 de marzo\""
+        },
+        {
+          "pass": false,
+          "message": "Último día de clases del primer semestre: formato fecha invalido \"Jueves 18 de junio\""
+        },
+        {
+          "pass": false,
+          "message": "Inicio de clases segundo semestre: formato fecha invalido \"Lunes 06 de julio\""
+        },
+        {
+          "pass": false,
+          "message": "Día del profesor: formato fecha invalido \"Viernes 16 de octubre (sin clases)\""
+        },
+        {
+          "pass": false,
+          "message": "Ingreso de estudiantes EPJA: dice Jueves pero 2026-03-04 es miercoles"
+        }
+      ]
+    }
+  ],
+  "cross_region": {
+    "inicio del ano escolar": [
+      {
+        "region": "aysen",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Inicio del año escolar: Lunes 02 de marzo"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      }
+    ],
+    "ingreso de docentes": [
+      {
+        "region": "aysen",
+        "date": "2026-03-02",
+        "date_end": "2026-03-03",
+        "raw": "Ingreso de docentes: Lunes 02 de marzo"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-03-02",
+        "date_end": null,
+        "raw": "Lunes 02 de marzo"
+      }
+    ],
+    "jornada de planificacion": [
+      {
+        "region": "aysen",
+        "date": "2026-03-02 a 2026-03-03",
+        "date_end": null,
+        "raw": "Jornada de planificación: Lunes 02 - martes 03 de marzo"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-03-02",
+        "date_end": "2026-03-03",
+        "raw": "Lunes 02 de marzo - martes 03 de marzo"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-03-02",
+        "date_end": "2026-03-03",
+        "raw": "Lunes 02 de marzo - martes 03 de marzo"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-03-02",
+        "date_end": "2026-03-03",
+        "raw": "Lunes 02 de marzo - martes 03 de marzo"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-03-02",
+        "date_end": "2026-03-03",
+        "raw": "Lunes 02 de marzo - martes 03 de marzo"
+      }
+    ],
+    "ingreso de estudiantes nt1 a 4° medio": [
+      {
+        "region": "aysen",
+        "date": "2026-03-04",
+        "date_end": null,
+        "raw": "Miércoles 04 de marzo"
+      }
+    ],
+    "ingreso de estudiantes epja": [
+      {
+        "region": "aysen",
+        "date": "2026-06-25",
+        "date_end": null,
+        "raw": "Ingreso de estudiantes EPJA: Jueves 25 de junio (semana 17)"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-03-04",
+        "date_end": null,
+        "raw": "Miércoles 04 de marzo"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-06-18",
+        "date_end": null,
+        "raw": "Ingreso de estudiantes EPJA: Jueves 18 de junio"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-06-18",
+        "date_end": null,
+        "raw": "Jueves 18 de junio"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-03-04",
+        "date_end": null,
+        "raw": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo"
+      },
+      {
+        "region": "valparaiso",
+        "date": "Miércoles 04 de marzo",
+        "date_end": null,
+        "raw": "Ingreso de estudiantes EPJA: Miércoles 04 de marzo"
+      }
+    ],
+    "ultimo dia de clases del primer semestre": [
+      {
+        "region": "aysen",
+        "date": "2026-06-26",
+        "date_end": null,
+        "raw": "Viernes 26 de junio."
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-06-18",
+        "date_end": null,
+        "raw": "Jueves 18 de junio"
+      },
+      {
+        "region": "metropolitana",
+        "date": null,
+        "date_end": null,
+        "raw": "Último día de clases del primer semestre"
+      },
+      {
+        "region": "ohiggins",
+        "date": null,
+        "date_end": null,
+        "raw": "Último día de clases del primer semestre: [fecha no especificada en el texto original]"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-06-18",
+        "date_end": null,
+        "raw": "Último día de clases del primer semestre: Jueves 18 de junio"
+      },
+      {
+        "region": "valparaiso",
+        "date": "Jueves 18 de junio",
+        "date_end": null,
+        "raw": "Último día de clases del primer semestre: Jueves 18 de junio"
+      }
+    ],
+    "jornada de evaluacion, y planificacion y analisis curricular": [
+      {
+        "region": "aysen",
+        "date": "2026-06-29 a 2026-07-17",
+        "date_end": "2026-07-17",
+        "raw": "Jornada de evaluación, y planificación y análisis curricular: Lunes 29 de junio - viernes 17 de julio"
+      }
+    ],
+    "receso de invierno regimen semestral": [
+      {
+        "region": "aysen",
+        "date": "2026-07-20",
+        "date_end": null,
+        "raw": "Receso de invierno régimen semestral: Lunes 20 de julio."
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-06-22",
+        "date_end": "2026-07-03",
+        "raw": "Lunes 22 de junio - viernes 03 de julio"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-06-22",
+        "date_end": "2026-07-03",
+        "raw": "Lunes 22 de junio - viernes 03 de julio"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-06-22",
+        "date_end": "2026-07-03",
+        "raw": "Lunes 22 de junio - viernes 03 de julio"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-06-22",
+        "date_end": "2026-07-03",
+        "raw": "Lunes 22 de junio - viernes 03 de julio"
+      }
+    ],
+    "inicio de clases segundo semestre": [
+      {
+        "region": "aysen",
+        "date": "2026-10-16",
+        "date_end": null,
+        "raw": "Inicio de clases segundo semestre: Viernes 16 de octubre (sin clases)"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-07-06",
+        "date_end": null,
+        "raw": "Lunes 06 de julio"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-07-06",
+        "date_end": null,
+        "raw": "Lunes 06 de julio"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-07-06",
+        "date_end": null,
+        "raw": "Lunes 06 de julio"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-07-06",
+        "date_end": null,
+        "raw": "Inicio de clases segundo semestre: Lunes 06 de julio"
+      },
+      {
+        "region": "valparaiso",
+        "date": "Lunes 06 de julio",
+        "date_end": null,
+        "raw": "Inicio de clases segundo semestre: Lunes 06 de julio"
+      }
+    ],
+    "dia del profesor y profesora": [
+      {
+        "region": "aysen",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Día del Profesor y Profesora: Viernes 20 de noviembre"
+      }
+    ],
+    "cierre actas 4° medio": [
+      {
+        "region": "aysen",
+        "date": "2026-12-11",
+        "date_end": null,
+        "raw": "Cierre actas 4° Medio: Viernes 11 de diciembre"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Viernes 20 de noviembre"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Viernes 20 de noviembre"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Cierre actas 4° Medio: Viernes 20 de noviembre"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Viernes 20 de noviembre"
+      }
+    ],
+    "ultimo dia de clases establecimientos con jec (38 semanas)": [
+      {
+        "region": "aysen",
+        "date": "2026-12-23",
+        "date_end": null,
+        "raw": "Último día de clases establecimientos con JEC (38 semanas): Martes 23 de diciembre"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-12-04",
+        "date_end": null,
+        "raw": "Viernes 04 de diciembre"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-12-04",
+        "date_end": null,
+        "raw": "Viernes 04 de diciembre"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-12-04",
+        "date_end": null,
+        "raw": "Viernes 04 de diciembre"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-12-04",
+        "date_end": null,
+        "raw": "Viernes 04 de diciembre"
+      }
+    ],
+    "ultimo dia de clases establecimiento sin jec (40 semanas)": [
+      {
+        "region": "aysen",
+        "date": "2026-11-27",
+        "date_end": null,
+        "raw": "Último día de clases establecimiento sin JEC (40 semanas): Viernes 27 de noviembre"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-12-18",
+        "date_end": null,
+        "raw": "Viernes 18 de diciembre"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-12-18",
+        "date_end": null,
+        "raw": "Viernes 18 de diciembre"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-12-18",
+        "date_end": null,
+        "raw": "Viernes 18 de diciembre"
+      }
+    ],
+    "ultimo dia de clases epja (36 semanas)": [
+      {
+        "region": "aysen",
+        "date": null,
+        "date_end": null,
+        "raw": "Último día de clases EPJA (36 semanas): [no especificado en el texto]"
+      },
+      {
+        "region": "coquimbo",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Viernes 20 de noviembre"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Viernes 20 de noviembre"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Viernes 20 de noviembre"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-11-20",
+        "date_end": null,
+        "raw": "Viernes 20 de noviembre"
+      }
+    ],
+    "ingreso de estudiantes nt 1 a 4° medio": [
+      {
+        "region": "coquimbo",
+        "date": "2026-03-04",
+        "date_end": null,
+        "raw": "Miércoles 04 de marzo"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-03-04",
+        "date_end": null,
+        "raw": "Miércoles 04 de marzo"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-03-04",
+        "date_end": null,
+        "raw": "Miércoles 04 de marzo"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-03-04",
+        "date_end": null,
+        "raw": "Miércoles 04 de marzo"
+      }
+    ],
+    "jornada de evaluacion, planificacion y analisis curricular": [
+      {
+        "region": "coquimbo",
+        "date": "2026-06-19",
+        "date_end": null,
+        "raw": "Viernes 19 de junio"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-06-19",
+        "date_end": null,
+        "raw": "Jornada de evaluación, planificación y análisis curricular: Viernes 19 de junio"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-06-19",
+        "date_end": null,
+        "raw": "Viernes 19 de junio"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-06-19",
+        "date_end": null,
+        "raw": "Viernes 19 de junio"
+      }
+    ],
+    "dia del profesor": [
+      {
+        "region": "coquimbo",
+        "date": "2026-10-16",
+        "date_end": null,
+        "raw": "Viernes 16 de octubre (sin clases)"
+      },
+      {
+        "region": "metropolitana",
+        "date": "2026-10-16",
+        "date_end": null,
+        "raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+      },
+      {
+        "region": "ohiggins",
+        "date": "2026-10-16",
+        "date_end": null,
+        "raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+      },
+      {
+        "region": "valparaiso",
+        "date": "2026-10-16",
+        "date_end": null,
+        "raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+      },
+      {
+        "region": "valparaiso",
+        "date": "Viernes 16 de octubre (sin clases)",
+        "date_end": null,
+        "raw": "Día del profesor: Viernes 16 de octubre (sin clases)"
+      }
+    ],
+    "ultimo dia de clases establecimientos sin jec (40 semanas)": [
+      {
+        "region": "coquimbo",
+        "date": "2026-12-18",
+        "date_end": null,
+        "raw": "Viernes 18 de diciembre"
+      }
+    ]
+  }
+}

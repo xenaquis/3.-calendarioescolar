@@ -21,6 +21,65 @@ var warnings = [];
 function error(msg) { errors.push('ERROR: ' + msg); }
 function warn(msg)  { warnings.push('WARN:  ' + msg); }
 
+// ── Helpers para validacion de afirmaciones ─────────────────────────────────
+function listHtmlFiles(dir) {
+  var results = [];
+  if (!fs.existsSync(dir)) return results;
+  var entries = fs.readdirSync(dir);
+  entries.forEach(function (entry) {
+    var full = path.join(dir, entry);
+    var stat;
+    try { stat = fs.statSync(full); } catch (e) { return; }
+    if (stat.isDirectory()) {
+      results = results.concat(listHtmlFiles(full));
+    } else if (entry.endsWith('.html')) {
+      results.push(full);
+    }
+  });
+  return results;
+}
+
+function resolveDataPath(dataPath, calendarConfig, pagesData) {
+  if (!dataPath) return null;
+  var arrow = dataPath.indexOf('\u2192');
+  if (arrow === -1) return null;
+  var file = dataPath.substring(0, arrow).trim();
+  var fieldPath = dataPath.substring(arrow + 1).trim();
+  var obj;
+  if (file === 'calendar-config.json') {
+    obj = calendarConfig;
+  } else if (file === 'pages.json') {
+    obj = pagesData;
+  } else {
+    return null;
+  }
+  if (!obj) return null;
+  // pages.json → length
+  if (fieldPath === 'length') {
+    return Array.isArray(obj) ? obj.length : null;
+  }
+  // pages.json → [region].field — multi-value, skip
+  if (fieldPath.indexOf('[region]') !== -1) return null;
+  // field.length (e.g. feriadosCompletos.length)
+  var lengthMatch = fieldPath.match(/^(\w+)\.length$/);
+  if (lengthMatch) {
+    var val = obj[lengthMatch[1]];
+    return Array.isArray(val) ? val.length : null;
+  }
+  // field[N].subfield (e.g. feriadosCompletos[0].date)
+  var arrayFieldMatch = fieldPath.match(/^(\w+)\[(\d+)\]\.(\w+)$/);
+  if (arrayFieldMatch) {
+    var arr = obj[arrayFieldMatch[1]];
+    var idx = parseInt(arrayFieldMatch[2], 10);
+    var sub = arrayFieldMatch[3];
+    if (Array.isArray(arr) && arr[idx]) return arr[idx][sub];
+    return null;
+  }
+  // Simple field (e.g. schoolStart)
+  if (obj.hasOwnProperty(fieldPath)) return obj[fieldPath];
+  return null;
+}
+
 // ── 1. pages.json ─────────────────────────────────────────────────────────
 var pagesPath = path.join(ROOT, 'data', 'pages.json');
 if (!fs.existsSync(pagesPath)) {
@@ -180,6 +239,90 @@ if (fs.existsSync(configPath)) {
   if (configStr.indexOf('PLACEHOLDER_SHEET_ID') !== -1) {
     warn('config.json: sheet.spreadsheetId es placeholder — actualizar con ID real del Google Sheet');
   }
+}
+
+// ── 6. Heartbeat: source-health.json no debe estar stale (>14 dias) ──────
+var sourceHealthPath = path.join(ROOT, 'data', 'source-health.json');
+if (fs.existsSync(sourceHealthPath)) {
+  try {
+    var sourceHealth = JSON.parse(fs.readFileSync(sourceHealthPath, 'utf8'));
+    if (sourceHealth.checked_at) {
+      var checkedDate = new Date(sourceHealth.checked_at);
+      var daysSinceCheck = Math.floor((Date.now() - checkedDate.getTime()) / (1000 * 60 * 60 * 24));
+      if (daysSinceCheck > 14) {
+        warn('source-health.json tiene ' + daysSinceCheck + ' dias sin actualizar — verificar que el workflow check-sources esta funcionando');
+      }
+    }
+  } catch (e) {
+    warn('source-health.json: JSON invalido — ' + e.message);
+  }
+}
+
+// ── 7. Validacion de afirmaciones ─────────────────────────────────────────
+var afirmacionesPath = path.join(ROOT, 'data', 'afirmaciones.json');
+if (fs.existsSync(afirmacionesPath)) {
+  var afirmaciones;
+  try {
+    afirmaciones = JSON.parse(fs.readFileSync(afirmacionesPath, 'utf8'));
+  } catch (e) {
+    error('data/afirmaciones.json: JSON invalido — ' + e.message);
+    afirmaciones = null;
+  }
+
+  if (afirmaciones && afirmaciones.claims && afirmaciones.sources) {
+    // 6a. Verificar que cada claim referencia una source existente
+    afirmaciones.claims.forEach(function (claim) {
+      if (claim.source_id && !afirmaciones.sources[claim.source_id]) {
+        error('afirmaciones.json: claim "' + claim.id +
+          '" referencia source inexistente "' + claim.source_id + '"');
+      }
+    });
+
+    // 6b. Verificar coherencia: displayed_value vs dato real
+    afirmaciones.claims.forEach(function (claim) {
+      if (claim.data_path && claim.displayed_value) {
+        var realValue = resolveDataPath(claim.data_path, cal, pages);
+        if (realValue !== null && String(realValue) !== String(claim.displayed_value)) {
+          error('afirmaciones.json: claim "' + claim.id + '" dice "' +
+            claim.displayed_value + '" pero dato real es "' + realValue + '"');
+        }
+      }
+    });
+
+    // 6c. Detector de claims huerfanas — escanea <meta name="claim-data"> en HTML
+    var htmlDir = path.join(ROOT, 'public');
+    var htmlFiles = listHtmlFiles(htmlDir);
+    var NO_CLAIM_EXEMPT = ['privacidad.html', 'contacto.html', 'about.html', 'avisolegal.html'];
+    var declaredKeys = {};
+
+    htmlFiles.forEach(function (htmlFile) {
+      var html = fs.readFileSync(htmlFile, 'utf8');
+      var match = html.match(/<meta\s+name="claim-data"\s+content="([^"]+)"/);
+      if (!match) {
+        var basename = path.basename(htmlFile);
+        if (NO_CLAIM_EXEMPT.indexOf(basename) === -1) {
+          warn(path.relative(ROOT, htmlFile).replace(/\\/g, '/') + ': no tiene meta claim-data');
+        }
+        return;
+      }
+      var dataKeys = match[1].split(',').map(function (k) { return k.trim(); });
+      dataKeys.forEach(function (key) {
+        if (!key) return;
+        declaredKeys[key] = true;
+        var hasClaim = afirmaciones.claims.some(function (c) { return c.data_key === key; });
+        if (!hasClaim) {
+          error(path.relative(ROOT, htmlFile).replace(/\\/g, '/') +
+            ': usa data_key "' + key + '" pero no hay claim en afirmaciones.json');
+        }
+      });
+    });
+
+    console.log('  Afirmaciones: ' + afirmaciones.claims.length + ' claims, ' +
+      Object.keys(afirmaciones.sources).length + ' sources, ' +
+      Object.keys(declaredKeys).length + ' data_keys declarados en HTML');
+  }
+} else {
+  warn('data/afirmaciones.json no encontrado — verificacion de afirmaciones deshabilitada');
 }
 
 // ── Reporte final ──────────────────────────────────────────────────────────

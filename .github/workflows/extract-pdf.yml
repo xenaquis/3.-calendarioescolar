@@ -1,0 +1,115 @@
+name: Extract & Validate PDF Data (RAG)
+
+on:
+  workflow_dispatch:
+    inputs:
+      fix:
+        description: 'Auto-corregir datos si hay discrepancias'
+        required: false
+        default: 'false'
+      region:
+        description: 'Procesar solo una region (slug, ej: aysen). Vacio = todas.'
+        required: false
+        default: ''
+      force_download:
+        description: 'Re-descargar PDFs aunque ya existan'
+        required: false
+        default: 'false'
+  schedule:
+    - cron: '0 14 15 5 *'    # 15 mayo 14:00 UTC — verificacion primer semestre
+    - cron: '0 14 31 12 *'   # 31 diciembre 14:00 UTC — resoluciones Mineduc ya publicadas
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install OCR tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-spa
+
+      - name: Extract data from Mineduc PDFs
+        id: extract
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event.inputs.fix }}" = "true" ]; then ARGS="$ARGS --fix"; fi
+          if [ -n "${{ github.event.inputs.region }}" ]; then ARGS="$ARGS --region=${{ github.event.inputs.region }}"; fi
+          if [ "${{ github.event.inputs.force_download }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          node scripts/extract-from-pdf.js $ARGS
+        continue-on-error: true
+
+      - name: Commit snapshots and report
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Agregar snapshots .txt (no PDFs, son muy grandes)
+          git add data/snapshots/*.txt 2>/dev/null || true
+          git add data/pdf-extraction-report.json 2>/dev/null || true
+
+          # Si --fix fue usado, agregar datos corregidos
+          if [ "${{ github.event.inputs.fix }}" = "true" ]; then
+            git add data/calendar-config.json data/pages.json 2>/dev/null || true
+          fi
+
+          git diff --staged --quiet || git commit -m "chore: update PDF extraction report [skip ci]"
+          git push
+
+      - name: Regenerate if fixed
+        if: github.event.inputs.fix == 'true' && steps.extract.outcome == 'success'
+        run: |
+          node scripts/generate-pages.js
+          node scripts/validate.js
+
+          git add public/ data/
+          git diff --staged --quiet || git commit -m "chore: regenerate pages from PDF-corrected data [skip ci]"
+          git push
+
+      - name: Alert on discrepancies
+        if: steps.extract.outcome == 'failure'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          MISMATCHES=$(node -e "
+            var r = require('./data/pdf-extraction-report.json');
+            if (!r.comparisons || r.comparisons.length === 0) process.exit(1);
+            r.comparisons.slice(0, 10).forEach(function(c) {
+              console.log('• ' + c.regionSlug + ' ' + c.field + ': PDF=' + c.extracted + ' vs actual=' + c.current);
+            });
+            if (r.comparisons.length > 10) console.log('... y ' + (r.comparisons.length - 10) + ' mas');
+          " 2>/dev/null) || exit 0
+
+          if [ -z "$MISMATCHES" ]; then exit 0; fi
+
+          MSG=$(printf '📄 *Discrepancias PDF vs datos — calendarioescolar.cl*\n\n%s\n\nEjecutar con --fix o revisar manualmente.' "$MISMATCHES")
+
+          curl -s -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+
+      - name: Summary
+        if: always()
+        run: |
+          node -e "
+            try {
+              var r = require('./data/pdf-extraction-report.json');
+              console.log('=== RAG EXTRACTION REPORT ===');
+              console.log('Regiones OK: ' + r.summary.regions_ok);
+              console.log('Regiones fallidas: ' + r.summary.regions_failed + ' ' + (r.summary.failed_regions || []).join(', '));
+              if (r.comparisons) {
+                var m = r.comparisons.filter(function(c) { return c.status === 'mismatch'; });
+                console.log('Discrepancias: ' + m.length);
+              }
+            } catch(e) { console.log('No se pudo leer el reporte'); }
+          "

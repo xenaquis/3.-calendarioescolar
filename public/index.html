@@ -8,6 +8,7 @@
   <title>Calendario Escolar 2026 Chile &mdash; calendarioescolar.cl</title>
   <meta name="description" content="Calendario escolar 2026 Chile: fechas de inicio de clases, vacaciones de invierno y fin de a&ntilde;o escolar por regi&oacute;n. Fuente oficial Mineduc.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, noai, noimageai">
+  <meta name="claim-data" content="schoolStart,winterStart,winterEnd,schoolEnd,totalRegiones,feriado_viernes_santo,feriado_dia_trabajo,feriado_glorias_navales,feriado_corpus_christi,feriado_san_pedro_san_pablo,feriado_encuentro_dos_mundos,feriado_inmaculada_concepcion">
   <link rel="canonical" href="https://calendarioescolar.cl/">
 
   <!-- Hreflang -->
@@ -42,6 +43,7 @@
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/ads.css">
+  <link rel="stylesheet" href="/css/verificacion.css">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -171,7 +173,7 @@
       </div>
 
       <!-- Fechas clave (estáticas — renderizan inmediatamente) -->
-      <section class="key-facts" aria-label="Fechas clave del a&ntilde;o escolar 2026">
+      <section class="key-facts" aria-label="Fechas clave del a&ntilde;o escolar 2026" data-verificacion="school-dates">
         <div class="key-fact key-fact--primary">
           <p class="key-fact__label">Inicio de clases</p>
           <p class="key-fact__date">2 de marzo</p>
@@ -305,7 +307,7 @@
       </div>
 
       <!-- Feriados en período escolar (contenido único) -->
-      <section class="section" aria-label="Feriados en per&iacute;odo escolar 2026">
+      <section class="section" aria-label="Feriados en per&iacute;odo escolar 2026" data-verificacion="holidays">
         <h2>Feriados dentro del per&iacute;odo escolar 2026</h2>
         <p>D&iacute;as festivos que caen en per&iacute;odos de clases (excluye vacaciones y fines de semana):</p>
         <div class="table-wrapper">
@@ -397,6 +399,13 @@
     </div>
   </main>
 
+  <!-- Verificación de fuentes -->
+  <div data-verificacion-footer>
+    <div class="verificacion-footer">
+      <p>Fuentes: Ministerio de Educaci&oacute;n de Chile &middot; Biblioteca del Congreso Nacional</p>
+    </div>
+  </div>
+
   <!-- Aviso legal -->
   <aside class="legal-notice" aria-label="Aviso legal">
     <div class="container">
@@ -455,6 +464,7 @@
   <script defer src="/js/regions-data.js"></script>
   <script defer src="/js/calendar-config.js"></script>
   <script defer src="/js/app.js"></script>
+  <script defer src="/js/verificacion.js"></script>
 
 </body>
 </html>

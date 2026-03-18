@@ -233,5 +233,26 @@ var health = {
   } : null,
   status: 'ok'
 };
+
+// Incluir estado de fuentes en health.json si existe
+var sourceHealthPath = path.join(__dirname, '..', 'data', 'source-health.json');
+if (fs.existsSync(sourceHealthPath)) {
+  try {
+    var sourceHealth = JSON.parse(fs.readFileSync(sourceHealthPath, 'utf8'));
+    health.sourceHealth = {
+      lastChecked: sourceHealth.checked_at,
+      totalSources: sourceHealth.total_sources,
+      ok: sourceHealth.ok,
+      broken: sourceHealth.broken,
+      changed: sourceHealth.changed
+    };
+  } catch (e) { /* ignorar si invalido */ }
+}
 fs.writeFileSync(path.join(OUTPUT_DIR, 'health.json'), JSON.stringify(health, null, 2));
 console.log('Generado public/health.json (status: ok, regiones: ' + health.regionsCount + ')');
+
+// Generar verificacion.json (Fase 4 — badges de verificación)
+var afirmacionesExists = fs.existsSync(path.join(__dirname, '..', 'data', 'afirmaciones.json'));
+if (afirmacionesExists) {
+  require('./generate-verificacion');
+}

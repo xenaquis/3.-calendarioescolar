@@ -3,10 +3,10 @@
 window.CALENDAR_CONFIG = {
   "_comment": "Fuente de verdad para fechas del año escolar. Sincronizar con data/pages.json y el Google Sheet. Actualizar cada noviembre cuando Mineduc publique el calendario del año siguiente.",
   "year": 2026,
-  "schoolStart": "2026-03-02",
-  "winterStart": "2026-07-11",
-  "winterEnd": "2026-07-25",
-  "schoolEnd": "2026-12-11",
+  "schoolStart": "2026-03-04",
+  "winterStart": "2026-06-22",
+  "winterEnd": "2026-07-03",
+  "schoolEnd": "2026-12-04",
   "feriados": [
     {
       "date": "2026-04-03",
@@ -25,8 +25,8 @@ window.CALENDAR_CONFIG = {
       "nombre": "Corpus Christi"
     },
     {
-      "date": "2026-06-29",
-      "nombre": "San Pedro y San Pablo"
+      "date": "2026-07-16",
+      "nombre": "Virgen del Carmen"
     },
     {
       "date": "2026-10-12",
@@ -122,8 +122,8 @@ window.CALENDAR_CONFIG = {
       "diaNum": 29,
       "mes": "junio",
       "tipo": "religioso",
-      "contexto": "en-clases",
-      "notaContexto": null,
+      "contexto": "sin-impacto",
+      "notaContexto": "En vacaciones de invierno",
       "nota": "Traslado legal si cae sáb/dom · <a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=160270\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 19.668 (BCN)</a>"
     },
     {
@@ -133,8 +133,8 @@ window.CALENDAR_CONFIG = {
       "diaNum": 16,
       "mes": "julio",
       "tipo": "religioso",
-      "contexto": "sin-impacto",
-      "notaContexto": "En vacaciones de invierno",
+      "contexto": "en-clases",
+      "notaContexto": null,
       "nota": null
     },
     {

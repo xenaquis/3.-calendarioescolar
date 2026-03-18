@@ -75,10 +75,16 @@ tracking y decisiones. El ID del spreadsheet está en config.json → sheet.spre
 Cada sitio tiene su propio tab en el Sheet.
 Cualquier cambio de estado debe reflejarse en el Sheet.
 
+## Sistema de validacion de afirmaciones
+- Cada pagina con datos factuales DEBE incluir `<meta name="claim-data" content="key1,key2,...">` listando los data_keys que consume.
+- Cada data_key declarado DEBE tener un claim correspondiente en `data/afirmaciones.json`.
+- El build falla si hay data_keys sin claim. Paginas sin meta (como privacidad.html) generan warning, no error.
+- Al agregar una pagina nueva con datos factuales: agregar meta claim-data + registrar claims en afirmaciones.json.
+
 ## NO HACER
 - No agregar dependencias npm
 - No usar ES modules (import/export)
 - No poner API keys en codigo frontend
 - No modificar la estructura de tokens.css (solo valores)
-- No crear archivos fuera de public/, data/, functions/, scripts/
+- No crear archivos fuera de public/, data/, functions/, scripts/, validacion/
 - No usar Google Fonts (system-ui solamente)

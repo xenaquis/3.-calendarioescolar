@@ -1,20 +1,27 @@
 {
-  "generatedAt": "2026-03-17T01:22:41.366Z",
-  "generatedDate": "2026-03-17",
+  "generatedAt": "2026-03-18T03:25:39.283Z",
+  "generatedDate": "2026-03-18",
   "dataYear": 2026,
   "regionsCount": 16,
   "pagesCount": 16,
   "sitemap": "22 URLs",
   "dataFingerprint": {
-    "pagesJson": "b14b83f42a27cf10812459d2d15592c9",
-    "calendarConfigJson": "a3aa86be91ccea1aa091046e08a99c89"
+    "pagesJson": "a3b26be233d7a5a72080d90ed143b5db",
+    "calendarConfigJson": "a717b20cac9e6830047254f4d6b4aebe"
   },
   "calendarConfig": {
-    "schoolStart": "2026-03-02",
-    "winterStart": "2026-07-11",
-    "winterEnd": "2026-07-25",
-    "schoolEnd": "2026-12-11",
+    "schoolStart": "2026-03-04",
+    "winterStart": "2026-06-22",
+    "winterEnd": "2026-07-03",
+    "schoolEnd": "2026-12-04",
     "feriadosCount": 7
   },
-  "status": "ok"
+  "status": "ok",
+  "sourceHealth": {
+    "lastChecked": "2026-03-18T00:53:13.886Z",
+    "totalSources": 6,
+    "ok": 6,
+    "broken": 0,
+    "changed": 0
+  }
 }

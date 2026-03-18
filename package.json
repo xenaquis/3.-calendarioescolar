@@ -8,6 +8,8 @@
     "generate": "node scripts/generate-pages.js",
     "dev": "npx wrangler pages dev public --port 8788",
     "new-site": "bash scripts/new-site.sh",
-    "deploy": "npx wrangler pages deploy public"
+    "deploy": "npx wrangler pages deploy public",
+    "extract-pdf": "node scripts/extract-from-pdf.js",
+    "verify-pdf": "node scripts/extract-from-pdf.js --local"
   }
 }

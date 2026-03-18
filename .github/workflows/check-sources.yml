@@ -1,0 +1,76 @@
+name: Check Source Health
+
+on:
+  schedule:
+    - cron: '0 10 * * 1'   # Lunes 10:00 UTC (07:00 Chile)
+  workflow_dispatch:         # Manual trigger
+
+jobs:
+  check-sources:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check source URLs
+        id: check
+        run: node scripts/check-sources.js
+        continue-on-error: true
+
+      - name: Commit health update
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/source-health.json
+          git diff --staged --quiet || git commit -m "chore: update source health [skip ci]"
+          git push
+
+      - name: Alert on problems
+        if: steps.check.outcome == 'failure'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          PROBLEMS=$(node -e "
+            var h = require('./data/source-health.json');
+            var p = Object.values(h.sources).filter(function(s) {
+              return s.status === 'broken' || s.status === 'error' || s.status === 'timeout';
+            });
+            if (p.length === 0) process.exit(1);
+            p.forEach(function(s) {
+              console.log('• ' + s.id + ': ' + s.status + (s.error ? ' — ' + s.error : ' (HTTP ' + s.http_status + ')'));
+            });
+          " 2>/dev/null) || exit 0
+
+          MSG=$(printf '⚠️ *Fuentes con problemas — calendarioescolar.cl*\n\n%s\n\nRevisado: %s' "$PROBLEMS" "$(date -u +%Y-%m-%dT%H:%M:%SZ)")
+
+          curl -s -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+
+      - name: Alert on content changes
+        if: always()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          CHANGED=$(node -e "
+            var h = require('./data/source-health.json');
+            var c = Object.values(h.sources).filter(function(s) { return s.hash_changed; });
+            if (c.length === 0) process.exit(1);
+            c.forEach(function(s) {
+              console.log('• ' + s.id + ': contenido cambio');
+            });
+          " 2>/dev/null) || exit 0
+
+          MSG=$(printf '🔄 *Contenido cambio en fuentes — calendarioescolar.cl*\n\n%s\n\nVerificar si los datos del sitio siguen siendo correctos.' "$CHANGED")
+
+          curl -s -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"

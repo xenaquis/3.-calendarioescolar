@@ -8,6 +8,7 @@
   <title>Feriados 2026 Chile &mdash; Impacto en el Calendario Escolar</title>
   <meta name="description" content="Feriados 2026 en Chile: cu&aacute;les suspenden clases y cu&aacute;les no. Solo 7 de 15 feriados afectan d&iacute;as de clase. Fechas oficiales Mineduc.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, noai, noimageai">
+  <meta name="claim-data" content="schoolStart,schoolEnd,winterStart,winterEnd,totalFeriados,feriadosEnClases,feriadosSinImpacto,feriado_ano_nuevo,feriado_viernes_santo,feriado_sabado_santo,feriado_dia_trabajo,feriado_glorias_navales,feriado_corpus_christi,feriado_pueblos_indigenas,feriado_san_pedro_san_pablo,feriado_virgen_carmen,feriado_fiestas_patrias,feriado_glorias_ejercito,feriado_encuentro_dos_mundos,feriado_iglesias_evangelicas,feriado_inmaculada_concepcion,feriado_navidad">
   <link rel="canonical" href="https://calendarioescolar.cl/feriados-2026.html">
 
   <!-- Hreflang -->
@@ -42,6 +43,7 @@
   <link rel="stylesheet" href="/css/base.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/ads.css">
+  <link rel="stylesheet" href="/css/verificacion.css">
 
   <style>
     /* Filtros de tabla */
@@ -309,7 +311,7 @@
       </div>
 
       <!-- Key facts -->
-      <section class="key-facts" aria-label="Resumen feriados 2026">
+      <section class="key-facts" aria-label="Resumen feriados 2026" data-verificacion="holidays">
         <div class="key-fact key-fact--primary">
           <p class="key-fact__label">Suspenden clases</p>
           <p class="key-fact__date">7 feriados</p>
@@ -427,18 +429,18 @@
                 <td><span class="badge badge--conmemorativo">Conmemorativo</span></td>
                 <td><span class="badge badge--sin-impacto">Fin de semana</span></td>
               </tr>
-              <tr data-contexto="en-clases">
+              <tr data-contexto="sin-impacto">
                 <td><time datetime="2026-06-29">Lunes 29 de junio</time></td>
                 <td><strong>San Pedro y San Pablo</strong>
                   <br><small style="color:var(--color-text-tertiary)">Traslado legal si cae sáb/dom · <a href="https://www.bcn.cl/leychile/Navegar?idNorma=160270" rel="noopener noreferrer" target="_blank">Ley 19.668 (BCN)</a></small></td>
                 <td><span class="badge badge--religioso">Religioso</span></td>
-                <td><span class="badge badge--clases">Suspende clases</span></td>
+                <td><span class="badge badge--sin-impacto">En vacaciones de invierno</span></td>
               </tr>
-              <tr data-contexto="sin-impacto">
+              <tr data-contexto="en-clases">
                 <td><time datetime="2026-07-16">Jueves 16 de julio</time></td>
                 <td><strong>Virgen del Carmen</strong></td>
                 <td><span class="badge badge--religioso">Religioso</span></td>
-                <td><span class="badge badge--sin-impacto">En vacaciones de invierno</span></td>
+                <td><span class="badge badge--clases">Suspende clases</span></td>
               </tr>
               <tr data-contexto="sin-impacto">
                 <td><time datetime="2026-09-18">Viernes 18 de septiembre</time></td>
@@ -622,6 +624,13 @@
     </div>
   </main>
 
+  <!-- Verificación de fuentes -->
+  <div data-verificacion-footer>
+    <div class="verificacion-footer">
+      <p>Fuentes: Ministerio de Educaci&oacute;n de Chile &middot; Biblioteca del Congreso Nacional</p>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
@@ -640,6 +649,7 @@
 
   <!-- JS -->
   <script defer src="/js/theme.js"></script>
+  <script defer src="/js/verificacion.js"></script>
   <script defer src="/js/ads.js"></script>
   <script defer src="/js/analytics.js"></script>
   <script defer src="/js/calendar-config.js"></script>

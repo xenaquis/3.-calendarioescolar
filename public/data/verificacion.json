@@ -1,0 +1,76 @@
+{
+  "generated_at": "2026-03-18T03:25:39.288Z",
+  "summary": {
+    "total_claims": 45,
+    "verified": 45,
+    "unverified": 0,
+    "incorrecto": 0,
+    "no_verificable": 0,
+    "fuente_inaccesible": 0,
+    "sources_ok": 6,
+    "sources_total": 6,
+    "last_source_check": "2026-03-18T00:53:13.886Z",
+    "last_source_check_formatted": "17 de marzo de 2026",
+    "source_names": [
+      "Mineduc",
+      "Biblioteca del Congreso Nacional"
+    ],
+    "has_verification_results": true
+  },
+  "sections": {
+    "school-dates": {
+      "id": "school-dates",
+      "status": "correcto",
+      "claims_count": 16,
+      "sources": [
+        "Resolucion Exenta Calendario Escolar 2026"
+      ],
+      "source_ids": [
+        "mineduc-resolucion-2026"
+      ],
+      "last_verified": "2026-03-18T03:25:32.112Z"
+    },
+    "holidays": {
+      "id": "holidays",
+      "status": "correcto",
+      "claims_count": 15,
+      "sources": [
+        "Ley 2.977 — Feriados legales de Chile",
+        "Ley 21.357 — Dia Nacional de los Pueblos Indigenas",
+        "Ley 20.148 — Virgen del Carmen feriado irrenunciable",
+        "Ley 19.668 — Traslado de feriados a lunes"
+      ],
+      "source_ids": [
+        "bcn-ley-2977",
+        "bcn-ley-21357",
+        "bcn-ley-20148",
+        "bcn-ley-19668"
+      ],
+      "last_verified": "2026-03-18T03:25:32.112Z"
+    },
+    "context": {
+      "id": "context",
+      "status": "correcto",
+      "claims_count": 9,
+      "sources": [
+        "Resolucion Exenta Calendario Escolar 2026",
+        "Ley 2.977 — Feriados legales de Chile",
+        "Ley 19.668 — Traslado de feriados a lunes"
+      ],
+      "source_ids": [
+        "mineduc-resolucion-2026",
+        "bcn-ley-2977",
+        "bcn-ley-19668"
+      ],
+      "last_verified": "2026-03-18T03:25:32.113Z"
+    },
+    "stats": {
+      "id": "stats",
+      "status": "correcto",
+      "claims_count": 5,
+      "sources": [],
+      "source_ids": [],
+      "last_verified": "2026-03-18T03:25:32.113Z"
+    }
+  }
+}

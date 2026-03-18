@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-17 (DOMINIO ACTIVO — calendarioescolar.cl HTTP 200; SEO 360° completado).
+Ultimo update de este blueprint: 2026-03-18 (auditoría empírica validadores + RAG pipeline + badges honestos).
 
 ---
 
@@ -20,11 +20,14 @@ Ultimo update de este blueprint: 2026-03-17 (DOMINIO ACTIVO — calendarioescola
 | Search Console        | PENDIENTE       | Verificar propiedad + enviar sitemap               |
 | OG Image              | PENDIENTE       | Archivo `/icons/og-image.png` referenciado pero no existe |
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
-| Datos Mineduc 2026    | Cargados        | En data/pages.json + data/calendar-config.json — Corpus Christi corregido 2026-03-12 |
+| Datos Mineduc 2026    | CORREGIDOS      | Vacaciones invierno corregidas (jun-jul). Inicio clases = 4 mar. Fin = 4 dic. Aysén/Magallanes diferenciados |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
 | Frontend              | COMPLETADO      | Rediseño UX completado 2026-03-16                  |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
 | SEO / Anti-IA         | COMPLETADO      | Auditoría 360° 2026-03-17: E-E-A-T, llms.txt, schemas, cache — commit 3df7917 |
+| Validación Robusta    | 4 FASES + RAG   | Auditoría empírica 2026-03-18: fiabilidad B+ (82/100). Ver sección Validación abajo |
+| RAG Pipeline          | OPERATIVO       | extract-from-pdf.js v3 (catalog-first) + OCR. Cron: 15 may + 31 dic. 11/16 regiones OK |
+| Badges Honestos       | IMPLEMENTADO    | 5 estados: verde/rojo/ámbar/gris/amarillo. Info no verificada se flaggea visiblemente |
 
 ---
 
@@ -72,13 +75,26 @@ Ultimo update de este blueprint: 2026-03-17 (DOMINIO ACTIVO — calendarioescola
 │   │                                  → escribe region/*/index.html + sitemap.xml
 │   │                                  → escribe js/regions-data.js + js/calendar-config.js + health.json
 │   ├── validate.js                 -> Valida integridad de datos antes de deploy (sale con 1 si hay errores)
+│   ├── verify-content.js           -> Fase 3: verificación IA + determinística de claims (45 claims)
+│   ├── generate-verificacion.js    -> Genera public/data/verificacion.json para badges frontend
+│   ├── check-sources.js            -> Fase 2: HTTP health check de 6 fuentes oficiales
+│   ├── extract-from-pdf.js         -> RAG pipeline v3: extrae datos de PDFs Mineduc (DeepSeek + OCR)
 │   ├── sync-from-sheet.js          -> Lee Google Sheet via REST API → actualiza pages.json + calendar-config.json
 │   └── build.sh                    -> Corre validate.js + verificaciones + cuenta archivos
 │
 ├── .github/
 │   └── workflows/
 │       ├── deploy.yml              -> CI/CD: push a main → build → deploy a Cloudflare Pages
-│       └── sync-deploy.yml         -> Cron semanal + manual: sync Sheet → generate → validate → deploy
+│       ├── sync-deploy.yml         -> Cron semanal + manual: sync Sheet → generate → validate → deploy
+│       ├── verify-content.yml      -> Cron mensual: verificación IA + alerta Telegram si INCORRECTO
+│       └── extract-pdf.yml         -> Cron bianual (15 may + 31 dic): RAG extracción PDFs Mineduc
+│
+├── validacion/                     -> Documentación del sistema de validación (4 fases)
+│   ├── SISTEMA-MAESTRO.md          -> Blueprint del sistema completo
+│   ├── FASE-1-registro-afirmaciones.md
+│   ├── FASE-2-monitor-fuentes.md
+│   ├── FASE-3-verificacion-contenido.md
+│   └── FASE-4-transparencia-frontend.md
 │
 ├── workers/
 │   └── calendar-monitor/
@@ -302,20 +318,31 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 - **BCN — feriados** (texto legal): `https://www.bcn.cl/leychile/navegar?idNorma=22209`
 - **FeriadosApp** (cross-validación): `https://www.feriadosapp.com/api`
 
-### Actualizacion anual de datos (cada noviembre) — flujo optimizado
+### Actualizacion anual de datos — flujo optimizado (RAG-asistido)
 
-1. Detectar publicación en `https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-{AÑO+1}/`
-2. Descargar PDFs regionales → extraer fechas de las 16 regiones
-3. **Verificar Corpus Christi** con algoritmo Pascua (NO copiar del año anterior — bug histórico)
-4. **Verificar San Pedro y San Pablo** (29 jun: si cae sáb/dom → mover al lunes)
-5. **Verificar qué otros feriados** (Pueblos Indígenas, Asunción, Iglesias Evangélicas) caen en días de clases ese año
-6. **Actualizar tab "Regiones"** del Google Sheet
-7. **Actualizar tab "Config"** del Google Sheet (year, fechas, feriados)
+**Automático** (GitHub Actions cron 31 dic):
+1. RAG pipeline descarga PDFs regionales de Mineduc y extrae datos
+2. Compara datos extraídos vs `pages.json` / `calendar-config.json`
+3. Si hay discrepancias → alerta Telegram con detalle
+4. Con `--fix` → auto-corrige datos y regenera páginas
+
+**Manual** (revisión humana post-alerta o cada noviembre):
+1. Verificar publicación en `https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-{AÑO+1}/`
+2. Ejecutar RAG: `npm run extract-pdf` (o disparar workflow manual en GitHub)
+3. Revisar `data/pdf-extraction-report.json` — verificar discrepancias
+4. **Verificar Corpus Christi** con algoritmo Pascua (NO copiar del año anterior — bug histórico)
+5. **Verificar San Pedro y San Pablo** (29 jun: si cae sáb/dom → mover al lunes)
+6. **Verificar regiones sur** — Aysén y Magallanes tienen fechas diferentes (vacaciones extendidas)
+7. Actualizar `data/calendar-config.json` + `data/pages.json` (o Google Sheet)
 8. Actualizar **FAQ hardcodeadas** en `public/index.html` (texto dentro de `<details>`)
 9. Actualizar **Schema.org JSON-LD** en `public/index.html` (fechas en `acceptedAnswer`)
-10. Disparar GitHub Action **"Sync desde Sheet + Deploy"** manualmente (o esperar al lunes)
+10. `npm run generate` → `node scripts/validate.js` → `node scripts/verify-content.js`
 11. Verificar `https://calendarioescolar.cl/health.json` → `dataYear` correcto
 12. Actualizar año en landings estáticas: `vacaciones-invierno-{AÑO}.html`, `cuando-empiezan-clases-{AÑO}.html`
+
+**Distinción importante PDF Mineduc:**
+- "Inicio del año escolar" (2 mar) ≠ "Ingreso de estudiantes" (4 mar) — el sitio muestra **ingreso de estudiantes**
+- "Último día clases JEC 38 sem" (4 dic) ≠ "Término año escolar" (31 dic) — el sitio muestra **último día clases JEC**
 
 **Sin Google Sheet (fallback manual):**
 Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` → `node scripts/validate.js` → deploy
@@ -343,6 +370,117 @@ Deploy: ver seccion "Comandos utiles" abajo.
 - Cloudflare Pages: https://dash.cloudflare.com
 - Search Console: https://search.google.com/search-console
 - Analytics: https://analytics.google.com
+
+---
+
+## Sistema de Validación — Auditoría empírica 2026-03-18
+
+### Fiabilidad global: B+ (82/100)
+
+Auditoría ejecutada con pruebas reales: inyección de fallos, verificación cruzada datos-claims,
+cobertura HTML meta tags, freshness de resultados, y test de regresión.
+
+### Componentes y calificación
+
+| Componente | Archivo(s) | Grado | Score | Notas |
+|-----------|------------|-------|-------|-------|
+| Build gate (validate.js) | `scripts/validate.js` | **A** | 95/100 | Detectó 5/5 fallos inyectados. Bloquea deploy. |
+| Content verifier (Fase 3) | `scripts/verify-content.js` | **B** | 78/100 | Bug hardcodeado "2 de marzo" corregido 2026-03-18. Cache puede enmascarar errores. |
+| Claims registry | `data/afirmaciones.json` | **A-** | 88/100 | 45 claims, 6 fuentes. Campo `status` no sincronizado con results. |
+| Source health (Fase 2) | `scripts/check-sources.js` | **B+** | 82/100 | 6 fuentes OK. Hashes BCN sospechosos (4 leyes = mismo hash). |
+| Frontend badges (Fase 4) | `public/js/verificacion.js` | **B-** | 72/100 | Secciones `context`/`stats` sin badge en HTML. |
+| RAG pipeline | `scripts/extract-from-pdf.js` | **C+** | 65/100 | 11/16 regiones OK. 5 requieren OCR (solo en CI). |
+| Generate pipeline | `scripts/generate-pages.js` | **A** | 95/100 | Sin fallos. |
+
+### Vulnerabilidades corregidas (2026-03-18)
+
+1. ~~**Hardcoded "2 de marzo" en verify-content.js**~~ CORREGIDO — ahora lee `pages[0].inicio` dinámicamente
+2. ~~**Badge `incorrecto` silencioso**~~ CORREGIDO — ahora muestra badge rojo "Discrepancia detectada"
+3. ~~**Badge `unverified` engañoso**~~ CORREGIDO — ahora dice "Pendiente de verificación" (ámbar)
+4. ~~**Sin badge cuando no hay fuente**~~ CORREGIDO — ahora muestra badge gris "Sin verificación independiente"
+5. ~~**source_reference obsoleta en afirmaciones.json**~~ CORREGIDO — actualizada a "4 de marzo"
+
+### Vulnerabilidades pendientes
+
+| Prioridad | Vulnerabilidad | Impacto | Mitigación sugerida |
+|-----------|---------------|---------|---------------------|
+| ALTA | Cache no tiene TTL — resultados CORRECTO persisten indefinidamente | Bug en lógica de verificación se enmascara | Agregar TTL de 30 días al cache |
+| ALTA | 4 leyes BCN con hash idéntico en source-health.json | Cambio en ley no se detectaría | Investigar si hash compara contenido correcto |
+| MEDIA | 11 claims sin referencia en HTML (contextual/derived) | Si fallan, ningún badge lo refleja | Agregar `data-verificacion="context"` en páginas relevantes |
+| MEDIA | Campo `status` en afirmaciones.json desincronizado | 32/45 dicen "unverified" pero verification-results dice CORRECTO | Agregar paso de sync post-verificación |
+| BAJA | 5/16 regiones sin extracción OCR local | Solo verificable en CI (Ubuntu) | Aceptable — workflow tiene tesseract |
+
+### Flujo de verificación completo
+
+```
+                     ┌─────────────────────────────────┐
+                     │  Fuentes oficiales (Mineduc/BCN) │
+                     └────────────┬────────────────────┘
+                                  │
+         ┌────────────────────────┼────────────────────────┐
+         │                        │                        │
+         ▼                        ▼                        ▼
+   ┌──────────┐           ┌──────────────┐         ┌─────────────┐
+   │ Fase 2   │           │ RAG Pipeline │         │ Fase 1      │
+   │ check-   │           │ extract-from │         │ afirmaciones│
+   │ sources  │           │ -pdf.js (v3) │         │ .json       │
+   │ (semanal)│           │ (bianual)    │         │ (45 claims) │
+   └────┬─────┘           └──────┬───────┘         └──────┬──────┘
+        │                        │                        │
+        ▼                        ▼                        ▼
+   source-health         pdf-extraction           ┌──────────────┐
+   .json                 -report.json             │ Fase 3       │
+        │                        │                │ verify-      │
+        │                        │                │ content.js   │
+        └────────────────┬───────┘                │ (mensual)    │
+                         │                        └──────┬───────┘
+                         ▼                               │
+                  ┌──────────────┐                       ▼
+                  │ validate.js  │              verification-
+                  │ (cada push)  │              results.json
+                  │ BUILD GATE   │                       │
+                  └──────┬───────┘                       │
+                         │                               │
+                    PASS │ FAIL → deploy bloqueado       │
+                         │                               │
+                         ▼                               ▼
+                  ┌──────────────────────────────────────────┐
+                  │ generate-verificacion.js                  │
+                  │ → public/data/verificacion.json           │
+                  └────────────────┬─────────────────────────┘
+                                   │
+                                   ▼
+                  ┌──────────────────────────────────────────┐
+                  │ Frontend badges (verificacion.js)         │
+                  │ ✓ Verde: verificado                       │
+                  │ ⚠ Rojo: discrepancia detectada            │
+                  │ ⏳ Ámbar: pendiente verificación           │
+                  │ — Gris: sin verificación independiente    │
+                  │ ⚠ Amarillo: fuente inaccesible            │
+                  └──────────────────────────────────────────┘
+```
+
+### RAG Pipeline (extract-from-pdf.js v3 — catalog-first)
+
+- **Arquitectura**: Descarga PDF → pdftotext (3 modos) → OCR fallback (tesseract) → DeepSeek catálogo → DeepSeek validación → checks determinísticos → análisis cross-regional
+- **Regímenes**: Distingue semestral vs trimestral en cada PDF
+- **Hitos extraídos**: Inicio año escolar, Ingreso estudiantes, Receso invierno, Fiestas Patrias, Último día clases (JEC/no-JEC), Término año escolar
+- **Workflow**: `.github/workflows/extract-pdf.yml` — cron 15 mayo + 31 diciembre 14:00 UTC + manual
+- **Inputs**: `--fix` (auto-corregir), `--region=slug`, `--force` (re-descargar)
+- **Estado actual**: 11/16 regiones con texto extraído. 5 regiones (Tarapacá, Atacama, Ñuble, Biobío, Araucanía) requieren OCR disponible solo en CI
+
+### Datos Mineduc corregidos 2026-03-18
+
+| Dato | Valor anterior (erróneo) | Valor correcto | Fuente |
+|------|-------------------------|----------------|--------|
+| winterStart | 2026-07-11 | **2026-06-22** | Resolución Mineduc reg. semestral |
+| winterEnd | 2026-07-25 | **2026-07-03** | Resolución Mineduc reg. semestral |
+| schoolStart | 2026-03-02 | **2026-03-04** | "Ingreso de estudiantes" (no "Inicio año escolar") |
+| schoolEnd | 2026-12-11 | **2026-12-04** | "Último día clases JEC 38 sem" |
+| Aysén vacaciones | standard | **29 jun - 17 jul** (19 días) | Resolución regional diferenciada |
+| Magallanes vacaciones | standard | **29 jun - 17 jul** (19 días) | Resolución regional diferenciada |
+| Aysén fin año | 4 dic | **23 dic** | Resolución regional |
+| Magallanes fin año | 4 dic | **11 dic** | Resolución regional |
 
 ---
 
@@ -425,8 +563,11 @@ npm run generate        # Genera todo: HTML, sitemap, regions-data.js, calendar-
 npm run build           # Valida datos + verificaciones de integridad
 npm run deploy          # Deploy a Cloudflare Pages
 
-node scripts/validate.js        # Solo validación de datos (0=OK, 1=error)
-node scripts/sync-from-sheet.js # Solo sync desde Sheet (requiere GOOGLE_API_KEY env var)
+node scripts/validate.js          # Solo validación de datos (0=OK, 1=error)
+node scripts/verify-content.js    # Verificación Fase 3 (determinística + IA). Con FORCE_ALL=true recalcula todo
+node scripts/sync-from-sheet.js   # Solo sync desde Sheet (requiere GOOGLE_API_KEY env var)
+npm run extract-pdf               # RAG: extrae datos de PDFs Mineduc (requiere DEEPSEEK_API_KEY)
+npm run verify-pdf                # RAG: solo PDFs locales (--local)
 
 # Calendar Monitor Worker (desde workers/calendar-monitor/)
 cd workers/calendar-monitor

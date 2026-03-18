@@ -1,0 +1,81 @@
+name: Verify Content Against Sources
+
+on:
+  schedule:
+    - cron: '0 12 1 * *'   # Dia 1 de cada mes, 12:00 UTC (09:00 Chile)
+  workflow_dispatch:
+    inputs:
+      force_all:
+        description: 'Re-verificar todas las afirmaciones (incluso las ya verificadas)'
+        required: false
+        default: 'false'
+  workflow_run:
+    workflows: ["Check Source Health"]
+    types: [completed]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    # Solo correr si fue disparado manualmente, por cron, o si el check de fuentes tuvo exito
+    if: >
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify content
+        id: verify
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          FORCE_ALL: ${{ github.event.inputs.force_all || 'false' }}
+        run: node scripts/verify-content.js
+        continue-on-error: true
+
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/verification-results.json data/verification-log.jsonl
+          git diff --staged --quiet || git commit -m "chore: update verification results [skip ci]"
+          git push
+
+      - name: Alert on INCORRECTO
+        if: steps.verify.outcome == 'failure'
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          INCORRECTOS=$(node -e "
+            var r = require('./data/verification-results.json');
+            r.results.filter(function(c) { return c.verdict === 'INCORRECTO'; }).forEach(function(c) {
+              console.log('• ' + c.id + ': ' + c.evidence);
+            });
+          " 2>/dev/null) || exit 0
+
+          if [ -z "$INCORRECTOS" ]; then exit 0; fi
+
+          MSG=$(printf '🚨 *DATOS INCORRECTOS — calendarioescolar.cl*\n\n%s\n\nAccion requerida: verificar y corregir datos.' "$INCORRECTOS")
+
+          curl -s -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -H "Content-Type: application/json" \
+            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+
+      - name: Summary
+        if: always()
+        run: |
+          node -e "
+            var r = require('./data/verification-results.json');
+            console.log('=== VERIFICACION DE CONTENIDO ===');
+            console.log('Total: ' + r.total_claims);
+            console.log('Correcto: ' + r.correcto);
+            console.log('Incorrecto: ' + r.incorrecto);
+            console.log('No verificable: ' + r.no_verificable);
+            console.log('Fuente inaccesible: ' + r.fuente_inaccesible);
+          "
