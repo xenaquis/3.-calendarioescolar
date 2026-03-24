@@ -19,22 +19,22 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 02 — datos-completos
+**Current focus:** Phase 03 — region-selector-panel
 
 ## Phase Status
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | Pipeline Visual | in_progress |
-| 2 | Datos Completos | not_started |
+| 1 | Pipeline Visual | completed |
+| 2 | Datos Completos | completed |
+| 3 | Region Selector Panel | in_progress |
 
-## Plan Progress — Phase 01
+## Plan Progress — Phase 03
 
 | Plan | Name | Status |
 |------|------|--------|
-| 01-01 | PDF-to-PNG Pipeline Setup | completed |
-| 01-02 | TBD | not_started |
-| 01-03 | TBD | not_started |
+| 03-01 | CSS + HTML Structure | completed |
+| 03-02 | JS Wiring | not_started |
 
 ## Decisions
 
@@ -68,11 +68,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 | Phase 01 P03 | 15 | 2 tasks | 3 files |
 | Phase 02 P01 | 8 min | 2 tasks | 7 files |
 | Phase 02 P02 | 15 | 1 tasks | 19 files |
+| 03 | 01 | 12 min | 2 | 2 |
 
 ## Session
 
-**Last session:** 2026-03-24T14:55:14.627Z
-**Stopped at:** Completed 02-02-PLAN.md
+**Last session:** 2026-03-24T16:30:00Z
+**Stopped at:** Completed 03-01-PLAN.md
 
 ---
 *Last updated: 2026-03-24*

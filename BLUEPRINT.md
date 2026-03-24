@@ -36,7 +36,7 @@ Ultimo update de este blueprint: 2026-03-18 (auditoría empírica validadores + 
 ```
 /
 ├── public/                         -> Root del sitio estatico (Cloudflare Pages)
-│   ├── index.html                  -> Homepage: key-facts, school-stats, chips selector de región, feriados escolares
+│   ├── index.html                  -> Homepage: school-stats, map layout selector (region list + data panel), feriados escolares
 │   ├── feriados-2026.html          -> Landing feriados: tabla filtrable + timeline + FAQ (generada a mano)
 │   ├── vacaciones-invierno-2026.html -> Landing SEO: fechas vacaciones por región
 │   ├── cuando-empiezan-clases-2026.html -> Landing SEO: inicio de clases
