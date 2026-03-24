@@ -16,12 +16,12 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 </details>
 
-### Phase 3: Region Selector Panel (in_progress — 0/2 plans complete)
+### Phase 3: Region Selector Panel (completed — 2/2 plans complete)
 
 | Plan | Name | Status |
 |------|------|--------|
 | 03-01 | CSS + HTML Structure | completed |
-| 03-02 | JS Wiring | not_started |
+| 03-02 | JS Wiring | completed |
 
 ---
-*Updated: 2026-03-24 — Phase 3 started*
+*Updated: 2026-03-24 — Phase 3 completed (desktop region selector fully functional)*

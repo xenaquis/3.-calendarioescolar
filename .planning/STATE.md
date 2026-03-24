@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Mapa Interactivo
 status: Ready to execute
-last_updated: "2026-03-24T17:04:57.674Z"
+last_updated: "2026-03-24T17:30:00.000Z"
 progress:
   total_phases: 2
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 0
+  completed_plans: 2
 ---
 
 # State — calendarioescolar.cl v1.1
@@ -22,14 +22,14 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 
 ## Current Position
 
-Phase: 03 (region-selector-panel) — EXECUTING
-Plan: 2 of 2
+Phase: 03 (region-selector-panel) — COMPLETED
+Plan: 2 of 2 (all complete)
 
 ## Phase Status
 
 | Phase | Goal | Status |
 |-------|------|--------|
-| 3 — Region Selector + Panel | Lista + panel funcional en desktop | Not started |
+| 3 — Region Selector + Panel | Lista + panel funcional en desktop | Completed 2026-03-24 |
 | 4 — Mobile Responsiveness | Dropdown + panel vertical en mobile | Not started |
 
 ## Decisions
@@ -42,6 +42,8 @@ Plan: 2 of 2
 - [v1.1]: Fases separadas por entorno: Phase 3 = desktop completo, Phase 4 = mobile
 - [Phase 03-region-selector-panel]: ESTANDAR regions have no data-grupo attribute; CSS default color applies
 - [Phase 03-region-selector-panel]: details[open] for additional data in panel - open by default per user decision
+- [Phase 03-02]: GRUPOS constant in JS (not data attributes on HTML) — group logic co-located with selector
+- [Phase 03-02]: selectRegion receives NodeList at init time to avoid re-querying DOM on each click
 
 ## Accumulated Context
 
@@ -51,4 +53,4 @@ Plan: 2 of 2
 - Tech: vanilla HTML/CSS/JS, IIFE modules, var para compatibilidad
 
 ---
-*Last updated: 2026-03-24 — roadmap created for v1.1*
+*Last updated: 2026-03-24 — Phase 03 completed (JS wiring done, desktop selector fully functional)*
