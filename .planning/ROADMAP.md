@@ -19,7 +19,7 @@
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — PDF-to-PNG generation + snapshot organization (PIPE-01, PIPE-02)
+- [x] 01-01-PLAN.md — PDF-to-PNG generation + snapshot organization (PIPE-01, PIPE-02)
 - [ ] 01-02-PLAN.md — Visual extraction script with multimodal LLM (PIPE-03)
 - [ ] 01-03-PLAN.md — Deterministic validation + cross-region checks + workflow update (PIPE-04, PIPE-05)
 
