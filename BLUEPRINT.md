@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-18 (auditoría empírica validadores + RAG pipeline + badges honestos).
+Ultimo update de este blueprint: 2026-03-24 (CSS token fixes: --space-5 y --leading-relaxed; mejora responsividad key-facts en movil).
 
 ---
 
@@ -22,7 +22,7 @@ Ultimo update de este blueprint: 2026-03-18 (auditoría empírica validadores + 
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
 | Datos Mineduc 2026    | CORREGIDOS      | Vacaciones invierno corregidas (jun-jul). Inicio clases = 4 mar. Fin = 4 dic. Aysén/Magallanes diferenciados |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
-| Frontend              | COMPLETADO      | Rediseño UX completado 2026-03-16                  |
+| Frontend              | COMPLETADO      | CSS token fixes + responsividad móvil (2026-03-24) |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
 | SEO / Anti-IA         | COMPLETADO      | Auditoría 360° 2026-03-17: E-E-A-T, llms.txt, schemas, cache — commit 3df7917 |
 | Validación Robusta    | 4 FASES + RAG   | Auditoría empírica 2026-03-18: fiabilidad B+ (82/100). Ver sección Validación abajo |
