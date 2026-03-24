@@ -3,7 +3,6 @@
 ## Milestones
 
 - ✅ **v1.0 Extraccion Fidedigna + Datos Completos** — Phases 1-2 (shipped 2026-03-24)
-- [ ] **v1.1 Mapa Interactivo** — Phases 3-4
 
 ## Phases
 
@@ -17,24 +16,11 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 </details>
 
-### Phase 3: Region Selector Panel (completed — 2/2 plans complete)
+## Phase 04: Mobile Responsiveness
 
 | Plan | Name | Status |
 |------|------|--------|
-| 03-01 | CSS + HTML Structure | completed |
-| 03-02 | JS Wiring | completed |
-
-### Phase 4: Mobile Responsiveness
-**Goal**: Users on mobile can select a region via a native dropdown and see the data panel stacked below it
-**Depends on**: Phase 3
-**Requirements**: RESP-02
-**Success Criteria** (what must be TRUE):
-  1. On a screen narrower than 650px the region list is replaced by a native select dropdown, and the data panel appears below it
-  2. Selecting a region in the dropdown populates the panel with the same data shown on desktop
-**Plans**: 1 plan
-
-Plans:
-- [ ] 04-01-PLAN.md — Agregar select mobile (HTML + CSS + JS)
+| 04-01 | Mobile Responsiveness & CSS Token Fixes | completed |
 
 ---
-*Updated: 2026-03-24 — Phase 4 planned (1 plan)*
+*Updated: 2026-03-24 after 04-01 completion*

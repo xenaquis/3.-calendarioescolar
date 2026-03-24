@@ -432,6 +432,13 @@ details h3 {
   margin-top: 0;
 }
 
+/* Pantallas muy pequenas: reducir tamano de fecha para evitar overflow */
+@media (max-width: 400px) {
+  .key-fact__date {
+    font-size: var(--text-xl);
+  }
+}
+
 @media (min-width: 640px) {
   .key-facts {
     grid-template-columns: repeat(4, 1fr);

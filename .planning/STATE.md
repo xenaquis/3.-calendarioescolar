@@ -2,55 +2,80 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Milestone complete
-last_updated: "2026-03-24T17:17:30.551Z"
+status: active
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-24T17:28:00.000Z"
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  total_phases: 4
+  completed_phases: 2
+  total_plans: 6
+  completed_plans: 6
 ---
 
-# State — calendarioescolar.cl v1.1
+# State — calendarioescolar.cl v2
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-24)
 
-**Core value:** Informacion 100% fidedigna extraida de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 03 — region-selector-panel
-
-## Current Position
-
-Phase: 03
-Plan: Not started
+**Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
+**Current focus:** Phase 04 — mobile-responsiveness
 
 ## Phase Status
 
-| Phase | Goal | Status |
-|-------|------|--------|
-| 3 — Region Selector + Panel | Lista + panel funcional en desktop | Completed 2026-03-24 |
-| 4 — Mobile Responsiveness | Dropdown + panel vertical en mobile | Not started |
+| # | Phase | Status |
+|---|-------|--------|
+| 1 | Pipeline Visual | completed |
+| 2 | Datos Completos | completed |
+| 3 | (skipped) | — |
+| 4 | Mobile Responsiveness | in_progress |
+
+## Plan Progress — Phase 04
+
+| Plan | Name | Status |
+|------|------|--------|
+| 04-01 | Mobile Responsiveness & CSS Token Fixes | completed |
 
 ## Decisions
 
-- [v1.0]: Pipeline visual completo, datos extendidos en 16 regiones
-- [v1.1]: Rediseno homepage con mapa interactivo (Mock C aprobado por usuario)
-- [v1.1]: Layout split: lista regiones izquierda + panel datos derecha (desktop)
-- [v1.1]: Mobile: dropdown fallback + panel vertical (Phase 4)
-- [v1.1]: Datos desde regions-data.js existente — sin duplicar datos
-- [v1.1]: Fases separadas por entorno: Phase 3 = desktop completo, Phase 4 = mobile
-- [Phase 03-region-selector-panel]: ESTANDAR regions have no data-grupo attribute; CSS default color applies
-- [Phase 03-region-selector-panel]: details[open] for additional data in panel - open by default per user decision
-- [Phase 03-02]: GRUPOS constant in JS (not data attributes on HTML) — group logic co-located with selector
-- [Phase 03-02]: selectRegion receives NodeList at init time to avoid re-querying DOM on each click
+- **[Phase 04-01]:** --space-5 set to 1.25rem (4px scale: 5×4=20px=1.25rem); --leading-relaxed set to 1.75 (standard)
+- **[Phase 04-01]:** key-fact__date breakpoint at 400px targets narrowest phones (iPhone SE 375px)
+- **PDF location:** Regional PDFs are in `data/extraction-tests/` (not `data/snapshots/`). Scripts handle both via `--pdf-dir` arg and worktree fallback.
+- **Table PNG count:** 25 table PNGs organized (not 62 — the 62 are all pages; 25 are the table-specific ones per TODAS-REGIONES JSON)
+- **Worktree paths:** organize-snapshots.js auto-detects parent project when running from git worktree
+- [Phase 01]: extract-visual.js --local mode expands TODAS-REGIONES-visual-extraction.json to gold standard structure
+- [Phase 01]: API mode supports Anthropic (default) and OpenAI via EXTRACTION_API env var
+- [Phase 01]: Dual-format detection in validate-extraction.js: flat-field format (TODAS-REGIONES) handled by skipping label-based checks and parsing Spanish dates for cross-region analysis
+- [Phase 02]: finAnoSinJEC/EPJA dates derived from regional group rules in buildFromLocalData(), not hardcoded per region
+- [Phase 02]: populate-pages-json.js is a separate script from extract-visual.js for clean separation of concerns
+- [Phase 02]: SUR group (Aysén, Magallanes) has different finSinJEC=23 dic, finEPJA=27 nov — verified against aysen-gold-standard.json
+- [Phase 02]: Native <details> element used for collapsible — no JavaScript, works without CSS
+- [Phase 02]: Section placed after main table, closed by default — secondary info not prominent
 
-## Accumulated Context
+## Context from Research (2026-03-24)
 
-- regions-data.js ya tiene los 5 campos adicionales de v1.0 para las 16 regiones
-- 4 grupos regionales: ESTANDAR (11), NORTE (Arica, Tarapaca), SUR (Aysén, Magallanes), SUR-PARCIAL (Los Lagos)
-- Breakpoint mobile: 650px
-- Tech: vanilla HTML/CSS/JS, IIFE modules, var para compatibilidad
+- 62 PNGs generados de los 16 PDFs en `data/extraction-tests/`
+- Extracción visual validada manualmente para las 16 regiones
+- 5 regiones con datos corregidos en `pages.json` (Arica, Tarapacá, Los Lagos, Aysén, Magallanes)
+- Gold standards creados para Metropolitana, Aysén, Maule
+- Pipeline actual (`extract-from-pdf.js`) usa DeepSeek + pdftotext — será reemplazado
+- **Plan 01-01 completado (2026-03-24):** scripts/pdf-to-png.py + scripts/organize-snapshots.js + 25 tabla PNGs + png-manifest.json
+
+## Performance Metrics
+
+| Phase | Plan | Duration | Tasks | Files |
+|-------|------|----------|-------|-------|
+| 01 | 01 | 3 min | 2 | 28 |
+| Phase 01 P02 | 2 min | 1 tasks | 2 files |
+| Phase 01 P03 | 15 | 2 tasks | 3 files |
+| Phase 02 P01 | 8 min | 2 tasks | 7 files |
+| Phase 02 P02 | 15 | 1 tasks | 19 files |
+| 04 | 01 | 4 min | 3 | 3 |
+
+## Session
+
+**Last session:** 2026-03-24T17:28:00.000Z
+**Stopped at:** Completed 04-01-PLAN.md
 
 ---
-*Last updated: 2026-03-24 — Phase 03 completed (JS wiring done, desktop selector fully functional)*
+*Last updated: 2026-03-24 after 04-01 completion*
