@@ -212,8 +212,31 @@
           <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-accent)"></span> Sur (2)</span>
         </div>
 
+        <!-- Mobile: dropdown selector (hidden on desktop) -->
+        <div class="mobile-region-selector">
+          <select id="region-select" aria-label="Selecciona tu regi&oacute;n">
+            <option value="">Selecciona tu regi&oacute;n</option>
+            <option value="arica-y-parinacota">Arica y Parinacota</option>
+            <option value="tarapaca">Tarapac&aacute;</option>
+            <option value="antofagasta">Antofagasta</option>
+            <option value="atacama">Atacama</option>
+            <option value="coquimbo">Coquimbo</option>
+            <option value="valparaiso">Valpara&iacute;so</option>
+            <option value="metropolitana">Metropolitana</option>
+            <option value="ohiggins">O&rsquo;Higgins</option>
+            <option value="maule">Maule</option>
+            <option value="nuble">&Ntilde;uble</option>
+            <option value="biobio">Biob&iacute;o</option>
+            <option value="araucania">La Araucan&iacute;a</option>
+            <option value="los-rios">Los R&iacute;os</option>
+            <option value="los-lagos">Los Lagos</option>
+            <option value="aysen">Ays&eacute;n</option>
+            <option value="magallanes">Magallanes</option>
+          </select>
+        </div>
+
         <div class="map-layout">
-          <!-- Lista de regiones -->
+          <!-- Lista de regiones (hidden on mobile) -->
           <div class="map-panel" role="listbox" aria-label="Regiones de Chile">
             <p class="map-panel__title">Regiones de Chile</p>
             <div class="chile-map">

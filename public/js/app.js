@@ -54,8 +54,19 @@ var App = (function () {
       (function (bar) {
         bar.addEventListener('click', function () {
           selectRegion(bar.dataset.slug, bars);
+          // Sync mobile dropdown
+          var sel = document.getElementById('region-select');
+          if (sel) sel.value = bar.dataset.slug;
         });
       })(bars[i]);
+    }
+
+    // Mobile dropdown
+    var mobileSelect = document.getElementById('region-select');
+    if (mobileSelect) {
+      mobileSelect.addEventListener('change', function () {
+        selectRegion(mobileSelect.value, bars);
+      });
     }
   }
 
@@ -65,9 +76,11 @@ var App = (function () {
     var r = REGIONS[slug];
 
     // Desactivar todas las barras
-    for (var i = 0; i < bars.length; i++) {
-      bars[i].classList.remove('active');
-      bars[i].setAttribute('aria-selected', 'false');
+    if (bars) {
+      for (var i = 0; i < bars.length; i++) {
+        bars[i].classList.remove('active');
+        bars[i].setAttribute('aria-selected', 'false');
+      }
     }
     // Activar la barra seleccionada
     var activeBar = document.querySelector('.region-bar[data-slug="' + slug + '"]');

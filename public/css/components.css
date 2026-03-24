@@ -657,7 +657,25 @@ details h3 {
   gap: var(--space-4);
   margin: var(--space-6) 0;
 }
+/* Mobile: show dropdown, hide region list */
+.mobile-region-selector {
+  margin-bottom: var(--space-3);
+}
+.mobile-region-selector select {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-size: 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Desktop: hide dropdown, show list + grid */
 @media (min-width: 650px) {
+  .mobile-region-selector {
+    display: none;
+  }
   .map-layout {
     grid-template-columns: 220px 1fr;
   }
