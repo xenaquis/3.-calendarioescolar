@@ -21,9 +21,10 @@
  *   node scripts/extract-visual.js --dry-run          # mostrar qué se procesaría sin API calls
  *
  * ENV:
- *   EXTRACTION_API      = "anthropic" (default) | "openai"
+ *   EXTRACTION_API      = "anthropic" (default) | "openai" | "gemini"
  *   ANTHROPIC_API_KEY   = clave Anthropic
  *   OPENAI_API_KEY      = clave OpenAI
+ *   GOOGLE_API_KEY      = clave Google AI (Gemini)
  *   EXTRACTION_MODEL    = modelo a usar (override)
  */
 
@@ -46,9 +47,11 @@ var OUTPUT_PATH = path.join(ROOT, 'data', 'visual-extraction.json');
 var EXTRACTION_API = process.env.EXTRACTION_API || 'anthropic';
 var ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY || '';
 var OPENAI_API_KEY = process.env.OPENAI_API_KEY || '';
+var GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || '';
 var EXTRACTION_MODEL = process.env.EXTRACTION_MODEL || '';
 var DEFAULT_MODEL_ANTHROPIC = 'claude-sonnet-4-20250514';
 var DEFAULT_MODEL_OPENAI = 'gpt-4o';
+var DEFAULT_MODEL_GEMINI = 'gemini-2.5-flash';
 var API_TIMEOUT_MS = 90000;
 var DELAY_BETWEEN_REGIONS_MS = 3000;
 var YEAR = 2026;
@@ -340,6 +343,85 @@ function callOpenAI(base64Images, model) {
 }
 
 /**
+ * Llama a Google Gemini API con imagen en base64
+ * Retorna el texto de respuesta del modelo
+ */
+function callGemini(base64Images, model) {
+  return new Promise(function (resolve, reject) {
+    var apiKey = GOOGLE_API_KEY;
+    if (!apiKey) {
+      return reject(new Error('GOOGLE_API_KEY no está definida'));
+    }
+
+    var modelName = model || DEFAULT_MODEL_GEMINI;
+
+    // Construir parts array: imagenes + texto del prompt
+    var parts = [];
+    base64Images.forEach(function (b64) {
+      parts.push({
+        inline_data: {
+          mime_type: 'image/png',
+          data: b64
+        }
+      });
+    });
+    parts.push({ text: EXTRACTION_PROMPT });
+
+    var body = JSON.stringify({
+      contents: [{ parts: parts }],
+      generationConfig: { maxOutputTokens: 4096 }
+    });
+
+    var options = {
+      hostname: 'generativelanguage.googleapis.com',
+      path: '/v1beta/models/' + modelName + ':generateContent?key=' + apiKey,
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'content-length': Buffer.byteLength(body)
+      }
+    };
+
+    var timer = setTimeout(function () {
+      req.destroy();
+      reject(new Error('API timeout (90s)'));
+    }, API_TIMEOUT_MS);
+
+    var req = https.request(options, function (res) {
+      var data = '';
+      res.on('data', function (chunk) { data += chunk; });
+      res.on('end', function () {
+        clearTimeout(timer);
+        try {
+          var parsed = JSON.parse(data);
+          if (parsed.error) {
+            return reject(new Error('Gemini API error: ' + (parsed.error.message || JSON.stringify(parsed.error))));
+          }
+          if (!parsed.candidates || !parsed.candidates[0] || !parsed.candidates[0].content) {
+            return reject(new Error('Respuesta inesperada de Gemini: ' + data.substring(0, 200)));
+          }
+          var textPart = parsed.candidates[0].content.parts.filter(function (p) { return p.text; })[0];
+          if (!textPart) {
+            return reject(new Error('No se encontró texto en respuesta Gemini'));
+          }
+          resolve(textPart.text);
+        } catch (e) {
+          reject(new Error('Error parseando respuesta Gemini: ' + e.message));
+        }
+      });
+    });
+
+    req.on('error', function (e) {
+      clearTimeout(timer);
+      reject(e);
+    });
+
+    req.write(body);
+    req.end();
+  });
+}
+
+/**
  * Llama al LLM con las imágenes en base64. Reintenta una vez si falla.
  */
 function callLLM(base64Images) {
@@ -349,6 +431,9 @@ function callLLM(base64Images) {
   function attempt() {
     if (apiName === 'openai') {
       return callOpenAI(base64Images, model);
+    }
+    if (apiName === 'gemini') {
+      return callGemini(base64Images, model);
     }
     return callAnthropic(base64Images, model);
   }
@@ -718,7 +803,7 @@ function runAPIMode(manifest, regions) {
         pipeline: 'visual',
         date: new Date().toISOString().substring(0, 10),
         api: EXTRACTION_API,
-        model: EXTRACTION_MODEL || (EXTRACTION_API === 'openai' ? DEFAULT_MODEL_OPENAI : DEFAULT_MODEL_ANTHROPIC)
+        model: EXTRACTION_MODEL || (EXTRACTION_API === 'openai' ? DEFAULT_MODEL_OPENAI : EXTRACTION_API === 'gemini' ? DEFAULT_MODEL_GEMINI : DEFAULT_MODEL_ANTHROPIC)
       },
       regions: {}
     };

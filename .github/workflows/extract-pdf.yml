@@ -50,7 +50,10 @@ jobs:
       - name: Extract data from PNGs (visual)
         id: extract
         env:
+          EXTRACTION_API: ${{ secrets.EXTRACTION_API || 'gemini' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
         run: |
           ARGS=""
           if [ -n "${{ github.event.inputs.region }}" ]; then ARGS="$ARGS --region=${{ github.event.inputs.region }}"; fi
