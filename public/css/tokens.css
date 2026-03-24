@@ -37,12 +37,14 @@
   --text-hero: clamp(2.5rem, 6vw, 4rem);
   --leading-tight: 1.2;
   --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
 
   /* Spacing (escala de 4px) */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
   --space-10: 2.5rem;
