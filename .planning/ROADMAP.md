@@ -6,7 +6,7 @@
 
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|------------------|
-| 1 | Pipeline Visual | 2/3 | In Progress|  |
+| 1 | Pipeline Visual | 3/3 | Complete   | 2026-03-24 |
 | 2 | Datos Completos | Mostrar todos los hitos del calendario en cada pagina | DATA-01..04 | Tabla extendida visible, datos verificados, estetica consistente |
 
 ## Phase Details
@@ -16,12 +16,12 @@
 
 **Requirements:** PIPE-01, PIPE-02, PIPE-03, PIPE-04, PIPE-05
 
-**Plans:** 2/3 plans executed
+**Plans:** 3/3 plans complete
 
 Plans:
 - [x] 01-01-PLAN.md — PDF-to-PNG generation + snapshot organization (PIPE-01, PIPE-02)
 - [x] 01-02-PLAN.md — Visual extraction script with multimodal LLM (PIPE-03)
-- [ ] 01-03-PLAN.md — Deterministic validation + cross-region checks + workflow update (PIPE-04, PIPE-05)
+- [x] 01-03-PLAN.md — Deterministic validation + cross-region checks + workflow update (PIPE-04, PIPE-05)
 
 **Success criteria:**
 1. Los 16 PDFs generan PNGs de las paginas con tablas

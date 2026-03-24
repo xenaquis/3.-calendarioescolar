@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-stopped_at: Completed 01-02-PLAN.md
-last_updated: "2026-03-24T14:14:15.175Z"
+stopped_at: Completed 01-03-PLAN.md
+last_updated: "2026-03-24T14:18:09.424Z"
 progress:
   total_phases: 2
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 3
-  completed_plans: 2
+  completed_plans: 3
 ---
 
 # State — calendarioescolar.cl v2
@@ -43,6 +43,7 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 - **Worktree paths:** organize-snapshots.js auto-detects parent project when running from git worktree
 - [Phase 01]: extract-visual.js --local mode expands TODAS-REGIONES-visual-extraction.json to gold standard structure
 - [Phase 01]: API mode supports Anthropic (default) and OpenAI via EXTRACTION_API env var
+- [Phase 01]: Dual-format detection in validate-extraction.js: flat-field format (TODAS-REGIONES) handled by skipping label-based checks and parsing Spanish dates for cross-region analysis
 
 ## Context from Research (2026-03-24)
 
@@ -59,11 +60,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 |-------|------|----------|-------|-------|
 | 01 | 01 | 3 min | 2 | 28 |
 | Phase 01 P02 | 2 min | 1 tasks | 2 files |
+| Phase 01 P03 | 15 | 2 tasks | 3 files |
 
 ## Session
 
-**Last session:** 2026-03-24T14:14:15.167Z
-**Stopped at:** Completed 01-02-PLAN.md
+**Last session:** 2026-03-24T14:18:09.419Z
+**Stopped at:** Completed 01-03-PLAN.md
 
 ---
 *Last updated: 2026-03-24*

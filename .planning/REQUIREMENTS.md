@@ -7,8 +7,8 @@
 - [x] **PIPE-01**: Script genera PNGs de páginas con tablas desde los 16 PDFs regionales usando PyMuPDF
 - [x] **PIPE-02**: PNGs se preservan en `data/snapshots/` con naming consistente (`{region}-tabla-p{N}.png`)
 - [x] **PIPE-03**: Extracción produce JSON estructurado por región con todos los hitos del calendario
-- [ ] **PIPE-04**: Checks deterministas validan formato fecha, día de semana, año, rangos
-- [ ] **PIPE-05**: Cross-region detecta diferencias y las clasifica como legítimas (NORTE/SUR/SUR-PARCIAL) vs errores
+- [x] **PIPE-04**: Checks deterministas validan formato fecha, día de semana, año, rangos
+- [x] **PIPE-05**: Cross-region detecta diferencias y las clasifica como legítimas (NORTE/SUR/SUR-PARCIAL) vs errores
 
 ### DATA — Datos Completos por Región
 
