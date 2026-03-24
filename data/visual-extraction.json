@@ -1,0 +1,1097 @@
+{
+  "_meta": {
+    "pipeline": "visual",
+    "date": "2026-03-24",
+    "api": "local"
+  },
+  "regions": {
+    "arica-y-parinacota": {
+      "_meta": {
+        "region": "Arica y Parinacota",
+        "regionSlug": "arica-y-parinacota",
+        "source_pdf": "mineduc-arica-y-parinacota.pdf",
+        "resolution": null,
+        "notes": "Receso 13 jul - 24 jul. Trimestral dice: régimen semestral lunes 13 al 24 de julio",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-07-13",
+          "date_end": "2026-07-24",
+          "raw_text": "13 de julio - 24 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-07-13",
+          "date_end": "2026-07-24",
+          "raw_text": "13 de julio - 24 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "tarapaca": {
+      "_meta": {
+        "region": "Tarapacá",
+        "regionSlug": "tarapaca",
+        "source_pdf": "mineduc-tarapaca.pdf",
+        "resolution": null,
+        "notes": "Idéntico a Arica. Receso 13 jul - 24 jul",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-07-13",
+          "date_end": "2026-07-24",
+          "raw_text": "13 de julio - 24 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-07-13",
+          "date_end": "2026-07-24",
+          "raw_text": "13 de julio - 24 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "antofagasta": {
+      "_meta": {
+        "region": "Antofagasta",
+        "regionSlug": "antofagasta",
+        "source_pdf": "mineduc-antofagasta.pdf",
+        "resolution": null,
+        "notes": null,
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "atacama": {
+      "_meta": {
+        "region": "Atacama",
+        "regionSlug": "atacama",
+        "source_pdf": "mineduc-atacama.pdf",
+        "resolution": null,
+        "notes": "Nota oficial en p4: Aysén y Magallanes deben tener receso una semana después + semana adicional, desde 29 junio",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "coquimbo": {
+      "_meta": {
+        "region": "Coquimbo",
+        "regionSlug": "coquimbo",
+        "source_pdf": "mineduc-coquimbo.pdf",
+        "resolution": null,
+        "notes": null,
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "valparaiso": {
+      "_meta": {
+        "region": "Valparaíso",
+        "regionSlug": "valparaiso",
+        "source_pdf": "mineduc-valparaiso.pdf",
+        "resolution": null,
+        "notes": null,
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "metropolitana": {
+      "_meta": {
+        "region": "Región Metropolitana",
+        "regionSlug": "metropolitana",
+        "source_pdf": "mineduc-metropolitana.pdf",
+        "resolution": null,
+        "notes": null,
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "ohiggins": {
+      "_meta": {
+        "region": "O'Higgins",
+        "regionSlug": "ohiggins",
+        "source_pdf": "mineduc-ohiggins.pdf",
+        "resolution": null,
+        "notes": null,
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "maule": {
+      "_meta": {
+        "region": "Maule",
+        "regionSlug": "maule",
+        "source_pdf": "mineduc-maule.pdf",
+        "resolution": null,
+        "notes": "Formato numerado diferente. Año escolar desde 01 marzo (domingo) pero clases desde 04 marzo",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "nuble": {
+      "_meta": {
+        "region": "Ñuble",
+        "regionSlug": "nuble",
+        "source_pdf": "mineduc-nuble.pdf",
+        "resolution": null,
+        "notes": null,
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "biobio": {
+      "_meta": {
+        "region": "Biobío",
+        "regionSlug": "biobio",
+        "source_pdf": "mineduc-biobio.pdf",
+        "resolution": null,
+        "notes": "Formato numerado tipo Maule. Usa JECD en vez de JEC",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "araucania": {
+      "_meta": {
+        "region": "La Araucanía",
+        "regionSlug": "araucania",
+        "source_pdf": "mineduc-araucania.pdf",
+        "resolution": null,
+        "notes": null,
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "los-rios": {
+      "_meta": {
+        "region": "Los Ríos",
+        "regionSlug": "los-rios",
+        "source_pdf": "mineduc-los-rios.pdf",
+        "resolution": null,
+        "notes": "Formato tabla única (trimestral). 2do receso trimestral: lunes 14 al JUEVES 17 sept (no viernes 18). fiestasPatriasFin podría ser 17 en vez de 18",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-17",
+          "raw_text": "14 de septiembre - 17 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "22 de junio - 3 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-17",
+          "raw_text": "14 de septiembre - 17 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "los-lagos": {
+      "_meta": {
+        "region": "Los Lagos",
+        "regionSlug": "los-lagos",
+        "source_pdf": "mineduc-los-lagos.pdf",
+        "resolution": null,
+        "notes": "Receso invierno: 6 jul - 17 jul. Diferente al estándar Y diferente a Aysén/Magallanes. EPJA ingresa 10 marzo (no 4)",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-07-06",
+          "date_end": "2026-07-17",
+          "raw_text": "6 de julio - 17 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-07-06",
+          "date_end": "2026-07-17",
+          "raw_text": "6 de julio - 17 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "4 de diciembre"
+        }
+      ]
+    },
+    "aysen": {
+      "_meta": {
+        "region": "Aysén",
+        "regionSlug": "aysen",
+        "source_pdf": "mineduc-aysen.pdf",
+        "resolution": null,
+        "notes": "Receso extendido por calidad del aire Coyhaique. Fin año 11 dic (no 4 dic)",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-29",
+          "date_end": "2026-07-17",
+          "raw_text": "29 de junio - 17 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-11",
+          "raw_text": "11 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-29",
+          "date_end": "2026-07-17",
+          "raw_text": "29 de junio - 17 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-11",
+          "raw_text": "11 de diciembre"
+        }
+      ]
+    },
+    "magallanes": {
+      "_meta": {
+        "region": "Magallanes",
+        "regionSlug": "magallanes",
+        "source_pdf": "mineduc-magallanes.pdf",
+        "resolution": null,
+        "notes": "Idéntico a Aysén. Fin año 11 dic. Sin JEC: 23 dic",
+        "extracted_by": "visual-pipeline-local",
+        "extracted_date": "2026-03-24"
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "label": "Inicio del año escolar",
+          "date": "2026-03-02",
+          "raw_text": "Lunes 02 de marzo",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-29",
+          "date_end": "2026-07-17",
+          "raw_text": "29 de junio - 17 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-11",
+          "raw_text": "11 de diciembre"
+        }
+      ],
+      "trimestral": [
+        {
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "4 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "label": "Receso de invierno régimen trimestral",
+          "date_start": "2026-06-29",
+          "date_end": "2026-07-17",
+          "raw_text": "29 de junio - 17 de julio"
+        },
+        {
+          "label": "Fiestas Patrias",
+          "date_start": "2026-09-14",
+          "date_end": "2026-09-18",
+          "raw_text": "14 de septiembre - 18 de septiembre"
+        },
+        {
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-11",
+          "raw_text": "11 de diciembre"
+        }
+      ]
+    }
+  }
+}
