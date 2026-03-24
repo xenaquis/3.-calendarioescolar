@@ -34,7 +34,10 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
   3. The active region is visually highlighted in the list so the user knows which region they are viewing
   4. A legend below or near the list explains what each color represents
   5. User can click "Ver pagina completa" in the panel and land on the correct /region/[slug]/ page
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 03-01-PLAN.md — CSS + HTML: map layout structure with region list, data panel, legend
+- [ ] 03-02-PLAN.md — JS: wire region clicks to data panel + visual verification
 **UI hint**: yes
 
 ### Phase 4: Mobile Responsiveness
@@ -51,8 +54,8 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 3. Region Selector + Panel | 0/? | Not started | - |
+| 3. Region Selector + Panel | 0/2 | Planning complete | - |
 | 4. Mobile Responsiveness | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-24 — v1.1 roadmap created*
+*Updated: 2026-03-24 — Phase 3 planned (2 plans, 2 waves)*
