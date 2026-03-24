@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-03-24T14:44:52.000Z",
+  "generated_at": "2026-03-24T14:50:52.688Z",
   "summary": {
-    "total_claims": 45,
+    "total_claims": 50,
     "verified": 45,
-    "unverified": 0,
+    "unverified": 5,
     "incorrecto": 0,
     "no_verificable": 0,
     "fuente_inaccesible": 0,
@@ -20,8 +20,8 @@
   "sections": {
     "school-dates": {
       "id": "school-dates",
-      "status": "correcto",
-      "claims_count": 16,
+      "status": "unverified",
+      "claims_count": 21,
       "sources": [
         "Resolucion Exenta Calendario Escolar 2026"
       ],

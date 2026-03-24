@@ -599,3 +599,44 @@ details h3 {
   color: var(--color-text-secondary);
   text-decoration: underline;
 }
+
+/* ============================================
+   Details-extra — collapsible secondary section
+   ============================================ */
+.section--secondary {
+  margin-top: var(--space-4);
+}
+
+.details-extra {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0;
+  background: var(--color-bg);
+}
+
+.details-extra__summary {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+.details-extra__summary::-webkit-details-marker {
+  display: none;
+}
+
+.details-extra[open] .details-extra__summary {
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.details-extra .table-wrapper {
+  padding: var(--space-4) var(--space-5);
+}
+
+.details-extra table {
+  font-size: var(--text-sm);
+}

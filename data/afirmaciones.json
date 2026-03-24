@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "generatedAt": "2026-03-17",
     "description": "Registro claim-centric: claims vinculadas a data_keys, no a paginas. Las paginas declaran sus datos via <meta name='claim-data'>. El mapping claim-pagina se resuelve en build time.",
-    "totalClaims": 45,
+    "totalClaims": 50,
     "model": "claim-centric",
     "tags_used": [
       "fechas_escolares",
@@ -930,6 +930,99 @@
       "verification_method": "arithmetic",
       "verification_tier": 0,
       "expected_check": "daysDiff('2026-09-14', '2026-09-18') + 1 == 5",
+      "last_verified": null,
+      "last_verified_by": null,
+      "status": "unverified"
+    },
+    {
+      "id": "region-fin-ano-sin-jec",
+      "tags": [
+        "fechas_escolares",
+        "regional",
+        "fin_ano"
+      ],
+      "claim": "Fin ano escolar sin JEC (40 semanas): 18 de diciembre en regiones estandar",
+      "displayed_value": "18 de diciembre",
+      "data_key": "finAnoSinJEC",
+      "data_path": "pages.json → [region].finAnoSinJEC",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "Resoluciones Calendarios Escolares Regionales 2026 - Mineduc",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": null,
+      "last_verified_by": null,
+      "status": "unverified"
+    },
+    {
+      "id": "region-fin-ano-epja",
+      "tags": [
+        "fechas_escolares",
+        "regional",
+        "fin_ano"
+      ],
+      "claim": "Fin ano EPJA (36 semanas): 20 de noviembre en regiones estandar",
+      "displayed_value": "20 de noviembre",
+      "data_key": "finAnoEPJA",
+      "data_path": "pages.json → [region].finAnoEPJA",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "Resoluciones Calendarios Escolares Regionales 2026 - Mineduc",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": null,
+      "last_verified_by": null,
+      "status": "unverified"
+    },
+    {
+      "id": "region-cierre-actas-4-medio",
+      "tags": [
+        "fechas_escolares",
+        "regional"
+      ],
+      "claim": "Cierre actas 4 Medio: 20 de noviembre en regiones estandar",
+      "displayed_value": "20 de noviembre",
+      "data_key": "cierreActas4Medio",
+      "data_path": "pages.json → [region].cierreActas4Medio",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "Resoluciones Calendarios Escolares Regionales 2026 - Mineduc",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": null,
+      "last_verified_by": null,
+      "status": "unverified"
+    },
+    {
+      "id": "region-dia-profesor",
+      "tags": [
+        "fechas_escolares",
+        "regional"
+      ],
+      "claim": "Dia del Profesor: 16 de octubre (fecha fija nacional)",
+      "displayed_value": "16 de octubre",
+      "data_key": "diaProfesor",
+      "data_path": "pages.json → [region].diaProfesor",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "Resoluciones Calendarios Escolares Regionales 2026 - Mineduc",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": null,
+      "last_verified_by": null,
+      "status": "unverified"
+    },
+    {
+      "id": "region-inicio-segundo-semestre",
+      "tags": [
+        "fechas_escolares",
+        "regional",
+        "inicio"
+      ],
+      "claim": "Inicio segundo semestre: 6 de julio en regiones estandar",
+      "displayed_value": "6 de julio",
+      "data_key": "inicioSegundoSemestre",
+      "data_path": "pages.json → [region].inicioSegundoSemestre",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "Resoluciones Calendarios Escolares Regionales 2026 - Mineduc",
+      "verification_method": "manual",
+      "verification_tier": 0,
       "last_verified": null,
       "last_verified_by": null,
       "status": "unverified"
