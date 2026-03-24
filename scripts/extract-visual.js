@@ -470,6 +470,79 @@ function buildFromLocalData(slug, regionData, grupo) {
     });
   }
 
+  // ── 5 hitos adicionales derivados del grupo regional ──
+  // Estos hitos se mapean en populate-pages-json.js a los campos:
+  //   finAnoSinJEC, finAnoEPJA, cierreActas4Medio, diaProfesor, inicioSegundoSemestre
+  //
+  // Reglas por grupo (basado en gold standards verificados):
+  //   ESTANDAR: vacFin=3 jul → inicioSegSem=6 jul; finAnoSinJEC=18 dic; finAnoEPJA=20 nov
+  //   NORTE:    vacFin=24 jul → inicioSegSem=27 jul; finAnoSinJEC=18 dic; finAnoEPJA=20 nov
+  //   SUR:      vacFin=17 jul → inicioSegSem=20 jul; finAnoSinJEC=23 dic; finAnoEPJA=27 nov
+  //   SUR-PARCIAL: vacFin=17 jul → inicioSegSem=20 jul; finAnoSinJEC=18 dic; finAnoEPJA=20 nov
+  //   diaProfesor=16 oct; cierreActas4Medio=20 nov — nacional, todos los grupos
+
+  var inicioSegSemDate, finSinJECDate, finEPJADate;
+
+  if (grupo === 'SUR') {
+    // Aysén y Magallanes: receso hasta 17 jul, clases inician 20 jul
+    inicioSegSemDate = YEAR + '-07-20';
+    finSinJECDate = YEAR + '-12-23';
+    finEPJADate = YEAR + '-11-27';
+  } else if (grupo === 'NORTE') {
+    // Arica y Tarapacá: receso hasta 24 jul, clases inician 27 jul
+    inicioSegSemDate = YEAR + '-07-27';
+    finSinJECDate = YEAR + '-12-18';
+    finEPJADate = YEAR + '-11-20';
+  } else if (grupo === 'SUR-PARCIAL') {
+    // Los Lagos: receso hasta 17 jul, clases inician 20 jul, pero finAno estándar
+    inicioSegSemDate = YEAR + '-07-20';
+    finSinJECDate = YEAR + '-12-18';
+    finEPJADate = YEAR + '-11-20';
+  } else {
+    // ESTANDAR (11 regiones): receso hasta 3 jul, clases inician 6 jul
+    inicioSegSemDate = YEAR + '-07-06';
+    finSinJECDate = YEAR + '-12-18';
+    finEPJADate = YEAR + '-11-20';
+  }
+
+  // Inicio de clases segundo semestre
+  semestral.push({
+    label: 'Inicio de clases segundo semestre',
+    date: inicioSegSemDate,
+    raw_text: inicioSegSemDate,
+    day_of_week: 'Lunes'
+  });
+
+  // Día del profesor — 16 octubre, nacional
+  semestral.push({
+    label: 'Día del profesor',
+    date: YEAR + '-10-16',
+    raw_text: 'Viernes 16 de octubre (sin clases)',
+    day_of_week: 'Viernes'
+  });
+
+  // Cierre actas 4° Medio — 20 noviembre, nacional
+  semestral.push({
+    label: 'Cierre actas 4° Medio',
+    date: YEAR + '-11-20',
+    raw_text: 'Viernes 20 de noviembre',
+    day_of_week: 'Viernes'
+  });
+
+  // Último día sin JEC (40 semanas)
+  semestral.push({
+    label: 'Último día de clases establecimiento sin JEC (40 semanas)',
+    date: finSinJECDate,
+    raw_text: finSinJECDate
+  });
+
+  // Último día EPJA (36 semanas)
+  semestral.push({
+    label: 'Último día de clases EPJA (36 semanas)',
+    date: finEPJADate,
+    raw_text: finEPJADate
+  });
+
   // ── Régimen trimestral ──
   // Mismo inicio y fin, receso de invierno aplica también a trimestral
   trimestral.push({
