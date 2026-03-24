@@ -1,0 +1,159 @@
+{
+  "timestamp": "2026-03-24T14:16:54.038Z",
+  "input": "C:\\Users\\csanchezr\\OneDrive - pjud.cl\\Documentos\\GitHub\\Paginas Chicas\\3. calendarioescolar\\data\\extraction-tests\\TODAS-REGIONES-visual-extraction.json",
+  "summary": {
+    "regions_checked": 16,
+    "regions_passed": 16,
+    "regions_failed": 0,
+    "total_errors": 0,
+    "total_warnings": 0
+  },
+  "checks": {
+    "date_format": {
+      "passed": true,
+      "errors": []
+    },
+    "day_of_week": {
+      "passed": true,
+      "errors": []
+    },
+    "chronological": {
+      "passed": true,
+      "errors": []
+    },
+    "required_milestones": {
+      "passed": true,
+      "errors": []
+    },
+    "cross_region": {
+      "passed": true,
+      "groups_detected": {
+        "ESTANDAR": [
+          "antofagasta",
+          "atacama",
+          "coquimbo",
+          "valparaiso",
+          "metropolitana",
+          "ohiggins",
+          "maule",
+          "nuble",
+          "biobio",
+          "araucania",
+          "los-rios"
+        ],
+        "NORTE": [
+          "arica-y-parinacota",
+          "tarapaca"
+        ],
+        "SUR": [
+          "aysen",
+          "magallanes"
+        ],
+        "SUR-PARCIAL": [
+          "los-lagos"
+        ]
+      },
+      "anomalies": [],
+      "errors": [],
+      "warnings": []
+    }
+  },
+  "per_region": {
+    "arica-y-parinacota": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "NORTE"
+    },
+    "tarapaca": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "NORTE"
+    },
+    "antofagasta": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "atacama": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "coquimbo": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "valparaiso": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "metropolitana": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "ohiggins": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "maule": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "nuble": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "biobio": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "araucania": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "los-rios": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "ESTANDAR"
+    },
+    "los-lagos": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "SUR-PARCIAL"
+    },
+    "aysen": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "SUR"
+    },
+    "magallanes": {
+      "passed": true,
+      "errors": [],
+      "warnings": [],
+      "group": "SUR"
+    }
+  }
+}
