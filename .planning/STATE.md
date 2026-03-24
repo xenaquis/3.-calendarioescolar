@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: active
+status: Milestone complete
 stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-24T17:28:00.000Z"
+last_updated: "2026-03-24T17:30:09.237Z"
 progress:
-  total_phases: 4
-  completed_phases: 2
-  total_plans: 6
-  completed_plans: 6
+  total_phases: 1
+  completed_phases: 1
+  total_plans: 1
+  completed_plans: 1
 ---
 
 # State — calendarioescolar.cl v2
