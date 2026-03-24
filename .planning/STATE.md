@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: v1.0 milestone complete
-stopped_at: Completed 02-02-PLAN.md
-last_updated: "2026-03-24T16:07:57.625Z"
+status: active
+stopped_at: Completed 04-01-PLAN.md
+last_updated: "2026-03-24T17:28:00.000Z"
 progress:
-  total_phases: 2
+  total_phases: 4
   completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
+  total_plans: 6
+  completed_plans: 6
 ---
 
 # State — calendarioescolar.cl v2
@@ -19,25 +19,27 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 02 — datos-completos
+**Current focus:** Phase 04 — mobile-responsiveness
 
 ## Phase Status
 
 | # | Phase | Status |
 |---|-------|--------|
-| 1 | Pipeline Visual | in_progress |
-| 2 | Datos Completos | not_started |
+| 1 | Pipeline Visual | completed |
+| 2 | Datos Completos | completed |
+| 3 | (skipped) | — |
+| 4 | Mobile Responsiveness | in_progress |
 
-## Plan Progress — Phase 01
+## Plan Progress — Phase 04
 
 | Plan | Name | Status |
 |------|------|--------|
-| 01-01 | PDF-to-PNG Pipeline Setup | completed |
-| 01-02 | TBD | not_started |
-| 01-03 | TBD | not_started |
+| 04-01 | Mobile Responsiveness & CSS Token Fixes | completed |
 
 ## Decisions
 
+- **[Phase 04-01]:** --space-5 set to 1.25rem (4px scale: 5×4=20px=1.25rem); --leading-relaxed set to 1.75 (standard)
+- **[Phase 04-01]:** key-fact__date breakpoint at 400px targets narrowest phones (iPhone SE 375px)
 - **PDF location:** Regional PDFs are in `data/extraction-tests/` (not `data/snapshots/`). Scripts handle both via `--pdf-dir` arg and worktree fallback.
 - **Table PNG count:** 25 table PNGs organized (not 62 — the 62 are all pages; 25 are the table-specific ones per TODAS-REGIONES JSON)
 - **Worktree paths:** organize-snapshots.js auto-detects parent project when running from git worktree
@@ -68,11 +70,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 | Phase 01 P03 | 15 | 2 tasks | 3 files |
 | Phase 02 P01 | 8 min | 2 tasks | 7 files |
 | Phase 02 P02 | 15 | 1 tasks | 19 files |
+| 04 | 01 | 4 min | 3 | 3 |
 
 ## Session
 
-**Last session:** 2026-03-24T14:55:14.627Z
-**Stopped at:** Completed 02-02-PLAN.md
+**Last session:** 2026-03-24T17:28:00.000Z
+**Stopped at:** Completed 04-01-PLAN.md
 
 ---
-*Last updated: 2026-03-24*
+*Last updated: 2026-03-24 after 04-01 completion*

@@ -16,5 +16,11 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 
 </details>
 
+## Phase 04: Mobile Responsiveness
+
+| Plan | Name | Status |
+|------|------|--------|
+| 04-01 | Mobile Responsiveness & CSS Token Fixes | completed |
+
 ---
-*Updated: 2026-03-24 after v1.0 milestone*
+*Updated: 2026-03-24 after 04-01 completion*
