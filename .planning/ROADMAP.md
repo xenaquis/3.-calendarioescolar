@@ -37,6 +37,12 @@ Plans:
 
 **Requirements:** DATA-01, DATA-02, DATA-03, DATA-04
 
+**Plans:** 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — Extract 5 additional fields from visual pipeline into pages.json (DATA-01, DATA-04)
+- [ ] 02-02-PLAN.md — Collapsible template section with additional dates + styling (DATA-02, DATA-03)
+
 **Success criteria:**
 1. `pages.json` tiene los campos adicionales para las 16 regiones
 2. Tabla extendida visible en cada pagina de region (seccion secundaria, no prominente)
