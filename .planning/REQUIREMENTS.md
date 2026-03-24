@@ -34,8 +34,15 @@
 
 ## Traceability
 
-| REQ | Phase |
-|-----|-------|
-| MAP-01..04 | TBD |
-| PANEL-01..04 | TBD |
-| RESP-01..02 | TBD |
+| REQ | Phase | Status |
+|-----|-------|--------|
+| MAP-01 | Phase 3 | Pending |
+| MAP-02 | Phase 3 | Pending |
+| MAP-03 | Phase 3 | Pending |
+| MAP-04 | Phase 3 | Pending |
+| PANEL-01 | Phase 3 | Pending |
+| PANEL-02 | Phase 3 | Pending |
+| PANEL-03 | Phase 3 | Pending |
+| PANEL-04 | Phase 3 | Pending |
+| RESP-01 | Phase 3 | Pending |
+| RESP-02 | Phase 4 | Pending |
