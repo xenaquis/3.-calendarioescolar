@@ -13,7 +13,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Arica y Parinacota: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "27 de julio"
   },
   {
     "slug": "region/tarapaca",
@@ -29,7 +34,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Tarapacá: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "27 de julio"
   },
   {
     "slug": "region/antofagasta",
@@ -45,7 +55,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Antofagasta: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/atacama",
@@ -61,7 +76,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Atacama: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/coquimbo",
@@ -77,7 +97,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Coquimbo: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/valparaiso",
@@ -93,7 +118,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Valparaíso: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/metropolitana",
@@ -109,7 +139,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región Metropolitana de Santiago: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.9"
+    "priority": "0.9",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/ohiggins",
@@ -125,7 +160,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de O’Higgins: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/maule",
@@ -141,7 +181,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región del Maule: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/nuble",
@@ -157,7 +202,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Ñuble: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/biobio",
@@ -173,7 +223,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región del Biobío: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/araucania",
@@ -189,7 +244,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de La Araucanía: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/los-rios",
@@ -205,7 +265,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Los Ríos: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "6 de julio"
   },
   {
     "slug": "region/los-lagos",
@@ -221,7 +286,12 @@
     "diasVacacionesInvierno": "12",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Los Lagos: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "18 de diciembre",
+    "finAnoEPJA": "20 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "20 de julio"
   },
   {
     "slug": "region/aysen",
@@ -237,7 +307,12 @@
     "diasVacacionesInvierno": "19",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Aysén: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "23 de diciembre",
+    "finAnoEPJA": "27 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "20 de julio"
   },
   {
     "slug": "region/magallanes",
@@ -253,6 +328,11 @@
     "diasVacacionesInvierno": "19",
     "diasFiestasPatrias": "5",
     "description": "Fechas del calendario escolar 2026 para la Región de Magallanes: inicio de clases, vacaciones de invierno y fin de año.",
-    "priority": "0.8"
+    "priority": "0.8",
+    "finAnoSinJEC": "23 de diciembre",
+    "finAnoEPJA": "27 de noviembre",
+    "cierreActas4Medio": "20 de noviembre",
+    "diaProfesor": "16 de octubre",
+    "inicioSegundoSemestre": "20 de julio"
   }
 ]

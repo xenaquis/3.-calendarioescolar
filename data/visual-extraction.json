@@ -45,6 +45,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-27",
+          "raw_text": "2026-07-27",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -113,6 +141,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-27",
+          "raw_text": "2026-07-27",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -181,6 +237,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -249,6 +333,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -317,6 +429,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -385,6 +525,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -453,6 +621,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -521,6 +717,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -589,6 +813,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -657,6 +909,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -725,6 +1005,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -793,6 +1101,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -861,6 +1197,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "2026-07-06",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -929,6 +1293,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-04",
           "raw_text": "4 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-20",
+          "raw_text": "2026-07-20",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "2026-12-18"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-20",
+          "raw_text": "2026-11-20"
         }
       ],
       "trimestral": [
@@ -997,6 +1389,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-11",
           "raw_text": "11 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-20",
+          "raw_text": "2026-07-20",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-23",
+          "raw_text": "2026-12-23"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-27",
+          "raw_text": "2026-11-27"
         }
       ],
       "trimestral": [
@@ -1065,6 +1485,34 @@
           "label": "Último día de clases establecimientos con JEC (38 semanas)",
           "date": "2026-12-11",
           "raw_text": "11 de diciembre"
+        },
+        {
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-20",
+          "raw_text": "2026-07-20",
+          "day_of_week": "Lunes"
+        },
+        {
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Cierre actas 4° Medio",
+          "date": "2026-11-20",
+          "raw_text": "Viernes 20 de noviembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-23",
+          "raw_text": "2026-12-23"
+        },
+        {
+          "label": "Último día de clases EPJA (36 semanas)",
+          "date": "2026-11-27",
+          "raw_text": "2026-11-27"
         }
       ],
       "trimestral": [

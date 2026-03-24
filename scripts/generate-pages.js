@@ -132,7 +132,12 @@ pages.forEach(function (page) {
     fpFin: page.fiestasPatriasFin,
     fin: page.finAno,
     diasVac: page.diasVacacionesInvierno,
-    diasFP: page.diasFiestasPatrias
+    diasFP: page.diasFiestasPatrias,
+    finSinJEC: page.finAnoSinJEC,
+    finEPJA: page.finAnoEPJA,
+    cierreActas: page.cierreActas4Medio,
+    diaProf: page.diaProfesor,
+    ini2doSem: page.inicioSegundoSemestre
   };
 });
 var regionsJs = '/* regions-data.js — generado automaticamente por scripts/generate-pages.js\n' +
