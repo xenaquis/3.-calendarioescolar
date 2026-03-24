@@ -1,4 +1,4 @@
-name: Extract & Validate PDF Data (RAG)
+name: Extract & Validate PDF Data (Visual Pipeline)
 
 on:
   workflow_dispatch:
@@ -29,22 +29,36 @@ jobs:
         with:
           node-version: '20'
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install PyMuPDF
+        run: pip install PyMuPDF
+
       - name: Install OCR tools
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-spa
 
-      - name: Extract data from Mineduc PDFs
+      - name: Generate PNGs from PDFs
+        run: python scripts/pdf-to-png.py --all --output-dir=data/snapshots
+
+      - name: Organize table PNGs
+        run: node scripts/organize-snapshots.js
+
+      - name: Extract data from PNGs (visual)
         id: extract
         env:
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           ARGS=""
-          if [ "${{ github.event.inputs.fix }}" = "true" ]; then ARGS="$ARGS --fix"; fi
           if [ -n "${{ github.event.inputs.region }}" ]; then ARGS="$ARGS --region=${{ github.event.inputs.region }}"; fi
-          if [ "${{ github.event.inputs.force_download }}" = "true" ]; then ARGS="$ARGS --force"; fi
-          node scripts/extract-from-pdf.js $ARGS
+          node scripts/extract-visual.js $ARGS
         continue-on-error: true
+
+      - name: Validate extraction
+        run: node scripts/validate-extraction.js --strict
 
       - name: Commit snapshots and report
         if: always()
@@ -52,16 +66,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Agregar snapshots .txt (no PDFs, son muy grandes)
-          git add data/snapshots/*.txt 2>/dev/null || true
-          git add data/pdf-extraction-report.json 2>/dev/null || true
+          # Agregar PNGs de tablas y manifest
+          git add data/snapshots/*.png 2>/dev/null || true
+          git add data/snapshots/png-manifest.json 2>/dev/null || true
+          git add data/extraction-validation-report.json 2>/dev/null || true
 
           # Si --fix fue usado, agregar datos corregidos
           if [ "${{ github.event.inputs.fix }}" = "true" ]; then
             git add data/calendar-config.json data/pages.json 2>/dev/null || true
           fi
 
-          git diff --staged --quiet || git commit -m "chore: update PDF extraction report [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: update visual extraction report [skip ci]"
           git push
 
       - name: Regenerate if fixed
@@ -71,7 +86,7 @@ jobs:
           node scripts/validate.js
 
           git add public/ data/
-          git diff --staged --quiet || git commit -m "chore: regenerate pages from PDF-corrected data [skip ci]"
+          git diff --staged --quiet || git commit -m "chore: regenerate pages from visual-corrected data [skip ci]"
           git push
 
       - name: Alert on discrepancies
@@ -81,17 +96,22 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
           MISMATCHES=$(node -e "
-            var r = require('./data/pdf-extraction-report.json');
-            if (!r.comparisons || r.comparisons.length === 0) process.exit(1);
-            r.comparisons.slice(0, 10).forEach(function(c) {
-              console.log('• ' + c.regionSlug + ' ' + c.field + ': PDF=' + c.extracted + ' vs actual=' + c.current);
-            });
-            if (r.comparisons.length > 10) console.log('... y ' + (r.comparisons.length - 10) + ' mas');
+            var fs = require('fs');
+            try {
+              var r = JSON.parse(fs.readFileSync('./data/extraction-validation-report.json', 'utf8'));
+              if (!r.summary || r.summary.total_errors === 0) process.exit(1);
+              var failedRegions = Object.keys(r.per_region || {}).filter(function(k) { return !r.per_region[k].passed; });
+              failedRegions.slice(0, 10).forEach(function(region) {
+                var errs = r.per_region[region].errors || [];
+                errs.forEach(function(e) { console.log('• ' + region + ': ' + e); });
+              });
+              if (failedRegions.length > 10) console.log('... y ' + (failedRegions.length - 10) + ' regiones mas');
+            } catch(e) { process.exit(1); }
           " 2>/dev/null) || exit 0
 
           if [ -z "$MISMATCHES" ]; then exit 0; fi
 
-          MSG=$(printf '📄 *Discrepancias PDF vs datos — calendarioescolar.cl*\n\n%s\n\nEjecutar con --fix o revisar manualmente.' "$MISMATCHES")
+          MSG=$(printf '📄 *Errores extraccion visual — calendarioescolar.cl*\n\n%s\n\nRevisar data/extraction-validation-report.json' "$MISMATCHES")
 
           curl -s -X POST \
             "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
@@ -102,14 +122,18 @@ jobs:
         if: always()
         run: |
           node -e "
+            var fs = require('fs');
             try {
-              var r = require('./data/pdf-extraction-report.json');
-              console.log('=== RAG EXTRACTION REPORT ===');
-              console.log('Regiones OK: ' + r.summary.regions_ok);
-              console.log('Regiones fallidas: ' + r.summary.regions_failed + ' ' + (r.summary.failed_regions || []).join(', '));
-              if (r.comparisons) {
-                var m = r.comparisons.filter(function(c) { return c.status === 'mismatch'; });
-                console.log('Discrepancias: ' + m.length);
-              }
-            } catch(e) { console.log('No se pudo leer el reporte'); }
+              var r = JSON.parse(fs.readFileSync('./data/extraction-validation-report.json', 'utf8'));
+              console.log('=== VISUAL PIPELINE EXTRACTION REPORT ===');
+              console.log('Regiones verificadas: ' + r.summary.regions_checked);
+              console.log('Regiones OK: ' + r.summary.regions_passed);
+              console.log('Regiones fallidas: ' + r.summary.regions_failed);
+              console.log('Total errores: ' + r.summary.total_errors);
+              console.log('Total advertencias: ' + r.summary.total_warnings);
+              var groups = r.checks.cross_region.groups_detected;
+              Object.keys(groups).forEach(function(g) {
+                console.log('  Grupo ' + g + ': ' + groups[g].join(', '));
+              });
+            } catch(e) { console.log('No se pudo leer el reporte: ' + e.message); }
           "
