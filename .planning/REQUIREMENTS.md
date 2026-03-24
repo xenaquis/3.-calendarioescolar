@@ -4,21 +4,21 @@
 
 ### MAP — Selector de Regiones
 
-- [ ] **MAP-01**: Usuario ve lista de 16 regiones ordenadas norte-sur con dot de color por grupo
+- [x] **MAP-01**: Usuario ve lista de 16 regiones ordenadas norte-sur con dot de color por grupo
 - [ ] **MAP-02**: Al hacer click en una region, el panel derecho muestra sus datos
-- [ ] **MAP-03**: Region activa se resalta visualmente en la lista
-- [ ] **MAP-04**: Leyenda de colores visible (Estandar, Norte, Sur-Parcial, Sur)
+- [x] **MAP-03**: Region activa se resalta visualmente en la lista
+- [x] **MAP-04**: Leyenda de colores visible (Estandar, Norte, Sur-Parcial, Sur)
 
 ### PANEL — Panel de Datos
 
-- [ ] **PANEL-01**: Panel muestra key-facts (inicio, vacaciones, fiestas patrias, fin ano)
-- [ ] **PANEL-02**: Panel muestra tabla de datos adicionales (5 campos de v1.0)
-- [ ] **PANEL-03**: Link "Ver pagina completa" lleva a /region/slug/
+- [x] **PANEL-01**: Panel muestra key-facts (inicio, vacaciones, fiestas patrias, fin ano)
+- [x] **PANEL-02**: Panel muestra tabla de datos adicionales (5 campos de v1.0)
+- [x] **PANEL-03**: Link "Ver pagina completa" lleva a /region/slug/
 - [ ] **PANEL-04**: Datos se cargan desde regions-data.js (sin duplicar)
 
 ### RESP — Responsividad
 
-- [ ] **RESP-01**: Desktop (>650px): layout split (lista izquierda + panel derecha)
+- [x] **RESP-01**: Desktop (>650px): layout split (lista izquierda + panel derecha)
 - [ ] **RESP-02**: Mobile (<650px): dropdown select + panel debajo
 
 ## Future Requirements (deferred)
@@ -36,13 +36,13 @@
 
 | REQ | Phase | Status |
 |-----|-------|--------|
-| MAP-01 | Phase 3 | Pending |
+| MAP-01 | Phase 3 | Complete |
 | MAP-02 | Phase 3 | Pending |
-| MAP-03 | Phase 3 | Pending |
-| MAP-04 | Phase 3 | Pending |
-| PANEL-01 | Phase 3 | Pending |
-| PANEL-02 | Phase 3 | Pending |
-| PANEL-03 | Phase 3 | Pending |
+| MAP-03 | Phase 3 | Complete |
+| MAP-04 | Phase 3 | Complete |
+| PANEL-01 | Phase 3 | Complete |
+| PANEL-02 | Phase 3 | Complete |
+| PANEL-03 | Phase 3 | Complete |
 | PANEL-04 | Phase 3 | Pending |
-| RESP-01 | Phase 3 | Pending |
+| RESP-01 | Phase 3 | Complete |
 | RESP-02 | Phase 4 | Pending |
