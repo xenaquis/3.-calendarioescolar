@@ -137,6 +137,21 @@ if (!fs.existsSync(pagesPath)) {
           warn('pages.json[' + id + ']: diasVacacionesInvierno=14 — regiones del sur normalmente tienen más vacaciones de invierno. Verificar con Mineduc.');
         }
       }
+
+      // Campos opcionales adicionales (DATA-01): si existen deben tener formato "DD de mes" o "Sin datos"
+      var OPTIONAL_DATE_FIELDS = [
+        'finAnoSinJEC', 'finAnoEPJA', 'cierreActas4Medio',
+        'diaProfesor', 'inicioSegundoSemestre'
+      ];
+
+      OPTIONAL_DATE_FIELDS.forEach(function (field) {
+        if (page[field] && page[field] !== 'Sin datos') {
+          // Validar formato: "DD de mes"
+          if (!/^\d{1,2}\s+de\s+[a-záéíóúñ]+$/i.test(page[field])) {
+            warn('pages.json[' + id + ']: campo "' + field + '" formato inesperado: ' + page[field]);
+          }
+        }
+      });
     });
   }
 }

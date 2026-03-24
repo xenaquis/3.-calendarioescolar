@@ -4,24 +4,34 @@ window.REGIONS_DATA = {
   "arica-y-parinacota": {
     "name": "Arica y Parinacota",
     "inicio": "4 de marzo",
-    "vacIni": "22 de junio",
-    "vacFin": "3 de julio",
+    "vacIni": "13 de julio",
+    "vacFin": "24 de julio",
     "fpIni": "14 de septiembre",
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "27 de julio"
   },
   "tarapaca": {
     "name": "Tarapacá",
     "inicio": "4 de marzo",
-    "vacIni": "22 de junio",
-    "vacFin": "3 de julio",
+    "vacIni": "13 de julio",
+    "vacFin": "24 de julio",
     "fpIni": "14 de septiembre",
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "27 de julio"
   },
   "antofagasta": {
     "name": "Antofagasta",
@@ -32,7 +42,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "atacama": {
     "name": "Atacama",
@@ -43,7 +58,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "coquimbo": {
     "name": "Coquimbo",
@@ -54,7 +74,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "valparaiso": {
     "name": "Valparaíso",
@@ -65,7 +90,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "metropolitana": {
     "name": "Metropolitana",
@@ -76,7 +106,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "ohiggins": {
     "name": "O’Higgins",
@@ -87,7 +122,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "maule": {
     "name": "Maule",
@@ -98,7 +138,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "nuble": {
     "name": "Ñuble",
@@ -109,7 +154,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "biobio": {
     "name": "Biobío",
@@ -120,7 +170,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "araucania": {
     "name": "La Araucanía",
@@ -131,7 +186,12 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "los-rios": {
     "name": "Los Ríos",
@@ -142,18 +202,28 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "6 de julio"
   },
   "los-lagos": {
     "name": "Los Lagos",
     "inicio": "4 de marzo",
-    "vacIni": "22 de junio",
-    "vacFin": "3 de julio",
+    "vacIni": "6 de julio",
+    "vacFin": "17 de julio",
     "fpIni": "14 de septiembre",
     "fpFin": "18 de septiembre",
     "fin": "4 de diciembre",
     "diasVac": "12",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "18 de diciembre",
+    "finEPJA": "20 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "20 de julio"
   },
   "aysen": {
     "name": "Aysén",
@@ -162,9 +232,14 @@ window.REGIONS_DATA = {
     "vacFin": "17 de julio",
     "fpIni": "14 de septiembre",
     "fpFin": "18 de septiembre",
-    "fin": "23 de diciembre",
+    "fin": "11 de diciembre",
     "diasVac": "19",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "23 de diciembre",
+    "finEPJA": "27 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "20 de julio"
   },
   "magallanes": {
     "name": "Magallanes",
@@ -175,6 +250,11 @@ window.REGIONS_DATA = {
     "fpFin": "18 de septiembre",
     "fin": "11 de diciembre",
     "diasVac": "19",
-    "diasFP": "5"
+    "diasFP": "5",
+    "finSinJEC": "23 de diciembre",
+    "finEPJA": "27 de noviembre",
+    "cierreActas": "20 de noviembre",
+    "diaProf": "16 de octubre",
+    "ini2doSem": "20 de julio"
   }
 };
