@@ -20,7 +20,11 @@ Información 100% fidedigna extraída de las resoluciones oficiales de cada regi
 
 ### Active
 
-- [ ] Datos completos por región: cierre actas 4° Medio, fin JEC/sin JEC/EPJA, día del profesor, inicio 2do semestre
+(No active requirements — all v2 requirements validated)
+
+### Validated in Phase 2
+
+- ✓ Datos completos por región: cierre actas 4° Medio, fin JEC/sin JEC/EPJA, día del profesor, inicio 2do semestre — Phase 2
 
 ### Validated in Phase 1
 
@@ -75,4 +79,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-24 after Phase 1 completion*
+*Last updated: 2026-03-24 after Phase 2 completion — all milestone phases complete*
