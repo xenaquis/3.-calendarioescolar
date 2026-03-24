@@ -24,7 +24,15 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 
 ### Active
 
-(No active requirements — next milestone TBD)
+- [ ] Lista-mapa interactiva de 16 regiones con colores por grupo regional
+- [ ] Panel lateral con key-facts + tabla + datos adicionales al seleccionar region
+- [ ] Layout responsive: split en desktop, dropdown + panel vertical en mobile
+- [ ] Leyenda visual de grupos regionales (ESTANDAR/NORTE/SUR/SUR-PARCIAL)
+- [ ] Integracion con regions-data.js existente (sin duplicar datos)
+
+## Current Milestone: v1.1 Mapa Interactivo
+
+**Goal:** Redisenar la homepage con selector de regiones tipo mapa (lista lateral con colores por grupo) + panel de datos dinamico, reemplazando los chips actuales.
 
 ### Out of Scope
 
@@ -62,4 +70,4 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-03-24 after v1.0 milestone completion*
+*Last updated: 2026-03-24 after v1.1 milestone start*
