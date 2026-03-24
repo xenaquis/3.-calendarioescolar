@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-03-24T14:16:54.038Z",
-  "input": "C:\\Users\\csanchezr\\OneDrive - pjud.cl\\Documentos\\GitHub\\Paginas Chicas\\3. calendarioescolar\\data\\extraction-tests\\TODAS-REGIONES-visual-extraction.json",
+  "timestamp": "2026-03-24T14:22:02.748Z",
+  "input": "C:\\Users\\csanchezr\\OneDrive - pjud.cl\\Documentos\\GitHub\\Paginas Chicas\\3. calendarioescolar\\data\\test-corrupt-temp.json",
   "summary": {
-    "regions_checked": 16,
-    "regions_passed": 16,
-    "regions_failed": 0,
-    "total_errors": 0,
-    "total_warnings": 0
+    "regions_checked": 1,
+    "regions_passed": 0,
+    "regions_failed": 1,
+    "total_errors": 4,
+    "total_warnings": 1
   },
   "checks": {
     "date_format": {
@@ -18,141 +18,52 @@
       "errors": []
     },
     "chronological": {
-      "passed": true,
-      "errors": []
+      "passed": false,
+      "errors": [
+        "aysen: Rango invalido en semestral \"Receso de invierno\": date_start 2026-07-01 >= date_end 2026-06-01"
+      ]
     },
     "required_milestones": {
-      "passed": true,
-      "errors": []
+      "passed": false,
+      "errors": [
+        "aysen: Fecha invalida en \"Inicio\" campo date: \"2026-99-99\"",
+        "aysen: No se encontro ningun hito con \"Ultimo dia\" (fin del año escolar)"
+      ]
     },
     "cross_region": {
-      "passed": true,
+      "passed": false,
       "groups_detected": {
-        "ESTANDAR": [
-          "antofagasta",
-          "atacama",
-          "coquimbo",
-          "valparaiso",
-          "metropolitana",
-          "ohiggins",
-          "maule",
-          "nuble",
-          "biobio",
-          "araucania",
-          "los-rios"
-        ],
-        "NORTE": [
-          "arica-y-parinacota",
-          "tarapaca"
-        ],
-        "SUR": [
-          "aysen",
-          "magallanes"
-        ],
-        "SUR-PARCIAL": [
-          "los-lagos"
-        ]
+        "ESTANDAR": [],
+        "NORTE": [],
+        "SUR": [],
+        "SUR-PARCIAL": []
       },
-      "anomalies": [],
-      "errors": [],
+      "anomalies": [
+        {
+          "region": "aysen",
+          "expected_group": "SUR",
+          "actual_matches": null,
+          "severity": "error",
+          "details": "vacacionesInicio: extraido=2026-07-01 esperado=2026-06-29; vacacionesFin: extraido=2026-06-01 esperado=2026-07-17"
+        }
+      ],
+      "errors": [
+        "aysen: fechas no coinciden con ningun grupo. vacacionesInicio: extraido=2026-07-01 esperado=2026-06-29; vacacionesFin: extraido=2026-06-01 esperado=2026-07-17"
+      ],
       "warnings": []
     }
   },
   "per_region": {
-    "arica-y-parinacota": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "NORTE"
-    },
-    "tarapaca": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "NORTE"
-    },
-    "antofagasta": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "atacama": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "coquimbo": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "valparaiso": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "metropolitana": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "ohiggins": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "maule": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "nuble": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "biobio": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "araucania": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "los-rios": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "ESTANDAR"
-    },
-    "los-lagos": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "SUR-PARCIAL"
-    },
     "aysen": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
-      "group": "SUR"
-    },
-    "magallanes": {
-      "passed": true,
-      "errors": [],
-      "warnings": [],
+      "passed": false,
+      "errors": [
+        "Fecha invalida en \"Inicio\" campo date: \"2026-99-99\"",
+        "Rango invalido en semestral \"Receso de invierno\": date_start 2026-07-01 >= date_end 2026-06-01",
+        "No se encontro ningun hito con \"Ultimo dia\" (fin del año escolar)"
+      ],
+      "warnings": [
+        "Orden cronologico: semestral \"Receso de invierno\" (2026-06-01) antes que hito previo (2026-99-99)"
+      ],
       "group": "SUR"
     }
   }
