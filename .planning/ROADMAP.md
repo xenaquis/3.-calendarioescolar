@@ -6,7 +6,7 @@
 
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|------------------|
-| 1 | Pipeline Visual | Reemplazar extraccion texto por visual con 100% precision | PIPE-01..05 | 16 regiones extraidas correctamente, PNGs preservados |
+| 1 | Pipeline Visual | 2/3 | In Progress|  |
 | 2 | Datos Completos | Mostrar todos los hitos del calendario en cada pagina | DATA-01..04 | Tabla extendida visible, datos verificados, estetica consistente |
 
 ## Phase Details
@@ -16,11 +16,11 @@
 
 **Requirements:** PIPE-01, PIPE-02, PIPE-03, PIPE-04, PIPE-05
 
-**Plans:** 3 plans
+**Plans:** 2/3 plans executed
 
 Plans:
 - [x] 01-01-PLAN.md — PDF-to-PNG generation + snapshot organization (PIPE-01, PIPE-02)
-- [ ] 01-02-PLAN.md — Visual extraction script with multimodal LLM (PIPE-03)
+- [x] 01-02-PLAN.md — Visual extraction script with multimodal LLM (PIPE-03)
 - [ ] 01-03-PLAN.md — Deterministic validation + cross-region checks + workflow update (PIPE-04, PIPE-05)
 
 **Success criteria:**

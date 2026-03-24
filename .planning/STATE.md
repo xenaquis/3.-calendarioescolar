@@ -3,14 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: in_progress
-last_updated: "2026-03-24T14:10:00.000Z"
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-03-24T14:14:15.175Z"
 progress:
   total_phases: 2
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
-  current_phase: 01-pipeline-visual
-  current_plan: 02
+  completed_plans: 2
 ---
 
 # State — calendarioescolar.cl v2
@@ -42,6 +41,8 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 - **PDF location:** Regional PDFs are in `data/extraction-tests/` (not `data/snapshots/`). Scripts handle both via `--pdf-dir` arg and worktree fallback.
 - **Table PNG count:** 25 table PNGs organized (not 62 — the 62 are all pages; 25 are the table-specific ones per TODAS-REGIONES JSON)
 - **Worktree paths:** organize-snapshots.js auto-detects parent project when running from git worktree
+- [Phase 01]: extract-visual.js --local mode expands TODAS-REGIONES-visual-extraction.json to gold standard structure
+- [Phase 01]: API mode supports Anthropic (default) and OpenAI via EXTRACTION_API env var
 
 ## Context from Research (2026-03-24)
 
@@ -57,11 +58,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 | Phase | Plan | Duration | Tasks | Files |
 |-------|------|----------|-------|-------|
 | 01 | 01 | 3 min | 2 | 28 |
+| Phase 01 P02 | 2 min | 1 tasks | 2 files |
 
 ## Session
 
-**Last session:** 2026-03-24
-**Stopped at:** Completed 01-01-PLAN.md
+**Last session:** 2026-03-24T14:14:15.167Z
+**Stopped at:** Completed 01-02-PLAN.md
 
 ---
 *Last updated: 2026-03-24*
