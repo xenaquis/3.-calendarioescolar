@@ -31,8 +31,10 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 **Success Criteria** (what must be TRUE):
   1. On a screen narrower than 650px the region list is replaced by a native select dropdown, and the data panel appears below it
   2. Selecting a region in the dropdown populates the panel with the same data shown on desktop
-**Plans**: TBD
-**UI hint**: yes
+**Plans**: 1 plan
+
+Plans:
+- [ ] 04-01-PLAN.md — Agregar select mobile (HTML + CSS + JS)
 
 ---
-*Updated: 2026-03-24 — Phase 3 completed, Phase 4 pending*
+*Updated: 2026-03-24 — Phase 4 planned (1 plan)*
