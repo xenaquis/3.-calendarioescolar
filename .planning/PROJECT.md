@@ -20,10 +20,13 @@ Información 100% fidedigna extraída de las resoluciones oficiales de cada regi
 
 ### Active
 
-- [ ] Pipeline de extracción visual: PDF → PNG → Claude Code multimodal → JSON verificado
 - [ ] Datos completos por región: cierre actas 4° Medio, fin JEC/sin JEC/EPJA, día del profesor, inicio 2do semestre
-- [ ] PNGs de tablas preservados como evidencia visual pública
-- [ ] Verificación verbatim adaptada del extractor no determinista (fuzzy match contra fuente)
+
+### Validated in Phase 1
+
+- ✓ Pipeline de extracción visual: PDF → PNG → Claude Code multimodal → JSON verificado — Phase 1
+- ✓ PNGs de tablas preservados como evidencia visual pública — Phase 1
+- ✓ Verificación determinista de extracción (formato fecha, día semana, año, cross-region) — Phase 1
 
 ### Out of Scope
 
@@ -72,4 +75,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-24 after initialization*
+*Last updated: 2026-03-24 after Phase 1 completion*
