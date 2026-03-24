@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Executing Phase 02
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-03-24T14:47:23.565Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-03-24T14:55:25.379Z"
 progress:
   total_phases: 2
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # State — calendarioescolar.cl v2
@@ -47,6 +47,8 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 - [Phase 02]: finAnoSinJEC/EPJA dates derived from regional group rules in buildFromLocalData(), not hardcoded per region
 - [Phase 02]: populate-pages-json.js is a separate script from extract-visual.js for clean separation of concerns
 - [Phase 02]: SUR group (Aysén, Magallanes) has different finSinJEC=23 dic, finEPJA=27 nov — verified against aysen-gold-standard.json
+- [Phase 02]: Native <details> element used for collapsible — no JavaScript, works without CSS
+- [Phase 02]: Section placed after main table, closed by default — secondary info not prominent
 
 ## Context from Research (2026-03-24)
 
@@ -65,11 +67,12 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 | Phase 01 P02 | 2 min | 1 tasks | 2 files |
 | Phase 01 P03 | 15 | 2 tasks | 3 files |
 | Phase 02 P01 | 8 min | 2 tasks | 7 files |
+| Phase 02 P02 | 15 | 1 tasks | 19 files |
 
 ## Session
 
-**Last session:** 2026-03-24T14:47:23.558Z
-**Stopped at:** Completed 02-01-PLAN.md
+**Last session:** 2026-03-24T14:55:14.627Z
+**Stopped at:** Completed 02-02-PLAN.md
 
 ---
 *Last updated: 2026-03-24*

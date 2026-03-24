@@ -13,8 +13,8 @@
 ### DATA — Datos Completos por Región
 
 - [x] **DATA-01**: `pages.json` incluye campos adicionales: `finAnoSinJEC`, `finAnoEPJA`, `cierreActas4Medio`, `diaProfesor`, `inicioSegundoSemestre`
-- [ ] **DATA-02**: Template de región muestra tabla extendida con los datos adicionales en sección colapsable o secundaria
-- [ ] **DATA-03**: Estilo minimalista consistente con la estética actual (mismo card, misma tipografía, jerarquía visual clara)
+- [x] **DATA-02**: Template de región muestra tabla extendida con los datos adicionales en sección colapsable o secundaria
+- [x] **DATA-03**: Estilo minimalista consistente con la estética actual (mismo card, misma tipografía, jerarquía visual clara)
 - [x] **DATA-04**: Los datos adicionales se extraen del mismo pipeline visual (no hardcodeados)
 
 ## v2 Requirements (deferred)

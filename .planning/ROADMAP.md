@@ -7,7 +7,7 @@
 | # | Phase | Goal | Requirements | Success Criteria |
 |---|-------|------|--------------|------------------|
 | 1 | Pipeline Visual | 3/3 | Complete   | 2026-03-24 |
-| 2 | Datos Completos | 1/2 | In Progress|  |
+| 2 | Datos Completos | 2/2 | Complete   | 2026-03-24 |
 
 ## Phase Details
 
@@ -37,11 +37,11 @@ Plans:
 
 **Requirements:** DATA-01, DATA-02, DATA-03, DATA-04
 
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 02-01-PLAN.md — Extract 5 additional fields from visual pipeline into pages.json (DATA-01, DATA-04)
-- [ ] 02-02-PLAN.md — Collapsible template section with additional dates + styling (DATA-02, DATA-03)
+- [x] 02-02-PLAN.md — Collapsible template section with additional dates + styling (DATA-02, DATA-03)
 
 **Success criteria:**
 1. `pages.json` tiene los campos adicionales para las 16 regiones
