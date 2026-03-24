@@ -27,9 +27,17 @@ var App = (function () {
   // Si no está disponible: ejecutar npm run generate
   var CAL = window.CALENDAR_CONFIG || null;
 
+  // Mapeo de grupos regionales (slugs sin grupo = Estándar por defecto)
+  var GRUPOS = {
+    'arica-y-parinacota': 'Norte',
+    'tarapaca': 'Norte',
+    'los-lagos': 'Sur-Parcial',
+    'aysen': 'Sur',
+    'magallanes': 'Sur'
+  };
+
   function init() {
-    initRegionSelector();
-    initRegionChips();
+    initMapSelector();
     if (CAL) {
       initSchoolStats();
     } else {
@@ -37,64 +45,74 @@ var App = (function () {
     }
   }
 
-  // Selector de región oculto (mantiene compatibilidad con el DOM esperado)
-  function initRegionSelector() {
-    var select = document.getElementById('region-select');
-    if (!select) return;
+  // Selector de región por mapa — enlaza clicks en .region-bar[data-slug]
+  function initMapSelector() {
+    var bars = document.querySelectorAll('.region-bar[data-slug]');
+    if (!bars.length) return;
 
-    select.addEventListener('change', function () {
-      var slug = select.value;
-      var container = document.getElementById('region-calendar');
-      if (!slug || !REGIONS[slug]) {
-        if (container) container.style.display = 'none';
-        return;
-      }
-
-      var r = REGIONS[slug];
-      var title = document.getElementById('region-title');
-      var tbody = document.getElementById('region-table-body');
-      var link  = document.getElementById('region-link');
-
-      if (title) title.textContent = 'Calendario Escolar ' + (CAL ? CAL.year : '') + ' \u2014 Regi\u00f3n ' + r.name;
-
-      if (tbody) {
-        tbody.innerHTML =
-          '<tr><td><strong>Inicio a\u00f1o escolar</strong></td><td>' + r.inicio + '</td><td>\u2014</td></tr>' +
-          '<tr><td><strong>Vacaciones invierno</strong></td><td>' + r.vacIni + ' \u2014 ' + r.vacFin + '</td><td>' + r.diasVac + '</td></tr>' +
-          '<tr><td><strong>Fiestas Patrias</strong></td><td>' + r.fpIni + ' \u2014 ' + r.fpFin + '</td><td>' + r.diasFP + '</td></tr>' +
-          '<tr><td><strong>Fin a\u00f1o escolar</strong></td><td>' + r.fin + '</td><td>\u2014</td></tr>';
-      }
-
-      if (link) link.href = '/region/' + slug + '/';
-
-      if (container) {
-        container.style.display = 'block';
-        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
+    for (var i = 0; i < bars.length; i++) {
+      (function (bar) {
+        bar.addEventListener('click', function () {
+          selectRegion(bar.dataset.slug, bars);
+        });
+      })(bars[i]);
+    }
   }
 
-  // Chips de región — activa el select oculto para que initRegionSelector procese
-  function initRegionChips() {
-    var chips = document.querySelectorAll('.chip[data-region]');
-    var select = document.getElementById('region-select');
-    if (!chips.length || !select) return;
+  // Selecciona una región: actualiza estado activo y puebla el panel de datos
+  function selectRegion(slug, bars) {
+    if (!slug || !REGIONS[slug]) return;
+    var r = REGIONS[slug];
 
-    for (var i = 0; i < chips.length; i++) {
-      (function (chip) {
-        chip.addEventListener('click', function () {
-          // Reset todos los chips
-          for (var j = 0; j < chips.length; j++) {
-            chips[j].setAttribute('aria-selected', 'false');
-          }
-          // Marcar chip activo
-          chip.setAttribute('aria-selected', 'true');
-          // Actualizar select y disparar change
-          select.value = chip.dataset.region;
-          select.dispatchEvent(new Event('change'));
-        });
-      })(chips[i]);
+    // Desactivar todas las barras
+    for (var i = 0; i < bars.length; i++) {
+      bars[i].classList.remove('active');
+      bars[i].setAttribute('aria-selected', 'false');
     }
+    // Activar la barra seleccionada
+    var activeBar = document.querySelector('.region-bar[data-slug="' + slug + '"]');
+    if (activeBar) {
+      activeBar.classList.add('active');
+      activeBar.setAttribute('aria-selected', 'true');
+    }
+
+    // Ocultar placeholder, mostrar datos
+    var placeholder = document.getElementById('placeholder-data');
+    var regionData = document.getElementById('region-data');
+    if (placeholder) placeholder.style.display = 'none';
+    if (regionData) regionData.className = 'active';
+
+    // Poblar datos clave
+    var elName  = document.getElementById('r-name');
+    var elGrupo = document.getElementById('r-grupo');
+    var elInicio = document.getElementById('r-inicio');
+    var elVac   = document.getElementById('r-vac');
+    var elFp    = document.getElementById('r-fp');
+    var elFin   = document.getElementById('r-fin');
+
+    if (elName)  elName.textContent  = 'Regi\u00f3n ' + r.name;
+    if (elGrupo) elGrupo.textContent = GRUPOS[slug] || 'Est\u00e1ndar';
+    if (elInicio) elInicio.textContent = r.inicio;
+    if (elVac)  elVac.textContent   = r.vacIni + ' \u2014 ' + r.vacFin;
+    if (elFp)   elFp.textContent    = r.fpIni + ' \u2014 ' + r.fpFin;
+    if (elFin)  elFin.textContent   = r.fin;
+
+    // Poblar datos adicionales
+    var elSeg    = document.getElementById('r-seg');
+    var elProf   = document.getElementById('r-prof');
+    var elActas  = document.getElementById('r-actas');
+    var elSinjec = document.getElementById('r-sinjec');
+    var elEpja   = document.getElementById('r-epja');
+
+    if (elSeg)    elSeg.textContent    = r.ini2doSem;
+    if (elProf)   elProf.textContent   = r.diaProf;
+    if (elActas)  elActas.textContent  = r.cierreActas;
+    if (elSinjec) elSinjec.textContent = r.finSinJEC;
+    if (elEpja)   elEpja.textContent   = r.finEPJA;
+
+    // Actualizar enlace "ver página completa"
+    var elLink = document.getElementById('link-pagina');
+    if (elLink) elLink.href = '/region/' + slug + '/';
   }
 
   // Stats en tiempo real: semana del año escolar, días para vacaciones, próximo feriado
