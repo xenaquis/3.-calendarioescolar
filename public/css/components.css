@@ -640,3 +640,194 @@ details h3 {
 .details-extra table {
   font-size: var(--text-sm);
 }
+
+/* ============================================
+   Map Layout — region list + data panel
+   ============================================ */
+.map-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin: var(--space-6) 0;
+}
+@media (min-width: 650px) {
+  .map-layout {
+    grid-template-columns: 220px 1fr;
+  }
+}
+
+.map-panel {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+.map-panel__title {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+  text-align: center;
+  font-weight: 600;
+}
+
+.chile-map {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.region-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: var(--text-xs);
+  transition: background var(--transition-fast), color var(--transition-fast);
+  border: 1.5px solid transparent;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  line-height: 1.3;
+}
+.region-bar:hover {
+  background: var(--color-primary-light);
+}
+.region-bar.active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+.region-bar__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+.region-bar.active .region-bar__dot {
+  background: #fff;
+}
+/* Group colors for dots */
+.region-bar[data-grupo="NORTE"] .region-bar__dot { background: var(--color-warning); }
+.region-bar[data-grupo="SUR"] .region-bar__dot { background: var(--color-accent); }
+.region-bar[data-grupo="SUR-PARCIAL"] .region-bar__dot { background: var(--color-success); }
+/* Active overrides for group colors */
+.region-bar.active[data-grupo="NORTE"] .region-bar__dot,
+.region-bar.active[data-grupo="SUR"] .region-bar__dot,
+.region-bar.active[data-grupo="SUR-PARCIAL"] .region-bar__dot { background: #fff; }
+
+.data-panel {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+  min-height: 300px;
+}
+.data-panel__title {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+.data-panel__grupo {
+  display: inline-block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+
+.mini-facts {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+.mini-fact {
+  padding: var(--space-3);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+}
+.mini-fact__label {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  margin-bottom: 2px;
+}
+.mini-fact__value {
+  font-size: var(--text-base);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.map-legend {
+  display: flex;
+  gap: var(--space-4);
+  justify-content: center;
+  margin: var(--space-3) 0;
+  flex-wrap: wrap;
+}
+.map-legend__item {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.map-legend__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.data-panel__placeholder {
+  text-align: center;
+  padding: 4rem 0;
+  color: var(--color-text-secondary);
+}
+.data-panel__placeholder-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-2);
+}
+
+#region-data {
+  display: none;
+}
+#region-data.active {
+  display: block;
+}
+
+/* Dark mode overrides for map components */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .map-panel,
+  :root:not([data-theme="light"]) .data-panel {
+    background: var(--color-surface);
+  }
+  :root:not([data-theme="light"]) .mini-fact {
+    background: var(--color-surface-alt);
+  }
+  :root:not([data-theme="light"]) .region-bar:hover {
+    background: var(--color-surface-alt);
+  }
+}
+[data-theme="dark"] .map-panel,
+[data-theme="dark"] .data-panel {
+  background: var(--color-surface);
+}
+[data-theme="dark"] .mini-fact {
+  background: var(--color-surface-alt);
+}
+[data-theme="dark"] .region-bar:hover {
+  background: var(--color-surface-alt);
+}
