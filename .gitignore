@@ -8,3 +8,7 @@ Thumbs.db
 .env
 .env.*
 data/snapshots/*.pdf
+data/snapshots/*.txt
+data/extraction-tests/
+.claude/worktrees/
+mocks/
