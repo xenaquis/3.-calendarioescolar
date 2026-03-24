@@ -172,33 +172,6 @@
         <p class="hero-sub">Fechas oficiales del <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Ministerio de Educaci&oacute;n (Mineduc)</a>. Selecciona tu regi&oacute;n para ver tu calendario.</p>
       </div>
 
-      <!-- Fechas clave (estáticas — renderizan inmediatamente) -->
-      <section class="key-facts" aria-label="Fechas clave del a&ntilde;o escolar 2026" data-verificacion="school-dates">
-        <div class="key-fact key-fact--primary">
-          <p class="key-fact__label">Inicio de clases</p>
-          <p class="key-fact__date">2 de marzo</p>
-          <p class="key-fact__note">Lunes &middot; Todas las regiones</p>
-        </div>
-        <div class="key-fact key-fact--accent">
-          <p class="key-fact__label">Vacaciones invierno</p>
-          <p class="key-fact__date">11&nbsp;&mdash;&nbsp;24 jul</p>
-          <p class="key-fact__note">14 d&iacute;as &middot; Ays&eacute;n/Mag: 4&mdash;24 jul</p>
-        </div>
-        <div class="key-fact key-fact--warning">
-          <p class="key-fact__label">Fiestas Patrias</p>
-          <p class="key-fact__date">14&nbsp;&mdash;&nbsp;18 sep</p>
-          <p class="key-fact__note">5 d&iacute;as</p>
-        </div>
-        <div class="key-fact key-fact--success">
-          <p class="key-fact__label">Fin de a&ntilde;o escolar</p>
-          <p class="key-fact__date">11 de diciembre</p>
-          <p class="key-fact__note">Viernes &middot; Ays&eacute;n/Mag: 4 dic</p>
-        </div>
-        <p class="card__meta" style="grid-column: 1 / -1; text-align:center; margin-top:var(--space-2);">
-          Fuente: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones Calendarios Escolares Regionales 2026 &mdash; Mineduc</a>
-        </p>
-      </section>
-
       <!-- Stats en tiempo real (lo que Google/IA no responde) -->
       <div class="school-stats" aria-label="Estado actual del a&ntilde;o escolar">
         <div class="stat-item">
@@ -228,70 +201,88 @@
              data-full-width-responsive="true"></ins>
       </div>
 
-      <!-- Selector de región por chips -->
+      <!-- Selector de region + panel de datos -->
       <section class="section" aria-label="Consulta por regi&oacute;n">
         <h2>&iquest;De qu&eacute; regi&oacute;n eres?</h2>
 
-        <fieldset class="region-chips" id="region-chips">
-          <legend class="sr-only">Selecciona tu regi&oacute;n</legend>
-          <button type="button" class="chip" data-region="arica-y-parinacota" aria-selected="false">Arica y Parinacota</button>
-          <button type="button" class="chip" data-region="tarapaca" aria-selected="false">Tarapac&aacute;</button>
-          <button type="button" class="chip" data-region="antofagasta" aria-selected="false">Antofagasta</button>
-          <button type="button" class="chip" data-region="atacama" aria-selected="false">Atacama</button>
-          <button type="button" class="chip" data-region="coquimbo" aria-selected="false">Coquimbo</button>
-          <button type="button" class="chip" data-region="valparaiso" aria-selected="false">Valpara&iacute;so</button>
-          <button type="button" class="chip" data-region="metropolitana" aria-selected="false">Metropolitana</button>
-          <button type="button" class="chip" data-region="ohiggins" aria-selected="false">O&rsquo;Higgins</button>
-          <button type="button" class="chip" data-region="maule" aria-selected="false">Maule</button>
-          <button type="button" class="chip" data-region="nuble" aria-selected="false">&Ntilde;uble</button>
-          <button type="button" class="chip" data-region="biobio" aria-selected="false">Biob&iacute;o</button>
-          <button type="button" class="chip" data-region="araucania" aria-selected="false">La Araucan&iacute;a</button>
-          <button type="button" class="chip" data-region="los-rios" aria-selected="false">Los R&iacute;os</button>
-          <button type="button" class="chip" data-region="los-lagos" aria-selected="false">Los Lagos</button>
-          <button type="button" class="chip" data-region="aysen" aria-selected="false">Ays&eacute;n</button>
-          <button type="button" class="chip" data-region="magallanes" aria-selected="false">Magallanes</button>
-        </fieldset>
+        <div class="map-legend" role="img" aria-label="Leyenda de grupos regionales">
+          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-primary)"></span> Est&aacute;ndar (11)</span>
+          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-warning)"></span> Norte (2)</span>
+          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-success)"></span> Sur-Parcial (1)</span>
+          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-accent)"></span> Sur (2)</span>
+        </div>
 
-        <!-- Select oculto para compatibilidad con app.js -->
-        <select id="region-select" aria-hidden="true" style="display:none" tabindex="-1">
-          <option value="">--</option>
-          <option value="arica-y-parinacota">Arica y Parinacota</option>
-          <option value="tarapaca">Tarapac&aacute;</option>
-          <option value="antofagasta">Antofagasta</option>
-          <option value="atacama">Atacama</option>
-          <option value="coquimbo">Coquimbo</option>
-          <option value="valparaiso">Valpara&iacute;so</option>
-          <option value="metropolitana">Metropolitana</option>
-          <option value="ohiggins">O&rsquo;Higgins</option>
-          <option value="maule">Maule</option>
-          <option value="nuble">&Ntilde;uble</option>
-          <option value="biobio">Biob&iacute;o</option>
-          <option value="araucania">La Araucan&iacute;a</option>
-          <option value="los-rios">Los R&iacute;os</option>
-          <option value="los-lagos">Los Lagos</option>
-          <option value="aysen">Ays&eacute;n</option>
-          <option value="magallanes">Magallanes</option>
-        </select>
-
-        <!-- Calendario inline de la región seleccionada -->
-        <div id="region-calendar" style="display:none;">
-          <div class="card">
-            <h3 id="region-title"></h3>
-            <div class="table-wrapper">
-              <table id="region-table">
-                <thead>
-                  <tr>
-                    <th>Evento</th>
-                    <th>Fechas</th>
-                    <th>D&iacute;as</th>
-                  </tr>
-                </thead>
-                <tbody id="region-table-body"></tbody>
-              </table>
+        <div class="map-layout">
+          <!-- Lista de regiones -->
+          <div class="map-panel" role="listbox" aria-label="Regiones de Chile">
+            <p class="map-panel__title">Regiones de Chile</p>
+            <div class="chile-map">
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="NORTE" data-slug="arica-y-parinacota"><span class="region-bar__dot"></span> Arica y Parinacota</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="NORTE" data-slug="tarapaca"><span class="region-bar__dot"></span> Tarapac&aacute;</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="antofagasta"><span class="region-bar__dot"></span> Antofagasta</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="atacama"><span class="region-bar__dot"></span> Atacama</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="coquimbo"><span class="region-bar__dot"></span> Coquimbo</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="valparaiso"><span class="region-bar__dot"></span> Valpara&iacute;so</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="metropolitana"><span class="region-bar__dot"></span> Metropolitana</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="ohiggins"><span class="region-bar__dot"></span> O&rsquo;Higgins</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="maule"><span class="region-bar__dot"></span> Maule</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="nuble"><span class="region-bar__dot"></span> &Ntilde;uble</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="biobio"><span class="region-bar__dot"></span> Biob&iacute;o</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="araucania"><span class="region-bar__dot"></span> La Araucan&iacute;a</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="los-rios"><span class="region-bar__dot"></span> Los R&iacute;os</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="SUR-PARCIAL" data-slug="los-lagos"><span class="region-bar__dot"></span> Los Lagos</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="SUR" data-slug="aysen"><span class="region-bar__dot"></span> Ays&eacute;n</button>
+              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="SUR" data-slug="magallanes"><span class="region-bar__dot"></span> Magallanes</button>
             </div>
-            <p style="margin-top:var(--space-4); text-align:center;">
-              <a id="region-link" href="#" class="btn btn--secondary">Ver p&aacute;gina completa &rarr;</a>
-            </p>
+          </div>
+
+          <!-- Panel de datos -->
+          <div class="data-panel">
+            <div id="placeholder-data" class="data-panel__placeholder">
+              <p class="data-panel__placeholder-icon" aria-hidden="true">&#x1F449;</p>
+              <p>Selecciona una regi&oacute;n para ver su calendario</p>
+            </div>
+
+            <div id="region-data">
+              <h3 class="data-panel__title" id="r-name"></h3>
+              <span class="data-panel__grupo" id="r-grupo"></span>
+
+              <div class="mini-facts">
+                <div class="mini-fact">
+                  <p class="mini-fact__label">Inicio clases</p>
+                  <p class="mini-fact__value" id="r-inicio"></p>
+                </div>
+                <div class="mini-fact">
+                  <p class="mini-fact__label">Vacaciones invierno</p>
+                  <p class="mini-fact__value" id="r-vac"></p>
+                </div>
+                <div class="mini-fact">
+                  <p class="mini-fact__label">Fiestas Patrias</p>
+                  <p class="mini-fact__value" id="r-fp"></p>
+                </div>
+                <div class="mini-fact">
+                  <p class="mini-fact__label">Fin de a&ntilde;o</p>
+                  <p class="mini-fact__value" id="r-fin"></p>
+                </div>
+              </div>
+
+              <details open>
+                <summary>Datos adicionales</summary>
+                <table>
+                  <tbody>
+                    <tr><td>Inicio 2do semestre</td><td id="r-seg"></td></tr>
+                    <tr><td>D&iacute;a del Profesor</td><td id="r-prof"></td></tr>
+                    <tr><td>Cierre actas 4&deg; Medio</td><td id="r-actas"></td></tr>
+                    <tr><td>Fin sin JEC (40 sem.)</td><td id="r-sinjec"></td></tr>
+                    <tr><td>Fin EPJA (36 sem.)</td><td id="r-epja"></td></tr>
+                  </tbody>
+                </table>
+              </details>
+
+              <div style="margin-top:var(--space-4); text-align:center;">
+                <a href="#" class="btn btn--primary" id="link-pagina">Ver p&aacute;gina completa &rarr;</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
