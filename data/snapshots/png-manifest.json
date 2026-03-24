@@ -1,0 +1,167 @@
+{
+  "generated": "2026-03-24T14:05:38.697Z",
+  "regions": {
+    "arica-y-parinacota": {
+      "table_pngs": [
+        "arica-y-parinacota-tabla-p1.png"
+      ],
+      "source_pages": [
+        2
+      ],
+      "grupo": "NORTE"
+    },
+    "tarapaca": {
+      "table_pngs": [
+        "tarapaca-tabla-p1.png",
+        "tarapaca-tabla-p2.png"
+      ],
+      "source_pages": [
+        3,
+        4
+      ],
+      "grupo": "NORTE"
+    },
+    "antofagasta": {
+      "table_pngs": [
+        "antofagasta-tabla-p1.png"
+      ],
+      "source_pages": [
+        2
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "atacama": {
+      "table_pngs": [
+        "atacama-tabla-p1.png",
+        "atacama-tabla-p2.png"
+      ],
+      "source_pages": [
+        3,
+        4
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "coquimbo": {
+      "table_pngs": [
+        "coquimbo-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "valparaiso": {
+      "table_pngs": [
+        "valparaiso-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "metropolitana": {
+      "table_pngs": [
+        "metropolitana-tabla-p1.png",
+        "metropolitana-tabla-p2.png",
+        "metropolitana-tabla-p3.png"
+      ],
+      "source_pages": [
+        2,
+        3,
+        4
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "ohiggins": {
+      "table_pngs": [
+        "ohiggins-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "maule": {
+      "table_pngs": [
+        "maule-tabla-p1.png",
+        "maule-tabla-p2.png",
+        "maule-tabla-p3.png",
+        "maule-tabla-p4.png"
+      ],
+      "source_pages": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "nuble": {
+      "table_pngs": [
+        "nuble-tabla-p1.png",
+        "nuble-tabla-p2.png"
+      ],
+      "source_pages": [
+        3,
+        4
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "biobio": {
+      "table_pngs": [
+        "biobio-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "araucania": {
+      "table_pngs": [
+        "araucania-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "los-rios": {
+      "table_pngs": [
+        "los-rios-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "ESTANDAR"
+    },
+    "los-lagos": {
+      "table_pngs": [
+        "los-lagos-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "SUR-PARCIAL"
+    },
+    "aysen": {
+      "table_pngs": [
+        "aysen-tabla-p1.png",
+        "aysen-tabla-p2.png"
+      ],
+      "source_pages": [
+        2,
+        3
+      ],
+      "grupo": "SUR"
+    },
+    "magallanes": {
+      "table_pngs": [
+        "magallanes-tabla-p1.png"
+      ],
+      "source_pages": [
+        3
+      ],
+      "grupo": "SUR"
+    }
+  }
+}
