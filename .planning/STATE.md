@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Validacion Legal + Mapa Interactivo
-status: Executing Phase 08 — checkpoint (ANTHROPIC_API_KEY required)
-last_updated: "2026-03-25T12:00:00Z"
+status: Phase complete — ready for verification
+last_updated: "2026-03-25T04:15:52.876Z"
 progress:
   total_phases: 3
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 1
-  completed_plans: 0
+  completed_plans: 1
 ---
 
 # State — calendarioescolar.cl v1.2
@@ -73,6 +73,8 @@ Plan: 1 of 1
 - [Phase 05]: Run npm run generate after template.html update to propagate GA4 ID to all 16 region pages
 - **[v1.2 roadmap]:** VERI tooltip grouped with MAP in Phase 10 — both are frontend UI concerns; BCN extractor (Phase 8) delivers the data both depend on
 - **[v1.2 roadmap]:** SEC-01 (Bot Fight Mode docs) attached to Phase 10 — standalone doc task, no dependencies
+- [Phase 08-01]: Switched from Anthropic Claude to DeepSeek API (OpenAI-compatible) — ANTHROPIC_API_KEY unavailable; DEEPSEEK_API_KEY used with openai SDK base_url override
+- [Phase 08-01]: Ordinal-to-numeric mapping in find_article_text() — BCN estructura uses PRIMERO/SEGUNDO/UNICO ordinals; ORDINAL_MAP normalizes before matching DeepSeek numeric output
 
 ## Accumulated Context
 
@@ -101,3 +103,4 @@ Plan: 1 of 1
 
 ---
 *Last updated: 2026-03-25 — Phase 08-01 Task 1 complete; checkpoint at Task 2 (ANTHROPIC_API_KEY required)*
+| Phase 08 P01 | 14 | 2 tasks | 5 files |

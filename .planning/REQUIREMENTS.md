@@ -7,9 +7,9 @@
 
 ### BCN — Extracción Legal
 
-- [ ] **BCN-01**: El script `scripts/bcn-extractor.py` obtiene el XML de cada ley de feriado desde BCN.cl y extrae el texto de todos sus artículos
-- [ ] **BCN-02**: Para cada claim de tipo `feriado-*` en `afirmaciones.json`, Claude API identifica qué artículos son relevantes (setup único, resultado guardado en `data/legal-articles.json`)
-- [ ] **BCN-03**: `data/legal-articles.json` almacena por claim: artículos verbatim, hash SHA del texto, `last_checked`, y texto anterior cuando hay cambio (historial)
+- [x] **BCN-01**: El script `scripts/bcn-extractor.py` obtiene el XML de cada ley de feriado desde BCN.cl y extrae el texto de todos sus artículos
+- [x] **BCN-02**: Para cada claim de tipo `feriado-*` en `afirmaciones.json`, Claude API identifica qué artículos son relevantes (setup único, resultado guardado en `data/legal-articles.json`)
+- [x] **BCN-03**: `data/legal-articles.json` almacena por claim: artículos verbatim, hash SHA del texto, `last_checked`, y texto anterior cuando hay cambio (historial)
 
 ### CHNG — Detección de Cambios
 
@@ -63,9 +63,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BCN-01 | Phase 8 | Pending |
-| BCN-02 | Phase 8 | Pending |
-| BCN-03 | Phase 8 | Pending |
+| BCN-01 | Phase 8 | Complete |
+| BCN-02 | Phase 8 | Complete |
+| BCN-03 | Phase 8 | Complete |
 | CHNG-01 | Phase 9 | Pending |
 | CHNG-02 | Phase 9 | Pending |
 | CHNG-03 | Phase 9 | Pending |

@@ -45,7 +45,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. `data/legal-articles.json` existe y contiene para cada claim `feriado-*`: articulo(s) relevante(s) identificados por Claude API, texto verbatim, hash SHA, y `last_checked`
   3. El hash SHA almacenado corresponde al texto verbatim guardado (verificable localmente con sha256)
   4. El campo `texto_anterior` se registra en `legal-articles.json` cuando hay un cambio respecto a la corrida previa
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
 - [~] 08-01-PLAN.md — Task 1 complete (bcn-extractor.py + afirmaciones.json fix). Task 2 at checkpoint: awaiting ANTHROPIC_API_KEY to generate legal-articles.json
 
@@ -83,7 +83,7 @@ Plans:
 | 2. Datos Completos | v1.0 | 2/2 | Complete | 2026-03-24 |
 | 4. Mobile Responsiveness | v1.0 | 1/1 | Complete | 2026-03-24 |
 | 5. Activacion de Produccion | v1.1 | 2/2 | Complete | 2026-03-25 |
-| 8. BCN Legal Extractor | v1.2 | 0/1 | In progress (checkpoint) | - |
+| 8. BCN Legal Extractor | v1.2 | 1/1 | Complete   | 2026-03-25 |
 | 9. Change Detection Pipeline | v1.2 | 0/? | Not started | - |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/? | Not started | - |
 
