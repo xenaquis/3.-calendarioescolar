@@ -30,7 +30,7 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 
 <!-- Milestone v1.2 Validación Legal + Mapa Interactivo -->
 
-- [ ] Extracción de artículos BCN XML por ley de feriado (Python), verbatim en JSON con hash + last_checked
+- ✓ Extracción de artículos BCN XML por ley de feriado (Python), verbatim en JSON con hash + last_checked — v1.2 Phase 8
 - [ ] Pipeline de detección de cambios: cron compara hash BCN actual vs guardado
 - [ ] Alerta GitHub Issue cuando cambia artículo: diff + evaluación IA de impacto en afirmación
 - [ ] Tooltip CSS sobre badge "Verificado" mostrando art. XX: "texto verbatim"
