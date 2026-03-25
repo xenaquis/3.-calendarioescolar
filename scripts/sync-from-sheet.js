@@ -6,38 +6,32 @@
      - GOOGLE_API_KEY en variable de entorno (o config.json → sheet.apiKey)
      - config.json → sheet.spreadsheetId (ID del Google Sheet)
 
-   El Google Sheet debe tener:
-     - Tab "Regiones" (config.json → sheet.regionsTab): datos de las 16 regiones
-     - Tab "Config" (config.json → sheet.configTab):   fechas del año escolar + feriados
+   Lee exclusivamente del tab "Datos" (config.json → sheet.datosTab).
+   El tab "Datos" tiene 12 columnas y hasta ~74 filas (1 header + secciones):
 
-   Estructura del tab "Regiones" (fila 1 = headers, filas 2-17 = datos):
-     A: slug (ej: region/metropolitana)
-     B: region (nombre corto, ej: Metropolitana)
-     C: regionSlug (ej: metropolitana)
-     D: inicio (ej: 2 de marzo)
-     E: vacacionesInicio (ej: 11 de julio)
-     F: vacacionesFin (ej: 24 de julio)
-     G: fiestasPatriasInicio (ej: 14 de septiembre)
-     H: fiestasPatriasFin (ej: 18 de septiembre)
-     I: finAno (ej: 11 de diciembre)
-     J: diasVacacionesInvierno (ej: 14)
-     K: diasFiestasPatrias (ej: 5)
-     L: title (ej: Calendario Escolar 2026 — Región Metropolitana)
-     M: description (texto meta)
-     N: priority (ej: 0.9)
+   Headers (fila 1):
+     A: seccion | B: id | C: pregunta | D: respuesta | E: fuente_url
+     F: fuente_referencia | G: extracto_verbatim | H: hash_respuesta
+     I: hash_verbatim | J: last_checked | K: status | L: campo
 
-   Estructura del tab "Config":
-     Fila 1: headers (KEY | VALUE | NOTAS)
-     Filas 2-6:
-       year         | 2026     |
-       schoolStart  | 2026-03-02 | YYYY-MM-DD
-       winterStart  | 2026-07-11 | YYYY-MM-DD
-       winterEnd    | 2026-07-25 | YYYY-MM-DD
-       schoolEnd    | 2026-12-12 | YYYY-MM-DD
-     Fila 8: "FERIADOS" (marcador de sección)
-     Fila 9: headers (DATE | NOMBRE)
-     Filas 10+: feriados (ej: 2026-04-03 | Viernes Santo)
-     (fin de feriados = fila vacía)
+   Secciones (detectadas por col A):
+     CLAIMS (50 filas): claims factuales del sitio
+       B=claim-id, C=pregunta, D=respuesta, E=fuente_url, F=fuente_referencia,
+       G=extracto_verbatim, I=hash_verbatim, J=last_checked, K=status
+     REGION (16 filas): datos completos de cada región
+       B=regionSlug, D=JSON.stringify(region object completo), L=datos_region
+     CONFIG (5+2 filas): configuración del año escolar
+       B=key-name, D=value, L=key-name
+       Keys: year, schoolStart, winterStart, winterEnd, schoolEnd,
+             feriados (JSON array), feriadosCompletos (JSON array)
+
+   Produce:
+     - data/claims.json        (merge Sheet data into existing claims structure)
+     - data/pages.json         (16 region objects)
+     - data/calendar-config.json (year, school dates, feriados)
+
+   Flags:
+     --dry-run  Imprime resumen de lo leido pero no escribe archivos
 */
 
 var https = require('https');
@@ -56,9 +50,9 @@ try {
 }
 
 var SPREADSHEET_ID = config.sheet && config.sheet.spreadsheetId;
-var REGIONS_TAB    = (config.sheet && config.sheet.regionsTab)    || 'Regiones';
-var CONFIG_TAB     = (config.sheet && config.sheet.configTab)     || 'Config';
+var DATOS_TAB      = (config.sheet && config.sheet.datosTab) || 'Datos';
 var API_KEY        = process.env.GOOGLE_API_KEY || (config.sheet && config.sheet.apiKey) || '';
+var DRY_RUN        = process.argv.indexOf('--dry-run') !== -1;
 
 if (!SPREADSHEET_ID || SPREADSHEET_ID === 'PLACEHOLDER_SHEET_ID') {
   console.error('sync-from-sheet: config.json → sheet.spreadsheetId no configurado.');
@@ -74,7 +68,7 @@ if (!API_KEY) {
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 function fetchSheet(tabName, callback) {
-  var range = encodeURIComponent(tabName + '!A1:P50');
+  var range = encodeURIComponent(tabName + '!A1:L100');
   var url = 'https://sheets.googleapis.com/v4/spreadsheets/' + SPREADSHEET_ID +
             '/values/' + range + '?key=' + API_KEY;
 
@@ -109,102 +103,110 @@ function cell(row, index) {
   return (row && row[index] !== undefined) ? String(row[index]).trim() : '';
 }
 
-// ── Parsear tab "Regiones" ─────────────────────────────────────────────────
-function parseRegionsTab(rows) {
-  if (!rows || rows.length < 2) throw new Error('Tab Regiones vacio o sin datos');
+// ── Parsear tab "Datos" ────────────────────────────────────────────────────
+function parseDatosTab(rows) {
+  if (!rows || rows.length < 2) throw new Error('Tab Datos vacio o sin datos');
 
-  // Fila 0 = headers, filas 1+ = datos
+  var claims = [];
   var pages = [];
-  for (var i = 1; i < rows.length; i++) {
-    var row = rows[i];
-    if (!row || !cell(row, 0)) break; // Fila vacía = fin
-
-    var slug = cell(row, 0);
-    var regionSlug = cell(row, 2);
-
-    if (!slug || !regionSlug) {
-      console.warn('  Fila ' + (i + 1) + ' ignorada: slug o regionSlug vacio');
-      continue;
-    }
-
-    pages.push({
-      slug:                    slug,
-      title:                   cell(row, 11),
-      region:                  cell(row, 1),
-      regionSlug:              regionSlug,
-      inicio:                  cell(row, 3),
-      vacacionesInicio:        cell(row, 4),
-      vacacionesFin:           cell(row, 5),
-      fiestasPatriasInicio:    cell(row, 6),
-      fiestasPatriasFin:       cell(row, 7),
-      finAno:                  cell(row, 8),
-      diasVacacionesInvierno:  cell(row, 9),
-      diasFiestasPatrias:      cell(row, 10),
-      description:             cell(row, 12),
-      priority:                cell(row, 13) || '0.8'
-    });
-  }
-
-  if (pages.length !== 16) {
-    throw new Error('Se esperan 16 regiones en el Sheet, se encontraron ' + pages.length);
-  }
-
-  return pages;
-}
-
-// ── Parsear tab "Config" ───────────────────────────────────────────────────
-function parseConfigTab(rows) {
-  if (!rows || rows.length < 2) throw new Error('Tab Config vacio o sin datos');
-
   var calConfig = {
     year: null,
     schoolStart: null,
     winterStart: null,
     winterEnd: null,
     schoolEnd: null,
-    feriados: []
+    feriados: [],
+    feriadosCompletos: []
   };
 
-  var inFeriados = false;
-  var feriadoHeaderSeen = false;
-
-  for (var i = 0; i < rows.length; i++) {
+  // Fila 0 = headers, filas 1+ = datos
+  for (var i = 1; i < rows.length; i++) {
     var row = rows[i];
-    if (!row) continue;
+    if (!row || !cell(row, 0)) continue; // Fila vacía = ignorar
 
-    var col0 = cell(row, 0).toLowerCase();
-    var col1 = cell(row, 1);
+    var seccion = cell(row, 0).toUpperCase();
 
-    // Detectar sección de feriados
-    if (col0 === 'feriados') {
-      inFeriados = true;
-      continue;
-    }
+    if (seccion === 'CLAIMS') {
+      claims.push({
+        id:                 cell(row, 1),  // B: id
+        pregunta:           cell(row, 2),  // C: pregunta
+        respuesta:          cell(row, 3),  // D: respuesta
+        fuente_url:         cell(row, 4),  // E: fuente_url
+        source_reference:   cell(row, 5),  // F: fuente_referencia
+        extracto_verbatim:  cell(row, 6) || null,  // G: extracto_verbatim
+        hash_sha256:        cell(row, 8) || null,  // I: hash_verbatim
+        last_checked:       cell(row, 9) || null,  // J: last_checked
+        status:             cell(row, 10) || 'unverified' // K: status
+      });
 
-    if (inFeriados) {
-      if (!feriadoHeaderSeen) { feriadoHeaderSeen = true; continue; } // saltar header
-      if (!col0 || !col1) break; // fin de feriados
-      calConfig.feriados.push({ date: col0, nombre: col1 });
-      continue;
-    }
+    } else if (seccion === 'REGION') {
+      var regionJson = cell(row, 3); // D: respuesta (JSON stringified)
+      if (!regionJson) {
+        console.warn('  Fila ' + (i + 1) + ' REGION ignorada: respuesta vacia');
+        continue;
+      }
+      try {
+        var regionObj = JSON.parse(regionJson);
+        pages.push(regionObj);
+      } catch (e) {
+        console.warn('  Fila ' + (i + 1) + ' REGION: error al parsear JSON de region "' + cell(row, 1) + '": ' + e.message);
+      }
 
-    // Claves de configuración
-    switch (col0) {
-      case 'year':        calConfig.year = parseInt(col1); break;
-      case 'schoolstart': calConfig.schoolStart = col1; break;
-      case 'winterstart': calConfig.winterStart = col1; break;
-      case 'winterend':   calConfig.winterEnd = col1; break;
-      case 'schoolend':   calConfig.schoolEnd = col1; break;
+    } else if (seccion === 'CONFIG') {
+      var key = cell(row, 1); // B: id (key name)
+      var val = cell(row, 3); // D: respuesta (value)
+
+      switch (key) {
+        case 'year':
+          calConfig.year = parseInt(val, 10);
+          break;
+        case 'schoolStart':
+          calConfig.schoolStart = val;
+          break;
+        case 'winterStart':
+          calConfig.winterStart = val;
+          break;
+        case 'winterEnd':
+          calConfig.winterEnd = val;
+          break;
+        case 'schoolEnd':
+          calConfig.schoolEnd = val;
+          break;
+        case 'feriados':
+          try {
+            calConfig.feriados = JSON.parse(val);
+          } catch (e) {
+            console.warn('  CONFIG feriados: error al parsear JSON: ' + e.message);
+            calConfig.feriados = [];
+          }
+          break;
+        case 'feriadosCompletos':
+          try {
+            calConfig.feriadosCompletos = JSON.parse(val);
+          } catch (e) {
+            console.warn('  CONFIG feriadosCompletos: error al parsear JSON: ' + e.message);
+            calConfig.feriadosCompletos = [];
+          }
+          break;
+      }
     }
   }
 
-  // Validaciones básicas
+  // Validaciones
+  if (pages.length !== 16) {
+    throw new Error('Se esperan 16 regiones en la pestana Datos, se encontraron ' + pages.length);
+  }
+
+  if (claims.length === 0) {
+    throw new Error('No se encontraron claims en la pestana Datos');
+  }
+
   var required = ['year', 'schoolStart', 'winterStart', 'winterEnd', 'schoolEnd'];
   required.forEach(function (f) {
-    if (!calConfig[f]) throw new Error('Tab Config: falta campo "' + f + '"');
+    if (!calConfig[f]) throw new Error('Tab Datos CONFIG: falta campo "' + f + '"');
   });
 
-  return calConfig;
+  return { claims: claims, pages: pages, calConfig: calConfig };
 }
 
 // ── Comparar y escribir si cambiaron ──────────────────────────────────────
@@ -229,67 +231,133 @@ function writeIfChanged(filePath, newData) {
   return true;
 }
 
+// ── Construir claims.json: merge Sheet data into existing structure ─────────
+function buildClaimsOutput(sheetClaims) {
+  // Leer claims.json existente para preservar _meta, sources y campos no editables
+  var existingData = { _meta: {}, sources: {}, claims: [] };
+  try {
+    existingData = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'claims.json'), 'utf8'));
+  } catch (e) {
+    console.warn('  claims.json no encontrado — se creara desde cero');
+  }
+
+  // Crear mapa de claims existentes por id
+  var existingMap = {};
+  var existingClaims = existingData.claims || [];
+  for (var i = 0; i < existingClaims.length; i++) {
+    existingMap[existingClaims[i].id] = existingClaims[i];
+  }
+
+  // Merge: Sheet data into existing claim objects
+  var mergedClaims = [];
+  for (var j = 0; j < sheetClaims.length; j++) {
+    var sheetClaim = sheetClaims[j];
+    var existing = existingMap[sheetClaim.id];
+
+    if (existing) {
+      // Actualizar campos editables desde Sheet, preservar el resto
+      var merged = {};
+      // Copiar todos los campos existentes primero
+      var keys = Object.keys(existing);
+      for (var k = 0; k < keys.length; k++) {
+        merged[keys[k]] = existing[keys[k]];
+      }
+      // Sobreescribir con datos del Sheet
+      merged.pregunta          = sheetClaim.pregunta          || existing.pregunta;
+      merged.respuesta         = sheetClaim.respuesta         || existing.respuesta;
+      merged.fuente_url        = sheetClaim.fuente_url        || existing.fuente_url;
+      merged.source_reference  = sheetClaim.source_reference  || existing.source_reference;
+      merged.extracto_verbatim = sheetClaim.extracto_verbatim !== null
+                                   ? sheetClaim.extracto_verbatim
+                                   : existing.extracto_verbatim;
+      merged.hash_sha256       = sheetClaim.hash_sha256 !== null
+                                   ? sheetClaim.hash_sha256
+                                   : existing.hash_sha256;
+      merged.last_checked      = sheetClaim.last_checked !== null
+                                   ? sheetClaim.last_checked
+                                   : existing.last_checked;
+      merged.status            = sheetClaim.status || existing.status;
+      mergedClaims.push(merged);
+    } else {
+      // Nueva claim no encontrada en existente — crear objeto mínimo
+      mergedClaims.push({
+        id:                 sheetClaim.id,
+        tags:               [],
+        pregunta:           sheetClaim.pregunta,
+        respuesta:          sheetClaim.respuesta,
+        fuente_url:         sheetClaim.fuente_url,
+        source_reference:   sheetClaim.source_reference,
+        extracto_verbatim:  sheetClaim.extracto_verbatim,
+        hash_sha256:        sheetClaim.hash_sha256,
+        last_checked:       sheetClaim.last_checked,
+        status:             sheetClaim.status
+      });
+    }
+  }
+
+  return {
+    _meta:    existingData._meta    || {},
+    sources:  existingData.sources  || {},
+    claims:   mergedClaims
+  };
+}
+
 // ── Main ───────────────────────────────────────────────────────────────────
 console.log('\n=== Sync desde Google Sheet ===');
 console.log('  Spreadsheet ID: ' + SPREADSHEET_ID);
-console.log('  Tab regiones:   ' + REGIONS_TAB);
-console.log('  Tab config:     ' + CONFIG_TAB);
+console.log('  Tab datos:      ' + DATOS_TAB);
+if (DRY_RUN) console.log('  MODO: --dry-run (no escribe archivos)');
 console.log('');
 
 var hasChanges = false;
 
-// Fetch ambos tabs en paralelo
-var regionsRows = null;
-var configRows = null;
-var errors = [];
-var pending = 2;
-
-function onTabFetched() {
-  pending--;
-  if (pending > 0) return;
-
-  if (errors.length > 0) {
-    errors.forEach(function (e) { console.error('  ERROR: ' + e); });
+fetchSheet(DATOS_TAB, function (err, rows) {
+  if (err) {
+    console.error('  ERROR al leer tab "' + DATOS_TAB + '": ' + err.message);
     process.exit(1);
   }
 
   try {
-    // Parsear datos
-    var pages = parseRegionsTab(regionsRows);
-    var calConfig = parseConfigTab(configRows);
+    var parsed = parseDatosTab(rows);
+    var claims    = parsed.claims;
+    var pages     = parsed.pages;
+    var calConfig = parsed.calConfig;
 
-    console.log('  Leidas ' + pages.length + ' regiones + config (year: ' + calConfig.year + ', feriados: ' + calConfig.feriados.length + ')');
+    console.log('  Leidos ' + claims.length + ' claims + ' + pages.length + ' regiones + config (year: ' + calConfig.year + ', feriados: ' + calConfig.feriados.length + ')');
     console.log('');
 
+    if (DRY_RUN) {
+      console.log('  [dry-run] claims.json:          ' + claims.length + ' claims');
+      console.log('  [dry-run] pages.json:           ' + pages.length + ' regiones');
+      console.log('  [dry-run] calendar-config.json: year=' + calConfig.year +
+                  ', schoolStart=' + calConfig.schoolStart +
+                  ', feriados=' + calConfig.feriados.length +
+                  ', feriadosCompletos=' + calConfig.feriadosCompletos.length);
+      console.log('');
+      console.log('  [dry-run] Sin escrituras. Saliendo.');
+      console.log('');
+      process.exit(0);
+    }
+
+    // Construir claims.json con merge
+    var claimsOutput = buildClaimsOutput(claims);
+
     // Escribir si cambiaron
+    if (writeIfChanged(path.join(ROOT, 'data', 'claims.json'), claimsOutput)) hasChanges = true;
     if (writeIfChanged(path.join(ROOT, 'data', 'pages.json'), pages)) hasChanges = true;
     if (writeIfChanged(path.join(ROOT, 'data', 'calendar-config.json'), calConfig)) hasChanges = true;
 
     console.log('');
     if (hasChanges) {
       console.log('  Datos actualizados. Ejecutar: npm run generate');
-      console.log('');
-      process.exit(0);
     } else {
       console.log('  Datos ya al dia. Nada que hacer.');
-      console.log('');
-      process.exit(0);
     }
+    console.log('');
+    process.exit(0);
 
   } catch (e) {
     console.error('  ERROR al procesar datos del Sheet: ' + e.message);
     process.exit(1);
   }
-}
-
-fetchSheet(REGIONS_TAB, function (err, rows) {
-  if (err) errors.push('Tab "' + REGIONS_TAB + '": ' + err.message);
-  else regionsRows = rows;
-  onTabFetched();
-});
-
-fetchSheet(CONFIG_TAB, function (err, rows) {
-  if (err) errors.push('Tab "' + CONFIG_TAB + '": ' + err.message);
-  else configRows = rows;
-  onTabFetched();
 });
