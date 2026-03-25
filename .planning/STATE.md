@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Validacion Legal + Mapa Interactivo
-status: Ready to plan
-last_updated: "2026-03-25T04:43:37.193Z"
+status: Milestone complete
+last_updated: "2026-03-25T05:12:31.645Z"
 progress:
   total_phases: 3
-  completed_phases: 2
-  total_plans: 2
-  completed_plans: 2
+  completed_phases: 3
+  total_plans: 3
+  completed_plans: 3
 ---
 
 # State — calendarioescolar.cl v1.2
@@ -18,7 +18,7 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 10 — UI Verificacion + Mapa Interactivo
+**Current focus:** Phase 10 — ui-verificacion-mapa
 
 ## Current Position
 
@@ -78,6 +78,9 @@ Plan: Not started
 - **[Phase 09-01]:** Break on BCN error (not continue) — prevents partial data from creating misleading Issues or partial last_checked updates
 - **[Phase 09-01]:** texto_antes uses stored texto_verbatim (not texto_anterior) for first-change diff — Pitfall 6 from RESEARCH.md
 - **[Phase 09-01]:** Consolidated single GitHub Issue for all changes — reduces noise per CONTEXT.md decision
+- [Phase 10]: CSS-only tooltip via :hover + :focus-within — zero JavaScript, works on all devices
+- [Phase 10]: tabindex=0 on .bcn-badge-wrap enables keyboard/tap focus for mobile accessibility (VERI-02)
+- [Phase 10]: Bot Fight Mode documented but not activated — requires human action in Cloudflare dashboard
 
 ## Accumulated Context
 
@@ -109,3 +112,4 @@ Plan: Not started
 
 ---
 *Last updated: 2026-03-25 — Phase 09-01 complete; check-bcn-changes.py + GitHub Action workflow created*
+| Phase 10 P01 | 2 | 2 tasks | 3 files |

@@ -32,7 +32,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 - [x] **Phase 8: BCN Legal Extractor** - Script Python extrae articulado verbatim desde BCN.cl y lo guarda en legal-articles.json (completed 2026-03-25)
 - [x] **Phase 9: Change Detection Pipeline** - Cron semanal detecta cambios en articulado BCN y crea GitHub Issue con evaluacion IA (completed 2026-03-25)
-- [ ] **Phase 10: UI Verificacion + Mapa Interactivo** - Tooltip "Verificado" con texto legal + mapa de regiones interactivo en mobile y desktop
+- [x] **Phase 10: UI Verificacion + Mapa Interactivo** - Tooltip "Verificado" con texto legal + mapa de regiones interactivo en mobile y desktop (completed 2026-03-25)
 
 ## Phase Details
 
@@ -74,7 +74,7 @@ Plans:
   4. Al hacer click en una region de la lista, el panel muestra sus key-facts y tabla de datos sin recargar la pagina
   5. En mobile (<650px), la interfaz muestra un dropdown select de region seguido del panel de datos, y los datos se leen desde `window.REGIONS_DATA` sin duplicacion en el HTML estatico
   6. La guia de Bot Fight Mode esta documentada y el dashboard de Cloudflare puede mostrar el estado activo
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 Plans:
 - [ ] 10-01-PLAN.md — CSS-only tooltip badges on 7 feriados + verify MAP + Bot Fight Mode docs
 
@@ -88,7 +88,7 @@ Plans:
 | 5. Activacion de Produccion | v1.1 | 2/2 | Complete | 2026-03-25 |
 | 8. BCN Legal Extractor | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 9. Change Detection Pipeline | v1.2 | 1/1 | Complete    | 2026-03-25 |
-| 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/1 | Planned | - |
+| 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/1 | Complete    | 2026-03-25 |
 
 ---
 *Updated: 2026-03-25 — Phase 10 planned: 1 plan (tooltip badges + MAP verify + Bot Fight Mode docs)*
