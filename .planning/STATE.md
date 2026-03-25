@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Sheet como Fuente de Verdad Unica
-status: Executing Phase 12
-last_updated: "2026-03-25T14:30:00.000Z"
+status: Phase complete — ready for verification
+last_updated: "2026-03-25T16:15:52.961Z"
 progress:
   total_phases: 4
   completed_phases: 0
@@ -102,6 +102,9 @@ Plan: 1 of 1
 - **[Phase 12-01]:** require('url').parse used for tokenUri parsing in JWT auth — stdlib native, consistent with zero-dependency constraint
 - **[Phase 12-01]:** REGION rows use JSON.stringify of full region object — all 19 fields auditable in one Sheet cell
 - **[Phase 12-01]:** addOrClearSheet checks statusCode=400 + INVALID_ARGUMENT — handles both tab-exists error variants from Sheets API
+- [Phase 12-01]: require('url').parse used for tokenUri parsing in JWT auth — stdlib native, consistent with zero-dependency constraint
+- [Phase 12-01]: REGION rows use JSON.stringify of full region object — all 19 fields auditable in one Sheet cell
+- [Phase 12-01]: addOrClearSheet checks statusCode=400 + INVALID_ARGUMENT — handles both tab-exists error variants from Sheets API
 
 ## Accumulated Context
 
@@ -139,3 +142,4 @@ Plan: 1 of 1
 
 ---
 *Last updated: 2026-03-25 — Phase 12 Plan 01 Task 1 complete: claims-to-sheet.js (557 lines, JWT auth, dry-run verified)*
+| Phase 12 P01 | 5 | 1 tasks | 2 files |

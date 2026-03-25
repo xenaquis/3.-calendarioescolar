@@ -9,15 +9,15 @@
 
 - [x] **JSON-01**: Cada afirmacion no-API tiene estructura enriquecida: pregunta (que responderia), respuesta ofrecida, fuente detallada (URL, ley, articulo), extracto verbatim relevante de la fuente, hash SHA256 del extracto, last_checked — claims.json v2.0.0 (Phase 11-01)
 - [x] **JSON-02**: afirmaciones.json y legal-articles.json se unifican en un solo modelo JSON (`data/claims.json`) con toda la informacion consolidada — merge-claims.js + claims.json (Phase 11-01)
-- [ ] **JSON-03**: 100% de las afirmaciones que aparecen en las paginas (meta claim-data) tienen su claim registrado con fuente y extracto
-- [ ] **JSON-04**: El build (`validate.js`) falla si alguna afirmacion con fuente normativa/legal no tiene extracto verbatim ni hash
+- [x] **JSON-03**: 100% de las afirmaciones que aparecen en las paginas (meta claim-data) tienen su claim registrado con fuente y extracto
+- [x] **JSON-04**: El build (`validate.js`) falla si alguna afirmacion con fuente normativa/legal no tiene extracto verbatim ni hash
 
 ### SHEET — Pestana Unica Google Sheet
 
-- [ ] **SHEET-01**: Script `scripts/claims-to-sheet.js` escribe `claims.json` completo a una pestana "Datos" en el Google Sheet
-- [ ] **SHEET-02**: La pestana "Datos" contiene UNA fila por afirmacion con columnas: id, pregunta, respuesta, fuente_url, fuente_referencia, extracto_verbatim, hash, last_checked, status
-- [ ] **SHEET-03**: La misma pestana incluye los datos regionales (16 regiones x campos) y los datos de configuracion (year, schoolStart, etc.) — una sola pestana = toda la pagina
-- [ ] **SHEET-04**: Hash de la columna "respuesta" permite detectar cuando el humano modifico un valor en el Sheet
+- [x] **SHEET-01**: Script `scripts/claims-to-sheet.js` escribe `claims.json` completo a una pestana "Datos" en el Google Sheet
+- [x] **SHEET-02**: La pestana "Datos" contiene UNA fila por afirmacion con columnas: id, pregunta, respuesta, fuente_url, fuente_referencia, extracto_verbatim, hash, last_checked, status
+- [x] **SHEET-03**: La misma pestana incluye los datos regionales (16 regiones x campos) y los datos de configuracion (year, schoolStart, etc.) — una sola pestana = toda la pagina
+- [x] **SHEET-04**: Hash de la columna "respuesta" permite detectar cuando el humano modifico un valor en el Sheet
 
 ### SYNC — Flujo Sheet → Pagina
 
@@ -57,11 +57,11 @@
 | JSON-01 | Phase 11 | Complete (Plan 01) |
 | JSON-02 | Phase 11 | Complete (Plan 01) |
 | JSON-03 | Phase 11 | Pending (Plan 02) |
-| JSON-04 | Phase 11 | Pending |
-| SHEET-01 | Phase 12 | Pending |
-| SHEET-02 | Phase 12 | Pending |
-| SHEET-03 | Phase 12 | Pending |
-| SHEET-04 | Phase 12 | Pending |
+| JSON-04 | Phase 11 | Complete |
+| SHEET-01 | Phase 12 | Complete |
+| SHEET-02 | Phase 12 | Complete |
+| SHEET-03 | Phase 12 | Complete |
+| SHEET-04 | Phase 12 | Complete |
 | SYNC-01 | Phase 13 | Pending |
 | SYNC-02 | Phase 13 | Pending |
 | SYNC-03 | Phase 13 | Pending |
