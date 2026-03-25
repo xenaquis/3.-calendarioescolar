@@ -2,12 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Validacion Legal + Mapa Interactivo
-status: Ready to plan
-last_updated: "2026-03-25T04:19:18.501Z"
+status: Executing Phase 09
+last_updated: "2026-03-25T04:34:02.129Z"
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 1
+  total_plans: 2
   completed_plans: 1
 ---
 
@@ -18,12 +18,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 08 — bcn-legal-extractor
+**Current focus:** Phase 09 — change-detection-pipeline
 
 ## Current Position
 
-Phase: 9
-Plan: Not started
+Phase: 09 (change-detection-pipeline) — EXECUTING
+Plan: 1 of 1
 
 ## Phase Status (v1.0 — archived)
 
