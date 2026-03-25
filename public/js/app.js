@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Módulos compartidos
   Theme.init();
   Ads.init();
-  Analytics.init('G-XXXXXXXXXX');
+  Analytics.init('G-6FVLKF6PFQ');
 
   // Lógica del sitio
   App.init();
