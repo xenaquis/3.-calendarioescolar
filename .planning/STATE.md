@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Validacion Legal + Mapa Interactivo
-status: Phase complete — ready for verification
-last_updated: "2026-03-25T04:15:52.876Z"
+status: Ready to plan
+last_updated: "2026-03-25T04:19:18.501Z"
 progress:
   total_phases: 3
   completed_phases: 1
@@ -22,8 +22,8 @@ See: .planning/PROJECT.md (updated 2026-03-25)
 
 ## Current Position
 
-Phase: 08 (bcn-legal-extractor) — EXECUTING
-Plan: 1 of 1
+Phase: 9
+Plan: Not started
 
 ## Phase Status (v1.0 — archived)
 

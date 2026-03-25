@@ -83,7 +83,7 @@ Plans:
 | 2. Datos Completos | v1.0 | 2/2 | Complete | 2026-03-24 |
 | 4. Mobile Responsiveness | v1.0 | 1/1 | Complete | 2026-03-24 |
 | 5. Activacion de Produccion | v1.1 | 2/2 | Complete | 2026-03-25 |
-| 8. BCN Legal Extractor | v1.2 | 1/1 | Complete   | 2026-03-25 |
+| 8. BCN Legal Extractor | v1.2 | 1/1 | Complete    | 2026-03-25 |
 | 9. Change Detection Pipeline | v1.2 | 0/? | Not started | - |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/? | Not started | - |
 
