@@ -1,48 +1,84 @@
 # Requirements — calendarioescolar.cl v1.1
 
+**Defined:** 2026-03-24
+**Core Value:** El usuario encuentra la fecha escolar que busca en menos de 10 segundos, con datos verificados y actualizados directo de Mineduc.
+
 ## v1.1 Requirements
 
-### MAP — Selector de Regiones
+### ANLYT — Analytics & Medición
 
-- [x] **MAP-01**: Usuario ve lista de 16 regiones ordenadas norte-sur con dot de color por grupo
-- [ ] **MAP-02**: Al hacer click en una region, el panel derecho muestra sus datos
-- [x] **MAP-03**: Region activa se resalta visualmente en la lista
-- [x] **MAP-04**: Leyenda de colores visible (Estandar, Norte, Sur-Parcial, Sur)
+- [ ] **ANLYT-01**: El sitio envía eventos reales a GA4 (propiedad real, no placeholder G-XXXXXXXXXX)
+- [ ] **ANLYT-02**: Google Search Console tiene la propiedad verificada y el sitemap enviado
+- [ ] **ANLYT-03**: GA4 y Search Console están conectados entre sí
 
-### PANEL — Panel de Datos
+### ASSET — Activos de Producción
 
-- [x] **PANEL-01**: Panel muestra key-facts (inicio, vacaciones, fiestas patrias, fin ano)
-- [x] **PANEL-02**: Panel muestra tabla de datos adicionales (5 campos de v1.0)
-- [x] **PANEL-03**: Link "Ver pagina completa" lleva a /region/slug/
-- [ ] **PANEL-04**: Datos se cargan desde regions-data.js (sin duplicar)
+- [ ] **ASSET-01**: og-image.png existe en public/icons/ (1200×630px, fondo #7c3aed, texto blanco "Calendario Escolar Chile 2026")
 
-### RESP — Responsividad
+### SEO — Contenido SEO
 
-- [x] **RESP-01**: Desktop (>650px): layout split (lista izquierda + panel derecha)
-- [ ] **RESP-02**: Mobile (<650px): dropdown select + panel debajo
+- [ ] **SEO-01**: Existe public/feriados-2027.html con estructura similar a feriados-2026.html, contenido orientado a búsquedas anticipadas
 
-## Future Requirements (deferred)
+### SEC — Seguridad & Calidad
 
-- [ ] Mapa SVG real de Chile (en vez de lista) — complejidad alta, poco valor agregado vs lista
-- [ ] Animacion de transicion al cambiar region
-- [ ] Guardar region preferida en localStorage
+- [ ] **SEC-01**: Bot Fight Mode de Cloudflare está activado (guía documentada para hacerlo via dashboard)
+- [ ] **SEC-02**: Sistema de validación Fase 1 implementado — registro de afirmaciones (afirmaciones.json) y meta claim-data en páginas
+- [ ] **SEC-03**: Sistema de validación Fase 2 implementado — check-sources.js (HTTP health check de fuentes oficiales)
+- [ ] **SEC-04**: Sistema de validación Fase 4 implementado — badges de transparencia visibles en frontend
+- [ ] **SEC-05**: Sistema de validación Fase 3 implementado — verify-content.js (verificación IA + determinística de claims)
+
+### MAP — Mapa Interactivo (completar)
+
+- [ ] **MAP-02**: Al hacer click en una región de la lista, el panel derecho muestra sus datos (key-facts + tabla adicional)
+- [ ] **MAP-04**: Panel carga datos desde window.REGIONS_DATA (regions-data.js) sin duplicar datos en HTML
+- [ ] **MAP-05**: Mobile (<650px): muestra dropdown select de región + panel de datos debajo (en vez de layout split)
+
+## v2 Requirements (deferred)
+
+### Mapa Interactivo — Futuro
+
+- **MAP-F01**: Mapa SVG geográfico real de Chile (en vez de lista) — alta complejidad
+- **MAP-F02**: Animación de transición al cambiar región
+- **MAP-F03**: Guardar región preferida en localStorage
+
+### Analytics — Futuro
+
+- **ANLYT-F01**: Dashboard de métricas personalizado (tráfico por región, keywords principales)
+- **ANLYT-F02**: Alertas automáticas si cae el tráfico orgánico significativamente
 
 ## Out of Scope
 
-- Mapa SVG geografico real — la lista ordenada norte-sur cumple el mismo proposito con menos complejidad
-- Comparador de regiones lado a lado — fuera del scope de esta milestone
+| Feature | Reason |
+|---------|--------|
+| AdSense setup | Ya activo en producción — excluido de este milestone |
+| Datos feriados 2027 completos | Los datos reales llegan ~noviembre 2026 desde Mineduc |
+| Mapa SVG geográfico real | Complejidad alta, lista norte-sur cumple el mismo propósito |
+| Comparador de regiones lado a lado | Fuera de scope — búsquedas de usuarios son por región individual |
+| Notificaciones push | Complejidad innecesaria para sitio estático utilitario |
 
 ## Traceability
 
-| REQ | Phase | Status |
-|-----|-------|--------|
-| MAP-01 | Phase 3 | Complete |
-| MAP-02 | Phase 3 | Pending |
-| MAP-03 | Phase 3 | Complete |
-| MAP-04 | Phase 3 | Complete |
-| PANEL-01 | Phase 3 | Complete |
-| PANEL-02 | Phase 3 | Complete |
-| PANEL-03 | Phase 3 | Complete |
-| PANEL-04 | Phase 3 | Pending |
-| RESP-01 | Phase 3 | Complete |
-| RESP-02 | Phase 4 | Pending |
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| ANLYT-01 | TBD | Pending |
+| ANLYT-02 | TBD | Pending |
+| ANLYT-03 | TBD | Pending |
+| ASSET-01 | TBD | Pending |
+| SEO-01 | TBD | Pending |
+| SEC-01 | TBD | Pending |
+| SEC-02 | TBD | Pending |
+| SEC-03 | TBD | Pending |
+| SEC-04 | TBD | Pending |
+| SEC-05 | TBD | Pending |
+| MAP-02 | TBD | Pending |
+| MAP-04 | TBD | Pending |
+| MAP-05 | TBD | Pending |
+
+**Coverage:**
+- v1.1 requirements: 13 total
+- Mapped to phases: 0 (roadmap pending)
+- Unmapped: 13 ⚠️
+
+---
+*Requirements defined: 2026-03-24*
+*Last updated: 2026-03-24 after initial definition*
