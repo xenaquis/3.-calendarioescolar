@@ -1,0 +1,88 @@
+# Requirements — calendarioescolar.cl v1.2
+
+**Defined:** 2026-03-25
+**Core Value:** El usuario encuentra la fecha escolar que busca en menos de 10 segundos, con datos verificados y actualizados directo de Mineduc.
+
+## v1.2 Requirements
+
+### BCN — Extracción Legal
+
+- [ ] **BCN-01**: El script `scripts/bcn-extractor.py` obtiene el XML de cada ley de feriado desde BCN.cl y extrae el texto de todos sus artículos
+- [ ] **BCN-02**: Para cada claim de tipo `feriado-*` en `afirmaciones.json`, Claude API identifica qué artículos son relevantes (setup único, resultado guardado en `data/legal-articles.json`)
+- [ ] **BCN-03**: `data/legal-articles.json` almacena por claim: artículos verbatim, hash SHA del texto, `last_checked`, y texto anterior cuando hay cambio (historial)
+
+### CHNG — Detección de Cambios
+
+- [ ] **CHNG-01**: El script `scripts/check-bcn-changes.py` compara el hash actual del articulado BCN vs el hash guardado en `legal-articles.json`
+- [ ] **CHNG-02**: Si detecta cambio, llama Claude API para evaluar si el claim vinculado necesita actualización (respuesta: `sin_impacto | requiere_revision | actualizar`)
+- [ ] **CHNG-03**: Si detecta cambio, crea automáticamente un GitHub Issue con: texto anterior vs actual (diff), evaluación IA, claim(s) afectados, y recomendación
+- [ ] **CHNG-04**: `last_checked` se actualiza en cada corrida independientemente de si hay cambio
+- [ ] **CHNG-05**: GitHub Action ejecuta `check-bcn-changes.py` en cron semanal con opción `workflow_dispatch` para ejecución manual
+
+### VERI — Tooltip de Verificación
+
+- [ ] **VERI-01**: El badge "Verificado" en las páginas de feriados muestra al hover un tooltip CSS-only con `art. XX inciso X: "texto verbatim"` del artículo de respaldo
+- [ ] **VERI-02**: El tooltip es accesible en mobile via tap/focus (sin JavaScript — CSS `:focus-within` puro)
+- [ ] **VERI-03**: El footer mantiene los links a fuentes oficiales (BCN.cl, Mineduc) como están hoy
+
+### MAP — Mapa Interactivo
+
+- [ ] **MAP-02**: Al hacer click en una región de la lista, el panel derecho muestra sus key-facts y tabla de datos sin recargar la página
+- [ ] **MAP-04**: Los datos del panel se cargan desde `window.REGIONS_DATA` (regions-data.js) — sin duplicar datos en el HTML estático
+- [ ] **MAP-05**: En mobile (<650px), el layout muestra un dropdown select de región + panel de datos debajo, sin el split de desktop
+
+### SEC — Seguridad
+
+- [ ] **SEC-01**: Guía documentada para activar Bot Fight Mode en el dashboard de Cloudflare (verificable: dashboard muestra estado activo)
+
+## v2 Requirements (deferred)
+
+### Legal — Futuro
+
+- **BCN-F01**: Extracción de articulado para claims de fechas escolares (Mineduc PDFs) — requiere pipeline visual adicional
+- **BCN-F02**: UI de historial de cambios legales visible en el frontend (timeline de modificaciones)
+- **BCN-F03**: Auto-update de afirmaciones cuando IA tiene confianza ≥90% de que el cambio no afecta el claim
+
+### Mapa — Futuro
+
+- **MAP-F01**: Mapa SVG geográfico real de Chile (en vez de lista) — alta complejidad
+- **MAP-F02**: Animación de transición al cambiar región
+- **MAP-F03**: Guardar región preferida en localStorage
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Auto-update de afirmaciones sin revisión humana | Riesgo de publicar datos incorrectos — siempre human-in-the-loop |
+| Articulado verbatim para fechas escolares (PDFs) | PDFs Mineduc no tienen estructura de artículos; pipeline visual cubre verificación |
+| Dashboard de historial de cambios legales | Complejidad UI alta, valor marginal para usuario final |
+| Datos en tiempo real de colegios individuales | No es el propósito del sitio |
+| Notificaciones push | Complejidad innecesaria para sitio estático utilitario |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| BCN-01 | TBD | Pending |
+| BCN-02 | TBD | Pending |
+| BCN-03 | TBD | Pending |
+| CHNG-01 | TBD | Pending |
+| CHNG-02 | TBD | Pending |
+| CHNG-03 | TBD | Pending |
+| CHNG-04 | TBD | Pending |
+| CHNG-05 | TBD | Pending |
+| VERI-01 | TBD | Pending |
+| VERI-02 | TBD | Pending |
+| VERI-03 | TBD | Pending |
+| MAP-02 | TBD | Pending |
+| MAP-04 | TBD | Pending |
+| MAP-05 | TBD | Pending |
+| SEC-01 | TBD | Pending |
+
+**Coverage:**
+- v1.2 requirements: 15 total
+- Mapped to phases: 0 (roadmap pending)
+- Unmapped: 15
+
+---
+*Requirements defined: 2026-03-25*
