@@ -24,30 +24,27 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 
 ### Active
 
-<!-- Milestone v1.1 Activación & Calidad -->
+<!-- Milestone v1.2 Validación Legal + Mapa Interactivo -->
 
-- [x] GA4 real configurado (G-6FVLKF6PFQ activo en todas las páginas) — Phase 5
-- [x] Google Search Console — pasos documentados en BLUEPRINT.md (verificación manual post-deploy) — Phase 5
-- [x] OG Image existe en public/icons/og-image.png (1200×630px) — Phase 5
-- [x] Landing feriados-2027.html creada y enlazada — Phase 5
-- [ ] Bot Fight Mode activado en Cloudflare (instrucciones + guía)
-- [ ] Sistema de validación robusta implementado (4 fases de validacion/)
+- [ ] Extracción de artículos BCN XML por ley de feriado (Python), verbatim en JSON con hash + last_checked
+- [ ] Pipeline de detección de cambios: cron compara hash BCN actual vs guardado
+- [ ] Alerta GitHub Issue cuando cambia artículo: diff + evaluación IA de impacto en afirmación
+- [ ] Tooltip CSS sobre badge "Verificado" mostrando art. XX: "texto verbatim"
 - [ ] Mapa: click en región abre panel con datos (MAP-02)
-- [ ] Mapa: carga datos desde regions-data.js sin duplicar (PANEL-04)
-- [ ] Mapa: mobile — dropdown select + panel debajo (RESP-02)
+- [ ] Mapa: carga datos desde regions-data.js sin duplicar (MAP-04)
+- [ ] Mapa: mobile — dropdown select + panel debajo (MAP-05)
+- [ ] Bot Fight Mode activado en Cloudflare (documentación manual)
 
-## Current Milestone: v1.1 Activación & Calidad
+## Current Milestone: v1.2 Validación Legal + Mapa Interactivo
 
-**Goal:** Activar servicios de medición, completar pendientes de producción, reforzar calidad de datos y terminar el mapa interactivo.
+**Goal:** Respaldar cada afirmación de feriados con articulado legal verbatim de BCN.cl, detectar cambios automáticamente con alerta humana, y completar el mapa interactivo de regiones.
 
 **Target features:**
-- GA4 real (crear propiedad, reemplazar placeholder, deploy)
-- Search Console (verificar, enviar sitemap, conectar GA4)
-- OG Image (og-image.png 1200×630px)
-- Landing feriados 2027
-- Bot Fight Mode (Cloudflare)
-- Validación robusta (4 fases)
-- Mapa interactivo: completar MAP-02, PANEL-04, RESP-02
+- BCN Article Extractor (Python): parsea XML de 6 leyes de feriado, identifica artículos relevantes con Claude API, guarda verbatim + hash + last_checked
+- Change Detection Pipeline: cron compara hash actual vs guardado; si cambia → Claude API evalúa impacto → GitHub Issue con diff + recomendación
+- Tooltip "Verificado": CSS-only sobre badge de verificación, muestra art. XX inciso X: "texto verbatim" al hover/tap
+- Mapa interactivo: completar MAP-02, MAP-04, MAP-05
+- Bot Fight Mode: documentación para activar en Cloudflare dashboard
 
 ### Out of Scope
 
@@ -85,4 +82,4 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-03-24 after v1.1 Activación & Calidad milestone start*
+*Last updated: 2026-03-24 after v1.2 Validación Legal + Mapa Interactivo milestone start*
