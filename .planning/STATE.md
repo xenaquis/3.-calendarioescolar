@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Sheet como Fuente de Verdad Unica
-status: Executing Phase 11
-last_updated: "2026-03-25T13:38:00Z"
+status: Phase complete — ready for verification
+last_updated: "2026-03-25T13:55:49.667Z"
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 2
-  completed_plans: 1
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # State — calendarioescolar.cl v1.3
@@ -96,6 +96,9 @@ Plan: 2 of 2
 - **[Phase 11-01]:** PREGUNTA_MAP object with 50 explicit mappings at script top — fallback to claim text for unknown IDs; avoids heuristic complexity
 - **[Phase 11-01]:** fuente_tipo copied per claim from sources[].type — downstream consumers can filter by source type without extra lookup
 - **[Phase 11-01]:** Null-fill all legal-articles fields for unenriched claims — consistent 50-field schema across all claims
+- [Phase 11-02]: Switch validate.js section 7 from afirmaciones.json to claims.json as primary source with afirmaciones.json fallback
+- [Phase 11-02]: BCN normative detection via source_id.startsWith('bcn-') — simple prefix, no extra config needed
+- [Phase 11-02]: 3 contextual BCN claims backfilled with verbatim from legal-articles.json (total-feriados, corpus-christi-movil, san-pedro-traslado-2026)
 
 ## Accumulated Context
 
@@ -131,3 +134,4 @@ Plan: 2 of 2
 
 ---
 *Last updated: 2026-03-25 — Phase 11 Plan 01 complete: claims.json v2.0.0 (50 claims, 15 enriched with BCN verbatim)*
+| Phase 11 P02 | 7 | 2 tasks | 2 files |

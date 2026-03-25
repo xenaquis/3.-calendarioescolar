@@ -42,7 +42,7 @@ Full details: `.planning/milestones/v1.2-ROADMAP.md`
 
 ### v1.3 Sheet como Fuente de Verdad Unica
 
-- [ ] **Phase 11: Modelo de Datos Unificado** - Unificar afirmaciones.json + legal-articles.json en claims.json con estructura enriquecida
+- [x] **Phase 11: Modelo de Datos Unificado** - Unificar afirmaciones.json + legal-articles.json en claims.json con estructura enriquecida (completed 2026-03-25)
 - [ ] **Phase 12: Sheet Write** - Script claims-to-sheet.js escribe claims.json completo a pestana "Datos" del Google Sheet
 - [ ] **Phase 13: Sync Sheet → Pagina** - Flujo completo Sheet como fuente de verdad: sync genera JSON, generate inyecta datos, cron diario
 - [ ] **Phase 14: Notificaciones Telegram** - Reemplazar GitHub Issues por Telegram en el pipeline de deteccion de cambios BCN
@@ -58,11 +58,11 @@ Full details: `.planning/milestones/v1.2-ROADMAP.md`
   2. Cada claim con fuente normativa tiene: pregunta, respuesta, fuente_url, extracto_verbatim, hash SHA256, last_checked
   3. Cada pagina del sitio con meta claim-data tiene su claim correspondiente registrado en claims.json con fuente y extracto
   4. `npm run build` falla con mensaje claro si algun claim normativo/legal carece de extracto verbatim o hash
-**Plans:** 2 plans
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 11-01-PLAN.md — Create merge script + generate unified claims.json
-- [ ] 11-02-PLAN.md — Update validate.js for claims.json enforcement
+- [x] 11-02-PLAN.md — Update validate.js for claims.json enforcement
 
 ### Phase 12: Sheet Write
 **Goal**: El Google Sheet refleja el estado completo del sitio — claims, datos regionales, y configuracion en una sola pestana auditable
@@ -107,7 +107,7 @@ Plans:
 | 8. BCN Legal Extractor | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 9. Change Detection Pipeline | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 1/1 | Complete | 2026-03-25 |
-| 11. Modelo de Datos Unificado | v1.3 | 1/2 | In progress | - |
+| 11. Modelo de Datos Unificado | v1.3 | 2/2 | Complete   | 2026-03-25 |
 | 12. Sheet Write | v1.3 | 0/? | Not started | - |
 | 13. Sync Sheet → Pagina | v1.3 | 0/? | Not started | - |
 | 14. Notificaciones Telegram | v1.3 | 0/? | Not started | - |
