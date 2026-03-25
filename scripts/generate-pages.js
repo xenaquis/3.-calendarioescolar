@@ -257,8 +257,79 @@ if (fs.existsSync(sourceHealthPath)) {
 fs.writeFileSync(path.join(OUTPUT_DIR, 'health.json'), JSON.stringify(health, null, 2));
 console.log('Generado public/health.json (status: ok, regiones: ' + health.regionsCount + ')');
 
+// Generar public/js/claims-data.js y public/js/claims-tooltips.js desde claims.json
+var CLAIMS_FILE = path.join(__dirname, '..', 'data', 'claims.json');
+var claimsData = null;
+try {
+  claimsData = JSON.parse(fs.readFileSync(CLAIMS_FILE, 'utf8'));
+} catch (e) {
+  console.log('ADVERTENCIA: No se encontro data/claims.json — claims-data.js no se generara.');
+}
+
+if (claimsData && claimsData.claims) {
+  // Construir mapa de claims para el frontend
+  var claimsDataMap = {};
+  claimsData.claims.forEach(function(claim) {
+    var entry = {
+      id: claim.id,
+      pregunta: claim.pregunta || null,
+      respuesta: claim.respuesta || null,
+      status: claim.status || 'unverified'
+    };
+    // Para claims BCN (fuente normativa), agregar campos de verificacion legal
+    if (claim.source_id && claim.source_id.indexOf('bcn-') === 0) {
+      var source = claimsData.sources && claimsData.sources[claim.source_id];
+      entry.source_reference = claim.source_reference || null;
+      entry.source_name = source ? source.name : null;
+      entry.extracto_verbatim = claim.extracto_verbatim || null;
+      entry.fuente_url = claim.fuente_url || null;
+      entry.articulo_numero = claim.articulo_numero || null;
+      entry.inciso = claim.inciso || null;
+    }
+    claimsDataMap[claim.id] = entry;
+  });
+
+  var claimsDataJs = '/* claims-data.js — generado automaticamente por scripts/generate-pages.js\n' +
+    '   NO EDITAR DIRECTAMENTE — editar claims en el Sheet y ejecutar: npm run generate */\n' +
+    'window.CLAIMS_DATA = ' + JSON.stringify(claimsDataMap, null, 2) + ';\n';
+  var claimsDataJsPath = path.join(OUTPUT_DIR, 'js', 'claims-data.js');
+  fs.writeFileSync(claimsDataJsPath, claimsDataJs);
+  console.log('Generado public/js/claims-data.js (' + claimsData.claims.length + ' claims)');
+
+  // Generar public/js/claims-tooltips.js — popula tooltips BCN desde CLAIMS_DATA en el DOM
+  var claimsTooltipsJs = '/* claims-tooltips.js — Popula tooltips BCN desde CLAIMS_DATA\n' +
+    '   Generado por generate-pages.js, datos desde claims.json via Sheet */\n' +
+    ';(function() {\n' +
+    '  \'use strict\';\n' +
+    '  document.addEventListener(\'DOMContentLoaded\', function() {\n' +
+    '    if (!window.CLAIMS_DATA) return;\n' +
+    '    var badges = document.querySelectorAll(\'[data-claim-id]\');\n' +
+    '    for (var i = 0; i < badges.length; i++) {\n' +
+    '      var claimId = badges[i].getAttribute(\'data-claim-id\');\n' +
+    '      var claim = window.CLAIMS_DATA[claimId];\n' +
+    '      if (!claim || !claim.source_reference) continue;\n' +
+    '      var tooltip = badges[i].querySelector(\'.bcn-tooltip\');\n' +
+    '      if (!tooltip) continue;\n' +
+    '      var sourceName = claim.source_name || \'\';\n' +
+    '      var text = claim.source_reference;\n' +
+    '      if (sourceName) text += \', \' + sourceName;\n' +
+    '      if (claim.extracto_verbatim) {\n' +
+    '        var excerpt = claim.extracto_verbatim;\n' +
+    '        if (excerpt.length > 200) excerpt = excerpt.substring(0, 197) + \'...\';\n' +
+    '        text += \': \u00ab\' + excerpt + \'\u00bb\';\n' +
+    '      }\n' +
+    '      tooltip.textContent = text;\n' +
+    '    }\n' +
+    '  });\n' +
+    '})();\n';
+  var claimsTooltipsJsPath = path.join(OUTPUT_DIR, 'js', 'claims-tooltips.js');
+  fs.writeFileSync(claimsTooltipsJsPath, claimsTooltipsJs);
+  console.log('Generado public/js/claims-tooltips.js');
+}
+
 // Generar verificacion.json (Fase 4 — badges de verificación)
+var claimsExists = fs.existsSync(path.join(__dirname, '..', 'data', 'claims.json'));
 var afirmacionesExists = fs.existsSync(path.join(__dirname, '..', 'data', 'afirmaciones.json'));
-if (afirmacionesExists) {
+if (claimsExists || afirmacionesExists) {
   require('./generate-verificacion');
 }

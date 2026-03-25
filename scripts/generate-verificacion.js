@@ -50,13 +50,36 @@ function formatDateEs(isoString) {
 }
 
 function main() {
-  // Load afirmaciones (required)
+  // Load claims data — prefer claims.json (v2), fallback to afirmaciones.json (v1)
+  var claimsPath = path.join(ROOT, 'data', 'claims.json');
   var afirmacionesPath = path.join(ROOT, 'data', 'afirmaciones.json');
-  if (!fs.existsSync(afirmacionesPath)) {
-    console.log('generate-verificacion: data/afirmaciones.json no encontrado — omitiendo');
+  var claimsData = null;
+
+  if (fs.existsSync(claimsPath)) {
+    try {
+      claimsData = JSON.parse(fs.readFileSync(claimsPath, 'utf8'));
+      console.log('generate-verificacion: usando claims.json');
+    } catch (e) {
+      console.log('generate-verificacion: error leyendo claims.json — ' + e.message);
+    }
+  }
+
+  if (!claimsData && fs.existsSync(afirmacionesPath)) {
+    try {
+      claimsData = JSON.parse(fs.readFileSync(afirmacionesPath, 'utf8'));
+      console.log('generate-verificacion: claims.json no disponible, usando afirmaciones.json como fallback');
+    } catch (e) {
+      console.log('generate-verificacion: error leyendo afirmaciones.json — ' + e.message);
+    }
+  }
+
+  if (!claimsData) {
+    console.log('generate-verificacion: ni claims.json ni afirmaciones.json encontrados — omitiendo');
     return;
   }
-  var afirmaciones = JSON.parse(fs.readFileSync(afirmacionesPath, 'utf8'));
+
+  // Alias for backward compatibility — both files share the same .claims and .sources structure
+  var afirmaciones = claimsData;
 
   // Load source-health (optional — Fase 2)
   var sourceHealth = null;
