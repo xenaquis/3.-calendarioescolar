@@ -31,8 +31,8 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 <!-- Milestone v1.2 Validación Legal + Mapa Interactivo -->
 
 - ✓ Extracción de artículos BCN XML por ley de feriado (Python), verbatim en JSON con hash + last_checked — v1.2 Phase 8
-- [ ] Pipeline de detección de cambios: cron compara hash BCN actual vs guardado
-- [ ] Alerta GitHub Issue cuando cambia artículo: diff + evaluación IA de impacto en afirmación
+- ✓ Pipeline de detección de cambios: cron compara hash BCN actual vs guardado — v1.2 Phase 9
+- ✓ Alerta GitHub Issue cuando cambia artículo: diff + evaluación IA de impacto en afirmación — v1.2 Phase 9
 - [ ] Tooltip CSS sobre badge "Verificado" mostrando art. XX: "texto verbatim"
 - [ ] Mapa: click en región abre panel con datos (MAP-02)
 - [ ] Mapa: carga datos desde regions-data.js sin duplicar (MAP-04)
