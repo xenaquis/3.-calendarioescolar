@@ -13,11 +13,11 @@
 
 ### CHNG — Detección de Cambios
 
-- [ ] **CHNG-01**: El script `scripts/check-bcn-changes.py` compara el hash actual del articulado BCN vs el hash guardado en `legal-articles.json`
-- [ ] **CHNG-02**: Si detecta cambio, llama Claude API para evaluar si el claim vinculado necesita actualización (respuesta: `sin_impacto | requiere_revision | actualizar`)
-- [ ] **CHNG-03**: Si detecta cambio, crea automáticamente un GitHub Issue con: texto anterior vs actual (diff), evaluación IA, claim(s) afectados, y recomendación
-- [ ] **CHNG-04**: `last_checked` se actualiza en cada corrida independientemente de si hay cambio
-- [ ] **CHNG-05**: GitHub Action ejecuta `check-bcn-changes.py` en cron semanal con opción `workflow_dispatch` para ejecución manual
+- [x] **CHNG-01**: El script `scripts/check-bcn-changes.py` compara el hash actual del articulado BCN vs el hash guardado en `legal-articles.json`
+- [x] **CHNG-02**: Si detecta cambio, llama DeepSeek API para evaluar si el claim vinculado necesita actualización (respuesta: `sin_impacto | requiere_revision | actualizar`)
+- [x] **CHNG-03**: Si detecta cambio, crea automáticamente un GitHub Issue con: texto anterior vs actual (diff), evaluación IA, claim(s) afectados, y recomendación
+- [x] **CHNG-04**: `last_checked` se actualiza en cada corrida independientemente de si hay cambio
+- [x] **CHNG-05**: GitHub Action ejecuta `check-bcn-changes.py` en cron semanal con opción `workflow_dispatch` para ejecución manual
 
 ### VERI — Tooltip de Verificación
 
@@ -66,11 +66,11 @@
 | BCN-01 | Phase 8 | Pending |
 | BCN-02 | Phase 8 | Pending |
 | BCN-03 | Phase 8 | Pending |
-| CHNG-01 | Phase 9 | Pending |
-| CHNG-02 | Phase 9 | Pending |
-| CHNG-03 | Phase 9 | Pending |
-| CHNG-04 | Phase 9 | Pending |
-| CHNG-05 | Phase 9 | Pending |
+| CHNG-01 | Phase 9 | Complete (2026-03-25) |
+| CHNG-02 | Phase 9 | Complete (2026-03-25) |
+| CHNG-03 | Phase 9 | Complete (2026-03-25) |
+| CHNG-04 | Phase 9 | Complete (2026-03-25) |
+| CHNG-05 | Phase 9 | Complete (2026-03-25) |
 | VERI-01 | Phase 10 | Pending |
 | VERI-02 | Phase 10 | Pending |
 | VERI-03 | Phase 10 | Pending |

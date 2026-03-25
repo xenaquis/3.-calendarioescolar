@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Validacion Legal + Mapa Interactivo
-status: Executing Phase 08 — checkpoint (ANTHROPIC_API_KEY required)
-last_updated: "2026-03-25T12:00:00Z"
+status: Executing Phase 10 — UI Verificacion + Mapa Interactivo
+last_updated: "2026-03-25T04:37:46Z"
 progress:
   total_phases: 3
-  completed_phases: 0
-  total_plans: 1
-  completed_plans: 0
+  completed_phases: 2
+  total_plans: 2
+  completed_plans: 2
 ---
 
 # State — calendarioescolar.cl v1.2
@@ -18,11 +18,11 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 08 — bcn-legal-extractor
+**Current focus:** Phase 10 — UI Verificacion + Mapa Interactivo
 
 ## Current Position
 
-Phase: 08 (bcn-legal-extractor) — EXECUTING
+Phase: 09 (change-detection-pipeline) — COMPLETED
 Plan: 1 of 1
 
 ## Phase Status (v1.0 — archived)
@@ -46,8 +46,8 @@ Plan: 1 of 1
 
 | # | Phase | Status |
 |---|-------|--------|
-| 8 | BCN Legal Extractor | In progress — Task 1 done, Task 2 blocked (ANTHROPIC_API_KEY) |
-| 9 | Change Detection Pipeline | Not started |
+| 8 | BCN Legal Extractor | completed (2026-03-25) |
+| 9 | Change Detection Pipeline | completed (2026-03-25) |
 | 10 | UI Verificacion + Mapa Interactivo | Not started |
 
 ## Decisions
@@ -73,6 +73,11 @@ Plan: 1 of 1
 - [Phase 05]: Run npm run generate after template.html update to propagate GA4 ID to all 16 region pages
 - **[v1.2 roadmap]:** VERI tooltip grouped with MAP in Phase 10 — both are frontend UI concerns; BCN extractor (Phase 8) delivers the data both depend on
 - **[v1.2 roadmap]:** SEC-01 (Bot Fight Mode docs) attached to Phase 10 — standalone doc task, no dependencies
+- **[Phase 09-01]:** GH_TOKEN mapped from GITHUB_TOKEN auto-token (not PAT) — requires issues:write in permissions block; avoids separate secret
+- **[Phase 09-01]:** Claims grouped by ley_id before iteration — 4 BCN fetches for 15 claims, not 15 fetches
+- **[Phase 09-01]:** Break on BCN error (not continue) — prevents partial data from creating misleading Issues or partial last_checked updates
+- **[Phase 09-01]:** texto_antes uses stored texto_verbatim (not texto_anterior) for first-change diff — Pitfall 6 from RESEARCH.md
+- **[Phase 09-01]:** Consolidated single GitHub Issue for all changes — reduces noise per CONTEXT.md decision
 
 ## Accumulated Context
 
@@ -84,6 +89,8 @@ Plan: 1 of 1
 - afirmaciones.json tiene 50 claims (version 1.0.0, generado 2026-03-17) — idNorma corregido para bcn-ley-20148: 257742→257080
 - v1.2: articulado verbatim solo para feriados (BCN JSON); fechas escolares mantienen sistema actual
 - bcn-extractor.py --dry-run verificado: 4 leyes, 15 claims, articulos extraidos correctamente
+- check-bcn-changes.py --dry-run verificado: 4 leyes, 15 claims, 0 cambios detectados (hashes coinciden con BCN actual al 2026-03-25)
+- GitHub labels bcn-change y legal-review deben crearse manualmente antes de la primera ejecucion del Action
 
 ## Performance Metrics
 
@@ -98,6 +105,7 @@ Plan: 1 of 1
 | Phase 05 P02 | 2 | 2 tasks | 3 files |
 | Phase 05 P01 | 3 | 2 tasks | 32 files |
 | 08 | 01 | 4 min | 1/2 tasks | 4 files (Task 2 pending ANTHROPIC_API_KEY) |
+| 09 | 01 | 3 min | 2 | 4 |
 
 ---
-*Last updated: 2026-03-25 — Phase 08-01 Task 1 complete; checkpoint at Task 2 (ANTHROPIC_API_KEY required)*
+*Last updated: 2026-03-25 — Phase 09-01 complete; check-bcn-changes.py + GitHub Action workflow created*
