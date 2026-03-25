@@ -24,15 +24,30 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 
 ### Active
 
-- [ ] Lista-mapa interactiva de 16 regiones con colores por grupo regional
-- [ ] Panel lateral con key-facts + tabla + datos adicionales al seleccionar region
-- [ ] Layout responsive: split en desktop, dropdown + panel vertical en mobile
-- [ ] Leyenda visual de grupos regionales (ESTANDAR/NORTE/SUR/SUR-PARCIAL)
-- [ ] Integracion con regions-data.js existente (sin duplicar datos)
+<!-- Milestone v1.1 Activación & Calidad -->
 
-## Current Milestone: v1.1 Mapa Interactivo
+- [ ] GA4 real configurado (reemplazar placeholder G-XXXXXXXXXX)
+- [ ] Google Search Console verificado y con sitemap enviado
+- [ ] OG Image creada (og-image.png 1200×630px — hoy referenciado pero no existe)
+- [ ] Landing feriados-2027.html (captura temprana de búsquedas del año siguiente)
+- [ ] Bot Fight Mode activado en Cloudflare (instrucciones + guía)
+- [ ] Sistema de validación robusta implementado (4 fases de validacion/)
+- [ ] Mapa: click en región abre panel con datos (MAP-02)
+- [ ] Mapa: carga datos desde regions-data.js sin duplicar (PANEL-04)
+- [ ] Mapa: mobile — dropdown select + panel debajo (RESP-02)
 
-**Goal:** Redisenar la homepage con selector de regiones tipo mapa (lista lateral con colores por grupo) + panel de datos dinamico, reemplazando los chips actuales.
+## Current Milestone: v1.1 Activación & Calidad
+
+**Goal:** Activar servicios de medición, completar pendientes de producción, reforzar calidad de datos y terminar el mapa interactivo.
+
+**Target features:**
+- GA4 real (crear propiedad, reemplazar placeholder, deploy)
+- Search Console (verificar, enviar sitemap, conectar GA4)
+- OG Image (og-image.png 1200×630px)
+- Landing feriados 2027
+- Bot Fight Mode (Cloudflare)
+- Validación robusta (4 fases)
+- Mapa interactivo: completar MAP-02, PANEL-04, RESP-02
 
 ### Out of Scope
 
@@ -70,4 +85,4 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-03-24 after v1.1 milestone start*
+*Last updated: 2026-03-24 after v1.1 Activación & Calidad milestone start*

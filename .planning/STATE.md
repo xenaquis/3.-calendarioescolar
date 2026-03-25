@@ -1,40 +1,41 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: Milestone complete
-stopped_at: Completed 04-01-PLAN.md
-last_updated: "2026-03-24T17:30:09.237Z"
+milestone: v1.1
+milestone_name: Activación & Calidad
+status: Defining requirements
+stopped_at: —
+last_updated: "2026-03-24T00:00:00.000Z"
 progress:
-  total_phases: 1
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  total_phases: 0
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
-# State — calendarioescolar.cl v2
+# State — calendarioescolar.cl v1.1
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 04 — mobile-responsiveness
+**Current focus:** Not started (defining requirements)
 
-## Phase Status
+## Current Position
+
+Phase: Not started (defining requirements)
+Plan: —
+Status: Defining requirements
+Last activity: 2026-03-24 — Milestone v1.1 Activación & Calidad started
+
+## Phase Status (v1.0 — archived)
 
 | # | Phase | Status |
 |---|-------|--------|
 | 1 | Pipeline Visual | completed |
 | 2 | Datos Completos | completed |
 | 3 | (skipped) | — |
-| 4 | Mobile Responsiveness | in_progress |
-
-## Plan Progress — Phase 04
-
-| Plan | Name | Status |
-|------|------|--------|
-| 04-01 | Mobile Responsiveness & CSS Token Fixes | completed |
+| 4 | Mobile Responsiveness | completed |
 
 ## Decisions
 
