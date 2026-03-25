@@ -28,8 +28,8 @@
 
 ### NOTIF — Notificaciones Telegram
 
-- [ ] **NOTIF-01**: Script `scripts/notify-telegram.js` envia mensaje via Telegram Bot API cuando el pipeline de deteccion de cambios encuentra diferencias
-- [ ] **NOTIF-02**: El mensaje incluye: claim afectado, texto anterior vs nuevo, evaluacion IA, link al Sheet para revisar
+- [x] **NOTIF-01**: Script `scripts/notify-telegram.js` envia mensaje via Telegram Bot API cuando el pipeline de deteccion de cambios encuentra diferencias
+- [x] **NOTIF-02**: El mensaje incluye: claim afectado, texto anterior vs nuevo, evaluacion IA, link al Sheet para revisar
 - [ ] **NOTIF-03**: Reemplaza la creacion de GitHub Issues en `check-bcn-changes.py` — el Action ahora notifica via Telegram
 
 ## v2 Requirements (deferred)
@@ -66,8 +66,8 @@
 | SYNC-02 | Phase 13 | Complete |
 | SYNC-03 | Phase 13 | Complete |
 | SYNC-04 | Phase 13 | Complete |
-| NOTIF-01 | Phase 14 | Pending |
-| NOTIF-02 | Phase 14 | Pending |
+| NOTIF-01 | Phase 14 | Complete |
+| NOTIF-02 | Phase 14 | Complete |
 | NOTIF-03 | Phase 14 | Pending |
 
 **Coverage:**
