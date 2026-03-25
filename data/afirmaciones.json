@@ -62,9 +62,9 @@
       "name": "Ley 20.148 — Virgen del Carmen feriado irrenunciable",
       "type": "xml",
       "tier": 1,
-      "url": "https://www.bcn.cl/leychile/navegar?idNorma=257742",
-      "api_endpoint": "https://www.bcn.cl/leychile/servicios/exportar?idNorma=257742&formato=xml",
-      "notas": "Establece 16 de julio como feriado irrenunciable."
+      "url": "https://www.bcn.cl/leychile/navegar?idNorma=257080",
+      "api_endpoint": "https://www.bcn.cl/leychile/servicios/exportar?idNorma=257080&formato=xml",
+      "notas": "Establece 16 de julio como feriado irrenunciable. idNorma corregido de 257742 a 257080 (2026-03-25 — 257742 retorna HTTP 500)."
     },
     "bcn-ley-21357": {
       "id": "bcn-ley-21357",
