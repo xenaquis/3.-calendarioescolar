@@ -6,12 +6,12 @@ Fases secuenciales:
   1. Lee claims BCN de data/afirmaciones.json
   2. Obtiene JSON de cada ley desde nuevo.leychile.cl
   3. Extrae texto de articulos (strip HTML + unescape entities)
-  4. Usa Claude API para identificar que articulos respaldan cada claim
+  4. Usa DeepSeek API para identificar que articulos respaldan cada claim
   5. Guarda resultado verbatim en data/legal-articles.json con SHA256 hashes
 
 Uso:
-  python scripts/bcn-extractor.py              -> ejecuta completo (requiere ANTHROPIC_API_KEY)
-  python scripts/bcn-extractor.py --dry-run    -> fetch + mostrar articulos, sin Claude ni escritura
+  python scripts/bcn-extractor.py              -> ejecuta completo (requiere DEEPSEEK_API_KEY)
+  python scripts/bcn-extractor.py --dry-run    -> fetch + mostrar articulos, sin AI ni escritura
   python scripts/bcn-extractor.py --force      -> re-identifica todos los claims, incluso los ya mapeados
 
 Salida: data/legal-articles.json
@@ -201,35 +201,35 @@ def get_feriado_claims(afirmaciones):
     return by_law
 
 
-def build_claude_client():
+def build_ai_client():
     """
-    Construye cliente de Anthropic SDK.
+    Construye cliente OpenAI apuntando a DeepSeek API (OpenAI-compatible).
 
-    Lee ANTHROPIC_API_KEY del entorno. Si no esta definida, imprime instrucciones y sale.
+    Lee DEEPSEEK_API_KEY del entorno. Si no esta definida, imprime instrucciones y sale.
 
     Returns:
-        anthropic.Anthropic instance
+        openai.OpenAI instance configurado para DeepSeek
     """
     # Importacion aqui (dentro de funcion) para permitir --dry-run sin el SDK
-    import anthropic
+    import openai
 
-    api_key = os.environ.get('ANTHROPIC_API_KEY')
+    api_key = os.environ.get('DEEPSEEK_API_KEY')
     if not api_key:
-        print('ERROR: ANTHROPIC_API_KEY no esta configurada.', file=sys.stderr)
-        print('  Ejecutar: export ANTHROPIC_API_KEY=sk-ant-...', file=sys.stderr)
+        print('ERROR: DEEPSEEK_API_KEY no esta configurada.', file=sys.stderr)
+        print('  Ejecutar: export DEEPSEEK_API_KEY=sk-...', file=sys.stderr)
         sys.exit(1)
-    return anthropic.Anthropic(api_key=api_key)
+    return openai.OpenAI(api_key=api_key, base_url='https://api.deepseek.com/v1')
 
 
 def identify_articles(client, ley_id, articles, claims):
     """
-    Usa Claude API para identificar que articulos respaldan cada claim de una ley.
+    Usa DeepSeek API para identificar que articulos respaldan cada claim de una ley.
 
     Envio batch por ley: un prompt con todos los articulos + todos los claims de esa ley.
-    Claude devuelve JSON mapeando data_key -> {articulo_numero, inciso}.
+    DeepSeek devuelve JSON mapeando data_key -> {articulo_numero, inciso}.
 
     Args:
-        client: anthropic.Anthropic instance
+        client: openai.OpenAI instance configurado para DeepSeek
         ley_id: string como 'bcn-ley-2977'
         articles: list de {numero, item_id, texto}
         claims: list de {data_key, claim, source_reference, ...}
@@ -237,9 +237,6 @@ def identify_articles(client, ley_id, articles, claims):
     Returns:
         dict: {data_key: {'articulo_numero': str, 'inciso': str|null}, ...}
     """
-    # Importacion necesaria para errores de API
-    import anthropic
-
     articles_block = '\n'.join(
         '{}: {}'.format(a['numero'], a['texto']) for a in articles
     )
@@ -260,14 +257,14 @@ def identify_articles(client, ley_id, articles, claims):
     ).format(ley_id=ley_id, articles_block=articles_block, claims_block=claims_block)
 
     try:
-        response = client.messages.create(
-            model='claude-haiku-4-5',
+        response = client.chat.completions.create(
+            model='deepseek-chat',
             max_tokens=1024,
             messages=[{'role': 'user', 'content': prompt}],
         )
-        response_text = response.content[0].text
-    except anthropic.APIError as e:
-        raise RuntimeError('Claude API error para {}: {}'.format(ley_id, e))
+        response_text = response.choices[0].message.content
+    except Exception as e:
+        raise RuntimeError('DeepSeek API error para {}: {}'.format(ley_id, e))
 
     # Parsear JSON de la respuesta (con fallback si Claude agrega preambulo)
     try:
@@ -281,7 +278,7 @@ def identify_articles(client, ley_id, articles, claims):
             except json.JSONDecodeError:
                 pass
         print(
-            'WARNING: Claude no devolvio JSON valido para {}. Respuesta: {}'.format(
+            'WARNING: DeepSeek no devolvio JSON valido para {}. Respuesta: {}'.format(
                 ley_id, response_text[:200]
             ),
             file=sys.stderr,
@@ -333,6 +330,8 @@ def update_entry(existing, new_texto, new_hash, ley_id, articulo_numero, inciso)
     entry['ley_id'] = ley_id
     entry['articulo_numero'] = articulo_numero
     entry['inciso'] = inciso
+    # Limpiar status de corridas previas — ahora tenemos texto valido
+    entry.pop('status', None)
 
     return entry
 
@@ -341,7 +340,8 @@ def find_article_text(articles, articulo_numero):
     """
     Busca el texto de un articulo en la lista de articulos extraidos.
 
-    Intenta matching por nombre exacto, luego por contenido numerico.
+    Intenta matching por nombre exacto, luego por equivalencia ordinal<->numerico,
+    luego fallback a primer articulo si solo hay uno.
 
     Args:
         articles: list de {numero, item_id, texto}
@@ -353,12 +353,28 @@ def find_article_text(articles, articulo_numero):
     if not articulo_numero:
         return None
 
-    articulo_num_lower = articulo_numero.lower().strip()
+    # Mapa de ordinales <-> numericos para matching flexible
+    ORDINAL_EQUIVALENTS = {
+        'primero': ['1', 'primero', 'primer'],
+        '1': ['1', 'primero', 'primer'],
+        'segundo': ['2', 'segundo'],
+        '2': ['2', 'segundo'],
+        'tercero': ['3', 'tercero'],
+        '3': ['3', 'tercero'],
+        'unico': ['unico', 'u\u00eanico', '\u00fanico', 'unico'],
+        '\u00fanico': ['unico', '\u00fanico', 'unico'],
+    }
 
-    # Matching exacto primero (case-insensitive)
+    query_lower = articulo_numero.lower().strip()
+    # Obtener alias equivalentes para este query
+    aliases = ORDINAL_EQUIVALENTS.get(query_lower, [query_lower])
+
+    # Matching: buscar cualquier alias en el nombre del articulo
     for art in articles:
-        if articulo_num_lower in art['numero'].lower():
-            return art['texto']
+        art_name_lower = art['numero'].lower()
+        for alias in aliases:
+            if alias in art_name_lower:
+                return art['texto']
 
     # Fallback: si solo hay un articulo, devolver ese
     if len(articles) == 1:
@@ -422,7 +438,7 @@ def main():
         print('(--dry-run: no Claude API, no file writes)')
 
     output = {}
-    claude_client = None  # Lazy init — solo si se necesita
+    ai_client = None  # Lazy init — solo si se necesita
 
     for source_id in sorted(by_law.keys()):
         claims = by_law[source_id]
@@ -471,12 +487,12 @@ def main():
         # Identificar articulos con Claude (si hay claims que necesitan ID)
         identification = {}
         if claims_needing_id:
-            if claude_client is None:
-                claude_client = build_claude_client()
-            print('  Identifying {} claims with Claude API...'.format(len(claims_needing_id)))
+            if ai_client is None:
+                ai_client = build_ai_client()
+            print('  Identifying {} claims with DeepSeek API...'.format(len(claims_needing_id)))
             try:
                 identification = identify_articles(
-                    claude_client, source_id, articles, claims_needing_id
+                    ai_client, source_id, articles, claims_needing_id
                 )
                 print('  Identification results: {}'.format(
                     {k: v for k, v in identification.items()}
@@ -502,6 +518,22 @@ def main():
             else:
                 articulo_numero = None
                 inciso = None
+
+            # Fallback: si AI no identifico el articulo, intentar extraerlo
+            # del campo source_reference ("Art. 1 — ...", "Art. unico — ...")
+            # Si no hay source_reference util, usar el primer articulo de la ley (Art. 1 / PRIMERO)
+            if not articulo_numero:
+                source_ref = claim.get('source_reference', '') or ''
+                ref_match = re.search(r'art(?:iculo)?\.?\s+([^\s\u2014\-]+)', source_ref, re.IGNORECASE)
+                if ref_match:
+                    articulo_numero = ref_match.group(1).strip('.')
+                    print('  INFO: Usando source_reference "{}" -> articulo_numero={}'.format(
+                        source_ref, articulo_numero))
+                elif articles:
+                    # Fallback final: usar primer articulo de la ley
+                    articulo_numero = articles[0]['numero']
+                    print('  INFO: Fallback a primer articulo ({}) para {}'.format(
+                        articulo_numero, data_key))
 
             # Obtener texto del articulo identificado
             article_texto = find_article_text(articles, articulo_numero)
