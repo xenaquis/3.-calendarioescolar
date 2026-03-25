@@ -41,7 +41,10 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
   2. Google Search Console muestra la propiedad verificada con el sitemap enviado y conectado a GA4
   3. Al compartir cualquier URL del sitio en redes sociales, aparece una imagen previa (og-image.png 1200x630px con texto "Calendario Escolar Chile 2026")
   4. Existe public/feriados-2027.html accesible y correctamente enlazada, con contenido orientado a busquedas anticipadas del proximo ano
-**Plans**: TBD
+**Plans:** 2 plans
+Plans:
+- [ ] 05-01-PLAN.md — GA4 activation (replace placeholder with real ID) + Search Console documentation
+- [ ] 05-02-PLAN.md — feriados-2027.html landing page + sitemap + index link
 **UI hint**: yes
 
 ### Phase 6: Seguridad & Validacion
@@ -75,9 +78,9 @@ Full details: `.planning/milestones/v1.0-ROADMAP.md`
 | 1. Pipeline Visual | 3/3 | Completed | 2026-03-24 |
 | 2. Datos Completos | 2/2 | Completed | 2026-03-24 |
 | 4. Mobile Responsiveness | 1/1 | Completed | 2026-03-24 |
-| 5. Activacion de Produccion | 0/? | Not started | - |
+| 5. Activacion de Produccion | 0/2 | Planned | - |
 | 6. Seguridad & Validacion | 0/? | Not started | - |
 | 7. Mapa Interactivo | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-24 — v1.1 phases 5-7 added*
+*Updated: 2026-03-24 — Phase 5 planned (2 plans, 1 wave)*
