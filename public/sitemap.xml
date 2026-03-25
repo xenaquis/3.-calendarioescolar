@@ -31,6 +31,12 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://calendarioescolar.cl/quienes-somos.html</loc>
+    <lastmod>2026-03-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+  <url>
     <loc>https://calendarioescolar.cl/contacto.html</loc>
     <lastmod>2026-03-25</lastmod>
     <changefreq>yearly</changefreq>
