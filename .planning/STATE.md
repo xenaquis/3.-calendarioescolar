@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Sheet como Fuente de Verdad Unica
-status: Phase complete — ready for verification
-last_updated: "2026-03-25T16:15:52.961Z"
+status: Ready to execute
+last_updated: "2026-03-25T16:38:38.427Z"
 progress:
   total_phases: 4
   completed_phases: 0
@@ -18,12 +18,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Informacion 100% fidedigna extraida de resoluciones oficiales, verificable visualmente, con el Google Sheet como fuente de verdad unica y auditable
-**Current focus:** Phase 12 — sheet-write
+**Current focus:** Phase 13 — sync-sheet-pagina
 
 ## Current Position
 
-Phase: 12 (sheet-write) — EXECUTING
-Plan: 1 of 1
+Phase: 13 (sync-sheet-pagina) — EXECUTING
+Plan: 2 of 2
 
 ## Phase Status (v1.0 — archived)
 
@@ -105,6 +105,8 @@ Plan: 1 of 1
 - [Phase 12-01]: require('url').parse used for tokenUri parsing in JWT auth — stdlib native, consistent with zero-dependency constraint
 - [Phase 12-01]: REGION rows use JSON.stringify of full region object — all 19 fields auditable in one Sheet cell
 - [Phase 12-01]: addOrClearSheet checks statusCode=400 + INVALID_ARGUMENT — handles both tab-exists error variants from Sheets API
+- [Phase 13]: Single Datos tab fetch replaces dual Regiones+Config fetch — consistent with Phase 12 write approach
+- [Phase 13]: claims merge preserves existing fields (tags, data_key, etc.) and overwrites only Sheet-editable fields
 
 ## Accumulated Context
 
@@ -143,3 +145,4 @@ Plan: 1 of 1
 ---
 *Last updated: 2026-03-25 — Phase 12 Plan 01 Task 1 complete: claims-to-sheet.js (557 lines, JWT auth, dry-run verified)*
 | Phase 12 P01 | 5 | 1 tasks | 2 files |
+| Phase 13 P01 | 4 min | 2 tasks | 2 files |
