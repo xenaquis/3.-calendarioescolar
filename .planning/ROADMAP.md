@@ -30,8 +30,8 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 ### 📋 v1.2 Validacion Legal + Mapa Interactivo
 
-- [x] **Phase 8: BCN Legal Extractor** - Script Python extrae articulado verbatim desde BCN.cl y lo guarda en legal-articles.json — completed 2026-03-25
-- [ ] **Phase 9: Change Detection Pipeline** - Cron semanal detecta cambios en articulado BCN y crea GitHub Issue con evaluacion IA
+- [x] **Phase 8: BCN Legal Extractor** - Script Python extrae articulado verbatim desde BCN.cl y lo guarda en legal-articles.json (completed 2026-03-25)
+- [x] **Phase 9: Change Detection Pipeline** - Cron semanal detecta cambios en articulado BCN y crea GitHub Issue con evaluacion IA (completed 2026-03-25)
 - [ ] **Phase 10: UI Verificacion + Mapa Interactivo** - Tooltip "Verificado" con texto legal + mapa de regiones interactivo en mobile y desktop
 
 ## Phase Details
@@ -45,9 +45,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. `data/legal-articles.json` existe y contiene para cada claim `feriado-*`: articulo(s) relevante(s) identificados por Claude API, texto verbatim, hash SHA, y `last_checked`
   3. El hash SHA almacenado corresponde al texto verbatim guardado (verificable localmente con sha256)
   4. El campo `texto_anterior` se registra en `legal-articles.json` cuando hay un cambio respecto a la corrida previa
-**Plans:** 1/1 plans complete
+**Plans:** 1 plan
 Plans:
-- [~] 08-01-PLAN.md — Task 1 complete (bcn-extractor.py + afirmaciones.json fix). Task 2 at checkpoint: awaiting ANTHROPIC_API_KEY to generate legal-articles.json
+- [x] 08-01-PLAN.md — COMPLETE: bcn-extractor.py + DeepSeek AI identification + legal-articles.json with 15 claims
 
 ### Phase 9: Change Detection Pipeline
 **Goal**: El sistema monitorea automaticamente cambios en la legislacion de feriados y alerta al equipo cuando una afirmacion necesita revision
@@ -55,13 +55,13 @@ Plans:
 **Requirements**: CHNG-01, CHNG-02, CHNG-03, CHNG-04, CHNG-05
 **Success Criteria** (what must be TRUE):
   1. `scripts/check-bcn-changes.py` compara el hash BCN actual contra `legal-articles.json` y detecta cambios correctamente
-  2. Cuando hay un cambio, Claude API responde con uno de los tres estados definidos (`sin_impacto | requiere_revision | actualizar`) y ese valor queda registrado
+  2. Cuando hay un cambio, DeepSeek responde con uno de los tres estados definidos (`sin_impacto | requiere_revision | actualizar`) y ese valor queda registrado
   3. Cuando hay un cambio, existe un GitHub Issue creado automaticamente con el diff de texto, la evaluacion IA, los claims afectados, y una recomendacion
   4. `last_checked` se actualiza en `legal-articles.json` despues de cada corrida, haya o no cambio
   5. El GitHub Action `check-bcn-changes` se ejecuta en cron semanal y tiene boton `workflow_dispatch` funcional
-**Plans:** 1 plan
+**Plans**: 1 plan
 Plans:
-- [ ] 09-01-PLAN.md — Create check-bcn-changes.py + GitHub Action workflow (CHNG-01 through CHNG-05)
+- [x] 09-01-PLAN.md — COMPLETE: check-bcn-changes.py + check-bcn-changes.yml workflow (2026-03-25)
 
 ### Phase 10: UI Verificacion + Mapa Interactivo
 **Goal**: El usuario puede verificar el respaldo legal de cada feriado directamente en la pagina, y navegar por regiones en un mapa interactivo que funciona en mobile y desktop
@@ -85,9 +85,9 @@ Plans:
 | 2. Datos Completos | v1.0 | 2/2 | Complete | 2026-03-24 |
 | 4. Mobile Responsiveness | v1.0 | 1/1 | Complete | 2026-03-24 |
 | 5. Activacion de Produccion | v1.1 | 2/2 | Complete | 2026-03-25 |
-| 8. BCN Legal Extractor | v1.2 | 1/1 | Complete    | 2026-03-25 |
-| 9. Change Detection Pipeline | v1.2 | 0/1 | Planned | - |
+| 8. BCN Legal Extractor | v1.2 | 1/1 | Complete | 2026-03-25 |
+| 9. Change Detection Pipeline | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-25 — Phase 9 planned (1 plan, 2 tasks)*
+*Updated: 2026-03-25 — Phase 9 complete: check-bcn-changes.py + GitHub Action workflow created and verified*
