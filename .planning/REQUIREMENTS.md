@@ -17,7 +17,7 @@
 
 ### SEO — Contenido SEO
 
-- [ ] **SEO-01**: Existe public/feriados-2027.html con estructura similar a feriados-2026.html, contenido orientado a búsquedas anticipadas
+- [x] **SEO-01**: Existe public/feriados-2027.html con estructura similar a feriados-2026.html, contenido orientado a búsquedas anticipadas
 
 ### SEC — Seguridad & Calidad
 
@@ -64,7 +64,7 @@
 | ANLYT-02 | Phase 5 | Pending |
 | ANLYT-03 | Phase 5 | Pending |
 | ASSET-01 | Phase 5 | Pending |
-| SEO-01 | Phase 5 | Pending |
+| SEO-01 | Phase 5 | Complete |
 | SEC-01 | Phase 6 | Pending |
 | SEC-02 | Phase 6 | Pending |
 | SEC-03 | Phase 6 | Pending |

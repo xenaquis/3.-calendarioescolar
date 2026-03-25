@@ -1,14 +1,14 @@
 ---
 gsd_state_version: 1.0
 milestone: v1.1
-milestone_name: Activación & Calidad
-status: Roadmap defined — ready for Phase 5
-stopped_at: —
-last_updated: "2026-03-24T00:00:00.000Z"
+milestone_name: Activacion & Calidad
+status: Ready to execute
+stopped_at: Completed 05-02-PLAN.md — feriados-2027.html anticipatory landing page
+last_updated: "2026-03-25T02:39:52.707Z"
 progress:
   total_phases: 3
   completed_phases: 0
-  total_plans: 0
+  total_plans: 2
   completed_plans: 0
 ---
 
@@ -19,14 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 5 — Activacion de Produccion
+**Current focus:** Phase 05 — activacion-de-produccion
 
 ## Current Position
 
-Phase: 5 — Activacion de Produccion
-Plan: —
-Status: Not started
-Last activity: 2026-03-24 — Roadmap v1.1 defined (phases 5-7)
+Phase: 05 (activacion-de-produccion) — EXECUTING
+Plan: 2 of 2
 
 ## Phase Status (v1.0 — archived)
 
@@ -60,6 +58,7 @@ Last activity: 2026-03-24 — Roadmap v1.1 defined (phases 5-7)
 - [Phase 02]: SUR group (Aysén, Magallanes) has different finSinJEC=23 dic, finEPJA=27 nov — verified against aysen-gold-standard.json
 - [Phase 02]: Native <details> element used for collapsible — no JavaScript, works without CSS
 - [Phase 02]: Section placed after main table, closed by default — secondary info not prominent
+- [Phase 05]: No claim-data meta on feriados-2027.html: page has no factual claims, only fixed-by-law holiday list — warnings are expected
 
 ## Context from Research (2026-03-24)
 
@@ -80,11 +79,12 @@ Last activity: 2026-03-24 — Roadmap v1.1 defined (phases 5-7)
 | Phase 02 P01 | 8 min | 2 tasks | 7 files |
 | Phase 02 P02 | 15 | 1 tasks | 19 files |
 | 04 | 01 | 4 min | 3 | 3 |
+| Phase 05 P02 | 2 | 2 tasks | 3 files |
 
 ## Session
 
-**Last session:** 2026-03-24T17:28:00.000Z
-**Stopped at:** Roadmap v1.1 defined — phases 5-7 ready for planning
+**Last session:** 2026-03-25T02:39:52.702Z
+**Stopped at:** Completed 05-02-PLAN.md — feriados-2027.html anticipatory landing page
 
 ---
 *Last updated: 2026-03-24 after v1.1 roadmap definition*
