@@ -1,12 +1,12 @@
 name: Sync desde Sheet + Deploy
 
-# Ejecuta automáticamente cada lunes a las 6:00 UTC (03:00 Chile)
+# Ejecuta automaticamente cada dia a las 6:00 UTC (03:00 Chile)
 # También disponible como trigger manual desde GitHub Actions UI
 # NUNCA disparado por push (eso lo maneja deploy.yml)
 
 on:
   schedule:
-    - cron: '0 6 * * 1'
+    - cron: '0 6 * * *'
   workflow_dispatch:
     inputs:
       force_deploy:
@@ -34,8 +34,8 @@ jobs:
         with:
           node-version: '20'
 
-      # ── Paso 1: Sync datos desde Google Sheet ──────────────────────────
-      - name: Sync datos desde Google Sheet
+      # ── Paso 1: Sync datos desde Google Sheet (tab Datos) ─────────────
+      - name: Sync datos desde Google Sheet (tab Datos)
         id: sync
         env:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
@@ -73,11 +73,11 @@ jobs:
         run: |
           git config user.name "calendarioescolar-bot"
           git config user.email "bot@calendarioescolar.cl"
-          git add data/pages.json data/calendar-config.json
+          git add data/pages.json data/calendar-config.json data/claims.json
           if git diff --staged --quiet; then
             echo "No hay cambios staged para commitear"
           else
-            git commit -m "chore: sync datos desde Google Sheet [skip ci]"
+            git commit -m "chore: sync datos desde Google Sheet (Datos tab) [skip ci]"
             git push origin ${{ github.ref_name }}
           fi
 
