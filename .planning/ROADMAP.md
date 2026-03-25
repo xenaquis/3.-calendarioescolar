@@ -45,7 +45,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
   2. `data/legal-articles.json` existe y contiene para cada claim `feriado-*`: articulo(s) relevante(s) identificados por Claude API, texto verbatim, hash SHA, y `last_checked`
   3. El hash SHA almacenado corresponde al texto verbatim guardado (verificable localmente con sha256)
   4. El campo `texto_anterior` se registra en `legal-articles.json` cuando hay un cambio respecto a la corrida previa
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 08-01-PLAN.md — Fix afirmaciones.json idNorma, create bcn-extractor.py, run with Claude API, verify legal-articles.json
 
 ### Phase 9: Change Detection Pipeline
 **Goal**: El sistema monitorea automaticamente cambios en la legislacion de feriados y alerta al equipo cuando una afirmacion necesita revision
@@ -81,9 +83,9 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 | 2. Datos Completos | v1.0 | 2/2 | Complete | 2026-03-24 |
 | 4. Mobile Responsiveness | v1.0 | 1/1 | Complete | 2026-03-24 |
 | 5. Activacion de Produccion | v1.1 | 2/2 | Complete | 2026-03-25 |
-| 8. BCN Legal Extractor | v1.2 | 0/? | Not started | - |
+| 8. BCN Legal Extractor | v1.2 | 0/1 | Planned | - |
 | 9. Change Detection Pipeline | v1.2 | 0/? | Not started | - |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-25 — v1.2 roadmap created*
+*Updated: 2026-03-25 — Phase 8 planned (1 plan)*
