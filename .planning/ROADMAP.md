@@ -59,7 +59,9 @@ Plans:
   3. Cuando hay un cambio, existe un GitHub Issue creado automaticamente con el diff de texto, la evaluacion IA, los claims afectados, y una recomendacion
   4. `last_checked` se actualiza en `legal-articles.json` despues de cada corrida, haya o no cambio
   5. El GitHub Action `check-bcn-changes` se ejecuta en cron semanal y tiene boton `workflow_dispatch` funcional
-**Plans**: TBD
+**Plans:** 1 plan
+Plans:
+- [ ] 09-01-PLAN.md — Create check-bcn-changes.py + GitHub Action workflow (CHNG-01 through CHNG-05)
 
 ### Phase 10: UI Verificacion + Mapa Interactivo
 **Goal**: El usuario puede verificar el respaldo legal de cada feriado directamente en la pagina, y navegar por regiones en un mapa interactivo que funciona en mobile y desktop
@@ -84,8 +86,8 @@ Plans:
 | 4. Mobile Responsiveness | v1.0 | 1/1 | Complete | 2026-03-24 |
 | 5. Activacion de Produccion | v1.1 | 2/2 | Complete | 2026-03-25 |
 | 8. BCN Legal Extractor | v1.2 | 1/1 | Complete    | 2026-03-25 |
-| 9. Change Detection Pipeline | v1.2 | 0/? | Not started | - |
+| 9. Change Detection Pipeline | v1.2 | 0/1 | Planned | - |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-25 — Phase 8 complete (DeepSeek API, 15 claims verbatim)*
+*Updated: 2026-03-25 — Phase 9 planned (1 plan, 2 tasks)*
