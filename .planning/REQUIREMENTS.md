@@ -63,26 +63,26 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| BCN-01 | TBD | Pending |
-| BCN-02 | TBD | Pending |
-| BCN-03 | TBD | Pending |
-| CHNG-01 | TBD | Pending |
-| CHNG-02 | TBD | Pending |
-| CHNG-03 | TBD | Pending |
-| CHNG-04 | TBD | Pending |
-| CHNG-05 | TBD | Pending |
-| VERI-01 | TBD | Pending |
-| VERI-02 | TBD | Pending |
-| VERI-03 | TBD | Pending |
-| MAP-02 | TBD | Pending |
-| MAP-04 | TBD | Pending |
-| MAP-05 | TBD | Pending |
-| SEC-01 | TBD | Pending |
+| BCN-01 | Phase 8 | Pending |
+| BCN-02 | Phase 8 | Pending |
+| BCN-03 | Phase 8 | Pending |
+| CHNG-01 | Phase 9 | Pending |
+| CHNG-02 | Phase 9 | Pending |
+| CHNG-03 | Phase 9 | Pending |
+| CHNG-04 | Phase 9 | Pending |
+| CHNG-05 | Phase 9 | Pending |
+| VERI-01 | Phase 10 | Pending |
+| VERI-02 | Phase 10 | Pending |
+| VERI-03 | Phase 10 | Pending |
+| MAP-02 | Phase 10 | Pending |
+| MAP-04 | Phase 10 | Pending |
+| MAP-05 | Phase 10 | Pending |
+| SEC-01 | Phase 10 | Pending |
 
 **Coverage:**
 - v1.2 requirements: 15 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 15
+- Mapped to phases: 15 (Phase 8: 3, Phase 9: 5, Phase 10: 7)
+- Unmapped: 0
 
 ---
-*Requirements defined: 2026-03-25*
+*Requirements defined: 2026-03-25 | Traceability updated: 2026-03-25*

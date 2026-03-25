@@ -1,31 +1,31 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.1
-milestone_name: Activacion & Calidad
-status: Defining requirements
-last_updated: "2026-03-25T02:58:26.924Z"
+milestone: v1.2
+milestone_name: Validacion Legal + Mapa Interactivo
+status: Roadmap created
+last_updated: "2026-03-25"
 last_activity: 2026-03-25
 progress:
   total_phases: 3
-  completed_phases: 1
-  total_plans: 2
-  completed_plans: 2
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
 # State — calendarioescolar.cl v1.2
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-03-24)
+See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Defining requirements for v1.2
+**Current focus:** v1.2 roadmap ready — Phase 8 next
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 8 — BCN Legal Extractor (Not started)
 Plan: —
-Status: Defining requirements
+Status: Roadmap created, ready for plan-phase
 Last activity: 2026-03-25
 
 ## Phase Status (v1.0 — archived)
@@ -41,18 +41,17 @@ Last activity: 2026-03-25
 
 | # | Phase | Status |
 |---|-------|--------|
-| 5 | Activacion de Produccion | completed (2026-03-24) |
+| 5 | Activacion de Produccion | completed (2026-03-25) |
 | 6 | Seguridad & Validacion | superseded by v1.2 |
-| 7 | Mapa Interactivo | carried over to v1.2 |
+| 7 | Mapa Interactivo | consolidated into Phase 10 |
 
 ## Phase Status (v1.2 — active)
 
 | # | Phase | Status |
 |---|-------|--------|
-| TBD | BCN Article Extractor | Not started |
-| TBD | Change Detection Pipeline | Not started |
-| TBD | Tooltip UI | Not started |
-| TBD | Mapa Interactivo | Not started |
+| 8 | BCN Legal Extractor | Not started |
+| 9 | Change Detection Pipeline | Not started |
+| 10 | UI Verificacion + Mapa Interactivo | Not started |
 
 ## Decisions
 
@@ -72,6 +71,8 @@ Last activity: 2026-03-25
 - [Phase 05]: No claim-data meta on feriados-2027.html: page has no factual claims, only fixed-by-law holiday list — warnings are expected
 - [Phase 05]: Replace placeholder in all 25 HTML pages including contacto.html and quienes-somos.html not listed in plan
 - [Phase 05]: Run npm run generate after template.html update to propagate GA4 ID to all 16 region pages
+- **[v1.2 roadmap]:** VERI tooltip grouped with MAP in Phase 10 — both are frontend UI concerns; BCN extractor (Phase 8) delivers the data both depend on
+- **[v1.2 roadmap]:** SEC-01 (Bot Fight Mode docs) attached to Phase 10 — standalone doc task, no dependencies
 
 ## Accumulated Context
 
@@ -97,4 +98,4 @@ Last activity: 2026-03-25
 | Phase 05 P01 | 3 | 2 tasks | 32 files |
 
 ---
-*Last updated: 2026-03-24 after v1.2 milestone start*
+*Last updated: 2026-03-25 — v1.2 roadmap created, Phase 8 ready for planning*
