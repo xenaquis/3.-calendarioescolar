@@ -22,9 +22,9 @@
 ### SYNC — Flujo Sheet → Pagina
 
 - [x] **SYNC-01**: `sync-from-sheet.js` actualizado lee la pestana "Datos" como fuente de verdad unica y genera `claims.json`, `pages.json`, y `calendar-config.json`
-- [ ] **SYNC-02**: `generate-pages.js` usa datos de `claims.json` (generado desde Sheet) para inyectar tooltips, datos verificados, y contenido factual en las paginas
+- [x] **SYNC-02**: `generate-pages.js` usa datos de `claims.json` (generado desde Sheet) para inyectar tooltips, datos verificados, y contenido factual en las paginas
 - [x] **SYNC-03**: GitHub Action con cron diario (lag 24h) ejecuta sync → generate → validate → deploy
-- [ ] **SYNC-04**: El flujo completo es: JSON escribe Sheet → humano modifica Sheet → Sheet genera pagina. Ningun dato se hardcodea en HTML
+- [x] **SYNC-04**: El flujo completo es: JSON escribe Sheet → humano modifica Sheet → Sheet genera pagina. Ningun dato se hardcodea en HTML
 
 ### NOTIF — Notificaciones Telegram
 
@@ -63,9 +63,9 @@
 | SHEET-03 | Phase 12 | Complete |
 | SHEET-04 | Phase 12 | Complete |
 | SYNC-01 | Phase 13 | Complete |
-| SYNC-02 | Phase 13 | Pending |
+| SYNC-02 | Phase 13 | Complete |
 | SYNC-03 | Phase 13 | Complete |
-| SYNC-04 | Phase 13 | Pending |
+| SYNC-04 | Phase 13 | Complete |
 | NOTIF-01 | Phase 14 | Pending |
 | NOTIF-02 | Phase 14 | Pending |
 | NOTIF-03 | Phase 14 | Pending |

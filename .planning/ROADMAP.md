@@ -44,7 +44,7 @@ Full details: `.planning/milestones/v1.2-ROADMAP.md`
 
 - [x] **Phase 11: Modelo de Datos Unificado** - Unificar afirmaciones.json + legal-articles.json en claims.json con estructura enriquecida (completed 2026-03-25)
 - [x] **Phase 12: Sheet Write** - Script claims-to-sheet.js escribe claims.json completo a pestana "Datos" del Google Sheet (completed 2026-03-25)
-- [ ] **Phase 13: Sync Sheet → Pagina** - Flujo completo Sheet como fuente de verdad: sync genera JSON, generate inyecta datos, cron diario
+- [x] **Phase 13: Sync Sheet → Pagina** - Flujo completo Sheet como fuente de verdad: sync genera JSON, generate inyecta datos, cron diario (completed 2026-03-25)
 - [ ] **Phase 14: Notificaciones Telegram** - Reemplazar GitHub Issues por Telegram en el pipeline de deteccion de cambios BCN
 
 ## Phase Details
@@ -87,11 +87,11 @@ Plans:
   2. `npm run generate` usa datos de claims.json para inyectar tooltips y contenido factual — no existe ningun dato hardcodeado en HTML
   3. El GitHub Action con cron diario ejecuta sync → generate → validate → deploy sin intervencion manual
   4. Editar un valor en la pestana "Datos" del Sheet, esperar el cron, y verificar que la pagina publicada refleja el cambio
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 13-01-PLAN.md — Rewrite sync-from-sheet.js for Datos tab + update GitHub Action to daily cron
-- [ ] 13-02-PLAN.md — Claims data injection in generate-pages.js + dynamic tooltips + E2E verification
+- [x] 13-02-PLAN.md — Claims data injection in generate-pages.js + dynamic tooltips + E2E verification
 
 ### Phase 14: Notificaciones Telegram
 **Goal**: El desarrollador recibe notificaciones de cambios BCN en Telegram con contexto suficiente para actuar sin revisar codigo
@@ -116,7 +116,7 @@ Plans:
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 11. Modelo de Datos Unificado | v1.3 | 2/2 | Complete    | 2026-03-25 |
 | 12. Sheet Write | v1.3 | 1/1 | Complete    | 2026-03-25 |
-| 13. Sync Sheet → Pagina | v1.3 | 1/2 | In Progress|  |
+| 13. Sync Sheet → Pagina | v1.3 | 2/2 | Complete   | 2026-03-25 |
 | 14. Notificaciones Telegram | v1.3 | 0/? | Not started | - |
 
 ---
