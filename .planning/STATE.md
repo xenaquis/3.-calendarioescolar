@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Sheet como Fuente de Verdad Unica
-status: Phase complete — ready for verification
-last_updated: "2026-03-25T13:55:49.667Z"
+status: Executing Phase 12
+last_updated: "2026-03-25T14:30:00.000Z"
 progress:
   total_phases: 4
   completed_phases: 0
@@ -18,12 +18,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Informacion 100% fidedigna extraida de resoluciones oficiales, verificable visualmente, con el Google Sheet como fuente de verdad unica y auditable
-**Current focus:** Phase 11 — modelo-de-datos-unificado
+**Current focus:** Phase 12 — sheet-write
 
 ## Current Position
 
-Phase: 11 (modelo-de-datos-unificado) — EXECUTING
-Plan: 2 of 2
+Phase: 12 (sheet-write) — EXECUTING
+Plan: 1 of 1
 
 ## Phase Status (v1.0 — archived)
 
@@ -55,7 +55,7 @@ Plan: 2 of 2
 | # | Phase | Status |
 |---|-------|--------|
 | 11 | Modelo de Datos Unificado | in-progress (plan 01 complete) |
-| 12 | Sheet Write | Not started |
+| 12 | Sheet Write | in-progress (plan 01 task 1 complete, awaiting human-verify task 2) |
 | 13 | Sync Sheet → Pagina | Not started |
 | 14 | Notificaciones Telegram | Not started |
 
@@ -99,6 +99,9 @@ Plan: 2 of 2
 - [Phase 11-02]: Switch validate.js section 7 from afirmaciones.json to claims.json as primary source with afirmaciones.json fallback
 - [Phase 11-02]: BCN normative detection via source_id.startsWith('bcn-') — simple prefix, no extra config needed
 - [Phase 11-02]: 3 contextual BCN claims backfilled with verbatim from legal-articles.json (total-feriados, corpus-christi-movil, san-pedro-traslado-2026)
+- **[Phase 12-01]:** require('url').parse used for tokenUri parsing in JWT auth — stdlib native, consistent with zero-dependency constraint
+- **[Phase 12-01]:** REGION rows use JSON.stringify of full region object — all 19 fields auditable in one Sheet cell
+- **[Phase 12-01]:** addOrClearSheet checks statusCode=400 + INVALID_ARGUMENT — handles both tab-exists error variants from Sheets API
 
 ## Accumulated Context
 
@@ -131,7 +134,8 @@ Plan: 2 of 2
 | 09 | 01 | 3 min | 2 | 4 |
 | Phase 10 P01 | 2 | 2 tasks | 3 files |
 | 11 | 01 | 2 min | 2 | 2 |
+| Phase 11 P02 | 7 | 2 tasks | 2 files |
+| 12 | 01 | 5 min | 1/2 tasks | 2 files (Task 2 pending GOOGLE_SERVICE_ACCOUNT_KEY) |
 
 ---
-*Last updated: 2026-03-25 — Phase 11 Plan 01 complete: claims.json v2.0.0 (50 claims, 15 enriched with BCN verbatim)*
-| Phase 11 P02 | 7 | 2 tasks | 2 files |
+*Last updated: 2026-03-25 — Phase 12 Plan 01 Task 1 complete: claims-to-sheet.js (557 lines, JWT auth, dry-run verified)*
