@@ -7,8 +7,8 @@
 
 ### JSON — Mapeo Completo
 
-- [ ] **JSON-01**: Cada afirmacion no-API tiene estructura enriquecida: pregunta (que responderia), respuesta ofrecida, fuente detallada (URL, ley, articulo), extracto verbatim relevante de la fuente, hash SHA256 del extracto, last_checked
-- [ ] **JSON-02**: afirmaciones.json y legal-articles.json se unifican en un solo modelo JSON (`data/claims.json`) con toda la informacion consolidada
+- [x] **JSON-01**: Cada afirmacion no-API tiene estructura enriquecida: pregunta (que responderia), respuesta ofrecida, fuente detallada (URL, ley, articulo), extracto verbatim relevante de la fuente, hash SHA256 del extracto, last_checked — claims.json v2.0.0 (Phase 11-01)
+- [x] **JSON-02**: afirmaciones.json y legal-articles.json se unifican en un solo modelo JSON (`data/claims.json`) con toda la informacion consolidada — merge-claims.js + claims.json (Phase 11-01)
 - [ ] **JSON-03**: 100% de las afirmaciones que aparecen en las paginas (meta claim-data) tienen su claim registrado con fuente y extracto
 - [ ] **JSON-04**: El build (`validate.js`) falla si alguna afirmacion con fuente normativa/legal no tiene extracto verbatim ni hash
 
@@ -54,9 +54,9 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| JSON-01 | Phase 11 | Pending |
-| JSON-02 | Phase 11 | Pending |
-| JSON-03 | Phase 11 | Pending |
+| JSON-01 | Phase 11 | Complete (Plan 01) |
+| JSON-02 | Phase 11 | Complete (Plan 01) |
+| JSON-03 | Phase 11 | Pending (Plan 02) |
 | JSON-04 | Phase 11 | Pending |
 | SHEET-01 | Phase 12 | Pending |
 | SHEET-02 | Phase 12 | Pending |
@@ -77,4 +77,4 @@
 
 ---
 *Requirements defined: 2026-03-25*
-*Last updated: 2026-03-25 — traceability complete after roadmap creation*
+*Last updated: 2026-03-25 — JSON-01, JSON-02 complete via Phase 11 Plan 01*

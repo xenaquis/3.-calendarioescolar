@@ -61,7 +61,7 @@ Full details: `.planning/milestones/v1.2-ROADMAP.md`
 **Plans:** 2 plans
 
 Plans:
-- [ ] 11-01-PLAN.md — Create merge script + generate unified claims.json
+- [x] 11-01-PLAN.md — Create merge script + generate unified claims.json
 - [ ] 11-02-PLAN.md — Update validate.js for claims.json enforcement
 
 ### Phase 12: Sheet Write
@@ -107,10 +107,10 @@ Plans:
 | 8. BCN Legal Extractor | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 9. Change Detection Pipeline | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 1/1 | Complete | 2026-03-25 |
-| 11. Modelo de Datos Unificado | v1.3 | 0/2 | Planning complete | - |
+| 11. Modelo de Datos Unificado | v1.3 | 1/2 | In progress | - |
 | 12. Sheet Write | v1.3 | 0/? | Not started | - |
 | 13. Sync Sheet → Pagina | v1.3 | 0/? | Not started | - |
 | 14. Notificaciones Telegram | v1.3 | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-25 — Phase 11 planned: 2 plans in 2 waves*
+*Updated: 2026-03-25 — Phase 11 Plan 01 complete: claims.json v2.0.0 generated (50 claims, 15 enriched)*

@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Sheet como Fuente de Verdad Unica
-status: roadmap created — awaiting phase planning
-last_updated: "2026-03-25"
+status: Executing Phase 11
+last_updated: "2026-03-25T13:38:00Z"
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_plans: 2
+  completed_plans: 1
 ---
 
 # State — calendarioescolar.cl v1.3
@@ -18,12 +18,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Informacion 100% fidedigna extraida de resoluciones oficiales, verificable visualmente, con el Google Sheet como fuente de verdad unica y auditable
-**Current focus:** Phase 11 — modelo-datos-unificado
+**Current focus:** Phase 11 — modelo-de-datos-unificado
 
 ## Current Position
 
-Phase: 11
-Plan: Not started
+Phase: 11 (modelo-de-datos-unificado) — EXECUTING
+Plan: 2 of 2
 
 ## Phase Status (v1.0 — archived)
 
@@ -54,7 +54,7 @@ Plan: Not started
 
 | # | Phase | Status |
 |---|-------|--------|
-| 11 | Modelo de Datos Unificado | Not started |
+| 11 | Modelo de Datos Unificado | in-progress (plan 01 complete) |
 | 12 | Sheet Write | Not started |
 | 13 | Sync Sheet → Pagina | Not started |
 | 14 | Notificaciones Telegram | Not started |
@@ -93,6 +93,9 @@ Plan: Not started
 - **[v1.3 roadmap]:** Phase 11 (JSON unification) must precede all others — claims.json is the data model everything depends on
 - **[v1.3 roadmap]:** Phase 14 (Telegram) placed last — depends on pipeline context from Phase 13 but can be developed somewhat independently once sync flow is in place
 - **[v1.3 roadmap]:** afirmaciones.json (~50 claims) + legal-articles.json (15 claims) merge into claims.json — 65 total claims with enriched structure
+- **[Phase 11-01]:** PREGUNTA_MAP object with 50 explicit mappings at script top — fallback to claim text for unknown IDs; avoids heuristic complexity
+- **[Phase 11-01]:** fuente_tipo copied per claim from sources[].type — downstream consumers can filter by source type without extra lookup
+- **[Phase 11-01]:** Null-fill all legal-articles fields for unenriched claims — consistent 50-field schema across all claims
 
 ## Accumulated Context
 
@@ -124,6 +127,7 @@ Plan: Not started
 | 08 | 01 | 4 min | 1/2 tasks | 4 files (Task 2 pending ANTHROPIC_API_KEY) |
 | 09 | 01 | 3 min | 2 | 4 |
 | Phase 10 P01 | 2 | 2 tasks | 3 files |
+| 11 | 01 | 2 min | 2 | 2 |
 
 ---
-*Last updated: 2026-03-25 — v1.3 roadmap created: 4 phases (11-14), 15 requirements, Sheet como fuente de verdad unica*
+*Last updated: 2026-03-25 — Phase 11 Plan 01 complete: claims.json v2.0.0 (50 claims, 15 enriched with BCN verbatim)*
