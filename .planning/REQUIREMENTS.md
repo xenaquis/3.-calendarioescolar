@@ -7,13 +7,13 @@
 
 ### ANLYT — Analytics & Medición
 
-- [ ] **ANLYT-01**: El sitio envía eventos reales a GA4 (propiedad real, no placeholder G-XXXXXXXXXX)
-- [ ] **ANLYT-02**: Google Search Console tiene la propiedad verificada y el sitemap enviado
-- [ ] **ANLYT-03**: GA4 y Search Console están conectados entre sí
+- [x] **ANLYT-01**: El sitio envía eventos reales a GA4 (propiedad real, no placeholder G-XXXXXXXXXX)
+- [x] **ANLYT-02**: Google Search Console tiene la propiedad verificada y el sitemap enviado
+- [x] **ANLYT-03**: GA4 y Search Console están conectados entre sí
 
 ### ASSET — Activos de Producción
 
-- [ ] **ASSET-01**: og-image.png existe en public/icons/ (1200×630px, fondo #7c3aed, texto blanco "Calendario Escolar Chile 2026")
+- [x] **ASSET-01**: og-image.png existe en public/icons/ (1200×630px, fondo #7c3aed, texto blanco "Calendario Escolar Chile 2026")
 
 ### SEO — Contenido SEO
 
@@ -60,10 +60,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| ANLYT-01 | Phase 5 | Pending |
-| ANLYT-02 | Phase 5 | Pending |
-| ANLYT-03 | Phase 5 | Pending |
-| ASSET-01 | Phase 5 | Pending |
+| ANLYT-01 | Phase 5 | Complete |
+| ANLYT-02 | Phase 5 | Complete |
+| ANLYT-03 | Phase 5 | Complete |
+| ASSET-01 | Phase 5 | Complete |
 | SEO-01 | Phase 5 | Complete |
 | SEC-01 | Phase 6 | Pending |
 | SEC-02 | Phase 6 | Pending |

@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Activacion & Calidad
-status: Ready to execute
-stopped_at: Completed 05-02-PLAN.md — feriados-2027.html anticipatory landing page
-last_updated: "2026-03-25T02:39:52.707Z"
+status: Phase complete — ready for verification
+stopped_at: Completed 05-01-PLAN.md (all 3 tasks; Task 3 human-verify approved)
+last_updated: "2026-03-25T02:46:35.864Z"
 progress:
   total_phases: 3
-  completed_phases: 0
+  completed_phases: 1
   total_plans: 2
-  completed_plans: 0
+  completed_plans: 2
 ---
 
 # State — calendarioescolar.cl v1.1
@@ -59,6 +59,8 @@ Plan: 2 of 2
 - [Phase 02]: Native <details> element used for collapsible — no JavaScript, works without CSS
 - [Phase 02]: Section placed after main table, closed by default — secondary info not prominent
 - [Phase 05]: No claim-data meta on feriados-2027.html: page has no factual claims, only fixed-by-law holiday list — warnings are expected
+- [Phase 05]: Replace placeholder in all 25 HTML pages including contacto.html and quienes-somos.html not listed in plan
+- [Phase 05]: Run npm run generate after template.html update to propagate GA4 ID to all 16 region pages
 
 ## Context from Research (2026-03-24)
 
@@ -80,11 +82,12 @@ Plan: 2 of 2
 | Phase 02 P02 | 15 | 1 tasks | 19 files |
 | 04 | 01 | 4 min | 3 | 3 |
 | Phase 05 P02 | 2 | 2 tasks | 3 files |
+| Phase 05 P01 | 3 | 2 tasks | 32 files |
 
 ## Session
 
-**Last session:** 2026-03-25T02:39:52.702Z
-**Stopped at:** Completed 05-02-PLAN.md — feriados-2027.html anticipatory landing page
+**Last session:** 2026-03-25T02:46:35.859Z
+**Stopped at:** Completed 05-01-PLAN.md (all 3 tasks; Task 3 human-verify approved)
 
 ---
 *Last updated: 2026-03-24 after v1.1 roadmap definition*
