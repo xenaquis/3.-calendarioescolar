@@ -73,7 +73,10 @@ Plans:
   2. La pestana "Datos" tiene una fila por afirmacion con las columnas: id, pregunta, respuesta, fuente_url, fuente_referencia, extracto_verbatim, hash, last_checked, status
   3. La misma pestana incluye filas para los 16 datos regionales y los campos de configuracion del ano escolar
   4. Editar el valor en la columna "respuesta" del Sheet produce un hash diferente al registrado, detectable automaticamente
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 12-01-PLAN.md — Create claims-to-sheet.js with JWT auth, data transformation, Sheet write, and --dry-run
 
 ### Phase 13: Sync Sheet → Pagina
 **Goal**: El Google Sheet es la unica fuente de verdad — toda edicion humana en el Sheet se propaga automaticamente a las paginas publicadas
@@ -107,10 +110,10 @@ Plans:
 | 8. BCN Legal Extractor | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 9. Change Detection Pipeline | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 1/1 | Complete | 2026-03-25 |
-| 11. Modelo de Datos Unificado | v1.3 | 2/2 | Complete   | 2026-03-25 |
-| 12. Sheet Write | v1.3 | 0/? | Not started | - |
+| 11. Modelo de Datos Unificado | v1.3 | 2/2 | Complete    | 2026-03-25 |
+| 12. Sheet Write | v1.3 | 0/1 | In progress | - |
 | 13. Sync Sheet → Pagina | v1.3 | 0/? | Not started | - |
 | 14. Notificaciones Telegram | v1.3 | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-25 — Phase 11 Plan 01 complete: claims.json v2.0.0 generated (50 claims, 15 enriched)*
+*Updated: 2026-03-25 — Phase 12 planned: 1 plan, 1 wave*
