@@ -94,6 +94,70 @@
   font-style: italic;
 }
 
+/* === BCN Legal Tooltip (Phase 10) === */
+
+.bcn-badge-wrap {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+}
+
+.bcn-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-md, 6px);
+  font-size: var(--text-xs, 0.8125rem);
+  font-weight: 600;
+  background-color: var(--color-success-light, #f0fdf4);
+  border: 1px solid #bbf7d0;
+  color: var(--color-success, #166534);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.bcn-tooltip {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 320px;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-md, 6px);
+  background-color: var(--color-success-light, #f0fdf4);
+  border: 1px solid #bbf7d0;
+  color: var(--color-success, #166534);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  text-align: left;
+  white-space: normal;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+/* Arrow pointing down */
+.bcn-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #bbf7d0;
+}
+
+/* Desktop: show on hover (VERI-01) */
+.bcn-badge-wrap:hover .bcn-tooltip {
+  display: block;
+}
+
+/* Mobile: show on focus/tap (VERI-02) — tabindex="0" enables focus */
+.bcn-badge-wrap:focus-within .bcn-tooltip {
+  display: block;
+}
+
 /* === Dark mode — prefers-color-scheme === */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .verificacion-badge--ok {
@@ -137,6 +201,22 @@
   }
   :root:not([data-theme="light"]) .verificacion-footer__caveat {
     color: #fde68a;
+  }
+
+  /* BCN tooltip dark mode */
+  :root:not([data-theme="light"]) .bcn-badge {
+    background-color: rgba(22, 101, 52, 0.2);
+    border-color: rgba(22, 101, 52, 0.5);
+    color: #86efac;
+  }
+  :root:not([data-theme="light"]) .bcn-tooltip {
+    background-color: rgba(22, 101, 52, 0.25);
+    border-color: rgba(22, 101, 52, 0.5);
+    color: #86efac;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+  :root:not([data-theme="light"]) .bcn-tooltip::after {
+    border-top-color: rgba(22, 101, 52, 0.5);
   }
 }
 
@@ -183,11 +263,34 @@
 [data-theme="dark"] .verificacion-footer__caveat {
   color: #fde68a;
 }
+[data-theme="dark"] .bcn-badge {
+  background-color: rgba(22, 101, 52, 0.2);
+  border-color: rgba(22, 101, 52, 0.5);
+  color: #86efac;
+}
+[data-theme="dark"] .bcn-tooltip {
+  background-color: rgba(22, 101, 52, 0.25);
+  border-color: rgba(22, 101, 52, 0.5);
+  color: #86efac;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+[data-theme="dark"] .bcn-tooltip::after {
+  border-top-color: rgba(22, 101, 52, 0.5);
+}
 
 /* === Responsive === */
 @media (max-width: 640px) {
   .verificacion-badge {
     font-size: 0.75rem;
     padding: 0.375rem 0.5rem;
+  }
+  .bcn-tooltip {
+    left: 0;
+    transform: none;
+    max-width: 280px;
+  }
+  .bcn-tooltip::after {
+    left: 1rem;
+    transform: none;
   }
 }

@@ -19,7 +19,7 @@ Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, 
 | AdSense               | PENDIENTE       | ID placeholder `ca-pub-XXXXXXXXXXXXXXXX` en config.json |
 | Search Console        | PENDIENTE       | Verificar propiedad + enviar sitemap               |
 | OG Image              | ACTIVO          | Archivo `public/icons/og-image.png` existe (verificado 2026-03-24) |
-| Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
+| Bot Fight Mode        | DOCUMENTADO     | Guia de activacion en seccion "Bot Fight Mode" abajo |
 | Datos Mineduc 2026    | CORREGIDOS      | Vacaciones invierno corregidas (jun-jul). Inicio clases = 4 mar. Fin = 4 dic. Aysén/Magallanes diferenciados |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
 | Frontend              | COMPLETADO      | CSS token fixes + responsividad móvil (2026-03-24) |
@@ -112,6 +112,32 @@ Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, 
         ├── seo-audit/SKILL.md
         └── update-data/SKILL.md
 ```
+
+---
+
+## Bot Fight Mode
+
+Cloudflare Bot Fight Mode bloquea bots maliciosos conocidos (scrapers, credential stuffers) sin afectar crawlers legitimos de Google, Bing, etc.
+
+### Activacion
+
+1. Ir a [Cloudflare Dashboard](https://dash.cloudflare.com/) → seleccionar sitio `calendarioescolar.cl`
+2. Navegacion: **Security** → **Bots**
+3. En la seccion "Bot Fight Mode", hacer click en **Enable** (toggle ON)
+4. Verificar que el toggle muestra estado activo (checkmark verde)
+
+### Que hace
+
+- Desafia con CAPTCHA o bloquea bots que coincidan con patrones maliciosos conocidos
+- NO afecta a crawlers legitimos (Googlebot, Bingbot, etc.) — estos estan en allowlist de Cloudflare
+- NO requiere configuracion adicional ni Workers
+- Funciona automaticamente una vez activado
+
+### Verificacion
+
+- Dashboard → Security → Bots → Bot Fight Mode debe mostrar "On"
+- Google Search Console debe seguir mostrando paginas indexadas normalmente
+- En Analytics (Cloudflare) → Security → Overview: se pueden ver bots bloqueados
 
 ---
 
