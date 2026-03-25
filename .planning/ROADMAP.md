@@ -101,7 +101,11 @@ Plans:
   1. `node scripts/notify-telegram.js` envia un mensaje al bot configurado cuando se detecta un cambio BCN
   2. El mensaje Telegram incluye: nombre del claim afectado, texto anterior vs nuevo, evaluacion IA del impacto, y link al Sheet
   3. check-bcn-changes.py ya no crea GitHub Issues — usa el script Telegram en su lugar
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 14-01-PLAN.md — Create notify-telegram.js (Telegram Bot API sender with stdin JSON + --dry-run)
+- [ ] 14-02-PLAN.md — Replace GitHub Issues in check-bcn-changes.py with Telegram + update workflow
 
 ## Progress Table
 
@@ -116,8 +120,8 @@ Plans:
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 11. Modelo de Datos Unificado | v1.3 | 2/2 | Complete    | 2026-03-25 |
 | 12. Sheet Write | v1.3 | 1/1 | Complete    | 2026-03-25 |
-| 13. Sync Sheet → Pagina | v1.3 | 2/2 | Complete   | 2026-03-25 |
-| 14. Notificaciones Telegram | v1.3 | 0/? | Not started | - |
+| 13. Sync Sheet → Pagina | v1.3 | 2/2 | Complete    | 2026-03-25 |
+| 14. Notificaciones Telegram | v1.3 | 0/2 | Planned | - |
 
 ---
-*Updated: 2026-03-25 — Phase 13 planned: 2 plans, 2 waves*
+*Updated: 2026-03-25 — Phase 14 planned: 2 plans, 2 waves*
