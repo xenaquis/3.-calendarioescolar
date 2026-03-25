@@ -1,0 +1,80 @@
+# Requirements — calendarioescolar.cl v1.3
+
+**Defined:** 2026-03-25
+**Core Value:** El usuario encuentra la fecha escolar que busca con datos 100% verificados, respaldados por fuentes oficiales, con el Google Sheet como fuente de verdad unica.
+
+## v1.3 Requirements
+
+### JSON — Mapeo Completo
+
+- [ ] **JSON-01**: Cada afirmacion no-API tiene estructura enriquecida: pregunta (que responderia), respuesta ofrecida, fuente detallada (URL, ley, articulo), extracto verbatim relevante de la fuente, hash SHA256 del extracto, last_checked
+- [ ] **JSON-02**: afirmaciones.json y legal-articles.json se unifican en un solo modelo JSON (`data/claims.json`) con toda la informacion consolidada
+- [ ] **JSON-03**: 100% de las afirmaciones que aparecen en las paginas (meta claim-data) tienen su claim registrado con fuente y extracto
+- [ ] **JSON-04**: El build (`validate.js`) falla si alguna afirmacion con fuente normativa/legal no tiene extracto verbatim ni hash
+
+### SHEET — Pestana Unica Google Sheet
+
+- [ ] **SHEET-01**: Script `scripts/claims-to-sheet.js` escribe `claims.json` completo a una pestana "Datos" en el Google Sheet
+- [ ] **SHEET-02**: La pestana "Datos" contiene UNA fila por afirmacion con columnas: id, pregunta, respuesta, fuente_url, fuente_referencia, extracto_verbatim, hash, last_checked, status
+- [ ] **SHEET-03**: La misma pestana incluye los datos regionales (16 regiones x campos) y los datos de configuracion (year, schoolStart, etc.) — una sola pestana = toda la pagina
+- [ ] **SHEET-04**: Hash de la columna "respuesta" permite detectar cuando el humano modifico un valor en el Sheet
+
+### SYNC — Flujo Sheet → Pagina
+
+- [ ] **SYNC-01**: `sync-from-sheet.js` actualizado lee la pestana "Datos" como fuente de verdad unica y genera `claims.json`, `pages.json`, y `calendar-config.json`
+- [ ] **SYNC-02**: `generate-pages.js` usa datos de `claims.json` (generado desde Sheet) para inyectar tooltips, datos verificados, y contenido factual en las paginas
+- [ ] **SYNC-03**: GitHub Action con cron diario (lag 24h) ejecuta sync → generate → validate → deploy
+- [ ] **SYNC-04**: El flujo completo es: JSON escribe Sheet → humano modifica Sheet → Sheet genera pagina. Ningun dato se hardcodea en HTML
+
+### NOTIF — Notificaciones Telegram
+
+- [ ] **NOTIF-01**: Script `scripts/notify-telegram.js` envia mensaje via Telegram Bot API cuando el pipeline de deteccion de cambios encuentra diferencias
+- [ ] **NOTIF-02**: El mensaje incluye: claim afectado, texto anterior vs nuevo, evaluacion IA, link al Sheet para revisar
+- [ ] **NOTIF-03**: Reemplaza la creacion de GitHub Issues en `check-bcn-changes.py` — el Action ahora notifica via Telegram
+
+## v2 Requirements (deferred)
+
+### Futuro
+
+- **JSON-F01**: Afirmaciones para claims que dependen de API (valor UF, etc.)
+- **SHEET-F01**: Dashboard de estado de verificacion en el Sheet (graficos, conteo por status)
+- **NOTIF-F01**: Notificaciones diferenciadas por severidad (info vs alerta vs critico)
+- **SYNC-F01**: Sync incremental (solo filas cambiadas, no regeneracion completa)
+
+## Out of Scope
+
+| Feature | Reason |
+|---------|--------|
+| Auto-update sin revision humana | Riesgo de publicar datos incorrectos — siempre human-in-the-loop |
+| Multiple pestanas Sheet | Una sola pestana es la fuente de verdad, mas simple y auditable |
+| Datos de API en tiempo real | Diferentes ciclo de vida, fuera del modelo de afirmaciones verificables |
+| Mapa SVG geografico | Ya descartado en v1.2 — lista ordenada cumple el proposito |
+
+## Traceability
+
+| Requirement | Phase | Status |
+|-------------|-------|--------|
+| JSON-01 | — | Pending |
+| JSON-02 | — | Pending |
+| JSON-03 | — | Pending |
+| JSON-04 | — | Pending |
+| SHEET-01 | — | Pending |
+| SHEET-02 | — | Pending |
+| SHEET-03 | — | Pending |
+| SHEET-04 | — | Pending |
+| SYNC-01 | — | Pending |
+| SYNC-02 | — | Pending |
+| SYNC-03 | — | Pending |
+| SYNC-04 | — | Pending |
+| NOTIF-01 | — | Pending |
+| NOTIF-02 | — | Pending |
+| NOTIF-03 | — | Pending |
+
+**Coverage:**
+- v1.3 requirements: 15 total
+- Mapped to phases: 0
+- Unmapped: 15
+
+---
+*Requirements defined: 2026-03-25*
+*Last updated: 2026-03-25 after initial definition*
