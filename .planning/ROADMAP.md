@@ -30,7 +30,7 @@ Full details: `.planning/milestones/v1.1-ROADMAP.md`
 
 ### 📋 v1.2 Validacion Legal + Mapa Interactivo
 
-- [~] **Phase 8: BCN Legal Extractor** - Script Python extrae articulado verbatim desde BCN.cl y lo guarda en legal-articles.json (Task 1 done, Task 2 pendiente ANTHROPIC_API_KEY)
+- [x] **Phase 8: BCN Legal Extractor** - Script Python extrae articulado verbatim desde BCN.cl y lo guarda en legal-articles.json — completed 2026-03-25
 - [ ] **Phase 9: Change Detection Pipeline** - Cron semanal detecta cambios en articulado BCN y crea GitHub Issue con evaluacion IA
 - [ ] **Phase 10: UI Verificacion + Mapa Interactivo** - Tooltip "Verificado" con texto legal + mapa de regiones interactivo en mobile y desktop
 
@@ -88,4 +88,4 @@ Plans:
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-25 — Phase 8 in progress: Task 1 done, Task 2 at checkpoint (ANTHROPIC_API_KEY required)*
+*Updated: 2026-03-25 — Phase 8 complete (DeepSeek API, 15 claims verbatim)*
