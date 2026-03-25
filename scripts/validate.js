@@ -273,71 +273,106 @@ if (fs.existsSync(sourceHealthPath)) {
   }
 }
 
-// ── 7. Validacion de afirmaciones ─────────────────────────────────────────
+// ── 7. Validacion de claims (JSON-03, JSON-04) ────────────────────────────
+var claimsPath = path.join(ROOT, 'data', 'claims.json');
 var afirmacionesPath = path.join(ROOT, 'data', 'afirmaciones.json');
-if (fs.existsSync(afirmacionesPath)) {
-  var afirmaciones;
+var claimsData = null;
+var claimsSource = null;
+
+if (fs.existsSync(claimsPath)) {
   try {
-    afirmaciones = JSON.parse(fs.readFileSync(afirmacionesPath, 'utf8'));
+    claimsData = JSON.parse(fs.readFileSync(claimsPath, 'utf8'));
+    claimsSource = 'claims.json';
+  } catch (e) {
+    error('data/claims.json: JSON invalido — ' + e.message);
+    claimsData = null;
+  }
+} else if (fs.existsSync(afirmacionesPath)) {
+  warn('data/claims.json no encontrado — usando data/afirmaciones.json (preferir claims.json)');
+  try {
+    claimsData = JSON.parse(fs.readFileSync(afirmacionesPath, 'utf8'));
+    claimsSource = 'afirmaciones.json';
   } catch (e) {
     error('data/afirmaciones.json: JSON invalido — ' + e.message);
-    afirmaciones = null;
-  }
-
-  if (afirmaciones && afirmaciones.claims && afirmaciones.sources) {
-    // 6a. Verificar que cada claim referencia una source existente
-    afirmaciones.claims.forEach(function (claim) {
-      if (claim.source_id && !afirmaciones.sources[claim.source_id]) {
-        error('afirmaciones.json: claim "' + claim.id +
-          '" referencia source inexistente "' + claim.source_id + '"');
-      }
-    });
-
-    // 6b. Verificar coherencia: displayed_value vs dato real
-    afirmaciones.claims.forEach(function (claim) {
-      if (claim.data_path && claim.displayed_value) {
-        var realValue = resolveDataPath(claim.data_path, cal, pages);
-        if (realValue !== null && String(realValue) !== String(claim.displayed_value)) {
-          error('afirmaciones.json: claim "' + claim.id + '" dice "' +
-            claim.displayed_value + '" pero dato real es "' + realValue + '"');
-        }
-      }
-    });
-
-    // 6c. Detector de claims huerfanas — escanea <meta name="claim-data"> en HTML
-    var htmlDir = path.join(ROOT, 'public');
-    var htmlFiles = listHtmlFiles(htmlDir);
-    var NO_CLAIM_EXEMPT = ['privacidad.html', 'contacto.html', 'about.html', 'avisolegal.html'];
-    var declaredKeys = {};
-
-    htmlFiles.forEach(function (htmlFile) {
-      var html = fs.readFileSync(htmlFile, 'utf8');
-      var match = html.match(/<meta\s+name="claim-data"\s+content="([^"]+)"/);
-      if (!match) {
-        var basename = path.basename(htmlFile);
-        if (NO_CLAIM_EXEMPT.indexOf(basename) === -1) {
-          warn(path.relative(ROOT, htmlFile).replace(/\\/g, '/') + ': no tiene meta claim-data');
-        }
-        return;
-      }
-      var dataKeys = match[1].split(',').map(function (k) { return k.trim(); });
-      dataKeys.forEach(function (key) {
-        if (!key) return;
-        declaredKeys[key] = true;
-        var hasClaim = afirmaciones.claims.some(function (c) { return c.data_key === key; });
-        if (!hasClaim) {
-          error(path.relative(ROOT, htmlFile).replace(/\\/g, '/') +
-            ': usa data_key "' + key + '" pero no hay claim en afirmaciones.json');
-        }
-      });
-    });
-
-    console.log('  Afirmaciones: ' + afirmaciones.claims.length + ' claims, ' +
-      Object.keys(afirmaciones.sources).length + ' sources, ' +
-      Object.keys(declaredKeys).length + ' data_keys declarados en HTML');
+    claimsData = null;
   }
 } else {
-  warn('data/afirmaciones.json no encontrado — verificacion de afirmaciones deshabilitada');
+  warn('data/claims.json no encontrado — verificacion de claims deshabilitada');
+}
+
+if (claimsData && claimsData.claims && claimsData.sources) {
+  // 7a. Verificar que cada claim referencia una source existente
+  claimsData.claims.forEach(function (claim) {
+    if (claim.source_id && !claimsData.sources[claim.source_id]) {
+      error(claimsSource + ': claim "' + claim.id +
+        '" referencia source inexistente "' + claim.source_id + '"');
+    }
+  });
+
+  // 7b. Enforcement: normative claims must have verbatim+hash (JSON-04)
+  claimsData.claims.forEach(function (claim) {
+    // A claim is normative if source_id starts with "bcn-"
+    if (claim.source_id && claim.source_id.indexOf('bcn-') === 0) {
+      if (!claim.extracto_verbatim) {
+        error('claims.json: claim "' + claim.id + '" tiene fuente normativa (' +
+          claim.source_id + ') pero carece de extracto_verbatim');
+      }
+      if (!claim.hash_sha256) {
+        error('claims.json: claim "' + claim.id + '" tiene fuente normativa (' +
+          claim.source_id + ') pero carece de hash_sha256');
+      }
+    }
+  });
+
+  // 7c. Verificar coherencia: displayed_value vs dato real
+  claimsData.claims.forEach(function (claim) {
+    if (claim.data_path && claim.displayed_value) {
+      var realValue = resolveDataPath(claim.data_path, cal, pages);
+      if (realValue !== null && String(realValue) !== String(claim.displayed_value)) {
+        error(claimsSource + ': claim "' + claim.id + '" dice "' +
+          claim.displayed_value + '" pero dato real es "' + realValue + '"');
+      }
+    }
+  });
+
+  // 7d. Detector de claims huerfanas — escanea <meta name="claim-data"> en HTML
+  var htmlDir = path.join(ROOT, 'public');
+  var htmlFiles = listHtmlFiles(htmlDir);
+  var NO_CLAIM_EXEMPT = ['privacidad.html', 'contacto.html', 'about.html', 'avisolegal.html'];
+  var declaredKeys = {};
+
+  htmlFiles.forEach(function (htmlFile) {
+    var html = fs.readFileSync(htmlFile, 'utf8');
+    var match = html.match(/<meta\s+name="claim-data"\s+content="([^"]+)"/);
+    if (!match) {
+      var basename = path.basename(htmlFile);
+      if (NO_CLAIM_EXEMPT.indexOf(basename) === -1) {
+        warn(path.relative(ROOT, htmlFile).replace(/\\/g, '/') + ': no tiene meta claim-data');
+      }
+      return;
+    }
+    var dataKeys = match[1].split(',').map(function (k) { return k.trim(); });
+    dataKeys.forEach(function (key) {
+      if (!key) return;
+      declaredKeys[key] = true;
+      var hasClaim = claimsData.claims.some(function (c) { return c.data_key === key; });
+      if (!hasClaim) {
+        error(path.relative(ROOT, htmlFile).replace(/\\/g, '/') +
+          ': usa data_key "' + key + '" pero no hay claim en ' + claimsSource);
+      }
+    });
+  });
+
+  var normativeCount = claimsData.claims.filter(function (c) {
+    return c.source_id && c.source_id.indexOf('bcn-') === 0;
+  }).length;
+  var enrichedCount = claimsData.claims.filter(function (c) {
+    return c.extracto_verbatim;
+  }).length;
+  console.log('  Claims: ' + claimsData.claims.length + ' total, ' +
+    Object.keys(claimsData.sources).length + ' sources, ' +
+    enrichedCount + '/' + normativeCount + ' normativas con verbatim, ' +
+    Object.keys(declaredKeys).length + ' data_keys en HTML');
 }
 
 // ── Reporte final ──────────────────────────────────────────────────────────
