@@ -26,10 +26,10 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 
 <!-- Milestone v1.1 Activación & Calidad -->
 
-- [ ] GA4 real configurado (reemplazar placeholder G-XXXXXXXXXX)
-- [ ] Google Search Console verificado y con sitemap enviado
-- [ ] OG Image creada (og-image.png 1200×630px — hoy referenciado pero no existe)
-- [ ] Landing feriados-2027.html (captura temprana de búsquedas del año siguiente)
+- [x] GA4 real configurado (G-6FVLKF6PFQ activo en todas las páginas) — Phase 5
+- [x] Google Search Console — pasos documentados en BLUEPRINT.md (verificación manual post-deploy) — Phase 5
+- [x] OG Image existe en public/icons/og-image.png (1200×630px) — Phase 5
+- [x] Landing feriados-2027.html creada y enlazada — Phase 5
 - [ ] Bot Fight Mode activado en Cloudflare (instrucciones + guía)
 - [ ] Sistema de validación robusta implementado (4 fases de validacion/)
 - [ ] Mapa: click en región abre panel con datos (MAP-02)
