@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Sheet como Fuente de Verdad Unica
-status: Ready to execute
-last_updated: "2026-03-25T17:07:05.859Z"
+status: Phase complete — ready for verification
+last_updated: "2026-03-25T17:11:22.374Z"
 progress:
   total_phases: 4
   completed_phases: 0
@@ -18,12 +18,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Informacion 100% fidedigna extraida de resoluciones oficiales, verificable visualmente, con el Google Sheet como fuente de verdad unica y auditable
-**Current focus:** Phase 14 — notificaciones-telegram
+**Current focus:** Phase 14 — notificaciones-telegram (complete)
 
 ## Current Position
 
-Phase: 14 (notificaciones-telegram) — EXECUTING
-Plan: 2 of 2
+Phase: 14 (notificaciones-telegram) — COMPLETE
+Plan: 2 of 2 (all plans complete)
 
 ## Phase Status (v1.0 — archived)
 
@@ -57,7 +57,7 @@ Plan: 2 of 2
 | 11 | Modelo de Datos Unificado | in-progress (plan 01 complete) |
 | 12 | Sheet Write | in-progress (plan 01 task 1 complete, awaiting human-verify task 2) |
 | 13 | Sync Sheet → Pagina | Not started |
-| 14 | Notificaciones Telegram | Not started |
+| 14 | Notificaciones Telegram | completed (2026-03-25) |
 
 ## Decisions
 
@@ -113,6 +113,9 @@ Plan: 2 of 2
 - [Phase 13-02]: generate-verificacion.js reads claims.json primary with afirmaciones.json fallback — backward compatible
 - [Phase 14-01]: EVAL_EMOJI maps sin_impacto to checkmark (not green circle) for better Telegram client compatibility
 - [Phase 14-01]: Message split strategy: summary first then per-change details when total exceeds 4096 chars
+- **[Phase 14-02]:** subprocess.run with input=json.dumps(payload) bridges Python change-detection pipeline to Node.js notify-telegram.js
+- **[Phase 14-02]:** --dry-run propagated to notify-telegram.js for end-to-end message preview without Telegram credentials
+- [Phase 14-02]: subprocess.run with input=json.dumps(payload) is the bridge between Python pipeline and Node.js notify-telegram.js
 
 ## Accumulated Context
 
@@ -154,3 +157,4 @@ Plan: 2 of 2
 | Phase 13 P01 | 4 min | 2 tasks | 2 files |
 | Phase 13 P02 | 8 | 1 tasks | 5 files |
 | Phase 14 P01 | 2 | 1 tasks | 1 files |
+| Phase 14 P02 | 5 min | 2 tasks | 2 files |

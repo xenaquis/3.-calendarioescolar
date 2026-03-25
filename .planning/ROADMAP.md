@@ -45,7 +45,7 @@ Full details: `.planning/milestones/v1.2-ROADMAP.md`
 - [x] **Phase 11: Modelo de Datos Unificado** - Unificar afirmaciones.json + legal-articles.json en claims.json con estructura enriquecida (completed 2026-03-25)
 - [x] **Phase 12: Sheet Write** - Script claims-to-sheet.js escribe claims.json completo a pestana "Datos" del Google Sheet (completed 2026-03-25)
 - [x] **Phase 13: Sync Sheet → Pagina** - Flujo completo Sheet como fuente de verdad: sync genera JSON, generate inyecta datos, cron diario (completed 2026-03-25)
-- [ ] **Phase 14: Notificaciones Telegram** - Reemplazar GitHub Issues por Telegram en el pipeline de deteccion de cambios BCN
+- [x] **Phase 14: Notificaciones Telegram** - Reemplazar GitHub Issues por Telegram en el pipeline de deteccion de cambios BCN (completed 2026-03-25)
 
 ## Phase Details
 
@@ -101,11 +101,11 @@ Plans:
   1. `node scripts/notify-telegram.js` envia un mensaje al bot configurado cuando se detecta un cambio BCN
   2. El mensaje Telegram incluye: nombre del claim afectado, texto anterior vs nuevo, evaluacion IA del impacto, y link al Sheet
   3. check-bcn-changes.py ya no crea GitHub Issues — usa el script Telegram en su lugar
-**Plans:** 1/2 plans executed
+**Plans:** 2/2 plans complete
 
 Plans:
 - [x] 14-01-PLAN.md — Create notify-telegram.js (Telegram Bot API sender with stdin JSON + --dry-run)
-- [ ] 14-02-PLAN.md — Replace GitHub Issues in check-bcn-changes.py with Telegram + update workflow
+- [x] 14-02-PLAN.md — Replace GitHub Issues in check-bcn-changes.py with Telegram + update workflow
 
 ## Progress Table
 
@@ -121,7 +121,7 @@ Plans:
 | 11. Modelo de Datos Unificado | v1.3 | 2/2 | Complete    | 2026-03-25 |
 | 12. Sheet Write | v1.3 | 1/1 | Complete    | 2026-03-25 |
 | 13. Sync Sheet → Pagina | v1.3 | 2/2 | Complete    | 2026-03-25 |
-| 14. Notificaciones Telegram | v1.3 | 1/2 | In Progress|  |
+| 14. Notificaciones Telegram | v1.3 | 2/2 | Complete   | 2026-03-25 |
 
 ---
 *Updated: 2026-03-25 — Phase 14 planned: 2 plans, 2 waves*
