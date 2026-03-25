@@ -33,11 +33,11 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 - ✓ Extracción de artículos BCN XML por ley de feriado (Python), verbatim en JSON con hash + last_checked — v1.2 Phase 8
 - ✓ Pipeline de detección de cambios: cron compara hash BCN actual vs guardado — v1.2 Phase 9
 - ✓ Alerta GitHub Issue cuando cambia artículo: diff + evaluación IA de impacto en afirmación — v1.2 Phase 9
-- [ ] Tooltip CSS sobre badge "Verificado" mostrando art. XX: "texto verbatim"
-- [ ] Mapa: click en región abre panel con datos (MAP-02)
-- [ ] Mapa: carga datos desde regions-data.js sin duplicar (MAP-04)
-- [ ] Mapa: mobile — dropdown select + panel debajo (MAP-05)
-- [ ] Bot Fight Mode activado en Cloudflare (documentación manual)
+- ✓ Tooltip CSS sobre badge "Verificado" mostrando art. XX: "texto verbatim" — v1.2 Phase 10
+- ✓ Mapa: click en región abre panel con datos (MAP-02) — v1.2 Phase 10
+- ✓ Mapa: carga datos desde regions-data.js sin duplicar (MAP-04) — v1.2 Phase 10
+- ✓ Mapa: mobile — dropdown select + panel debajo (MAP-05) — v1.2 Phase 10
+- ✓ Bot Fight Mode documentado en BLUEPRINT.md (SEC-01) — v1.2 Phase 10
 
 ## Current Milestone: v1.2 Validación Legal + Mapa Interactivo
 
@@ -90,4 +90,4 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-03-25 after v1.1 Activacion & Calidad milestone archived*
+*Last updated: 2026-03-25 after v1.2 Phase 10 complete — all v1.2 requirements validated*
