@@ -1,8 +1,8 @@
-# calendarioescolar.cl — Extraccion Fidedigna + Datos Completos
+# calendarioescolar.cl — Extraccion Fidedigna + Sheet como Fuente de Verdad
 
 ## What This Is
 
-Sitio utility chileno que entrega el calendario escolar 2026 por region. Extrae datos visualmente de PDFs oficiales del Mineduc (16 resoluciones regionales), los valida con checks deterministas, y los publica como paginas estaticas. Incluye datos extendidos (cierre actas, fin sin JEC/EPJA, dia profesor, inicio 2do semestre) en seccion colapsable. Cada afirmacion de feriado esta respaldada por articulado legal verbatim de BCN.cl con deteccion automatica de cambios.
+Sitio utility chileno que entrega el calendario escolar 2026 por region. Extrae datos visualmente de PDFs oficiales del Mineduc (16 resoluciones regionales), los valida con checks deterministas, y los publica como paginas estaticas. Cada afirmacion de feriado esta respaldada por articulado legal verbatim de BCN.cl con deteccion automatica de cambios. El Google Sheet es la fuente de verdad unica — toda edicion humana en el Sheet se propaga automaticamente a las paginas publicadas via pipeline diario.
 
 ## Core Value
 
@@ -32,6 +32,13 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 - ✓ Mapa: click en región abre panel con datos, carga desde regions-data.js sin duplicar — v1.2
 - ✓ Mapa: mobile — dropdown select + panel debajo — v1.2
 - ✓ Bot Fight Mode documentado en BLUEPRINT.md — v1.2
+- ✓ Modelo unificado claims.json (50 claims, 18 normativas con verbatim+hash) — v1.3
+- ✓ Build enforcement: npm run build falla si claim normativo carece de extracto_verbatim o hash — v1.3
+- ✓ Script claims-to-sheet.js escribe datos completos a pestana "Datos" del Google Sheet — v1.3
+- ✓ sync-from-sheet.js lee exclusivamente pestana "Datos" y regenera claims.json, pages.json, calendar-config.json — v1.3
+- ✓ generate-pages.js produce claims-data.js con tooltips dinamicos desde claims.json — v1.3
+- ✓ GitHub Action cron diario: sync → generate → validate → deploy — v1.3
+- ✓ Notificaciones Telegram reemplazan GitHub Issues en pipeline de deteccion de cambios BCN — v1.3
 
 ### Active
 
@@ -45,8 +52,11 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 - **4 grupos de fechas regionales:** ESTANDAR (11 regiones), NORTE (Arica, Tarapaca), SUR (Aysen, Magallanes), SUR-PARCIAL (Los Lagos)
 - **Tech stack:** Vanilla HTML/CSS/JS, Cloudflare Pages. Scripts: PyMuPDF (PNG), Node.js CommonJS (extraction, validation, generation), Python (BCN extractor + change detection)
 - **Pipeline:** pdf-to-png.py → organize-snapshots.js → extract-visual.js → validate-extraction.js → populate-pages-json.js → generate-pages.js
-- **Legal pipeline:** bcn-extractor.py → legal-articles.json → check-bcn-changes.py (cron semanal) → GitHub Issue on change
-- **Pending human actions:** Search Console verification, GA4↔Search Console connection, Bot Fight Mode activation (guías en BLUEPRINT.md)
+- **v1.3 shipped (2026-03-25):** Modelo unificado claims.json + Sheet como fuente de verdad + tooltips dinamicos + Telegram notifications
+- **Data pipeline:** claims.json ← merge-claims.js (afirmaciones + legal-articles) → claims-to-sheet.js → Google Sheet "Datos" tab
+- **Sync pipeline:** Google Sheet → sync-from-sheet.js → claims.json + pages.json + calendar-config.json → generate-pages.js → HTML + claims-data.js
+- **Legal pipeline:** bcn-extractor.py → legal-articles.json → check-bcn-changes.py (cron semanal) → notify-telegram.js
+- **Pending human actions:** Search Console verification, GA4↔Search Console connection, Bot Fight Mode activation, Google Service Account setup for Sheet write
 
 ## Constraints
 
@@ -69,11 +79,14 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 | Phase 6 (Seguridad) descartada | Scope evolucionó a verificación legal BCN.cl en v1.2 — enfoque más preciso que "validación genérica" | ✓ v1.1 → v1.2 |
 | DeepSeek en lugar de Anthropic para change detection | API OpenAI-compatible, costo menor para cron semanal de baja frecuencia | ✓ v1.2 Phase 9 |
 | CSS-only tooltip para verificación legal | Zero JavaScript: :hover desktop + :focus-within mobile con tabindex=0 | ✓ v1.2 Phase 10 |
-| Tooltip text hardcoded en HTML | Texto inciso específico por feriado es estático — no requiere fetch dinámico de legal-articles.json | ✓ v1.2 Phase 10 (tech debt INT-01: no auto-generado) |
+| Tooltip text hardcoded en HTML | Texto inciso específico por feriado es estático — no requiere fetch dinámico de legal-articles.json | ✓ v1.2 Phase 10 → Resuelto v1.3 Phase 13 (tooltips dinamicos desde claims-data.js) |
+| Modelo unificado claims.json | afirmaciones.json + legal-articles.json → single source of truth con build enforcement | ✓ v1.3 Phase 11 |
+| Sheet como fuente de verdad unica | Una pestana "Datos" consolida claims, regiones, config — auditable por humanos | ✓ v1.3 Phase 12-13 |
+| Telegram sobre GitHub Issues | Notificaciones mas directas, con contexto suficiente para actuar sin revisar codigo | ✓ v1.3 Phase 14 |
 
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-03-25 — v1.2 shipped: BCN legal verification + change detection + mapa interactivo*
+*Last updated: 2026-03-25 after v1.3 milestone — Sheet como Fuente de Verdad Unica*
