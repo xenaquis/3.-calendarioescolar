@@ -15,10 +15,10 @@ Ultimo update de este blueprint: 2026-03-24 (CSS token fixes: --space-5 y --lead
 | Dominio               | ACTIVO          | calendarioescolar.cl — HTTP 200 verificado 2026-03-17 |
 | Cloudflare Pages      | ACTIVO          | Deploy via GitHub Actions — en producción          |
 | DNS                   | ACTIVO          | Cloudflare DNS configurado y propagado             |
-| GA4                   | PENDIENTE       | ID placeholder `G-XXXXXXXXXX` en config.json       |
+| GA4                   | ACTIVO          | ID `G-6FVLKF6PFQ` activo en todas las paginas (2026-03-24) |
 | AdSense               | PENDIENTE       | ID placeholder `ca-pub-XXXXXXXXXXXXXXXX` en config.json |
 | Search Console        | PENDIENTE       | Verificar propiedad + enviar sitemap               |
-| OG Image              | PENDIENTE       | Archivo `/icons/og-image.png` referenciado pero no existe |
+| OG Image              | ACTIVO          | Archivo `public/icons/og-image.png` existe (verificado 2026-03-24) |
 | Bot Fight Mode        | PENDIENTE       | Activar en dashboard de Cloudflare                 |
 | Datos Mineduc 2026    | CORREGIDOS      | Vacaciones invierno corregidas (jun-jul). Inicio clases = 4 mar. Fin = 4 dic. Aysén/Magallanes diferenciados |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
@@ -59,7 +59,7 @@ Ultimo update de este blueprint: 2026-03-24 (CSS token fixes: --space-5 y --lead
 │   │   ├── analytics.js            -> Google Analytics init
 │   │   └── export-image.js         -> Exportar tabla como imagen (solo paginas de region)
 │   ├── icons/
-│   │   └── og-image.png            -> FALTA — referenciado en HTML pero no existe (ver BUG 4)
+│   │   └── og-image.png            -> EXISTE — og-image.png 1200x630px presente (2026-03-24)
 │   ├── health.json                 -> GENERADO — metadata para monitoreo automatico
 │   └── sitemap.xml                 -> GENERADO por scripts/generate-pages.js
 │
@@ -245,15 +245,15 @@ Las páginas en `public/region/` y `public/js/` son artefactos generados — nun
 
 ## Bugs conocidos y deuda tecnica
 
-### BUG 4 — OG IMAGE FALTANTE
+### ~~BUG 4 — OG IMAGE FALTANTE~~ RESUELTO (2026-03-24)
 - **Archivo**: `config.json` → referencia `https://calendarioescolar.cl/icons/og-image.png`
-- **Problema**: El archivo `public/icons/og-image.png` no existe.
-- **Fix pendiente**: Crear og-image.png (1200x630px). Diseño: fondo #7c3aed, texto blanco "Calendario Escolar 2026 Chile".
+- **Fix**: El archivo `public/icons/og-image.png` existe y es referenciado correctamente.
 
-### BUG 6 — IDS PLACEHOLDER EN config.json
+### BUG 6 — IDS PLACEHOLDER EN config.json (PARCIALMENTE RESUELTO)
 - **Archivo**: `config.json`
-- **Problema**: `ca-pub-XXXXXXXXXXXXXXXX` (AdSense) y `G-XXXXXXXXXX` (GA4) son placeholders.
-- **Fix pendiente**: Obtener IDs reales y actualizar config.json + todos los HTML.
+- **Problema original**: `ca-pub-XXXXXXXXXXXXXXXX` (AdSense) y `G-XXXXXXXXXX` (GA4) eran placeholders.
+- **GA4**: RESUELTO (2026-03-24) — `G-6FVLKF6PFQ` activo en todas las paginas.
+- **AdSense**: PENDIENTE — `ca-pub-XXXXXXXXXXXXXXXX` aun es placeholder (requiere cuenta AdSense aprobada).
 
 ### ~~BUG 9 — CORPUS CHRISTI INCORRECTO~~ RESUELTO (2026-03-12)
 - **Archivos**: `data/calendar-config.json` + `public/index.html`
@@ -288,9 +288,7 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
    - Agregar GitHub Secret: `GOOGLE_API_KEY`
    - Actualizar `config.json` → `sheet.spreadsheetId`
 
-4. **Crear propiedad GA4**
-   - URL: https://analytics.google.com → obtener ID `G-XXXXXXXXXX`
-   - Reemplazar placeholder en config.json y en todos los HTML
+4. ~~**Crear propiedad GA4**~~ COMPLETADO (2026-03-24) — ID `G-6FVLKF6PFQ` activo en todas las paginas
 
 5. **Solicitar AdSense**
    - URL: https://www.google.com/adsense (requiere tráfico real primero)
@@ -300,7 +298,36 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 
 7. **Activar Bot Fight Mode en Cloudflare**
 
-8. **Crear og-image.png** (1200x630px, fondo #7c3aed, texto blanco)
+8. ~~**Crear og-image.png**~~ COMPLETADO — archivo `public/icons/og-image.png` existe (2026-03-24)
+
+---
+
+## Google Search Console & GA4 Connection
+
+### Pasos para verificar Search Console
+
+1. Ir a https://search.google.com/search-console
+2. Click "Agregar propiedad" → seleccionar "Prefijo de URL" → ingresar `https://calendarioescolar.cl`
+3. Verificar via DNS TXT record en Cloudflare:
+   - Cloudflare Dashboard → DNS → Add Record → TXT
+   - Name: `@`
+   - Content: (copiar el valor de verificacion que entrega Google)
+   - TTL: Auto
+4. Esperar verificacion (puede tomar hasta 24h)
+5. Una vez verificado, ir a Sitemaps → ingresar `sitemap.xml` → Enviar
+
+### Pasos para conectar GA4 con Search Console
+
+1. Ir a Google Analytics → Admin → Product Links → Search Console Links
+2. Click "Link" → seleccionar la propiedad de Search Console verificada
+3. Confirmar la conexion
+4. Los datos de Search Console apareceran en GA4 bajo Acquisition → Search Console
+
+### Estado actual
+
+- GA4 ID: `G-6FVLKF6PFQ` (activo en todas las paginas)
+- Search Console: pendiente verificacion manual
+- Conexion GA4-GSC: pendiente (requiere Search Console verificado primero)
 
 ---
 
