@@ -12,3 +12,6 @@ data/snapshots/*.txt
 data/extraction-tests/
 .claude/worktrees/
 mocks/
+__pycache__/
+*.pyc
+*.pyo

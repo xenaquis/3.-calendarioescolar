@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-24 (CSS token fixes: --space-5 y --leading-relaxed; mejora responsividad key-facts en movil).
+Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, afirmaciones.json idNorma corregido — pendiente ejecucion con ANTHROPIC_API_KEY).
 
 ---
 
@@ -28,6 +28,7 @@ Ultimo update de este blueprint: 2026-03-24 (CSS token fixes: --space-5 y --lead
 | Validación Robusta    | 4 FASES + RAG   | Auditoría empírica 2026-03-18: fiabilidad B+ (82/100). Ver sección Validación abajo |
 | RAG Pipeline          | OPERATIVO       | extract-from-pdf.js v3 (catalog-first) + OCR. Cron: 15 may + 31 dic. 11/16 regiones OK |
 | Badges Honestos       | IMPLEMENTADO    | 5 estados: verde/rojo/ámbar/gris/amarillo. Info no verificada se flaggea visiblemente |
+| BCN Legal Extractor   | SCRIPT LISTO    | scripts/bcn-extractor.py creado (2026-03-25). Pendiente ejecutar con ANTHROPIC_API_KEY para generar data/legal-articles.json |
 
 ---
 
@@ -68,7 +69,8 @@ Ultimo update de este blueprint: 2026-03-24 (CSS token fixes: --space-5 y --lead
 │   ├── calendar-config.json        -> FUENTE DE VERDAD temporal: fechas del año escolar, feriados
 │   ├── template.html               -> Plantilla HTML para paginas de region (usa {{variables}})
 │   ├── SHEET-SETUP.md              -> Instrucciones para configurar el Google Sheet
-│   └── FUENTES-VERDAD.md           -> Auditoría de fuentes oficiales, protocolo anual, riesgos
+│   ├── FUENTES-VERDAD.md           -> Auditoría de fuentes oficiales, protocolo anual, riesgos
+│   └── legal-articles.json         -> GENERADO por bcn-extractor.py — articulos verbatim de 15 claims feriado con SHA256
 │
 ├── scripts/
 │   ├── generate-pages.js           -> Lee pages.json + template.html + calendar-config.json
@@ -80,6 +82,7 @@ Ultimo update de este blueprint: 2026-03-24 (CSS token fixes: --space-5 y --lead
 │   ├── check-sources.js            -> Fase 2: HTTP health check de 6 fuentes oficiales
 │   ├── extract-from-pdf.js         -> RAG pipeline v3: extrae datos de PDFs Mineduc (DeepSeek + OCR)
 │   ├── sync-from-sheet.js          -> Lee Google Sheet via REST API → actualiza pages.json + calendar-config.json
+│   ├── bcn-extractor.py            -> Extrae articulos legales BCN.cl (4 leyes) → data/legal-articles.json con SHA256 + Claude ID
 │   └── build.sh                    -> Corre validate.js + verificaciones + cuenta archivos
 │
 ├── .github/

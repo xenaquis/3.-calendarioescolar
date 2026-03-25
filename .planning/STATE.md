@@ -2,13 +2,12 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Validacion Legal + Mapa Interactivo
-status: Roadmap created
-last_updated: "2026-03-25"
-last_activity: 2026-03-25
+status: Executing Phase 08 — checkpoint (ANTHROPIC_API_KEY required)
+last_updated: "2026-03-25T12:00:00Z"
 progress:
   total_phases: 3
   completed_phases: 0
-  total_plans: 0
+  total_plans: 1
   completed_plans: 0
 ---
 
@@ -19,14 +18,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-25)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** v1.2 roadmap ready — Phase 8 next
+**Current focus:** Phase 08 — bcn-legal-extractor
 
 ## Current Position
 
-Phase: 8 — BCN Legal Extractor (Not started)
-Plan: —
-Status: Roadmap created, ready for plan-phase
-Last activity: 2026-03-25
+Phase: 08 (bcn-legal-extractor) — EXECUTING
+Plan: 1 of 1
 
 ## Phase Status (v1.0 — archived)
 
@@ -49,12 +46,15 @@ Last activity: 2026-03-25
 
 | # | Phase | Status |
 |---|-------|--------|
-| 8 | BCN Legal Extractor | Not started |
+| 8 | BCN Legal Extractor | In progress — Task 1 done, Task 2 blocked (ANTHROPIC_API_KEY) |
 | 9 | Change Detection Pipeline | Not started |
 | 10 | UI Verificacion + Mapa Interactivo | Not started |
 
 ## Decisions
 
+- **[Phase 08-01]:** import anthropic inside build_claude_client() — allows --dry-run without anthropic SDK installed
+- **[Phase 08-01]:** source_id None check uses 'or empty string' pattern — JSON null becomes Python None, .startswith() fails on None
+- **[Phase 08-01]:** IDNORMA_CORRECTIONS dict as defense-in-depth even after fixing afirmaciones.json — bcn-ley-20148 corrected 257742→257080
 - **[Phase 04-01]:** --space-5 set to 1.25rem (4px scale: 5×4=20px=1.25rem); --leading-relaxed set to 1.75 (standard)
 - **[Phase 04-01]:** key-fact__date breakpoint at 400px targets narrowest phones (iPhone SE 375px)
 - **PDF location:** Regional PDFs are in `data/extraction-tests/` (not `data/snapshots/`). Scripts handle both via `--pdf-dir` arg and worktree fallback.
@@ -80,9 +80,10 @@ Last activity: 2026-03-25
 - Extracción visual validada manualmente para las 16 regiones
 - 5 regiones con datos corregidos en `pages.json` (Arica, Tarapacá, Los Lagos, Aysén, Magallanes)
 - Gold standards creados para Metropolitana, Aysén, Maule
-- BCN.cl tiene XML API estable para 6 leyes de feriados — endpoints ya en afirmaciones.json
-- afirmaciones.json tiene 50 claims (version 1.0.0, generado 2026-03-17)
-- v1.2: articulado verbatim solo para feriados (BCN XML); fechas escolares mantienen sistema actual
+- BCN.cl usa nuevo.leychile.cl JSON API (no XML — SPA migration ~2022). Endpoints en afirmaciones.json solo sirven para extraer idNorma
+- afirmaciones.json tiene 50 claims (version 1.0.0, generado 2026-03-17) — idNorma corregido para bcn-ley-20148: 257742→257080
+- v1.2: articulado verbatim solo para feriados (BCN JSON); fechas escolares mantienen sistema actual
+- bcn-extractor.py --dry-run verificado: 4 leyes, 15 claims, articulos extraidos correctamente
 
 ## Performance Metrics
 
@@ -96,6 +97,7 @@ Last activity: 2026-03-25
 | 04 | 01 | 4 min | 3 | 3 |
 | Phase 05 P02 | 2 | 2 tasks | 3 files |
 | Phase 05 P01 | 3 | 2 tasks | 32 files |
+| 08 | 01 | 4 min | 1/2 tasks | 4 files (Task 2 pending ANTHROPIC_API_KEY) |
 
 ---
-*Last updated: 2026-03-25 — v1.2 roadmap created, Phase 8 ready for planning*
+*Last updated: 2026-03-25 — Phase 08-01 Task 1 complete; checkpoint at Task 2 (ANTHROPIC_API_KEY required)*
