@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Activación & Calidad
-status: Defining requirements
+status: Roadmap defined — ready for Phase 5
 stopped_at: —
 last_updated: "2026-03-24T00:00:00.000Z"
 progress:
-  total_phases: 0
+  total_phases: 3
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -19,14 +19,14 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Not started (defining requirements)
+**Current focus:** Phase 5 — Activacion de Produccion
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: 5 — Activacion de Produccion
 Plan: —
-Status: Defining requirements
-Last activity: 2026-03-24 — Milestone v1.1 Activación & Calidad started
+Status: Not started
+Last activity: 2026-03-24 — Roadmap v1.1 defined (phases 5-7)
 
 ## Phase Status (v1.0 — archived)
 
@@ -36,6 +36,14 @@ Last activity: 2026-03-24 — Milestone v1.1 Activación & Calidad started
 | 2 | Datos Completos | completed |
 | 3 | (skipped) | — |
 | 4 | Mobile Responsiveness | completed |
+
+## Phase Status (v1.1 — active)
+
+| # | Phase | Status |
+|---|-------|--------|
+| 5 | Activacion de Produccion | Not started |
+| 6 | Seguridad & Validacion | Not started |
+| 7 | Mapa Interactivo | Not started |
 
 ## Decisions
 
@@ -76,7 +84,7 @@ Last activity: 2026-03-24 — Milestone v1.1 Activación & Calidad started
 ## Session
 
 **Last session:** 2026-03-24T17:28:00.000Z
-**Stopped at:** Completed 04-01-PLAN.md
+**Stopped at:** Roadmap v1.1 defined — phases 5-7 ready for planning
 
 ---
-*Last updated: 2026-03-24 after 04-01 completion*
+*Last updated: 2026-03-24 after v1.1 roadmap definition*
