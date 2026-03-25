@@ -5,14 +5,14 @@ check-bcn-changes.py — Pipeline de deteccion de cambios en articulos legales B
 Compara los hashes SHA256 de los articulos legales en BCN.cl contra los hashes
 almacenados en data/legal-articles.json. Si detecta cambios:
   1. Evalua impacto con DeepSeek API (sin_impacto|requiere_revision|actualizar)
-  2. Crea un GitHub Issue consolidado con diff, evaluacion IA, claims y recomendacion
+  2. Envia notificacion via Telegram con diff, evaluacion IA, claims y recomendacion
 
 Siempre actualiza last_checked en legal-articles.json despues de una corrida exitosa.
 Si BCN esta caido: fallo silencioso (exit 0), sin actualizacion de last_checked.
 
 Uso:
-  python scripts/check-bcn-changes.py              -> corrida completa (requiere DEEPSEEK_API_KEY + GH_TOKEN)
-  python scripts/check-bcn-changes.py --dry-run    -> fetch BCN + comparar hashes, sin DeepSeek ni GitHub Issue
+  python scripts/check-bcn-changes.py              -> corrida completa (requiere DEEPSEEK_API_KEY + TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID)
+  python scripts/check-bcn-changes.py --dry-run    -> fetch BCN + comparar hashes, sin llamar a DeepSeek ni enviar Telegram
 """
 
 import sys
@@ -20,6 +20,7 @@ import os
 import importlib
 import json
 import argparse
+import subprocess
 import urllib.request
 import urllib.error
 from datetime import datetime
@@ -33,7 +34,7 @@ if _scripts_dir not in sys.path:
 bcn = importlib.import_module('bcn-extractor')
 
 # Version del script para trazabilidad
-SCRIPT_VERSION = '1.0.0'
+SCRIPT_VERSION = '2.0.0'
 
 
 def evaluate_impact(client, data_key, claim_text, texto_anterior, texto_nuevo):
@@ -86,116 +87,51 @@ def evaluate_impact(client, data_key, claim_text, texto_anterior, texto_nuevo):
     return 'sin_impacto'
 
 
-def create_github_issue(title, body, labels):
+def send_telegram_notification(changes, evaluations, claims_by_key, total_claims, dry_run=False):
     """
-    Crea un GitHub Issue via GitHub REST API con el token GH_TOKEN del entorno.
+    Envia notificacion de cambios via Telegram llamando a notify-telegram.js.
 
-    Args:
-        title: string con el titulo del Issue
-        body: string con el cuerpo markdown del Issue
-        labels: list de strings con los labels a asignar
-
-    Returns:
-        string con la URL HTML del Issue creado
-
-    Raises:
-        RuntimeError: si GH_TOKEN o GITHUB_REPOSITORY no estan disponibles
-        RuntimeError: si la API de GitHub retorna error HTTP
-    """
-    gh_token = os.environ.get('GH_TOKEN')
-    if not gh_token:
-        raise RuntimeError(
-            'GH_TOKEN no esta configurada. '
-            'Asegurarse de que el Action mapea GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}'
-        )
-
-    repo = os.environ.get('GITHUB_REPOSITORY')
-    if not repo:
-        raise RuntimeError(
-            'GITHUB_REPOSITORY no disponible. '
-            'Esta variable es automatica en GitHub Actions. '
-            'Para pruebas locales: export GITHUB_REPOSITORY=owner/repo'
-        )
-
-    url = 'https://api.github.com/repos/{}/issues'.format(repo)
-    payload = json.dumps({
-        'title': title,
-        'body': body,
-        'labels': labels,
-    }).encode('utf-8')
-
-    req = urllib.request.Request(
-        url,
-        data=payload,
-        method='POST',
-        headers={
-            'Authorization': 'Bearer {}'.format(gh_token),
-            'Accept': 'application/vnd.github+json',
-            'Content-Type': 'application/json',
-            'X-GitHub-Api-Version': '2022-11-28',
-        },
-    )
-
-    try:
-        resp = urllib.request.urlopen(req, timeout=30)
-        result = json.loads(resp.read().decode('utf-8'))
-        return result.get('html_url', '(Issue creado sin URL)')
-    except urllib.error.HTTPError as e:
-        body_text = e.read().decode('utf-8', errors='replace')
-        raise RuntimeError('GitHub API error {}: {}'.format(e.code, body_text))
-
-
-def build_issue_body(changes, evaluations, claims_by_key):
-    """
-    Construye el cuerpo markdown del GitHub Issue con todos los cambios detectados.
-
-    Incluye 4 componentes por cambio:
-      1. Diff (texto anterior vs texto actual en bloques de codigo)
-      2. Evaluacion IA (sin_impacto|requiere_revision|actualizar)
-      3. Claims afectados (data_key + texto del claim)
-      4. Recomendacion basada en el estado de evaluacion
-
-    Args:
-        changes: list de dicts con data_key, texto_antes, texto_despues, new_hash
-        evaluations: dict {data_key: estado} con los resultados de DeepSeek
-        claims_by_key: dict {data_key: claim_obj} del afirmaciones.json
-
-    Returns:
-        string con el cuerpo markdown del Issue
+    Construye el JSON de entrada y lo pasa via stdin a notify-telegram.js.
+    En --dry-run, pasa el flag --dry-run a notify-telegram.js tambien.
     """
     now_iso = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
-    lines = []
-    lines.append('## Cambios detectados en articulos BCN\n\n')
-    lines.append('**Fecha de deteccion:** {}\n'.format(now_iso))
-    lines.append('**Total de cambios:** {}\n'.format(len(changes)))
-
+    payload = {
+        'changes': [],
+        'total_claims_checked': total_claims,
+        'detection_date': now_iso,
+    }
     for ch in changes:
         dk = ch['data_key']
         claim_obj = claims_by_key.get(dk, {})
-        claim_text = claim_obj.get('claim', '(sin claim registrado)')
-        estado = evaluations.get(dk, 'requiere_revision')
+        payload['changes'].append({
+            'data_key': dk,
+            'texto_antes': ch['texto_antes'],
+            'texto_despues': ch['texto_despues'],
+            'evaluacion': evaluations.get(dk, 'requiere_revision'),
+            'claim_text': claim_obj.get('claim', '(sin claim registrado)'),
+        })
 
-        # Mapa de recomendaciones por estado
-        recomendaciones = {
-            'sin_impacto': 'Sin accion requerida. El cambio es formal o tipografico — el claim sigue siendo correcto. Verificar igualmente en el siguiente ciclo.',
-            'requiere_revision': 'Revisar manualmente si el claim sigue siendo correcto. Hay un cambio sustantivo en el texto legal que podria afectar la afirmacion.',
-            'actualizar': 'ACCION REQUERIDA: Actualizar el claim en el sitio. El texto legal ha cambiado sustantivamente y el claim actual es incorrecto.',
-        }
-        recomendacion = recomendaciones.get(estado, 'Revisar manualmente.')
+    # Resolver path a notify-telegram.js relativo al script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    notify_script = os.path.join(script_dir, 'notify-telegram.js')
 
-        lines.append('\n---\n\n')
-        lines.append('### Claim afectado: `{}`\n\n'.format(dk))
-        lines.append('**Afirmacion del sitio:** {}\n\n'.format(claim_text))
-        lines.append('**Evaluacion IA:** `{}`\n\n'.format(estado))
-        lines.append('**Texto anterior:**\n')
-        lines.append('```\n{}\n```\n\n'.format(
-            ch['texto_antes'] or '(sin registro previo)'
-        ))
-        lines.append('**Texto actual (BCN):**\n')
-        lines.append('```\n{}\n```\n\n'.format(ch['texto_despues']))
-        lines.append('**Recomendacion:** {}\n'.format(recomendacion))
+    cmd = ['node', notify_script]
+    if dry_run:
+        cmd.append('--dry-run')
 
-    return ''.join(lines)
+    result = subprocess.run(
+        cmd,
+        input=json.dumps(payload),
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+
+    if result.stdout:
+        print(result.stdout)
+    if result.returncode != 0:
+        print('ERROR notify-telegram.js: {}'.format(result.stderr), file=sys.stderr)
+        raise RuntimeError('notify-telegram.js exited with code {}'.format(result.returncode))
 
 
 def main():
@@ -207,7 +143,7 @@ def main():
       2. Cargar legal-articles.json y afirmaciones.json
       3. Agrupar claims por ley para evitar fetches redundantes (4 leyes, 15 claims)
       4. Para cada ley: fetch BCN + extraer articulos + comparar hashes
-      5. Si hay cambios y no --dry-run: evaluar con DeepSeek + crear GitHub Issue
+      5. Si hay cambios y no --dry-run: evaluar con DeepSeek + enviar notificacion Telegram
       6. Actualizar last_checked en legal-articles.json (solo si BCN disponible)
       7. Escribir legal-articles.json actualizado
     """
@@ -217,7 +153,7 @@ def main():
     parser.add_argument(
         '--dry-run',
         action='store_true',
-        help='Fetch BCN y comparar hashes pero sin llamar a DeepSeek ni crear GitHub Issues',
+        help='Fetch BCN y comparar hashes pero sin llamar a DeepSeek ni enviar Telegram',
     )
     args = parser.parse_args()
 
@@ -260,7 +196,7 @@ def main():
     ))
 
     if args.dry_run:
-        print('(--dry-run: no DeepSeek API, no GitHub Issue creation)')
+        print('(--dry-run: no DeepSeek API, no Telegram notification)')
 
     changes = []
     bcn_error = False
@@ -359,19 +295,14 @@ def main():
             evaluations[dk] = estado
             print('  {} -> {}'.format(dk, estado))
 
-        # Construir Issue consolidado
-        n_changes = len(changes)
-        title = 'Cambio detectado en articulado BCN ({} claim(s))'.format(n_changes)
-        body = build_issue_body(changes, evaluations, claims_by_key)
-        labels = ['bcn-change', 'legal-review']
-
+        # Enviar notificacion via Telegram
         print()
-        print('Creating GitHub Issue...')
+        print('Sending Telegram notification...')
         try:
-            issue_url = create_github_issue(title, body, labels)
-            print('Issue created: {}'.format(issue_url))
+            send_telegram_notification(changes, evaluations, claims_by_key, total_claims)
+            print('Telegram notification sent successfully.')
         except RuntimeError as e:
-            print('ERROR creating GitHub Issue: {}'.format(e), file=sys.stderr)
+            print('ERROR sending Telegram notification: {}'.format(e), file=sys.stderr)
             # Continuar — actualizar last_checked igualmente
 
         # Actualizar legal_articles con los cambios detectados
@@ -385,9 +316,13 @@ def main():
 
     elif changes and args.dry_run:
         print()
-        print('--dry-run: {} change(s) detected (no DeepSeek, no Issue created):'.format(len(changes)))
-        for ch in changes:
-            print('  - {} (stored hash differs from BCN current)'.format(ch['data_key']))
+        print('--dry-run: {} change(s) detected. Telegram message preview:'.format(len(changes)))
+        # Build minimal evaluations dict for dry-run preview
+        evaluations = {ch['data_key']: 'requiere_revision' for ch in changes}
+        try:
+            send_telegram_notification(changes, evaluations, claims_by_key, total_claims, dry_run=True)
+        except RuntimeError as e:
+            print('WARNING: notify-telegram.js dry-run failed: {}'.format(e), file=sys.stderr)
 
     else:
         print()
