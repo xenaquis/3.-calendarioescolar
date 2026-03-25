@@ -54,27 +54,27 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| JSON-01 | — | Pending |
-| JSON-02 | — | Pending |
-| JSON-03 | — | Pending |
-| JSON-04 | — | Pending |
-| SHEET-01 | — | Pending |
-| SHEET-02 | — | Pending |
-| SHEET-03 | — | Pending |
-| SHEET-04 | — | Pending |
-| SYNC-01 | — | Pending |
-| SYNC-02 | — | Pending |
-| SYNC-03 | — | Pending |
-| SYNC-04 | — | Pending |
-| NOTIF-01 | — | Pending |
-| NOTIF-02 | — | Pending |
-| NOTIF-03 | — | Pending |
+| JSON-01 | Phase 11 | Pending |
+| JSON-02 | Phase 11 | Pending |
+| JSON-03 | Phase 11 | Pending |
+| JSON-04 | Phase 11 | Pending |
+| SHEET-01 | Phase 12 | Pending |
+| SHEET-02 | Phase 12 | Pending |
+| SHEET-03 | Phase 12 | Pending |
+| SHEET-04 | Phase 12 | Pending |
+| SYNC-01 | Phase 13 | Pending |
+| SYNC-02 | Phase 13 | Pending |
+| SYNC-03 | Phase 13 | Pending |
+| SYNC-04 | Phase 13 | Pending |
+| NOTIF-01 | Phase 14 | Pending |
+| NOTIF-02 | Phase 14 | Pending |
+| NOTIF-03 | Phase 14 | Pending |
 
 **Coverage:**
 - v1.3 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15
+- Mapped to phases: 15
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-25*
-*Last updated: 2026-03-25 after initial definition*
+*Last updated: 2026-03-25 — traceability complete after roadmap creation*

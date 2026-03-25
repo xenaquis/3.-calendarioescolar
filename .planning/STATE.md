@@ -1,28 +1,28 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.2
-milestone_name: Validacion Legal + Mapa Interactivo
-status: v1.2 milestone complete
-last_updated: "2026-03-25T05:22:12.966Z"
+milestone: v1.3
+milestone_name: Sheet como Fuente de Verdad Unica
+status: roadmap created — awaiting phase planning
+last_updated: "2026-03-25"
 progress:
-  total_phases: 3
-  completed_phases: 3
-  total_plans: 3
-  completed_plans: 3
+  total_phases: 4
+  completed_phases: 0
+  total_plans: 0
+  completed_plans: 0
 ---
 
-# State — calendarioescolar.cl v1.2
+# State — calendarioescolar.cl v1.3
 
 ## Project Reference
 
 See: .planning/PROJECT.md (updated 2026-03-25)
 
-**Core value:** Información 100% fidedigna extraída de resoluciones oficiales, verificable visualmente
-**Current focus:** Phase 10 — ui-verificacion-mapa
+**Core value:** Informacion 100% fidedigna extraida de resoluciones oficiales, verificable visualmente, con el Google Sheet como fuente de verdad unica y auditable
+**Current focus:** Phase 11 — modelo-datos-unificado
 
 ## Current Position
 
-Phase: 10
+Phase: 11
 Plan: Not started
 
 ## Phase Status (v1.0 — archived)
@@ -42,13 +42,22 @@ Plan: Not started
 | 6 | Seguridad & Validacion | superseded by v1.2 |
 | 7 | Mapa Interactivo | consolidated into Phase 10 |
 
-## Phase Status (v1.2 — active)
+## Phase Status (v1.2 — archived)
 
 | # | Phase | Status |
 |---|-------|--------|
 | 8 | BCN Legal Extractor | completed (2026-03-25) |
 | 9 | Change Detection Pipeline | completed (2026-03-25) |
-| 10 | UI Verificacion + Mapa Interactivo | Not started |
+| 10 | UI Verificacion + Mapa Interactivo | completed (2026-03-25) |
+
+## Phase Status (v1.3 — active)
+
+| # | Phase | Status |
+|---|-------|--------|
+| 11 | Modelo de Datos Unificado | Not started |
+| 12 | Sheet Write | Not started |
+| 13 | Sync Sheet → Pagina | Not started |
+| 14 | Notificaciones Telegram | Not started |
 
 ## Decisions
 
@@ -81,6 +90,9 @@ Plan: Not started
 - [Phase 10]: CSS-only tooltip via :hover + :focus-within — zero JavaScript, works on all devices
 - [Phase 10]: tabindex=0 on .bcn-badge-wrap enables keyboard/tap focus for mobile accessibility (VERI-02)
 - [Phase 10]: Bot Fight Mode documented but not activated — requires human action in Cloudflare dashboard
+- **[v1.3 roadmap]:** Phase 11 (JSON unification) must precede all others — claims.json is the data model everything depends on
+- **[v1.3 roadmap]:** Phase 14 (Telegram) placed last — depends on pipeline context from Phase 13 but can be developed somewhat independently once sync flow is in place
+- **[v1.3 roadmap]:** afirmaciones.json (~50 claims) + legal-articles.json (15 claims) merge into claims.json — 65 total claims with enriched structure
 
 ## Accumulated Context
 
@@ -94,6 +106,8 @@ Plan: Not started
 - bcn-extractor.py --dry-run verificado: 4 leyes, 15 claims, articulos extraidos correctamente
 - check-bcn-changes.py --dry-run verificado: 4 leyes, 15 claims, 0 cambios detectados (hashes coinciden con BCN actual al 2026-03-25)
 - GitHub labels bcn-change y legal-review deben crearse manualmente antes de la primera ejecucion del Action
+- v1.3: Google Sheet ya tiene pestanas Regiones y Config — nueva pestana "Datos" consolida todo
+- v1.3: Tooltip text actualmente hardcodeado en HTML (tech debt INT-01) — Phase 13 lo elimina via claims.json generado desde Sheet
 
 ## Performance Metrics
 
@@ -109,7 +123,7 @@ Plan: Not started
 | Phase 05 P01 | 3 | 2 tasks | 32 files |
 | 08 | 01 | 4 min | 1/2 tasks | 4 files (Task 2 pending ANTHROPIC_API_KEY) |
 | 09 | 01 | 3 min | 2 | 4 |
+| Phase 10 P01 | 2 | 2 tasks | 3 files |
 
 ---
-*Last updated: 2026-03-25 — Phase 09-01 complete; check-bcn-changes.py + GitHub Action workflow created*
-| Phase 10 P01 | 2 | 2 tasks | 3 files |
+*Last updated: 2026-03-25 — v1.3 roadmap created: 4 phases (11-14), 15 requirements, Sheet como fuente de verdad unica*
