@@ -87,7 +87,11 @@ Plans:
   2. `npm run generate` usa datos de claims.json para inyectar tooltips y contenido factual — no existe ningun dato hardcodeado en HTML
   3. El GitHub Action con cron diario ejecuta sync → generate → validate → deploy sin intervencion manual
   4. Editar un valor en la pestana "Datos" del Sheet, esperar el cron, y verificar que la pagina publicada refleja el cambio
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 13-01-PLAN.md — Rewrite sync-from-sheet.js for Datos tab + update GitHub Action to daily cron
+- [ ] 13-02-PLAN.md — Claims data injection in generate-pages.js + dynamic tooltips + E2E verification
 
 ### Phase 14: Notificaciones Telegram
 **Goal**: El desarrollador recibe notificaciones de cambios BCN en Telegram con contexto suficiente para actuar sin revisar codigo
@@ -111,9 +115,9 @@ Plans:
 | 9. Change Detection Pipeline | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 10. UI Verificacion + Mapa Interactivo | v1.2 | 1/1 | Complete | 2026-03-25 |
 | 11. Modelo de Datos Unificado | v1.3 | 2/2 | Complete    | 2026-03-25 |
-| 12. Sheet Write | v1.3 | 1/1 | Complete   | 2026-03-25 |
-| 13. Sync Sheet → Pagina | v1.3 | 0/? | Not started | - |
+| 12. Sheet Write | v1.3 | 1/1 | Complete    | 2026-03-25 |
+| 13. Sync Sheet → Pagina | v1.3 | 0/2 | Not started | - |
 | 14. Notificaciones Telegram | v1.3 | 0/? | Not started | - |
 
 ---
-*Updated: 2026-03-25 — Phase 12 planned: 1 plan, 1 wave*
+*Updated: 2026-03-25 — Phase 13 planned: 2 plans, 2 waves*
