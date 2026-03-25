@@ -2,8 +2,8 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Validacion Legal + Mapa Interactivo
-status: Milestone complete
-last_updated: "2026-03-25T05:12:31.645Z"
+status: v1.2 milestone complete
+last_updated: "2026-03-25T05:22:12.966Z"
 progress:
   total_phases: 3
   completed_phases: 3
