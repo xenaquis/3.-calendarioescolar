@@ -21,6 +21,10 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 - ✓ PNGs de tablas preservados como evidencia visual publica — v1.0
 - ✓ Verificacion determinista de extraccion (formato fecha, dia semana, ano, cross-region) — v1.0
 - ✓ Datos completos por region: cierre actas 4 Medio, fin JEC/sin JEC/EPJA, dia del profesor, inicio 2do semestre — v1.0
+- ✓ GA4 real configurado (G-6FVLKF6PFQ activo en todas las páginas) — v1.1
+- ✓ og-image.png 1200×630px referenciada en todas las páginas — v1.1
+- ✓ Landing feriados-2027.html creada y enlazada desde footer — v1.1
+- ✓ Guía Search Console + GA4 connection documentada en BLUEPRINT.md — v1.1
 
 ### Active
 
@@ -55,10 +59,11 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 ## Context
 
 - **v1.0 shipped (2026-03-24):** Pipeline visual completo + datos extendidos en 16 regiones
+- **v1.1 shipped (2026-03-25):** GA4 activado + feriados-2027.html + guía Search Console
 - **4 grupos de fechas regionales:** ESTANDAR (11 regiones), NORTE (Arica, Tarapaca), SUR (Aysen, Magallanes), SUR-PARCIAL (Los Lagos)
 - **Tech stack:** Vanilla HTML/CSS/JS, Cloudflare Pages. Scripts: PyMuPDF (PNG), Node.js CommonJS (extraction, validation, generation)
 - **Pipeline:** pdf-to-png.py → organize-snapshots.js → extract-visual.js → validate-extraction.js → populate-pages-json.js → generate-pages.js
-- **Pending human verification:** collapsible section browser behavior, API-mode extraction, pdf-to-png.py --all
+- **Pending human actions:** Search Console verification, GA4↔Search Console connection (guía en BLUEPRINT.md)
 
 ## Constraints
 
@@ -76,10 +81,13 @@ Informacion 100% fidedigna extraida de las resoluciones oficiales de cada region
 | Preservar PNGs como evidencia | Transparencia: 25 PNGs canonicos en data/snapshots/ con manifest | ✓ Implementado v1.0 |
 | Datos completos en seccion colapsable | No prominente: `<details>` cerrado por defecto, 5 campos adicionales | ✓ Implementado v1.0 |
 | Datos del pipeline, no hardcodeados | DATA-04: populate-pages-json.js lee visual-extraction.json, no valores manuales | ✓ Implementado v1.0 |
+| GA4 ID en analytics.js con guard | Guard `indexOf('XXXX')` evita carga accidental con placeholder — real ID en config.json | ✓ v1.1 |
+| feriados-2027.html sin claim-data | Página anticipatoria sin datos reales — no tiene meta claim-data para evitar falsos positivos en validación | ✓ v1.1 |
+| Phase 6 (Seguridad) descartada | Scope evolucionó a verificación legal BCN.cl en v1.2 — enfoque más preciso que "validación genérica" | ✓ v1.1 → v1.2 |
 
 ## Evolution
 
 This document evolves at phase transitions and milestone boundaries.
 
 ---
-*Last updated: 2026-03-24 after v1.2 Validación Legal + Mapa Interactivo milestone start*
+*Last updated: 2026-03-25 after v1.1 Activacion & Calidad milestone archived*

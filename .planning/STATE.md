@@ -1,15 +1,15 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.2
-milestone_name: Validacion Legal + Mapa Interactivo
+milestone: v1.1
+milestone_name: Activacion & Calidad
 status: Defining requirements
-stopped_at: ""
-last_updated: "2026-03-24T00:00:00.000Z"
+last_updated: "2026-03-25T02:58:26.924Z"
+last_activity: 2026-03-25
 progress:
-  total_phases: 0
-  completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
+  total_phases: 3
+  completed_phases: 1
+  total_plans: 2
+  completed_plans: 2
 ---
 
 # State — calendarioescolar.cl v1.2
@@ -26,7 +26,7 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 Phase: Not started (defining requirements)
 Plan: —
 Status: Defining requirements
-Last activity: 2026-03-24 — Milestone v1.2 started
+Last activity: 2026-03-25
 
 ## Phase Status (v1.0 — archived)
 

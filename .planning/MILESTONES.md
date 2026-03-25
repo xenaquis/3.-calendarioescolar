@@ -1,5 +1,15 @@
 # Milestones
 
+## v1.1 Activacion & Calidad (Shipped: 2026-03-25)
+
+**Phases completed:** 1 phases, 2 plans, 3 tasks
+
+**Key accomplishments:**
+
+- (none recorded)
+
+---
+
 ## v1.0 Extraccion Fidedigna + Datos Completos (Shipped: 2026-03-24)
 
 **Phases completed:** 2 phases, 5 plans, 3 tasks
