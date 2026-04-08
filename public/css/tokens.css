@@ -4,6 +4,8 @@
    ============================================ */
 
 :root {
+  color-scheme: light dark;
+
   /* Brand — Educaci\u00f3n */
   --color-primary: #7c3aed;
   --color-primary-light: #ede9fe;
