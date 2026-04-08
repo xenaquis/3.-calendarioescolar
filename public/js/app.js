@@ -45,28 +45,55 @@ var App = (function () {
     }
   }
 
-  // Selector de región por mapa — enlaza clicks en .region-bar[data-slug]
+  // Selector de región — soporta SVG (.svgregion) y botones (.region-bar)
   function initMapSelector() {
+    var svgRegions = document.querySelectorAll('.svgregion[data-slug]');
     var bars = document.querySelectorAll('.region-bar[data-slug]');
-    if (!bars.length) return;
+    var selectables = svgRegions.length ? svgRegions : bars;
 
-    for (var i = 0; i < bars.length; i++) {
+    if (!selectables.length) return;
+
+    // SVG regions: click + teclado
+    for (var i = 0; i < svgRegions.length; i++) {
+      (function (el) {
+        el.addEventListener('click', function () {
+          selectRegion(el.dataset.slug, svgRegions);
+          var sel = document.getElementById('region-select');
+          if (sel) sel.value = el.dataset.slug;
+        });
+        el.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            selectRegion(el.dataset.slug, svgRegions);
+          }
+        });
+      })(svgRegions[i]);
+    }
+
+    // Botones de barra (fallback)
+    for (var j = 0; j < bars.length; j++) {
       (function (bar) {
         bar.addEventListener('click', function () {
           selectRegion(bar.dataset.slug, bars);
-          // Sync mobile dropdown
           var sel = document.getElementById('region-select');
           if (sel) sel.value = bar.dataset.slug;
         });
-      })(bars[i]);
+      })(bars[j]);
     }
 
     // Mobile dropdown
     var mobileSelect = document.getElementById('region-select');
     if (mobileSelect) {
       mobileSelect.addEventListener('change', function () {
-        selectRegion(mobileSelect.value, bars);
+        selectRegion(mobileSelect.value, selectables);
       });
+    }
+
+    // Auto-seleccionar Metropolitana al cargar
+    if (REGIONS['metropolitana']) {
+      selectRegion('metropolitana', selectables);
+      var initSel = document.getElementById('region-select');
+      if (initSel) initSel.value = 'metropolitana';
     }
   }
 
@@ -82,8 +109,8 @@ var App = (function () {
         bars[i].setAttribute('aria-selected', 'false');
       }
     }
-    // Activar la barra seleccionada
-    var activeBar = document.querySelector('.region-bar[data-slug="' + slug + '"]');
+    // Activar el elemento seleccionado (SVG o barra)
+    var activeBar = document.querySelector('.svgregion[data-slug="' + slug + '"], .region-bar[data-slug="' + slug + '"]');
     if (activeBar) {
       activeBar.classList.add('active');
       activeBar.setAttribute('aria-selected', 'true');

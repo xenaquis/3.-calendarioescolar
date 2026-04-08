@@ -177,7 +177,7 @@
       </div>
 
       <!-- Stats en tiempo real (lo que Google/IA no responde) -->
-      <div class="school-stats" aria-label="Estado actual del a&ntilde;o escolar">
+      <div class="school-stats" data-verificacion="stats" aria-label="Estado actual del a&ntilde;o escolar">
         <div class="stat-item">
           <p class="stat-label">Estamos en</p>
           <p class="stat-value" id="school-week">Semana&nbsp;3</p>
@@ -240,27 +240,74 @@
         </div>
 
         <div class="map-layout">
-          <!-- Lista de regiones (hidden on mobile) -->
-          <div class="map-panel" role="listbox" aria-label="Regiones de Chile">
-            <p class="map-panel__title">Regiones de Chile</p>
-            <div class="chile-map">
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="NORTE" data-slug="arica-y-parinacota"><span class="region-bar__dot"></span> Arica y Parinacota</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="NORTE" data-slug="tarapaca"><span class="region-bar__dot"></span> Tarapac&aacute;</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="antofagasta"><span class="region-bar__dot"></span> Antofagasta</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="atacama"><span class="region-bar__dot"></span> Atacama</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="coquimbo"><span class="region-bar__dot"></span> Coquimbo</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="valparaiso"><span class="region-bar__dot"></span> Valpara&iacute;so</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="metropolitana"><span class="region-bar__dot"></span> Metropolitana</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="ohiggins"><span class="region-bar__dot"></span> O&rsquo;Higgins</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="maule"><span class="region-bar__dot"></span> Maule</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="nuble"><span class="region-bar__dot"></span> &Ntilde;uble</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="biobio"><span class="region-bar__dot"></span> Biob&iacute;o</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="araucania"><span class="region-bar__dot"></span> La Araucan&iacute;a</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-slug="los-rios"><span class="region-bar__dot"></span> Los R&iacute;os</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="SUR-PARCIAL" data-slug="los-lagos"><span class="region-bar__dot"></span> Los Lagos</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="SUR" data-slug="aysen"><span class="region-bar__dot"></span> Ays&eacute;n</button>
-              <button type="button" class="region-bar" role="option" aria-selected="false" data-grupo="SUR" data-slug="magallanes"><span class="region-bar__dot"></span> Magallanes</button>
-            </div>
+          <!-- Mapa esquemático de Chile — clickeable (oculto en móvil) -->
+          <div class="map-panel">
+            <svg class="chile-svg" viewBox="0 0 180 369" role="listbox" aria-label="Mapa de regiones de Chile — selecciona tu región">
+              <g class="svgregion" data-slug="arica-y-parinacota" data-grupo="NORTE" role="option" tabindex="0" aria-selected="false" aria-label="Arica y Parinacota">
+                <rect x="48" y="1" width="84" height="22" rx="2"/>
+                <text x="90" y="12" text-anchor="middle" dominant-baseline="central">Arica y Parinacota</text>
+              </g>
+              <g class="svgregion" data-slug="tarapaca" data-grupo="NORTE" role="option" tabindex="0" aria-selected="false" aria-label="Tarapacá">
+                <rect x="42" y="24" width="96" height="22" rx="2"/>
+                <text x="90" y="35" text-anchor="middle" dominant-baseline="central">Tarapac&aacute;</text>
+              </g>
+              <g class="svgregion" data-slug="antofagasta" role="option" tabindex="0" aria-selected="false" aria-label="Antofagasta">
+                <rect x="32" y="47" width="116" height="22" rx="2"/>
+                <text x="90" y="58" text-anchor="middle" dominant-baseline="central">Antofagasta</text>
+              </g>
+              <g class="svgregion" data-slug="atacama" role="option" tabindex="0" aria-selected="false" aria-label="Atacama">
+                <rect x="26" y="70" width="128" height="22" rx="2"/>
+                <text x="90" y="81" text-anchor="middle" dominant-baseline="central">Atacama</text>
+              </g>
+              <g class="svgregion" data-slug="coquimbo" role="option" tabindex="0" aria-selected="false" aria-label="Coquimbo">
+                <rect x="18" y="93" width="144" height="22" rx="2"/>
+                <text x="90" y="104" text-anchor="middle" dominant-baseline="central">Coquimbo</text>
+              </g>
+              <g class="svgregion" data-slug="valparaiso" role="option" tabindex="0" aria-selected="false" aria-label="Valparaíso">
+                <rect x="14" y="116" width="152" height="22" rx="2"/>
+                <text x="90" y="127" text-anchor="middle" dominant-baseline="central">Valpara&iacute;so</text>
+              </g>
+              <g class="svgregion" data-slug="metropolitana" role="option" tabindex="0" aria-selected="false" aria-label="Región Metropolitana">
+                <rect x="10" y="139" width="160" height="22" rx="2"/>
+                <text x="90" y="150" text-anchor="middle" dominant-baseline="central">Metropolitana</text>
+              </g>
+              <g class="svgregion" data-slug="ohiggins" role="option" tabindex="0" aria-selected="false" aria-label="O'Higgins">
+                <rect x="10" y="162" width="160" height="22" rx="2"/>
+                <text x="90" y="173" text-anchor="middle" dominant-baseline="central">O&rsquo;Higgins</text>
+              </g>
+              <g class="svgregion" data-slug="maule" role="option" tabindex="0" aria-selected="false" aria-label="Maule">
+                <rect x="10" y="185" width="160" height="22" rx="2"/>
+                <text x="90" y="196" text-anchor="middle" dominant-baseline="central">Maule</text>
+              </g>
+              <g class="svgregion" data-slug="nuble" role="option" tabindex="0" aria-selected="false" aria-label="Ñuble">
+                <rect x="12" y="208" width="156" height="22" rx="2"/>
+                <text x="90" y="219" text-anchor="middle" dominant-baseline="central">&Ntilde;uble</text>
+              </g>
+              <g class="svgregion" data-slug="biobio" role="option" tabindex="0" aria-selected="false" aria-label="Biobío">
+                <rect x="10" y="231" width="160" height="22" rx="2"/>
+                <text x="90" y="242" text-anchor="middle" dominant-baseline="central">Biob&iacute;o</text>
+              </g>
+              <g class="svgregion" data-slug="araucania" role="option" tabindex="0" aria-selected="false" aria-label="La Araucanía">
+                <rect x="12" y="254" width="156" height="22" rx="2"/>
+                <text x="90" y="265" text-anchor="middle" dominant-baseline="central">La Araucan&iacute;a</text>
+              </g>
+              <g class="svgregion" data-slug="los-rios" role="option" tabindex="0" aria-selected="false" aria-label="Los Ríos">
+                <rect x="18" y="277" width="144" height="22" rx="2"/>
+                <text x="90" y="288" text-anchor="middle" dominant-baseline="central">Los R&iacute;os</text>
+              </g>
+              <g class="svgregion" data-slug="los-lagos" data-grupo="SUR-PARCIAL" role="option" tabindex="0" aria-selected="false" aria-label="Los Lagos">
+                <rect x="12" y="300" width="156" height="22" rx="2"/>
+                <text x="90" y="311" text-anchor="middle" dominant-baseline="central">Los Lagos</text>
+              </g>
+              <g class="svgregion" data-slug="aysen" data-grupo="SUR" role="option" tabindex="0" aria-selected="false" aria-label="Aysén">
+                <rect x="8" y="323" width="164" height="22" rx="2"/>
+                <text x="90" y="334" text-anchor="middle" dominant-baseline="central">Ays&eacute;n</text>
+              </g>
+              <g class="svgregion" data-slug="magallanes" data-grupo="SUR" role="option" tabindex="0" aria-selected="false" aria-label="Magallanes">
+                <rect x="2" y="346" width="176" height="22" rx="2"/>
+                <text x="90" y="357" text-anchor="middle" dominant-baseline="central">Magallanes</text>
+              </g>
+            </svg>
           </div>
 
           <!-- Panel de datos -->

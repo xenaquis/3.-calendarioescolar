@@ -856,3 +856,85 @@ details h3 {
 [data-theme="dark"] .region-bar:hover {
   background: var(--color-surface-alt);
 }
+
+/* ============================================
+   Chile SVG Map — mapa esquemático clickeable
+   ============================================ */
+
+.chile-svg {
+  width: 100%;
+  display: block;
+}
+
+.svgregion {
+  cursor: pointer;
+  outline: none;
+}
+
+.svgregion rect {
+  fill: #ede9fe;
+  stroke: #c4b5fd;
+  stroke-width: 0.5;
+  transition: fill var(--transition-fast), stroke var(--transition-fast);
+}
+
+.svgregion text {
+  font-family: var(--font-sans);
+  font-size: 7px;
+  fill: #1e1b18;
+  pointer-events: none;
+  user-select: none;
+}
+
+.svgregion:hover rect,
+.svgregion:focus-visible rect {
+  fill: #c4b5fd;
+  stroke: #7c3aed;
+}
+
+.svgregion.active rect {
+  fill: #7c3aed;
+  stroke: #5b21b6;
+}
+
+.svgregion.active text {
+  fill: #ffffff;
+  font-weight: 600;
+}
+
+/* Colores por grupo de calendario */
+.svgregion[data-grupo="NORTE"] rect { fill: #fef3c7; stroke: #fcd34d; }
+.svgregion[data-grupo="NORTE"]:hover rect,
+.svgregion[data-grupo="NORTE"]:focus-visible rect { fill: #fde68a; stroke: #d97706; }
+.svgregion[data-grupo="NORTE"].active rect { fill: #d97706; stroke: #b45309; }
+.svgregion[data-grupo="NORTE"].active text { fill: #fff; }
+
+.svgregion[data-grupo="SUR-PARCIAL"] rect { fill: #dcfce7; stroke: #86efac; }
+.svgregion[data-grupo="SUR-PARCIAL"]:hover rect,
+.svgregion[data-grupo="SUR-PARCIAL"]:focus-visible rect { fill: #bbf7d0; stroke: #16a34a; }
+.svgregion[data-grupo="SUR-PARCIAL"].active rect { fill: #16a34a; stroke: #15803d; }
+.svgregion[data-grupo="SUR-PARCIAL"].active text { fill: #fff; }
+
+.svgregion[data-grupo="SUR"] rect { fill: #dbeafe; stroke: #93c5fd; }
+.svgregion[data-grupo="SUR"]:hover rect,
+.svgregion[data-grupo="SUR"]:focus-visible rect { fill: #bfdbfe; stroke: #2563eb; }
+.svgregion[data-grupo="SUR"].active rect { fill: #2563eb; stroke: #1d4ed8; }
+.svgregion[data-grupo="SUR"].active text { fill: #fff; }
+
+/* Dark mode — SVG map */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .svgregion rect { fill: #3b1f6e; stroke: #6d28d9; }
+  :root:not([data-theme="light"]) .svgregion text { fill: #e4e4e7; }
+  :root:not([data-theme="light"]) .svgregion:hover rect,
+  :root:not([data-theme="light"]) .svgregion:focus-visible rect { fill: #4c1d95; stroke: #7c3aed; }
+  :root:not([data-theme="light"]) .svgregion[data-grupo="NORTE"] rect { fill: #451a03; stroke: #92400e; }
+  :root:not([data-theme="light"]) .svgregion[data-grupo="SUR"] rect { fill: #1e3a5f; stroke: #1d4ed8; }
+  :root:not([data-theme="light"]) .svgregion[data-grupo="SUR-PARCIAL"] rect { fill: #052e16; stroke: #15803d; }
+}
+[data-theme="dark"] .svgregion rect { fill: #3b1f6e; stroke: #6d28d9; }
+[data-theme="dark"] .svgregion text { fill: #e4e4e7; }
+[data-theme="dark"] .svgregion:hover rect,
+[data-theme="dark"] .svgregion:focus-visible rect { fill: #4c1d95; stroke: #7c3aed; }
+[data-theme="dark"] .svgregion[data-grupo="NORTE"] rect { fill: #451a03; stroke: #92400e; }
+[data-theme="dark"] .svgregion[data-grupo="SUR"] rect { fill: #1e3a5f; stroke: #1d4ed8; }
+[data-theme="dark"] .svgregion[data-grupo="SUR-PARCIAL"] rect { fill: #052e16; stroke: #15803d; }

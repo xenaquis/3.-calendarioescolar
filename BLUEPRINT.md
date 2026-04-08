@@ -29,6 +29,7 @@ Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, 
 | RAG Pipeline          | OPERATIVO       | extract-from-pdf.js v3 (catalog-first) + OCR. Cron: 15 may + 31 dic. 11/16 regiones OK |
 | Badges Honestos       | IMPLEMENTADO    | 5 estados: verde/rojo/ámbar/gris/amarillo. Info no verificada se flaggea visiblemente |
 | BCN Legal Extractor   | OPERATIVO       | scripts/bcn-extractor.py — 15 claims con articulado verbatim en data/legal-articles.json (DeepSeek API). SHA256 hashes verificados. |
+| GLM-OCR Local         | OPERATIVO       | scripts/glm-ocr-local.py — OCR local (Ollama). 108/112 campos = visual pipeline. Para dev/testing + cross-check. NO reemplaza CI. |
 
 ---
 
@@ -83,6 +84,7 @@ Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, 
 │   ├── extract-from-pdf.js         -> RAG pipeline v3: extrae datos de PDFs Mineduc (DeepSeek + OCR)
 │   ├── sync-from-sheet.js          -> Lee Google Sheet via REST API → actualiza pages.json + calendar-config.json
 │   ├── bcn-extractor.py            -> Extrae articulos legales BCN.cl (4 leyes) → data/legal-articles.json con SHA256 + DeepSeek ID
+│   ├── glm-ocr-local.py            -> OCR local (Ollama + GLM-OCR): extraccion sin API keys + cross-check vs pipeline visual
 │   └── build.sh                    -> Corre validate.js + verificaciones + cuenta archivos
 │
 ├── .github/
@@ -266,6 +268,21 @@ scripts/generate-pages.js
       v
 Cloudflare Pages (deploy)
 ```
+
+### Herramienta local: GLM-OCR (no CI, solo dev/testing)
+
+```
+python scripts/glm-ocr-local.py                       # extract: 16 regiones via Ollama
+python scripts/glm-ocr-local.py --region=aysen         # solo una region
+python scripts/glm-ocr-local.py --crosscheck           # comparar OCR vs visual-extraction.json
+python scripts/glm-ocr-local.py --dry-run              # ver que se procesaria
+```
+
+- Requiere: Ollama corriendo + modelo glm-ocr (`ollama pull glm-ocr`, 2.2GB)
+- Salida extract: `data/glm-ocr-extraction.json` (validable con `node scripts/validate-extraction.js --input=data/glm-ocr-extraction.json`)
+- Salida crosscheck: `data/glm-ocr-crosscheck.json` (discrepancias OCR vs LLM)
+- Precision: 108/112 campos = pipeline visual (4 gaps por cobertura de snapshots, 0 discrepancias)
+- NO reemplaza extract-visual.js en CI — Ollama no corre en GitHub Actions
 
 **Regla**: editar datos SOLO en el Google Sheet (o en `data/pages.json` + `data/calendar-config.json` si se prefiere manual).
 Las páginas en `public/region/` y `public/js/` son artefactos generados — nunca editar a mano.

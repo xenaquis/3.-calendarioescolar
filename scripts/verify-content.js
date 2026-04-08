@@ -870,6 +870,13 @@ function getCachedResult(claim) {
   }
   if (!prev) return null;
 
+  // TTL: resultados CORRECTO expiran despues de 30 dias para garantizar re-verificacion periodica
+  var CACHE_TTL_DAYS = 30;
+  if (prev.verified_at) {
+    var ageDays = (Date.now() - new Date(prev.verified_at).getTime()) / 86400000;
+    if (ageDays > CACHE_TTL_DAYS) return null;
+  }
+
   // Solo cachear CORRECTO (los demas merecen re-verificacion)
   if (prev.verdict !== 'CORRECTO') return null;
 
@@ -1142,6 +1149,23 @@ function finalize(results) {
 
   fs.writeFileSync(RESULTS_PATH, JSON.stringify(output, null, 2));
   console.log('\nGenerado data/verification-results.json');
+
+  // Sincronizar campo status en afirmaciones.json con resultados de verificacion
+  var syncById = {};
+  results.forEach(function (r) { syncById[r.id] = r; });
+  var statusChanged = false;
+  afirmaciones.claims.forEach(function (claim) {
+    var r = syncById[claim.id];
+    var newStatus = r ? r.verdict.toLowerCase() : 'unverified';
+    if (claim.status !== newStatus) {
+      claim.status = newStatus;
+      statusChanged = true;
+    }
+  });
+  if (statusChanged) {
+    fs.writeFileSync(AFIRMACIONES_PATH, JSON.stringify(afirmaciones, null, 2));
+    console.log('  \u2192 Sincronizados estados en data/afirmaciones.json');
+  }
 
   // Reporte
   console.log('\n=== Resultado ===');

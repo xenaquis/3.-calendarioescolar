@@ -206,6 +206,13 @@ function main() {
               contentToHash = extractStableContent(response.body);
             }
 
+            // Tier 1 (XML BCN): extraer solo texto sin tags para hash estable
+            // Evita que timestamps o metadata dinamica en el XML causen falsos positivos
+            // y que distintas leyes con envolturas similares produzcan el mismo hash
+            if (source.type === 'xml') {
+              contentToHash = extractTextFromXml(response.body);
+            }
+
             result.content_hash = sha256(contentToHash);
 
             // Comparar con hash anterior
