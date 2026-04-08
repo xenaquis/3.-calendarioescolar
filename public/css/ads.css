@@ -7,25 +7,31 @@
   width: 100%;
   overflow: hidden;
   text-align: center;
-  background: var(--color-surface-alt);
+  background: transparent;
   border-radius: var(--radius);
-  margin: var(--space-6) 0;
   contain: layout style;
+  /* Por defecto: colapsado — sin anuncio activo no ocupa espacio */
+  min-height: 0;
+  margin: 0;
 }
 
-/* Banner horizontal (top) */
-.ad-slot--banner {
+/* Solo reservar espacio cuando hay un iframe real (ad cargado) */
+.ad-slot:has(iframe) {
+  background: var(--color-surface-alt);
+  margin: var(--space-6) 0;
+}
+
+.ad-slot--banner:has(iframe) {
   min-height: var(--ad-height-banner);
 }
 
-/* Rectángulo (mid/bottom) */
-.ad-slot--rect {
+.ad-slot--rect:has(iframe) {
   min-height: var(--ad-height-rect);
 }
 
 /* Mobile: banner más pequeño */
 @media (max-width: 640px) {
-  .ad-slot--banner {
+  .ad-slot--banner:has(iframe) {
     min-height: var(--ad-height-banner-mobile);
   }
 }
@@ -33,12 +39,6 @@
 /* Ocultar en print */
 @media print {
   .ad-slot { display: none !important; }
-}
-
-/* Placeholder mientras carga */
-.ad-slot::before {
-  content: '';
-  display: block;
 }
 
 /* Cuando el ad cargó, quitar background placeholder */

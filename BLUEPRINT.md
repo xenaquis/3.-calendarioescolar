@@ -22,7 +22,7 @@ Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, 
 | Bot Fight Mode        | DOCUMENTADO     | Guia de activacion en seccion "Bot Fight Mode" abajo |
 | Datos Mineduc 2026    | CORREGIDOS      | Vacaciones invierno corregidas (jun-jul). Inicio clases = 4 mar. Fin = 4 dic. Aysén/Magallanes diferenciados |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
-| Frontend              | COMPLETADO      | CSS token fixes + responsividad móvil (2026-03-24) |
+| Frontend              | COMPLETADO      | Auditoría 360° 2026-04-08: SVG dark mode fix, ads.css collapse, CSP fix (CF Insights + AdSense quality), hero padding, mini-fact/panel borders, zebra table, placeholder icon |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
 | SEO / Anti-IA         | COMPLETADO      | Auditoría 360° 2026-03-17: E-E-A-T, llms.txt, schemas, cache — commit 3df7917 |
 | Validación Robusta    | 4 FASES + RAG   | Auditoría empírica 2026-03-18: fiabilidad B+ (82/100). Ver sección Validación abajo |
