@@ -53,10 +53,17 @@ var App = (function () {
 
     if (!selectables.length) return;
 
-    // SVG regions: click + teclado
+    // SVG regions: click + touch (iOS Safari) + teclado
     for (var i = 0; i < svgRegions.length; i++) {
       (function (el) {
         el.addEventListener('click', function () {
+          selectRegion(el.dataset.slug, svgRegions);
+          var sel = document.getElementById('region-select');
+          if (sel) sel.value = el.dataset.slug;
+        });
+        // iOS Safari no dispara click en SVG <g> — usar touchend como fallback
+        el.addEventListener('touchend', function (e) {
+          e.preventDefault();
           selectRegion(el.dataset.slug, svgRegions);
           var sel = document.getElementById('region-select');
           if (sel) sel.value = el.dataset.slug;

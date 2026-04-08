@@ -883,6 +883,8 @@ details h3 {
 .svgregion {
   cursor: pointer;
   outline: none;
+  pointer-events: all;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .svgregion rect {

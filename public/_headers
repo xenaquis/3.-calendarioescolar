@@ -18,12 +18,12 @@
 /region/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
-# Static assets: long cache, immutable (fingerprinted via content)
+# Static assets: 1 día + revalidar (archivos no están versionados con hash)
 /css/*
-  Cache-Control: public, max-age=2592000, immutable
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 /js/*
-  Cache-Control: public, max-age=2592000, immutable
+  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 /icons/*
   Cache-Control: public, max-age=31536000, immutable
