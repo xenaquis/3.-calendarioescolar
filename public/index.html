@@ -209,14 +209,7 @@
       <section class="section" aria-label="Consulta por regi&oacute;n">
         <h2>&iquest;De qu&eacute; regi&oacute;n eres?</h2>
 
-        <div class="map-legend" role="img" aria-label="Leyenda de grupos regionales">
-          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-primary)"></span> Est&aacute;ndar (11)</span>
-          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-warning)"></span> Norte (2)</span>
-          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-success)"></span> Sur-Parcial (1)</span>
-          <span class="map-legend__item"><span class="map-legend__dot" style="background:var(--color-accent)"></span> Sur (2)</span>
-        </div>
-
-        <!-- Mobile: hidden select for JS compatibility -->
+        <!-- Hidden select for JS compatibility -->
         <select id="region-select" class="sr-only" aria-label="Selecciona tu regi&oacute;n">
           <option value="">Selecciona tu regi&oacute;n</option>
           <option value="arica-y-parinacota">Arica y Parinacota</option>
@@ -237,7 +230,7 @@
           <option value="magallanes">Magallanes</option>
         </select>
 
-        <!-- Mobile: lista simple de regiones (oculta en desktop donde se usa SVG) -->
+        <!-- Lista de regiones -->
         <div class="region-list-mobile" role="listbox" aria-label="Selecciona tu regi&oacute;n">
           <button class="region-bar" data-slug="arica-y-parinacota" data-grupo="NORTE" role="option" aria-selected="false"><span class="region-bar__dot"></span>Arica y Parinacota</button>
           <button class="region-bar" data-slug="tarapaca" data-grupo="NORTE" role="option" aria-selected="false"><span class="region-bar__dot"></span>Tarapac&aacute;</button>

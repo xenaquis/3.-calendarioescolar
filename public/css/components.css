@@ -664,7 +664,7 @@ details h3 {
   margin: var(--space-6) 0;
 }
 /* ============================================
-   Region list (mobile) — lista simple de botones
+   Region list — lista simple de botones (reemplaza SVG)
    ============================================ */
 .region-list-mobile {
   display: grid;
@@ -680,25 +680,23 @@ details h3 {
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
 }
-
-/* Mobile: hide SVG map panel, show region list */
-@media (max-width: 649px) {
-  .map-panel {
-    display: none;
+@media (min-width: 480px) {
+  .region-list-mobile {
+    grid-template-columns: repeat(3, 1fr);
   }
-  .map-layout {
-    grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .region-list-mobile {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
-/* Desktop: hide region list, show SVG + grid */
-@media (min-width: 650px) {
-  .region-list-mobile {
-    display: none;
-  }
-  .map-layout {
-    grid-template-columns: 220px 1fr;
-  }
+/* SVG map: oculto siempre — reemplazado por lista */
+.map-panel {
+  display: none;
+}
+.map-layout {
+  grid-template-columns: 1fr;
 }
 
 .map-panel {
