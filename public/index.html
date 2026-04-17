@@ -33,10 +33,6 @@
   <meta name="twitter:description" content="Inicio 4 de marzo, vacaciones desde el 22 de junio, fin 4 de diciembre. 16 regiones. Fuente Mineduc.">
   <meta name="twitter:image" content="https://calendarioescolar.cl/icons/og-image.png">
 
-  <!-- AdSense -->
-  <meta name="google-adsense-account" content="ca-pub-2859628961076196">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2859628961076196" crossorigin="anonymous"></script>
-
   <!-- Favicon -->
   <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
@@ -45,9 +41,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/css/tokens.css?v=2">
   <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/components.css?v=2">
-  <link rel="stylesheet" href="/css/ads.css?v=2">
-  <link rel="stylesheet" href="/css/verificacion.css">
+  <link rel="stylesheet" href="/css/components.css?v=3">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -169,48 +163,27 @@
 
   <!-- Main -->
   <main id="main">
-    <div class="container">
+    <div class="container container--narrow">
 
-      <div class="hero-section">
-        <h1>Calendario Escolar 2026 &mdash; Chile</h1>
-        <p class="hero-sub">Fechas oficiales del <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Ministerio de Educaci&oacute;n (Mineduc)</a>. Selecciona tu regi&oacute;n para ver tu calendario.</p>
-      </div>
+      <section class="landing-hero">
+        <h1>Calendario escolar <strong>2026</strong></h1>
+        <p class="hero-sub">Fechas oficiales del <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Mineduc</a>.</p>
+      </section>
 
-      <!-- Stats en tiempo real (lo que Google/IA no responde) -->
-      <div class="school-stats" data-verificacion="stats" aria-label="Estado actual del a&ntilde;o escolar">
-        <div class="stat-item">
-          <p class="stat-label">Estamos en</p>
-          <p class="stat-value" id="school-week">Semana&nbsp;3</p>
-          <p class="stat-note">del a&ntilde;o escolar 2026</p>
-        </div>
-        <div class="stat-item">
-          <p class="stat-label">Vacaciones invierno</p>
-          <p class="stat-value" id="days-to-winter">117&nbsp;d&iacute;as</p>
-          <p class="stat-note">a partir del 22 de junio</p>
-        </div>
-        <div class="stat-item">
-          <p class="stat-label">Pr&oacute;ximo feriado</p>
-          <p class="stat-value" id="next-holiday-name">V.&nbsp;Santo</p>
-          <p class="stat-note" id="next-holiday-days">en&nbsp;18&nbsp;d&iacute;as</p>
-        </div>
-      </div>
+      <!-- Pr&oacute;ximo feriado escolar (poblado por app.js) -->
+      <section class="feriado-card" aria-label="Pr&oacute;ximo feriado en per&iacute;odo escolar" data-verificacion="holidays">
+        <p class="feriado-card__eyebrow">Pr&oacute;ximo feriado escolar</p>
+        <p class="feriado-card__name" id="feriado-name">&mdash;</p>
+        <p class="feriado-card__date" id="feriado-date">&nbsp;</p>
+        <span class="feriado-card__countdown" id="feriado-countdown" hidden>
+          en <strong id="feriado-days">0</strong> d&iacute;as
+        </span>
+      </section>
 
-      <!-- Ad: Top Banner -->
-      <div class="ad-slot ad-slot--banner" aria-hidden="true">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2859628961076196"
-             data-ad-slot="1234567890"
-             data-ad-format="horizontal"
-             data-full-width-responsive="true"></ins>
-      </div>
-
-      <!-- Selector de region + panel de datos -->
-      <section class="section" aria-label="Consulta por regi&oacute;n">
-        <h2>&iquest;De qu&eacute; regi&oacute;n eres?</h2>
-
-        <!-- Hidden select for JS compatibility -->
-        <select id="region-select" class="sr-only" aria-label="Selecciona tu regi&oacute;n">
+      <!-- Selector de regi&oacute;n + resultado -->
+      <section class="region-picker" aria-label="Consulta tu regi&oacute;n">
+        <label class="region-picker__label" for="region-select">&iquest;Cu&aacute;ndo empiezan las clases en tu regi&oacute;n?</label>
+        <select id="region-select" aria-label="Selecciona tu regi&oacute;n">
           <option value="">Selecciona tu regi&oacute;n</option>
           <option value="arica-y-parinacota">Arica y Parinacota</option>
           <option value="tarapaca">Tarapac&aacute;</option>
@@ -230,308 +203,20 @@
           <option value="magallanes">Magallanes</option>
         </select>
 
-        <!-- Lista de regiones -->
-        <div class="region-list-mobile" role="listbox" aria-label="Selecciona tu regi&oacute;n">
-          <button class="region-bar" data-slug="arica-y-parinacota" data-grupo="NORTE" role="option" aria-selected="false"><span class="region-bar__dot"></span>Arica y Parinacota</button>
-          <button class="region-bar" data-slug="tarapaca" data-grupo="NORTE" role="option" aria-selected="false"><span class="region-bar__dot"></span>Tarapac&aacute;</button>
-          <button class="region-bar" data-slug="antofagasta" role="option" aria-selected="false"><span class="region-bar__dot"></span>Antofagasta</button>
-          <button class="region-bar" data-slug="atacama" role="option" aria-selected="false"><span class="region-bar__dot"></span>Atacama</button>
-          <button class="region-bar" data-slug="coquimbo" role="option" aria-selected="false"><span class="region-bar__dot"></span>Coquimbo</button>
-          <button class="region-bar" data-slug="valparaiso" role="option" aria-selected="false"><span class="region-bar__dot"></span>Valpara&iacute;so</button>
-          <button class="region-bar" data-slug="metropolitana" role="option" aria-selected="false"><span class="region-bar__dot"></span>Metropolitana</button>
-          <button class="region-bar" data-slug="ohiggins" role="option" aria-selected="false"><span class="region-bar__dot"></span>O&rsquo;Higgins</button>
-          <button class="region-bar" data-slug="maule" role="option" aria-selected="false"><span class="region-bar__dot"></span>Maule</button>
-          <button class="region-bar" data-slug="nuble" role="option" aria-selected="false"><span class="region-bar__dot"></span>&Ntilde;uble</button>
-          <button class="region-bar" data-slug="biobio" role="option" aria-selected="false"><span class="region-bar__dot"></span>Biob&iacute;o</button>
-          <button class="region-bar" data-slug="araucania" role="option" aria-selected="false"><span class="region-bar__dot"></span>La Araucan&iacute;a</button>
-          <button class="region-bar" data-slug="los-rios" role="option" aria-selected="false"><span class="region-bar__dot"></span>Los R&iacute;os</button>
-          <button class="region-bar" data-slug="los-lagos" data-grupo="SUR-PARCIAL" role="option" aria-selected="false"><span class="region-bar__dot"></span>Los Lagos</button>
-          <button class="region-bar" data-slug="aysen" data-grupo="SUR" role="option" aria-selected="false"><span class="region-bar__dot"></span>Ays&eacute;n</button>
-          <button class="region-bar" data-slug="magallanes" data-grupo="SUR" role="option" aria-selected="false"><span class="region-bar__dot"></span>Magallanes</button>
-        </div>
-
-        <div class="map-layout">
-          <!-- Mapa esquemático de Chile — clickeable (oculto en móvil) -->
-          <div class="map-panel">
-            <svg class="chile-svg" viewBox="0 0 180 369" role="listbox" aria-label="Mapa de regiones de Chile — selecciona tu región">
-              <g class="svgregion" data-slug="arica-y-parinacota" data-grupo="NORTE" role="option" tabindex="0" aria-selected="false" aria-label="Arica y Parinacota">
-                <rect x="48" y="1" width="84" height="22" rx="2" fill="#fef3c7" stroke="#fcd34d" stroke-width="0.5"/>
-                <text x="90" y="12" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Arica y Parinacota</text>
-              </g>
-              <g class="svgregion" data-slug="tarapaca" data-grupo="NORTE" role="option" tabindex="0" aria-selected="false" aria-label="Tarapacá">
-                <rect x="42" y="24" width="96" height="22" rx="2" fill="#fef3c7" stroke="#fcd34d" stroke-width="0.5"/>
-                <text x="90" y="35" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Tarapac&aacute;</text>
-              </g>
-              <g class="svgregion" data-slug="antofagasta" role="option" tabindex="0" aria-selected="false" aria-label="Antofagasta">
-                <rect x="32" y="47" width="116" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="58" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Antofagasta</text>
-              </g>
-              <g class="svgregion" data-slug="atacama" role="option" tabindex="0" aria-selected="false" aria-label="Atacama">
-                <rect x="26" y="70" width="128" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="81" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Atacama</text>
-              </g>
-              <g class="svgregion" data-slug="coquimbo" role="option" tabindex="0" aria-selected="false" aria-label="Coquimbo">
-                <rect x="18" y="93" width="144" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="104" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Coquimbo</text>
-              </g>
-              <g class="svgregion" data-slug="valparaiso" role="option" tabindex="0" aria-selected="false" aria-label="Valparaíso">
-                <rect x="14" y="116" width="152" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="127" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Valpara&iacute;so</text>
-              </g>
-              <g class="svgregion" data-slug="metropolitana" role="option" tabindex="0" aria-selected="false" aria-label="Región Metropolitana">
-                <rect x="10" y="139" width="160" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="150" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Metropolitana</text>
-              </g>
-              <g class="svgregion" data-slug="ohiggins" role="option" tabindex="0" aria-selected="false" aria-label="O'Higgins">
-                <rect x="10" y="162" width="160" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="173" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">O&rsquo;Higgins</text>
-              </g>
-              <g class="svgregion" data-slug="maule" role="option" tabindex="0" aria-selected="false" aria-label="Maule">
-                <rect x="10" y="185" width="160" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="196" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Maule</text>
-              </g>
-              <g class="svgregion" data-slug="nuble" role="option" tabindex="0" aria-selected="false" aria-label="Ñuble">
-                <rect x="12" y="208" width="156" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="219" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">&Ntilde;uble</text>
-              </g>
-              <g class="svgregion" data-slug="biobio" role="option" tabindex="0" aria-selected="false" aria-label="Biobío">
-                <rect x="10" y="231" width="160" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="242" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Biob&iacute;o</text>
-              </g>
-              <g class="svgregion" data-slug="araucania" role="option" tabindex="0" aria-selected="false" aria-label="La Araucanía">
-                <rect x="12" y="254" width="156" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="265" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">La Araucan&iacute;a</text>
-              </g>
-              <g class="svgregion" data-slug="los-rios" role="option" tabindex="0" aria-selected="false" aria-label="Los Ríos">
-                <rect x="18" y="277" width="144" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-                <text x="90" y="288" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Los R&iacute;os</text>
-              </g>
-              <g class="svgregion" data-slug="los-lagos" data-grupo="SUR-PARCIAL" role="option" tabindex="0" aria-selected="false" aria-label="Los Lagos">
-                <rect x="12" y="300" width="156" height="22" rx="2" fill="#dcfce7" stroke="#86efac" stroke-width="0.5"/>
-                <text x="90" y="311" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Los Lagos</text>
-              </g>
-              <g class="svgregion" data-slug="aysen" data-grupo="SUR" role="option" tabindex="0" aria-selected="false" aria-label="Aysén">
-                <rect x="8" y="323" width="164" height="22" rx="2" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.5"/>
-                <text x="90" y="334" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Ays&eacute;n</text>
-              </g>
-              <g class="svgregion" data-slug="magallanes" data-grupo="SUR" role="option" tabindex="0" aria-selected="false" aria-label="Magallanes">
-                <rect x="2" y="346" width="176" height="22" rx="2" fill="#dbeafe" stroke="#93c5fd" stroke-width="0.5"/>
-                <text x="90" y="357" text-anchor="middle" dominant-baseline="central" fill="#1e1b18">Magallanes</text>
-              </g>
-            </svg>
-          </div>
-
-          <!-- Panel de datos -->
-          <div class="data-panel">
-            <div id="placeholder-data" class="data-panel__placeholder">
-              <span class="data-panel__placeholder-icon" aria-hidden="true">
-                <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
-                  <circle cx="12" cy="9" r="2.5"/>
-                </svg>
-              </span>
-              <p>Selecciona una regi&oacute;n para ver su calendario</p>
-            </div>
-
-            <div id="region-data">
-              <h3 class="data-panel__title" id="r-name"></h3>
-              <span class="data-panel__grupo" id="r-grupo"></span>
-
-              <div class="mini-facts">
-                <div class="mini-fact">
-                  <p class="mini-fact__label">Inicio clases</p>
-                  <p class="mini-fact__value" id="r-inicio"></p>
-                </div>
-                <div class="mini-fact">
-                  <p class="mini-fact__label">Vacaciones invierno</p>
-                  <p class="mini-fact__value" id="r-vac"></p>
-                </div>
-                <div class="mini-fact">
-                  <p class="mini-fact__label">Fiestas Patrias</p>
-                  <p class="mini-fact__value" id="r-fp"></p>
-                </div>
-                <div class="mini-fact">
-                  <p class="mini-fact__label">Fin de a&ntilde;o</p>
-                  <p class="mini-fact__value" id="r-fin"></p>
-                </div>
-              </div>
-
-              <details open>
-                <summary>Datos adicionales</summary>
-                <table>
-                  <tbody>
-                    <tr><td>Inicio 2do semestre</td><td id="r-seg"></td></tr>
-                    <tr><td>D&iacute;a del Profesor</td><td id="r-prof"></td></tr>
-                    <tr><td>Cierre actas 4&deg; Medio</td><td id="r-actas"></td></tr>
-                    <tr><td>Fin sin JEC (40 sem.)</td><td id="r-sinjec"></td></tr>
-                    <tr><td>Fin EPJA (36 sem.)</td><td id="r-epja"></td></tr>
-                  </tbody>
-                </table>
-              </details>
-
-              <div style="margin-top:var(--space-4); text-align:center;">
-                <a href="#" class="btn btn--primary" id="link-pagina">Ver p&aacute;gina completa &rarr;</a>
-              </div>
-            </div>
-          </div>
+        <div class="region-result" id="region-result" hidden>
+          <div class="region-result__row"><span>Inicio de clases</span><strong id="r-inicio">&mdash;</strong></div>
+          <div class="region-result__row"><span>Vacaciones invierno</span><strong id="r-vac">&mdash;</strong></div>
+          <div class="region-result__row"><span>Fin de a&ntilde;o escolar</span><strong id="r-fin">&mdash;</strong></div>
+          <a href="#" class="region-result__link" id="link-pagina">Ver calendario completo &rarr;</a>
         </div>
       </section>
 
-      <!-- Ad: Mid -->
-      <div class="ad-slot ad-slot--rect" aria-hidden="true">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2859628961076196"
-             data-ad-slot="0987654321"
-             data-ad-format="rectangle"
-             data-full-width-responsive="true"></ins>
-      </div>
-
-      <!-- Feriados en período escolar (contenido único) -->
-      <section class="section" aria-label="Feriados en per&iacute;odo escolar 2026" data-verificacion="holidays">
-        <h2>Feriados dentro del per&iacute;odo escolar 2026</h2>
-        <p>D&iacute;as festivos que caen en per&iacute;odos de clases (excluye vacaciones y fines de semana):</p>
-        <div class="table-wrapper">
-          <table>
-            <thead>
-              <tr>
-                <th>Fecha</th>
-                <th>Feriado</th>
-                <th>Ley</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Viernes 3 de abril</td>
-                <td>Viernes Santo</td>
-                <td>
-                  <span class="bcn-badge-wrap" tabindex="0" data-claim-id="feriado-viernes-santo">
-                    <span class="bcn-badge">&#10003; Ley</span>
-                    <span class="bcn-tooltip" role="tooltip"></span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Viernes 1 de mayo</td>
-                <td>D&iacute;a del Trabajo</td>
-                <td>
-                  <span class="bcn-badge-wrap" tabindex="0" data-claim-id="feriado-dia-trabajo">
-                    <span class="bcn-badge">&#10003; Ley</span>
-                    <span class="bcn-tooltip" role="tooltip"></span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Jueves 21 de mayo</td>
-                <td>Glorias Navales</td>
-                <td>
-                  <span class="bcn-badge-wrap" tabindex="0" data-claim-id="feriado-glorias-navales">
-                    <span class="bcn-badge">&#10003; Ley</span>
-                    <span class="bcn-tooltip" role="tooltip"></span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Jueves 4 de junio</td>
-                <td>Corpus Christi</td>
-                <td>
-                  <span class="bcn-badge-wrap" tabindex="0" data-claim-id="feriado-corpus-christi">
-                    <span class="bcn-badge">&#10003; Ley</span>
-                    <span class="bcn-tooltip" role="tooltip"></span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Lunes 12 de octubre</td>
-                <td>Encuentro de Dos Mundos</td>
-                <td>
-                  <span class="bcn-badge-wrap" tabindex="0" data-claim-id="feriado-encuentro-dos-mundos">
-                    <span class="bcn-badge">&#10003; Ley</span>
-                    <span class="bcn-tooltip" role="tooltip"></span>
-                  </span>
-                </td>
-              </tr>
-              <tr>
-                <td>Martes 8 de diciembre</td>
-                <td>Inmaculada Concepci&oacute;n</td>
-                <td>
-                  <span class="bcn-badge-wrap" tabindex="0" data-claim-id="feriado-inmaculada-concepcion">
-                    <span class="bcn-badge">&#10003; Ley</span>
-                    <span class="bcn-tooltip" role="tooltip"></span>
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="card__meta">
-          Solo feriados irrenunciables en d&iacute;as de clases para la mayor&iacute;a de las regiones. Los colegios privados pueden tener variaciones. San Pedro y San Pablo (29 de junio) cae en vacaciones de invierno en la mayor&iacute;a de las regiones. La Virgen del Carmen (16 de julio) cae en vacaciones en las regiones del norte, Los Lagos, Ays&eacute;n y Magallanes.<br>
-          Fuente legal: <a href="https://www.bcn.cl/leychile/Navegar?idNorma=23639" rel="noopener noreferrer" target="_blank">Ley 2.977 y modificaciones &mdash; BCN</a> &middot;
-          Calendario escolar: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones Mineduc 2026</a>
-        </p>
-        <p style="text-align:center; margin-top:var(--space-4);">
-          <a href="/feriados-2026.html" class="btn btn--secondary">Ver todos los feriados 2026 &rarr;</a>
-        </p>
-      </section>
-
-      <!-- Consulta tambi&eacute;n -->
-      <section class="section">
-        <h2>Consulta tambi&eacute;n</h2>
-        <div class="card-grid">
-          <a href="/vacaciones-invierno-2026.html" class="card" style="text-decoration:none; color:inherit;">
-            <h3 class="card__title" style="color:var(--color-accent);">Vacaciones de Invierno 2026</h3>
-            <p>Fechas exactas por regi&oacute;n, countdown y comparativa norte&nbsp;/&nbsp;centro&nbsp;/&nbsp;sur.</p>
-          </a>
-          <a href="/cuando-empiezan-clases-2026.html" class="card" style="text-decoration:none; color:inherit;">
-            <h3 class="card__title" style="color:var(--color-primary);">&iquest;Cu&aacute;ndo empiezan las clases 2026?</h3>
-            <p>D&iacute;a y mes por regi&oacute;n, preguntas frecuentes y fechas de regreso.</p>
-          </a>
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section class="section" id="faq">
-        <h2>Preguntas frecuentes</h2>
-
-        <details>
-          <summary>&iquest;Cu&aacute;ndo empiezan las clases 2026 en Chile?</summary>
-          <p>El a&ntilde;o escolar 2026 en Chile comienza el <strong>mi&eacute;rcoles 4 de marzo</strong> en
-             todas las regiones, seg&uacute;n el <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">calendario oficial del Ministerio de Educaci&oacute;n (Mineduc)</a>.</p>
-        </details>
-
-        <details>
-          <summary>&iquest;Cu&aacute;ndo son las vacaciones de invierno 2026?</summary>
-          <p>Las vacaciones de invierno 2026 var&iacute;an por regi&oacute;n: del <strong>22 de junio al 3 de julio</strong> en la
-             mayor&iacute;a de las regiones (12 d&iacute;as). En Ays&eacute;n y Magallanes van del
-             <strong>29 de junio al 17 de julio</strong> (19 d&iacute;as). En Los Lagos del 6 al 17 de julio.
-             En Arica y Tarapac&aacute; del 13 al 24 de julio.
-             Seg&uacute;n la <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluci&oacute;n de Calendarios Escolares 2026 del Mineduc</a>.</p>
-        </details>
-
-        <details>
-          <summary>&iquest;Cu&aacute;ndo termina el a&ntilde;o escolar 2026?</summary>
-          <p>El a&ntilde;o escolar 2026 finaliza el <strong>4 de diciembre</strong> en la mayor&iacute;a de las
-             regiones. En Ays&eacute;n y Magallanes termina el <strong>11 de diciembre</strong>.
-             Fuente: <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Mineduc 2026</a>.</p>
-        </details>
-
-        <details>
-          <summary>&iquest;Pueden los colegios cambiar las fechas del Mineduc?</summary>
-          <p>Los establecimientos educacionales pueden hacer <strong>ajustes menores</strong> dentro del
-             marco que establece el Mineduc, usando los d&iacute;as de libre disposici&oacute;n. Las fechas
-             de este sitio son las oficiales seg&uacute;n las <a href="https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/" rel="noopener noreferrer" target="_blank">Resoluciones Exentas Mineduc 2026</a>; siempre confirma con tu colegio.</p>
-        </details>
-      </section>
-
-      <!-- Ad: Bottom -->
-      <div class="ad-slot ad-slot--rect" aria-hidden="true">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-2859628961076196"
-             data-ad-slot="1122334455"
-             data-ad-format="rectangle"
-             data-full-width-responsive="true"></ins>
-      </div>
+      <!-- M&aacute;s recursos -->
+      <nav class="more-links" aria-label="M&aacute;s informaci&oacute;n">
+        <a href="/feriados-2026.html">Todos los feriados 2026 &rarr;</a>
+        <a href="/vacaciones-invierno-2026.html">Vacaciones de invierno &rarr;</a>
+        <a href="/cuando-empiezan-clases-2026.html">Inicio de clases &rarr;</a>
+      </nav>
 
     </div>
   </main>
@@ -599,14 +284,10 @@
 
   <!-- JS: defer = descarga paralela, ejecución en orden -->
   <script defer src="/js/theme.js"></script>
-  <script defer src="/js/ads.js?v=2"></script>
   <script defer src="/js/analytics.js"></script>
   <script defer src="/js/regions-data.js"></script>
   <script defer src="/js/calendar-config.js"></script>
-  <script defer src="/js/app.js?v=2"></script>
-  <script defer src="/js/claims-data.js"></script>
-  <script defer src="/js/claims-tooltips.js"></script>
-  <script defer src="/js/verificacion.js"></script>
+  <script defer src="/js/app.js?v=3"></script>
 
 </body>
 </html>

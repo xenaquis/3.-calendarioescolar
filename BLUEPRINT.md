@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, afirmaciones.json idNorma corregido — pendiente ejecucion con ANTHROPIC_API_KEY).
+Ultimo update de este blueprint: 2026-04-17 (Landing simplificada: index.html reducido a hero + feriado-card + region-picker. AdSense removido del home. CSP ajustado para sodar2.js).
 
 ---
 
@@ -16,7 +16,7 @@ Ultimo update de este blueprint: 2026-03-25 (Phase 08: bcn-extractor.py creado, 
 | Cloudflare Pages      | ACTIVO          | Deploy via GitHub Actions — en producción          |
 | DNS                   | ACTIVO          | Cloudflare DNS configurado y propagado             |
 | GA4                   | ACTIVO          | ID `G-6FVLKF6PFQ` activo en todas las paginas (2026-03-24) |
-| AdSense               | PENDIENTE       | ID placeholder `ca-pub-XXXXXXXXXXXXXXXX` en config.json |
+| AdSense               | PENDIENTE       | Slots removidos del home. Script + ins en landings/regiones con ID `ca-pub-2859628961076196` (slots aún placeholders en esas páginas). Reactivar en home cuando AdSense apruebe slots reales. |
 | Search Console        | PENDIENTE       | Verificar propiedad + enviar sitemap               |
 | OG Image              | ACTIVO          | Archivo `public/icons/og-image.png` existe (verificado 2026-03-24) |
 | Bot Fight Mode        | DOCUMENTADO     | Guia de activacion en seccion "Bot Fight Mode" abajo |
@@ -140,6 +140,36 @@ Cloudflare Bot Fight Mode bloquea bots maliciosos conocidos (scrapers, credentia
 - Dashboard → Security → Bots → Bot Fight Mode debe mostrar "On"
 - Google Search Console debe seguir mostrando paginas indexadas normalmente
 - En Analytics (Cloudflare) → Security → Overview: se pueden ver bots bloqueados
+
+---
+
+## Rediseño landing minimal (2026-04-17)
+
+Home (`public/index.html`) simplificado a 3 bloques — feedback: demasiado ruido en landing.
+Sketch ganador: `.planning/sketches/001-landing-layout/` variante A (single-card hero).
+
+### Cambios
+
+- **`<main>` reescrito:** hero (h1+sub) → `.feriado-card` (próximo feriado escolar, poblado por app.js) → `.region-picker` (`<select>` + result inline con inicio/vacaciones/fin + link a /region/{slug}/) → `.more-links` (links a feriados-2026, vacaciones, cuando-empiezan-clases).
+- **Removido del home:** `.school-stats` bar, region chips + SVG map + panel de datos, tabla de feriados (ahora sólo en `/feriados-2026.html`), FAQ, cards "Consulta también" (movidas a `.more-links`), 3 ad slots AdSense.
+- **AdSense removido del home:** `meta google-adsense-account`, `<script pagead2>`, `ads.css` link, `ads.js` reference, 3 `<ins.adsbygoogle>` blocks. Sigue activo en landings SEO + páginas de región hasta que AdSense apruebe slots reales.
+- **Scripts eliminados del home:** `ads.js`, `claims-data.js`, `claims-tooltips.js`, `verificacion.js` (usados antes para badges BCN en tabla feriados). Home solo carga: theme.js, analytics.js, regions-data.js, calendar-config.js, app.js.
+- **`app.js` reescrito:** dropped `initMapSelector`, `selectRegion`, `initSchoolStats`. Nuevas funciones: `initFeriadoCard` (computa próximo feriado en-clases desde `CAL.feriadosCompletos`) + `initRegionPicker` (select onchange popula result panel).
+- **CSS nuevo en `components.css`:** `.landing-hero`, `.feriado-card` + sub-classes, `.region-picker` + sub-classes, `.region-result` + sub-classes, `.more-links`, `.container--narrow` (max-width 560px).
+- **CSP fix:** agregado `https://ep2.adtrafficquality.google` a `script-src`, `script-src-elem`, `frame-src`, `connect-src` en `public/_headers` para permitir sodar2.js (AdSense quality detection).
+
+### Preservado
+
+- Todos los schemas JSON-LD en `<head>` (WebSite, Organization, Person, WebApplication, ItemList 16 regiones, FAQPage).
+- Todo el SEO meta (canonical, hreflang, OG, Twitter, robots, claim-data).
+- `<noscript>` fallback completo (16 regiones + fechas clave).
+- `legal-notice` + `site-footer` + `verificacion-footer`.
+- Dark mode toggle.
+- GA4 tracking.
+
+### Riesgo SEO
+
+FAQPage schema conserva 3 preguntas. Contenido textual de FAQ ya no está en el DOM visible — pero sí en el schema + en las landings (`/cuando-empiezan-clases-2026.html`, `/vacaciones-invierno-2026.html`, `/feriados-2026.html`). Monitorear Search Console en próximas semanas.
 
 ---
 

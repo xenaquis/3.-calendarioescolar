@@ -1,5 +1,5 @@
 /* app.js — calendarioescolar.cl
-   Selector de región + stats en tiempo real
+   Landing minimal: próximo feriado escolar + selector de región.
 
    Depende de (cargados antes en HTML):
      - public/js/regions-data.js    → window.REGIONS_DATA
@@ -8,229 +8,115 @@
 */
 
 document.addEventListener('DOMContentLoaded', function () {
-  // Módulos compartidos
   Theme.init();
-  Ads.init();
   Analytics.init('G-6FVLKF6PFQ');
-
-  // Lógica del sitio
   App.init();
 });
 
 var App = (function () {
-  // Datos de regiones — cargados desde public/js/regions-data.js
-  // Si no está disponible: ejecutar npm run generate
   var REGIONS = window.REGIONS_DATA || {};
-
-  // Config del calendario — cargada desde public/js/calendar-config.js
-  // Fuente de verdad: data/calendar-config.json
-  // Si no está disponible: ejecutar npm run generate
   var CAL = window.CALENDAR_CONFIG || null;
 
-  // Mapeo de grupos regionales (slugs sin grupo = Estándar por defecto)
-  var GRUPOS = {
-    'arica-y-parinacota': 'Norte',
-    'tarapaca': 'Norte',
-    'los-lagos': 'Sur-Parcial',
-    'aysen': 'Sur',
-    'magallanes': 'Sur'
-  };
+  var MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+               'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  var DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+
+  function parseDate(isoStr) {
+    var parts = isoStr.split('-');
+    return new Date(Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]), 12, 0, 0));
+  }
+
+  function today() {
+    var now = new Date();
+    return new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0));
+  }
+
+  function formatDateLong(d) {
+    return DIAS[d.getUTCDay()] + ' ' + d.getUTCDate() + ' de ' + MESES[d.getUTCMonth()];
+  }
+
+  function capitalize(s) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
 
   function init() {
-    initMapSelector();
     if (CAL) {
-      initSchoolStats();
+      initFeriadoCard();
     } else {
       console.warn('[app.js] CALENDAR_CONFIG no disponible — ejecutar: npm run generate');
     }
+    initRegionPicker();
   }
 
-  // Selector de región — soporta SVG (.svgregion) y botones (.region-bar)
-  function initMapSelector() {
-    var svgRegions = document.querySelectorAll('.svgregion[data-slug]');
-    var bars = document.querySelectorAll('.region-bar[data-slug]');
+  // Próximo feriado escolar: primero en feriadosCompletos con contexto="en-clases" y fecha >= hoy.
+  // Fallback: feriados[] (lista corta) filtrada por fecha futura.
+  function initFeriadoCard() {
+    var nameEl = document.getElementById('feriado-name');
+    var dateEl = document.getElementById('feriado-date');
+    var cdEl = document.getElementById('feriado-countdown');
+    var daysEl = document.getElementById('feriado-days');
+    if (!nameEl || !dateEl) return;
 
-    if (!svgRegions.length && !bars.length) return;
+    var now = today();
+    var source = CAL.feriadosCompletos || CAL.feriados || [];
+    var next = null;
 
-    // SVG regions: click + touch (iOS Safari) + teclado
-    for (var i = 0; i < svgRegions.length; i++) {
-      (function (el) {
-        el.addEventListener('click', function () {
-          selectRegion(el.dataset.slug);
-          var sel = document.getElementById('region-select');
-          if (sel) sel.value = el.dataset.slug;
-        });
-        el.addEventListener('touchend', function (e) {
-          e.preventDefault();
-          selectRegion(el.dataset.slug);
-          var sel = document.getElementById('region-select');
-          if (sel) sel.value = el.dataset.slug;
-        });
-        el.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            selectRegion(el.dataset.slug);
-          }
-        });
-      })(svgRegions[i]);
+    for (var i = 0; i < source.length; i++) {
+      var f = source[i];
+      var d = parseDate(f.date);
+      if (d < now) continue;
+      if (f.contexto && f.contexto !== 'en-clases') continue;
+      next = { date: d, nombre: f.nombre };
+      break;
     }
 
-    // Botones de barra (lista móvil)
-    for (var j = 0; j < bars.length; j++) {
-      (function (bar) {
-        bar.addEventListener('click', function () {
-          selectRegion(bar.dataset.slug);
-          var sel = document.getElementById('region-select');
-          if (sel) sel.value = bar.dataset.slug;
-        });
-      })(bars[j]);
+    if (!next) {
+      nameEl.textContent = 'No hay m\u00e1s feriados este a\u00f1o escolar';
+      dateEl.textContent = 'El a\u00f1o escolar 2026 ha concluido';
+      if (cdEl) cdEl.hidden = true;
+      return;
     }
 
-    // Hidden select (accesibilidad)
-    var mobileSelect = document.getElementById('region-select');
-    if (mobileSelect) {
-      mobileSelect.addEventListener('change', function () {
-        selectRegion(mobileSelect.value);
-      });
-    }
+    nameEl.textContent = next.nombre;
+    dateEl.textContent = capitalize(formatDateLong(next.date));
 
-    // Auto-seleccionar Metropolitana al cargar
-    if (REGIONS['metropolitana']) {
-      selectRegion('metropolitana');
-      var initSel = document.getElementById('region-select');
-      if (initSel) initSel.value = 'metropolitana';
+    var diffDays = Math.ceil((next.date - now) / 86400000);
+    if (cdEl && daysEl) {
+      if (diffDays === 0) {
+        daysEl.textContent = '';
+        cdEl.firstChild.textContent = '\u00a1Hoy!';
+        cdEl.hidden = false;
+      } else {
+        daysEl.textContent = diffDays;
+        cdEl.hidden = false;
+      }
     }
   }
 
-  // Selecciona una región: actualiza estado activo y puebla el panel de datos
-  function selectRegion(slug) {
-    if (!slug || !REGIONS[slug]) return;
-    var r = REGIONS[slug];
+  function initRegionPicker() {
+    var sel = document.getElementById('region-select');
+    var result = document.getElementById('region-result');
+    if (!sel || !result) return;
 
-    // Desactivar TODOS los selectores (SVG + barras)
-    var allItems = document.querySelectorAll('.svgregion, .region-bar');
-    for (var i = 0; i < allItems.length; i++) {
-      allItems[i].classList.remove('active');
-      allItems[i].setAttribute('aria-selected', 'false');
-    }
-    // Activar TODOS los elementos con este slug (SVG + barra)
-    var activeItems = document.querySelectorAll('.svgregion[data-slug="' + slug + '"], .region-bar[data-slug="' + slug + '"]');
-    for (var k = 0; k < activeItems.length; k++) {
-      activeItems[k].classList.add('active');
-      activeItems[k].setAttribute('aria-selected', 'true');
-    }
+    sel.addEventListener('change', function () {
+      var slug = sel.value;
+      if (!slug || !REGIONS[slug]) {
+        result.hidden = true;
+        return;
+      }
+      var r = REGIONS[slug];
+      var elInicio = document.getElementById('r-inicio');
+      var elVac = document.getElementById('r-vac');
+      var elFin = document.getElementById('r-fin');
+      var elLink = document.getElementById('link-pagina');
 
-    // Ocultar placeholder, mostrar datos
-    var placeholder = document.getElementById('placeholder-data');
-    var regionData = document.getElementById('region-data');
-    if (placeholder) placeholder.style.display = 'none';
-    if (regionData) regionData.className = 'active';
+      if (elInicio) elInicio.textContent = r.inicio || '\u2014';
+      if (elVac) elVac.textContent = (r.vacIni && r.vacFin) ? (r.vacIni + ' \u2014 ' + r.vacFin) : '\u2014';
+      if (elFin) elFin.textContent = r.fin || '\u2014';
+      if (elLink) elLink.href = '/region/' + slug + '/';
 
-    // Poblar datos clave
-    var elName  = document.getElementById('r-name');
-    var elGrupo = document.getElementById('r-grupo');
-    var elInicio = document.getElementById('r-inicio');
-    var elVac   = document.getElementById('r-vac');
-    var elFp    = document.getElementById('r-fp');
-    var elFin   = document.getElementById('r-fin');
-
-    if (elName)  elName.textContent  = 'Regi\u00f3n ' + r.name;
-    if (elGrupo) elGrupo.textContent = GRUPOS[slug] || 'Est\u00e1ndar';
-    if (elInicio) elInicio.textContent = r.inicio;
-    if (elVac)  elVac.textContent   = r.vacIni + ' \u2014 ' + r.vacFin;
-    if (elFp)   elFp.textContent    = r.fpIni + ' \u2014 ' + r.fpFin;
-    if (elFin)  elFin.textContent   = r.fin;
-
-    // Poblar datos adicionales
-    var elSeg    = document.getElementById('r-seg');
-    var elProf   = document.getElementById('r-prof');
-    var elActas  = document.getElementById('r-actas');
-    var elSinjec = document.getElementById('r-sinjec');
-    var elEpja   = document.getElementById('r-epja');
-
-    if (elSeg)    elSeg.textContent    = r.ini2doSem;
-    if (elProf)   elProf.textContent   = r.diaProf;
-    if (elActas)  elActas.textContent  = r.cierreActas;
-    if (elSinjec) elSinjec.textContent = r.finSinJEC;
-    if (elEpja)   elEpja.textContent   = r.finEPJA;
-
-    // Actualizar enlace "ver página completa"
-    var elLink = document.getElementById('link-pagina');
-    if (elLink) elLink.href = '/region/' + slug + '/';
-  }
-
-  // Stats en tiempo real: semana del año escolar, días para vacaciones, próximo feriado
-  // Lee fechas desde window.CALENDAR_CONFIG (data/calendar-config.json)
-  function initSchoolStats() {
-    // Parsear fechas ISO desde calendar-config.json
-    // Nota: parseamos con hora 12:00 UTC para evitar desfase de timezone (Chile -3/-4)
-    function parseDate(isoStr) {
-      var parts = isoStr.split('-');
-      return new Date(Date.UTC(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]), 12, 0, 0));
-    }
-
-    var schoolStart = parseDate(CAL.schoolStart);
-    var winterStart = parseDate(CAL.winterStart);
-    var winterEnd   = parseDate(CAL.winterEnd);
-    var schoolEnd   = parseDate(CAL.schoolEnd);
-
-    // Feriados desde calendar-config.json (ya no hardcodeados)
-    var FERIADOS = CAL.feriados.map(function (f) {
-      return { date: parseDate(f.date), nombre: f.nombre };
+      result.hidden = false;
     });
-
-    var now = new Date();
-    var today = new Date(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0));
-
-    // Semana del año escolar
-    var weekEl = document.getElementById('school-week');
-    if (weekEl) {
-      var daysSinceStart = Math.floor((today - schoolStart) / 86400000);
-      if (daysSinceStart < 0) {
-        weekEl.textContent = 'A\u00fan no inicia';
-      } else if (today >= schoolEnd) {
-        weekEl.textContent = 'Finalizado';
-      } else {
-        var weekNum = Math.floor(daysSinceStart / 7) + 1;
-        weekEl.textContent = 'Semana\u00a0' + weekNum;
-      }
-    }
-
-    // Días para vacaciones de invierno (o estado actual)
-    var winterEl = document.getElementById('days-to-winter');
-    if (winterEl) {
-      var daysToWinter = Math.ceil((winterStart - today) / 86400000);
-      if (daysToWinter > 0) {
-        winterEl.textContent = daysToWinter + '\u00a0d\u00edas';
-      } else if (today < winterEnd) {
-        winterEl.textContent = '\u00a1En\u00a0curso!';
-      } else {
-        winterEl.textContent = 'Pasadas';
-      }
-    }
-
-    // Próximo feriado en período escolar
-    var nameEl = document.getElementById('next-holiday-name');
-    var daysEl = document.getElementById('next-holiday-days');
-    if (nameEl) {
-      var nextFeriado = null;
-      for (var i = 0; i < FERIADOS.length; i++) {
-        if (FERIADOS[i].date >= today) {
-          nextFeriado = FERIADOS[i];
-          break;
-        }
-      }
-      if (nextFeriado) {
-        nameEl.textContent = nextFeriado.nombre;
-        if (daysEl) {
-          var dF = Math.ceil((nextFeriado.date - today) / 86400000);
-          daysEl.textContent = dF === 0 ? '\u00a1Hoy!' : 'en ' + dF + ' d\u00edas';
-        }
-      } else {
-        nameEl.textContent = 'Ninguno';
-        if (daysEl) daysEl.textContent = 'a\u00f1o concluido';
-      }
-    }
   }
 
   return { init: init };
