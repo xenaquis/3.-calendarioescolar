@@ -49,78 +49,75 @@ var App = (function () {
   function initMapSelector() {
     var svgRegions = document.querySelectorAll('.svgregion[data-slug]');
     var bars = document.querySelectorAll('.region-bar[data-slug]');
-    var selectables = svgRegions.length ? svgRegions : bars;
 
-    if (!selectables.length) return;
+    if (!svgRegions.length && !bars.length) return;
 
     // SVG regions: click + touch (iOS Safari) + teclado
     for (var i = 0; i < svgRegions.length; i++) {
       (function (el) {
         el.addEventListener('click', function () {
-          selectRegion(el.dataset.slug, svgRegions);
+          selectRegion(el.dataset.slug);
           var sel = document.getElementById('region-select');
           if (sel) sel.value = el.dataset.slug;
         });
-        // iOS Safari no dispara click en SVG <g> — usar touchend como fallback
         el.addEventListener('touchend', function (e) {
           e.preventDefault();
-          selectRegion(el.dataset.slug, svgRegions);
+          selectRegion(el.dataset.slug);
           var sel = document.getElementById('region-select');
           if (sel) sel.value = el.dataset.slug;
         });
         el.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') {
             e.preventDefault();
-            selectRegion(el.dataset.slug, svgRegions);
+            selectRegion(el.dataset.slug);
           }
         });
       })(svgRegions[i]);
     }
 
-    // Botones de barra (fallback)
+    // Botones de barra (lista móvil)
     for (var j = 0; j < bars.length; j++) {
       (function (bar) {
         bar.addEventListener('click', function () {
-          selectRegion(bar.dataset.slug, bars);
+          selectRegion(bar.dataset.slug);
           var sel = document.getElementById('region-select');
           if (sel) sel.value = bar.dataset.slug;
         });
       })(bars[j]);
     }
 
-    // Mobile dropdown
+    // Hidden select (accesibilidad)
     var mobileSelect = document.getElementById('region-select');
     if (mobileSelect) {
       mobileSelect.addEventListener('change', function () {
-        selectRegion(mobileSelect.value, selectables);
+        selectRegion(mobileSelect.value);
       });
     }
 
     // Auto-seleccionar Metropolitana al cargar
     if (REGIONS['metropolitana']) {
-      selectRegion('metropolitana', selectables);
+      selectRegion('metropolitana');
       var initSel = document.getElementById('region-select');
       if (initSel) initSel.value = 'metropolitana';
     }
   }
 
   // Selecciona una región: actualiza estado activo y puebla el panel de datos
-  function selectRegion(slug, bars) {
+  function selectRegion(slug) {
     if (!slug || !REGIONS[slug]) return;
     var r = REGIONS[slug];
 
-    // Desactivar todas las barras
-    if (bars) {
-      for (var i = 0; i < bars.length; i++) {
-        bars[i].classList.remove('active');
-        bars[i].setAttribute('aria-selected', 'false');
-      }
+    // Desactivar TODOS los selectores (SVG + barras)
+    var allItems = document.querySelectorAll('.svgregion, .region-bar');
+    for (var i = 0; i < allItems.length; i++) {
+      allItems[i].classList.remove('active');
+      allItems[i].setAttribute('aria-selected', 'false');
     }
-    // Activar el elemento seleccionado (SVG o barra)
-    var activeBar = document.querySelector('.svgregion[data-slug="' + slug + '"], .region-bar[data-slug="' + slug + '"]');
-    if (activeBar) {
-      activeBar.classList.add('active');
-      activeBar.setAttribute('aria-selected', 'true');
+    // Activar TODOS los elementos con este slug (SVG + barra)
+    var activeItems = document.querySelectorAll('.svgregion[data-slug="' + slug + '"], .region-bar[data-slug="' + slug + '"]');
+    for (var k = 0; k < activeItems.length; k++) {
+      activeItems[k].classList.add('active');
+      activeItems[k].setAttribute('aria-selected', 'true');
     }
 
     // Ocultar placeholder, mostrar datos

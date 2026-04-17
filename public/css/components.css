@@ -663,23 +663,37 @@ details h3 {
   gap: var(--space-4);
   margin: var(--space-6) 0;
 }
-/* Mobile: show dropdown, hide region list */
-.mobile-region-selector {
-  margin-bottom: var(--space-3);
+/* ============================================
+   Region list (mobile) — lista simple de botones
+   ============================================ */
+.region-list-mobile {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
 }
-.mobile-region-selector select {
-  width: 100%;
-  padding: var(--space-3) var(--space-4);
-  font-size: 1rem;
-  border: 1.5px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: var(--color-bg);
-  color: var(--color-text);
+.region-list-mobile .region-bar {
+  font-size: var(--text-sm);
+  padding: var(--space-3) var(--space-3);
+  min-height: 48px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
 }
 
-/* Desktop: hide dropdown, show list + grid */
+/* Mobile: hide SVG map panel, show region list */
+@media (max-width: 649px) {
+  .map-panel {
+    display: none;
+  }
+  .map-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Desktop: hide region list, show SVG + grid */
 @media (min-width: 650px) {
-  .mobile-region-selector {
+  .region-list-mobile {
     display: none;
   }
   .map-layout {
