@@ -1,0 +1,37 @@
+/* sketch theme — utility dashboard · calendarioescolar.cl */
+:root {
+  --primary: #7c3aed;
+  --primary-tint: #ede9fe;
+  --accent: #2563eb;
+  --bg: #fdfcfb;
+  --surface: #ffffff;
+  --border: #e4dfd7;
+  --text: #1e1b18;
+  --text-muted: #5a5450;
+  --text-faint: #94908a;
+  --success: #16a34a;
+  --warning: #d97706;
+  --danger: #dc2626;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Fira Code', monospace;
+
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+
+  --shadow-sm: 0 1px 2px rgba(30, 20, 10, 0.05);
+  --shadow: 0 2px 6px rgba(30, 20, 10, 0.08);
+  --shadow-md: 0 8px 24px rgba(30, 20, 10, 0.10);
+}
+
+[data-theme="dark"] {
+  --bg: #0f1020;
+  --surface: #1a1b30;
+  --border: #2a2a4a;
+  --text: #e4e4e7;
+  --text-muted: #a1a1aa;
+  --text-faint: #71717a;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}

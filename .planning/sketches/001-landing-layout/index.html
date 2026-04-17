@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sketch 001 — Landing layout</title>
+<link rel="stylesheet" href="../themes/default.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    padding-top: 56px;
+    min-height: 100vh;
+  }
+
+  /* Variant nav */
+  #variant-nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 16px;
+    display: flex; gap: 8px; align-items: center;
+    font-size: 13px;
+  }
+  .variant-tab {
+    background: transparent; border: 1px solid var(--border);
+    padding: 6px 14px; border-radius: var(--radius-sm);
+    font-family: inherit; font-size: 13px; color: var(--text-muted);
+    cursor: pointer; transition: all .15s;
+  }
+  .variant-tab:hover { background: var(--primary-tint); color: var(--primary); }
+  .variant-tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+  #theme-toggle {
+    margin-left: auto; background: transparent; border: 1px solid var(--border);
+    padding: 6px 10px; border-radius: var(--radius-sm); cursor: pointer;
+    font-size: 14px;
+  }
+  .variant { display: none; }
+  .variant.active { display: block; }
+
+  /* Shared page chrome */
+  .site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 20px;
+  }
+  .site-header__inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .site-header__brand {
+    font-weight: 600; font-size: 15px; color: var(--text);
+    text-decoration: none;
+  }
+  .site-header__nav { display: flex; gap: 20px; font-size: 14px; }
+  .site-header__nav a { color: var(--text-muted); text-decoration: none; }
+  .site-header__nav a:hover { color: var(--primary); }
+
+  .container {
+    max-width: 900px; margin: 0 auto; padding: 0 20px;
+  }
+
+  /* -------- shared components -------- */
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  .feriado-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+    box-shadow: var(--shadow);
+  }
+  .feriado-card__name {
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 8px;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .feriado-card__date {
+    font-size: 16px; color: var(--text-muted);
+    margin: 0 0 16px;
+  }
+  .feriado-card__countdown {
+    display: inline-flex; align-items: baseline; gap: 6px;
+    background: var(--primary-tint);
+    color: var(--primary);
+    padding: 6px 14px;
+    border-radius: var(--radius-full, 999px);
+    font-weight: 600; font-size: 14px;
+  }
+  .feriado-card__countdown strong { font-size: 18px; }
+
+  .region-picker {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px 28px;
+  }
+  .region-picker__label {
+    font-size: 15px; font-weight: 600;
+    margin: 0 0 12px; color: var(--text);
+  }
+  .region-picker select {
+    width: 100%; padding: 12px 14px;
+    font-size: 16px; font-family: inherit;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--text);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'><path d='M2 4l4 4 4-4' stroke='%237c3aed' stroke-width='2' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+  .region-picker select:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+
+  .region-result {
+    margin-top: 16px;
+    padding: 16px;
+    background: var(--primary-tint);
+    border-radius: var(--radius);
+    font-size: 15px;
+    display: none;
+  }
+  .region-result.show { display: block; }
+  .region-result__row { display: flex; justify-content: space-between; padding: 4px 0; }
+  .region-result__row strong { color: var(--primary); }
+  .region-result__link {
+    display: inline-block; margin-top: 10px;
+    color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px;
+  }
+  .region-result__link:hover { text-decoration: underline; }
+
+  .legal-footer {
+    max-width: 900px; margin: 40px auto 0;
+    padding: 20px; border-top: 1px solid var(--border);
+    font-size: 12px; color: var(--text-faint); text-align: center;
+  }
+  .legal-footer a { color: var(--text-muted); }
+
+  /* ==================== VARIANT A: single-card hero ==================== */
+  #variant-a .hero {
+    padding: 48px 0 24px;
+  }
+  #variant-a h1 {
+    font-size: 20px; font-weight: 500;
+    color: var(--text-muted);
+    margin: 0 0 4px;
+  }
+  #variant-a h1 strong { color: var(--text); font-weight: 700; }
+  #variant-a .stack {
+    display: flex; flex-direction: column; gap: 20px;
+    padding-bottom: 40px;
+  }
+
+  /* ==================== VARIANT B: split 50/50 ==================== */
+  #variant-b .hero { padding: 32px 0 12px; }
+  #variant-b h1 { font-size: 24px; margin: 0 0 6px; letter-spacing: -0.01em; }
+  #variant-b h1 strong { color: var(--primary); }
+  #variant-b .hero p { color: var(--text-muted); margin: 0; font-size: 14px; }
+  #variant-b .split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    padding: 24px 0 40px;
+  }
+  @media (max-width: 680px) {
+    #variant-b .split { grid-template-columns: 1fr; }
+  }
+
+  /* ==================== VARIANT C: countdown hero ==================== */
+  #variant-c {
+    background: linear-gradient(180deg, var(--primary-tint) 0%, var(--bg) 360px);
+  }
+  #variant-c .hero {
+    text-align: center; padding: 40px 0 20px;
+  }
+  #variant-c .hero__eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--primary);
+    margin: 0 0 12px;
+  }
+  #variant-c .hero__num {
+    font-size: clamp(72px, 16vw, 140px);
+    font-weight: 800; line-height: 1;
+    color: var(--primary);
+    letter-spacing: -0.04em;
+    font-variant-numeric: tabular-nums;
+    margin: 0;
+  }
+  #variant-c .hero__unit {
+    font-size: 20px; font-weight: 500;
+    color: var(--text-muted);
+    margin: 4px 0 24px;
+  }
+  #variant-c .hero__feriado {
+    font-size: 22px; font-weight: 700;
+    margin: 0 0 4px;
+  }
+  #variant-c .hero__date {
+    font-size: 15px; color: var(--text-muted); margin: 0 0 32px;
+  }
+  #variant-c .region-picker {
+    max-width: 520px; margin: 0 auto 40px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<nav id="variant-nav">
+  <button class="variant-tab active" data-v="a">A: Single-card hero ★</button>
+  <button class="variant-tab" data-v="b">B: Split screen</button>
+  <button class="variant-tab" data-v="c">C: Countdown hero</button>
+  <button id="theme-toggle" aria-label="Dark mode">☽</button>
+</nav>
+
+<!-- ==================== VARIANT A ==================== -->
+<section id="variant-a" class="variant active">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-header__brand">Calendario Escolar Chile</a>
+      <nav class="site-header__nav">
+        <a href="#">Feriados</a>
+        <a href="#">Info</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Calendario escolar <strong>2026</strong></h1>
+    </div>
+
+    <div class="stack">
+      <div class="feriado-card">
+        <p class="eyebrow">Próximo feriado escolar</p>
+        <p class="feriado-card__name">Día del Trabajo</p>
+        <p class="feriado-card__date">Viernes 1 de mayo · Ley 2.977</p>
+        <span class="feriado-card__countdown">en <strong>14</strong> días</span>
+      </div>
+
+      <div class="region-picker">
+        <p class="region-picker__label">¿Cuándo empiezan las clases en tu región?</p>
+        <select data-picker="a">
+          <option value="">Selecciona tu región</option>
+        </select>
+        <div class="region-result" data-result="a">
+          <div class="region-result__row"><span>Inicio de clases</span><strong data-field="inicio"></strong></div>
+          <div class="region-result__row"><span>Vacaciones invierno</span><strong data-field="vac"></strong></div>
+          <div class="region-result__row"><span>Fin de año escolar</span><strong data-field="fin"></strong></div>
+          <a href="#" class="region-result__link" data-field="link">Ver calendario completo →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="legal-footer">
+    Información referencial. Fuente: <a href="https://www.mineduc.cl/">Mineduc</a> · <a href="#">Aviso legal</a>
+  </footer>
+</section>
+
+<!-- ==================== VARIANT B ==================== -->
+<section id="variant-b" class="variant">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-header__brand">Calendario Escolar Chile</a>
+      <nav class="site-header__nav">
+        <a href="#">Feriados</a>
+        <a href="#">Info</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <h1>Calendario escolar <strong>2026</strong></h1>
+      <p>Dos cosas. Nada más.</p>
+    </div>
+
+    <div class="split">
+      <div class="feriado-card">
+        <p class="eyebrow">Próximo feriado</p>
+        <p class="feriado-card__name">Día del Trabajo</p>
+        <p class="feriado-card__date">Viernes 1 de mayo</p>
+        <span class="feriado-card__countdown">en <strong>14</strong> días</span>
+      </div>
+
+      <div class="region-picker">
+        <p class="region-picker__label">Inicio de clases por región</p>
+        <select data-picker="b">
+          <option value="">Selecciona tu región</option>
+        </select>
+        <div class="region-result" data-result="b">
+          <div class="region-result__row"><span>Inicio</span><strong data-field="inicio"></strong></div>
+          <div class="region-result__row"><span>Vacaciones inv.</span><strong data-field="vac"></strong></div>
+          <div class="region-result__row"><span>Fin año</span><strong data-field="fin"></strong></div>
+          <a href="#" class="region-result__link" data-field="link">Ver calendario completo →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="legal-footer">
+    Información referencial. Fuente: <a href="https://www.mineduc.cl/">Mineduc</a> · <a href="#">Aviso legal</a>
+  </footer>
+</section>
+
+<!-- ==================== VARIANT C ==================== -->
+<section id="variant-c" class="variant">
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a href="#" class="site-header__brand">Calendario Escolar Chile</a>
+      <nav class="site-header__nav">
+        <a href="#">Feriados</a>
+        <a href="#">Info</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="hero">
+      <p class="hero__eyebrow">Próximo feriado escolar</p>
+      <p class="hero__num">14</p>
+      <p class="hero__unit">días restantes</p>
+      <p class="hero__feriado">Día del Trabajo</p>
+      <p class="hero__date">Viernes 1 de mayo de 2026</p>
+    </div>
+
+    <div class="region-picker">
+      <p class="region-picker__label">Inicio de clases por región</p>
+      <select data-picker="c">
+        <option value="">Selecciona tu región</option>
+      </select>
+      <div class="region-result" data-result="c">
+        <div class="region-result__row"><span>Inicio de clases</span><strong data-field="inicio"></strong></div>
+        <div class="region-result__row"><span>Vacaciones invierno</span><strong data-field="vac"></strong></div>
+        <div class="region-result__row"><span>Fin de año escolar</span><strong data-field="fin"></strong></div>
+        <a href="#" class="region-result__link" data-field="link">Ver calendario completo →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="legal-footer">
+    Información referencial. Fuente: <a href="https://www.mineduc.cl/">Mineduc</a> · <a href="#">Aviso legal</a>
+  </footer>
+</section>
+
+<script>
+  // Variant switching
+  var tabs = document.querySelectorAll('.variant-tab');
+  var variants = document.querySelectorAll('.variant');
+  tabs.forEach(function(t){
+    t.addEventListener('click', function(){
+      var v = this.dataset.v;
+      tabs.forEach(function(x){ x.classList.remove('active'); });
+      this.classList.add('active');
+      variants.forEach(function(x){ x.classList.remove('active'); });
+      document.getElementById('variant-' + v).classList.add('active');
+    });
+  });
+
+  // Theme toggle
+  document.getElementById('theme-toggle').addEventListener('click', function(){
+    var cur = document.documentElement.getAttribute('data-theme');
+    document.documentElement.setAttribute('data-theme', cur === 'dark' ? '' : 'dark');
+    this.textContent = cur === 'dark' ? '☽' : '☀';
+  });
+
+  // Mock data — 16 regiones
+  var REGIONS = [
+    { slug: 'arica-y-parinacota', name: 'Arica y Parinacota', inicio: '4 de marzo', vac: '13 – 24 de julio', fin: '4 de diciembre' },
+    { slug: 'tarapaca', name: 'Tarapacá', inicio: '4 de marzo', vac: '13 – 24 de julio', fin: '4 de diciembre' },
+    { slug: 'antofagasta', name: 'Antofagasta', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'atacama', name: 'Atacama', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'coquimbo', name: 'Coquimbo', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'valparaiso', name: 'Valparaíso', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'metropolitana', name: 'Metropolitana', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'ohiggins', name: 'O\u2019Higgins', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'maule', name: 'Maule', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'nuble', name: 'Ñuble', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'biobio', name: 'Biobío', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'araucania', name: 'La Araucanía', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'los-rios', name: 'Los Ríos', inicio: '4 de marzo', vac: '22 jun – 3 jul', fin: '4 de diciembre' },
+    { slug: 'los-lagos', name: 'Los Lagos', inicio: '4 de marzo', vac: '6 – 17 de julio', fin: '4 de diciembre' },
+    { slug: 'aysen', name: 'Aysén', inicio: '4 de marzo', vac: '29 jun – 17 jul', fin: '23 de diciembre' },
+    { slug: 'magallanes', name: 'Magallanes', inicio: '4 de marzo', vac: '29 jun – 17 jul', fin: '11 de diciembre' }
+  ];
+
+  // Populate all selects + wire change handler
+  document.querySelectorAll('select[data-picker]').forEach(function(sel){
+    REGIONS.forEach(function(r){
+      var o = document.createElement('option');
+      o.value = r.slug; o.textContent = r.name;
+      sel.appendChild(o);
+    });
+    sel.addEventListener('change', function(){
+      var v = this.dataset.picker;
+      var result = document.querySelector('[data-result="' + v + '"]');
+      if (!this.value) { result.classList.remove('show'); return; }
+      var r = REGIONS.find(function(x){ return x.slug === this.value; }.bind(this));
+      if (!r) return;
+      result.querySelector('[data-field="inicio"]').textContent = r.inicio;
+      result.querySelector('[data-field="vac"]').textContent = r.vac;
+      result.querySelector('[data-field="fin"]').textContent = r.fin;
+      result.querySelector('[data-field="link"]').href = '/region/' + r.slug + '/';
+      result.classList.add('show');
+    });
+  });
+</script>
+
+</body>
+</html>
