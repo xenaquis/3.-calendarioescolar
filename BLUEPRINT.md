@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-04-17 (Landing simplificada: index.html reducido a hero + feriado-card + region-picker. AdSense removido del home. CSP ajustado para sodar2.js).
+Ultimo update de este blueprint: 2026-04-20 (SEO recovery: re-agregado contenido indexable below-the-fold tras caida de impresiones 3500→10-20 post-refactor 2026-04-17. Hero densificado, tabla feriados, FAQ con details, more-cards descriptivos, schemas Event + HowTo agregados, title/meta con fechas concretas).
 
 ---
 
@@ -170,6 +170,57 @@ Sketch ganador: `.planning/sketches/001-landing-layout/` variante A (single-card
 ### Riesgo SEO
 
 FAQPage schema conserva 3 preguntas. Contenido textual de FAQ ya no está en el DOM visible — pero sí en el schema + en las landings (`/cuando-empiezan-clases-2026.html`, `/vacaciones-invierno-2026.html`, `/feriados-2026.html`). Monitorear Search Console en próximas semanas.
+
+---
+
+## SEO Recovery post-refactor (2026-04-20)
+
+### Problema detectado
+
+Google Search Console reportó caída de **3500 → 10-20 impresiones diarias** tras el refactor del 17-abr. Causa: commit `ce2835f` removió ~300 líneas de contenido indexable del home (FAQ, tabla feriados, cards descriptivas, school-stats). FAQPage schema quedó sin pareo HTML visible → señal débil.
+
+### Fix aplicado
+
+**Above-the-fold** (minimal, preservado):
+- Hero + feriado-card + region-picker sin cambios de layout
+
+**Above-the-fold densificado**:
+- `.hero-dates` — línea con fechas clave "Inicio **4 mar** · Vacaciones invierno **22 jun** · Fin **4 dic**" (scannable + CTR)
+- `.hero-updated` — "Actualizado: abril 2026" (freshness signal)
+
+**Below-the-fold** (recuperación SEO):
+- `.more-cards` (reemplaza `.more-links`) — 3 cards con título + descripción de 1 línea hacia landings hijas
+- `<section class="home-section">` Feriados en período escolar — tabla 6 filas + meta legal
+- `<section class="home-section home-faq">` FAQ — 4 `<details open>` con contenido pareado al FAQPage schema
+
+**Head optimizations (CTR)**:
+- `<title>`: "Calendario Escolar 2026 Chile — Inicio 4 marzo · Vacaciones · Fin diciembre" (fechas concretas)
+- `<meta description>`: accionable + "Actualizado abril 2026"
+- OG + Twitter titles/descriptions sincronizados
+
+**Schema.org agregados** al `@graph`:
+- `Event` — año escolar 2026 (startDate 2026-03-04, endDate 2026-12-04, organizer Mineduc)
+- `HowTo` — "Cómo consultar tu calendario escolar 2026" con 3 pasos
+- `FAQPage` — 4ª pregunta añadida ("¿pueden los colegios cambiar las fechas?")
+
+**CSS nuevo en `components.css`** (cache bust v3→v4):
+- `.hero-dates`, `.hero-updated`
+- `.more-cards`, `.more-card`, `.more-card__title`, `.more-card__desc`
+- `.home-section`, `.home-section__intro`, `.home-section__meta`, `.home-section__cta`
+- `.feriados-table` (zebra stripes, sin badges BCN)
+- `.home-faq details` overrides
+
+### Recovery esperado
+
+- Impresiones: 50-70% en 2 semanas, ~100% en 4-6 semanas
+- CTR: +20-40% vs pre-refactor si rich results Event/HowTo/FAQPage se activan
+
+### Monitoreo
+
+Revisar GSC semanalmente:
+- Impresiones diarias del home (`/`) → objetivo 3000+ en 4 semanas
+- Queries indexadas → objetivo recuperar long-tail tipo "cuándo empiezan las clases 2026", "corpus christi 2026", "vacaciones invierno chile"
+- Appearance de rich results (FAQ, HowTo, Event) → GSC > Enhancements
 
 ---
 

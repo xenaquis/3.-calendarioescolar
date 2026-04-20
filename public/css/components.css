@@ -1162,3 +1162,127 @@ details h3 {
   text-decoration: underline;
 }
 
+.hero-dates {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  margin: var(--space-2) 0 0;
+  line-height: 1.5;
+}
+
+.hero-dates strong {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.hero-updated {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin: var(--space-1) 0 0;
+  opacity: 0.8;
+}
+
+.more-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  padding: var(--space-4) 0 var(--space-8);
+}
+
+.more-card {
+  display: block;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  background: var(--color-surface);
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.more-card:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.more-card__title {
+  display: block;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.more-card__desc {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.home-section {
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.home-section h2 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin: 0 0 var(--space-3);
+  color: var(--color-text);
+}
+
+.home-section__intro {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-3);
+}
+
+.home-section__meta {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin: var(--space-3) 0 0;
+  line-height: 1.5;
+}
+
+.home-section__meta a {
+  color: var(--color-accent);
+}
+
+.home-section__cta {
+  margin: var(--space-4) 0 0;
+  text-align: center;
+}
+
+.home-section__cta a {
+  color: var(--color-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.home-section__cta a:hover {
+  text-decoration: underline;
+}
+
+.feriados-table {
+  width: 100%;
+  font-size: var(--text-sm);
+}
+
+.feriados-table th,
+.feriados-table td {
+  text-align: left;
+  padding: var(--space-2) var(--space-3);
+}
+
+.feriados-table tbody tr:nth-child(even) {
+  background: var(--color-surface-alt, rgba(0,0,0,0.02));
+}
+
+.home-faq details {
+  margin: 0 0 var(--space-2);
+}
+
+.home-faq details[open] {
+  margin-bottom: var(--space-3);
+}
+
