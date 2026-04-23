@@ -71,7 +71,7 @@ var STATIC_PAGES = [
 ];
 STATIC_PAGES.forEach(function (p) {
   if (fs.existsSync(path.join(OUTPUT_DIR, p.file))) {
-    var slug = p.file === 'index.html' ? '' : p.file;
+    var slug = p.file === 'index.html' ? '' : p.file.replace(/\.html$/, '');
     sitemapUrls.push({ loc: 'https://' + domain + '/' + slug, priority: p.pri, changefreq: p.freq });
   }
 });
