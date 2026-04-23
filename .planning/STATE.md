@@ -2,13 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.3
 milestone_name: Sheet como Fuente de Verdad Unica
-status: v1.3 milestone complete — archived
-last_updated: "2026-03-25T19:45:00.000Z"
+status: hotfix complete — Phase 15 SEO Recovery v3 executed 2026-04-23
+last_updated: "2026-04-23T00:00:00.000Z"
 progress:
-  total_phases: 4
-  completed_phases: 4
-  total_plans: 7
-  completed_plans: 7
+  total_phases: 1
+  completed_phases: 1
+  total_plans: 3
+  completed_plans: 3
+active_phase: ""
 ---
 
 # State — calendarioescolar.cl

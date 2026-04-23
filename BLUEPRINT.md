@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-04-20 (SEO recovery: re-agregado contenido indexable below-the-fold tras caida de impresiones 3500→10-20 post-refactor 2026-04-17. Hero densificado, tabla feriados, FAQ con details, more-cards descriptivos, schemas Event + HowTo agregados, title/meta con fechas concretas).
+Ultimo update de este blueprint: 2026-04-23 (SEO Recovery v3: canonical/hreflang sin .html, title ranker revertido, link graph 16 regiones, stats bar home-stats, dateModified refrescado, sitemap loc sin .html. Respuesta al March 2026 Core Update).
 
 ---
 
@@ -221,6 +221,47 @@ Revisar GSC semanalmente:
 - Impresiones diarias del home (`/`) → objetivo 3000+ en 4 semanas
 - Queries indexadas → objetivo recuperar long-tail tipo "cuándo empiezan las clases 2026", "corpus christi 2026", "vacaciones invierno chile"
 - Appearance de rich results (FAQ, HowTo, Event) → GSC > Enhancements
+
+---
+
+## SEO Recovery v3 — Core Update response (2026-04-23)
+
+### Diagnóstico
+Caída de 3000 → 5 impresiones/día (2026-04-13 → 2026-04-21). Posición 2.8 → 32.6.
+Causa raíz: **Google March 2026 Core Update** (rollout 27-mar → 8-abr, tail 13-15 abril).
+El update explícitamente movió visibilidad away from aggregators/utility pages toward destination sources.
+calendarioescolar.cl es aggregator de datos Mineduc → target directo.
+
+### Fixes aplicados
+- **B1** Canonical + hreflang: 4 landings ahora apuntan a URL sin `.html` (alineado con pretty URLs Cloudflare).
+- **B2** Sitemap: `scripts/generate-pages.js` emite `<loc>` sin `.html`.
+- **B3** Title revert: "Calendario Escolar 2026 Chile — Fechas Oficiales por Región" (patrón ranker histórico).
+- **B4** H2 semántico "¿De qué región eres?" + `<section class="region-index">` con 16 anchors a páginas región.
+- **B5** `<section class="home-stats">` con semana escolar / días a vacaciones / feriados restantes (contenido único time-sensitive → señal destination-source).
+- **B6** `dateModified` refrescado a 2026-04-23 en schemas + article:modified_time.
+
+### Baseline 2026-04-23
+- Impresiones: ~5/día
+- Clicks: 0/día
+- Posición promedio: 32.6
+- Pages top (histórico pre-caída): `/vacaciones-invierno-2026` (14855 impr), `/` (9460 impr), `/feriados-2026` (1954 impr)
+- Query motor: "vacaciones de invierno 2026" (7009 impr acumulado, pos 3.43 histórico)
+
+### Gate de escalación
+- **2026-04-30 (7d)**: ≥50 impr/día + pos <15 → recovery iniciándose.
+- **2026-05-07 (14d)**: ≥500 impr/día + pos <10 → trayectoria OK.
+- **2026-05-14 (21d)**: si sigue <200 impr/día → escalar:
+  - Reintroducir tabla feriados con badges BCN SHA256 en home.
+  - Considerar nueva landing "calendario-escolar-2026" como destination page con datos densos.
+  - Revisar reversión parcial del refactor ce2835f.
+
+### Track C manual pendiente (user)
+- [ ] GSC → Security & Manual actions (descartar penalización)
+- [ ] GSC → Pages coverage: exportar y revisar URLs "Crawled - not indexed" entre 10-21 abril
+- [ ] GSC → URL Inspection en: `/`, `/vacaciones-invierno-2026`, `/feriados-2026`, top 3 regiones
+- [ ] GSC → Sitemaps → re-submit `sitemap.xml` tras deploy
+- [ ] GSC → URL Inspection → Request Indexing en las URLs top post-deploy
+- [ ] Cloudflare Analytics → descartar spike 4xx/5xx entre 13-15 abril
 
 ---
 

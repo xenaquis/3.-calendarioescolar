@@ -53,4 +53,24 @@ Full details: `.planning/milestones/v1.3-ROADMAP.md`
 </details>
 
 ---
-*Updated: 2026-03-25 — v1.3 complete, all milestones shipped*
+
+## Hotfix / Standalone Phases
+
+- [x] **Phase 15: SEO Recovery v3** — Core Update response (3/3 plans) — completed 2026-04-23
+
+### Phase 15: SEO Recovery v3 — Core Update Response
+
+**Goal:** Re-posicionar el sitio como destination source (no aggregator) vía señales técnicas + contenido único diferenciador, revertiendo las regresiones SEO del refactor ce2835f y corrigiendo señales canónicas contradictorias.
+
+**Causa raíz:** Google March 2026 Core Update movió visibilidad away from aggregators toward destination sources. calendarioescolar.cl cayó de ~3000 → ~5 impresiones/día.
+
+| Plan | Wave | Scope |
+|------|------|-------|
+| 15-01 | 1 | B1 canonical+hreflang sin .html (4 landings) + B2 sitemap sin .html |
+| 15-02 | 1 | B3 title revert + B4 H2+linkgraph + B5 stats bar + B6 dateModified |
+| 15-03 | 2 | B7 regenerar + validar + BLUEPRINT.md update |
+
+**Phase dir:** `.planning/phases/15-seo-recovery/`
+
+---
+*Updated: 2026-04-23 — Phase 15 SEO Recovery v3 planned*
