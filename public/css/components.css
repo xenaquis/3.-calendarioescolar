@@ -1286,3 +1286,89 @@ details h3 {
   margin-bottom: var(--space-3);
 }
 
+/* ---------- Region picker H2 ---------- */
+.region-picker__h2 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 var(--space-3) 0;
+  text-align: center;
+}
+
+/* ---------- Region index (link graph) ---------- */
+.region-index {
+  margin-top: var(--space-5);
+  padding: var(--space-4);
+}
+.region-index__heading {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-3) 0;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.region-index__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-1) var(--space-3);
+}
+@media (min-width: 600px) {
+  .region-index__list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.region-index__list a {
+  display: block;
+  padding: var(--space-2) 0;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  border-bottom: 1px solid transparent;
+}
+.region-index__list a:hover,
+.region-index__list a:focus {
+  border-bottom-color: var(--color-primary);
+}
+
+/* ---------- Home stats (destination-source signal) ---------- */
+.home-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+.home-stats__item {
+  text-align: center;
+}
+.home-stats__label {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin: 0 0 var(--space-1) 0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.home-stats__value {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.1;
+}
+.home-stats__note {
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  margin: var(--space-1) 0 0 0;
+}
+@media (max-width: 480px) {
+  .home-stats__value { font-size: var(--text-lg); }
+}
+

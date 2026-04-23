@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- SEO -->
-  <title>Calendario Escolar 2026 Chile &mdash; Inicio 4 marzo &middot; Vacaciones &middot; Fin diciembre</title>
-  <meta name="description" content="Inicio 4 marzo &middot; Vacaciones invierno desde 22 junio &middot; Fin 4 diciembre. Tu calendario por regi&oacute;n, fechas oficiales Mineduc 2026. Actualizado abril 2026.">
+  <title>Calendario Escolar 2026 Chile &mdash; Fechas Oficiales por Regi&oacute;n</title>
+  <meta name="description" content="Calendario escolar 2026 Chile: inicio 4 de marzo, vacaciones de invierno desde el 22 de junio, fin de a&ntilde;o 4 de diciembre. Fechas oficiales Mineduc para las 16 regiones. Actualizado abril 2026.">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, noai, noimageai">
   <meta name="claim-data" content="schoolStart,winterStart,winterEnd,schoolEnd,totalRegiones,feriado_viernes_santo,feriado_dia_trabajo,feriado_glorias_navales,feriado_corpus_christi,feriado_san_pedro_san_pablo,feriado_encuentro_dos_mundos,feriado_inmaculada_concepcion">
   <link rel="canonical" href="https://calendarioescolar.cl/">
@@ -19,8 +19,8 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://calendarioescolar.cl/">
-  <meta property="og:title" content="Calendario Escolar 2026 Chile &mdash; Inicio 4 marzo &middot; Vacaciones &middot; Fin diciembre">
-  <meta property="og:description" content="Inicio 4 marzo &middot; Invierno desde 22 junio &middot; Fin 4 diciembre. Fechas Mineduc 2026 para 16 regiones.">
+  <meta property="og:title" content="Calendario Escolar 2026 Chile &mdash; Fechas Oficiales por Regi&oacute;n">
+  <meta property="og:description" content="Inicio 4 de marzo, vacaciones desde el 22 de junio, fin 4 de diciembre. Fechas Mineduc para las 16 regiones de Chile.">
   <meta property="og:image" content="https://calendarioescolar.cl/icons/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -29,8 +29,8 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Calendario Escolar 2026 Chile &mdash; Inicio 4 marzo &middot; Vacaciones &middot; Fin diciembre">
-  <meta name="twitter:description" content="Inicio 4 marzo &middot; Invierno 22 junio &middot; Fin 4 diciembre. 16 regiones. Fuente Mineduc.">
+  <meta name="twitter:title" content="Calendario Escolar 2026 Chile &mdash; Fechas Oficiales por Regi&oacute;n">
+  <meta name="twitter:description" content="Inicio 4 de marzo, vacaciones desde el 22 de junio, fin 4 de diciembre. 16 regiones. Fuente Mineduc.">
   <meta name="twitter:image" content="https://calendarioescolar.cl/icons/og-image.png">
 
   <!-- Favicon -->
@@ -41,7 +41,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="/css/tokens.css?v=2">
   <link rel="stylesheet" href="/css/base.css">
-  <link rel="stylesheet" href="/css/components.css?v=4">
+  <link rel="stylesheet" href="/css/components.css?v=5">
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -58,7 +58,7 @@
         "inLanguage": "es-CL",
         "publisher": { "@id": "https://calendarioescolar.cl/#org" },
         "datePublished": "2026-02-15",
-        "dateModified": "2026-04-17",
+        "dateModified": "2026-04-23",
         "copyrightYear": 2026
       },
       {
@@ -230,8 +230,28 @@
         </span>
       </section>
 
+      <!-- Stats en tiempo real (contenido único destination-source) -->
+      <section class="home-stats" aria-label="Estado actual del a&ntilde;o escolar 2026">
+        <div class="home-stats__item">
+          <p class="home-stats__label">Semana escolar</p>
+          <p class="home-stats__value" id="stat-week">&mdash;</p>
+          <p class="home-stats__note">de 38 (JEC)</p>
+        </div>
+        <div class="home-stats__item">
+          <p class="home-stats__label">Faltan</p>
+          <p class="home-stats__value" id="stat-days-winter">&mdash;</p>
+          <p class="home-stats__note">d&iacute;as para vacaciones invierno</p>
+        </div>
+        <div class="home-stats__item">
+          <p class="home-stats__label">Feriados restantes</p>
+          <p class="home-stats__value" id="stat-feriados-left">&mdash;</p>
+          <p class="home-stats__note">en per&iacute;odo escolar</p>
+        </div>
+      </section>
+
       <!-- Selector de regi&oacute;n + resultado -->
       <section class="region-picker" aria-label="Consulta tu regi&oacute;n">
+        <h2 class="region-picker__h2">&iquest;De qu&eacute; regi&oacute;n eres?</h2>
         <label class="region-picker__label" for="region-select">&iquest;Cu&aacute;ndo empiezan las clases en tu regi&oacute;n?</label>
         <select id="region-select" aria-label="Selecciona tu regi&oacute;n">
           <option value="">Selecciona tu regi&oacute;n</option>
@@ -259,6 +279,29 @@
           <div class="region-result__row"><span>Fin de a&ntilde;o escolar</span><strong id="r-fin">&mdash;</strong></div>
           <a href="#" class="region-result__link" id="link-pagina">Ver calendario completo &rarr;</a>
         </div>
+      </section>
+
+      <!-- Link graph: 16 regiones con anchor text crawlable -->
+      <section class="region-index" aria-label="&Iacute;ndice de regiones">
+        <h2 class="region-index__heading">Calendario escolar por regi&oacute;n</h2>
+        <ul class="region-index__list">
+          <li><a href="/region/arica-y-parinacota/">Arica y Parinacota</a></li>
+          <li><a href="/region/tarapaca/">Tarapac&aacute;</a></li>
+          <li><a href="/region/antofagasta/">Antofagasta</a></li>
+          <li><a href="/region/atacama/">Atacama</a></li>
+          <li><a href="/region/coquimbo/">Coquimbo</a></li>
+          <li><a href="/region/valparaiso/">Valpara&iacute;so</a></li>
+          <li><a href="/region/metropolitana/">Metropolitana</a></li>
+          <li><a href="/region/ohiggins/">O&rsquo;Higgins</a></li>
+          <li><a href="/region/maule/">Maule</a></li>
+          <li><a href="/region/nuble/">&Ntilde;uble</a></li>
+          <li><a href="/region/biobio/">Biob&iacute;o</a></li>
+          <li><a href="/region/araucania/">La Araucan&iacute;a</a></li>
+          <li><a href="/region/los-rios/">Los R&iacute;os</a></li>
+          <li><a href="/region/los-lagos/">Los Lagos</a></li>
+          <li><a href="/region/aysen/">Ays&eacute;n</a></li>
+          <li><a href="/region/magallanes/">Magallanes</a></li>
+        </ul>
       </section>
 
       <!-- M&aacute;s recursos -->
@@ -403,7 +446,7 @@
   <script defer src="/js/analytics.js"></script>
   <script defer src="/js/regions-data.js"></script>
   <script defer src="/js/calendar-config.js"></script>
-  <script defer src="/js/app.js?v=3"></script>
+  <script defer src="/js/app.js?v=4"></script>
 
 </body>
 </html>

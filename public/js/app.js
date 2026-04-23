@@ -39,9 +39,53 @@ var App = (function () {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
+  function initHomeStats() {
+    var weekEl = document.getElementById('stat-week');
+    var daysEl = document.getElementById('stat-days-winter');
+    var feriadosEl = document.getElementById('stat-feriados-left');
+    if (!weekEl || !daysEl || !feriadosEl || !CAL) return;
+
+    var now = today();
+    var schoolStart = parseDate(CAL.schoolStart);
+    var winterStart = parseDate(CAL.winterStart);
+
+    if (now >= schoolStart) {
+      var diffMs = now - schoolStart;
+      var week = Math.floor(diffMs / (7 * 86400000)) + 1;
+      weekEl.textContent = week > 0 && week <= 45 ? week : '—';
+    } else {
+      weekEl.textContent = 'Pre';
+    }
+
+    if (now < winterStart) {
+      var diffDays = Math.ceil((winterStart - now) / 86400000);
+      daysEl.textContent = diffDays;
+    } else {
+      var winterEnd = parseDate(CAL.winterEnd);
+      if (now <= winterEnd) {
+        daysEl.textContent = '0';
+        var daysElNote = daysEl.nextElementSibling;
+        if (daysElNote) daysElNote.textContent = 'ya estamos de vacaciones';
+      } else {
+        daysEl.textContent = '—';
+      }
+    }
+
+    var source = CAL.feriadosCompletos || [];
+    var count = 0;
+    for (var i = 0; i < source.length; i++) {
+      var f = source[i];
+      if (f.contexto && f.contexto !== 'en-clases') continue;
+      var d = parseDate(f.date);
+      if (d >= now) count++;
+    }
+    feriadosEl.textContent = count;
+  }
+
   function init() {
     if (CAL) {
       initFeriadoCard();
+      initHomeStats();
     } else {
       console.warn('[app.js] CALENDAR_CONFIG no disponible — ejecutar: npm run generate');
     }
