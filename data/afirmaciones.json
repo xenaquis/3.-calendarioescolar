@@ -273,26 +273,6 @@
       "status": "unverified"
     },
     {
-      "id": "feriado-corpus-christi",
-      "tags": [
-        "feriados",
-        "religioso",
-        "movil"
-      ],
-      "claim": "Corpus Christi es feriado el 4 de junio de 2026",
-      "displayed_value": "2026-06-04",
-      "data_key": "feriado_corpus_christi",
-      "data_path": "calendar-config.json → feriadosCompletos[5].date",
-      "source_id": "bcn-ley-2977",
-      "source_reference": "Art. 2 — Corpus Christi (60 dias despues de Pascua)",
-      "verification_method": "deterministic",
-      "verification_tier": 1,
-      "expected_check": "Pascua 2026 = 5 abril + 60 dias = 4 junio. Algoritmo Meeus/Jones/Butcher.",
-      "last_verified": null,
-      "last_verified_by": null,
-      "status": "unverified"
-    },
-    {
       "id": "feriado-pueblos-indigenas",
       "tags": [
         "feriados",
@@ -735,26 +715,6 @@
       "verification_method": "arithmetic",
       "verification_tier": 0,
       "expected_check": "count(feriadosCompletos where contexto == 'sin-impacto') == 8",
-      "last_verified": null,
-      "last_verified_by": null,
-      "status": "unverified"
-    },
-    {
-      "id": "corpus-christi-movil",
-      "tags": [
-        "contextuales",
-        "feriados",
-        "movil"
-      ],
-      "claim": "Corpus Christi es un feriado movil que se calcula como Pascua + 60 dias",
-      "displayed_value": null,
-      "data_key": "corpusChristiMovil",
-      "data_path": null,
-      "source_id": "bcn-ley-2977",
-      "source_reference": "Art. 2 — feriados moviles eclesiasticos",
-      "verification_method": "deterministic",
-      "verification_tier": 1,
-      "expected_check": "Pascua 2026 = 5 abril. 5 abril + 60 = 4 junio 2026.",
       "last_verified": null,
       "last_verified_by": null,
       "status": "unverified"

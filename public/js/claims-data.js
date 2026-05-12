@@ -91,18 +91,6 @@ window.CLAIMS_DATA = {
     "articulo_numero": "PRIMERO",
     "inciso": "5"
   },
-  "feriado-corpus-christi": {
-    "id": "feriado-corpus-christi",
-    "pregunta": "Cuando es el feriado de Corpus Christi 2026?",
-    "respuesta": "Corpus Christi es feriado el 4 de junio de 2026",
-    "status": "unverified",
-    "source_reference": "Art. 2 — Corpus Christi (60 dias despues de Pascua)",
-    "source_name": "Ley 2.977 — Feriados legales de Chile",
-    "extracto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
-    "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=23639",
-    "articulo_numero": "PRIMERO",
-    "inciso": "2"
-  },
   "feriado-pueblos-indigenas": {
     "id": "feriado-pueblos-indigenas",
     "pregunta": "Cuando es el Dia Nacional de los Pueblos Indigenas 2026?",

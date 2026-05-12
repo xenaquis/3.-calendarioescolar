@@ -21,10 +21,6 @@ window.CALENDAR_CONFIG = {
       "nombre": "Glorias Navales"
     },
     {
-      "date": "2026-06-04",
-      "nombre": "Corpus Christi"
-    },
-    {
       "date": "2026-07-16",
       "nombre": "Virgen del Carmen"
     },
@@ -92,17 +88,6 @@ window.CALENDAR_CONFIG = {
       "contexto": "en-clases",
       "notaContexto": null,
       "nota": null
-    },
-    {
-      "date": "2026-06-04",
-      "nombre": "Corpus Christi",
-      "diaSemana": "Jueves",
-      "diaNum": 4,
-      "mes": "junio",
-      "tipo": "religioso",
-      "contexto": "en-clases",
-      "notaContexto": null,
-      "nota": "Móvil · Pascua + 60 días · <a href=\"https://www.bcn.cl/leychile/Navegar?idNorma=23639\" rel=\"noopener noreferrer\" target=\"_blank\">Ley 2.977 (BCN)</a>"
     },
     {
       "date": "2026-06-21",

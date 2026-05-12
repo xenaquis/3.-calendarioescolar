@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-04-23T16:16:05.076Z",
+  "generated_at": "2026-05-12T12:53:30.643Z",
   "summary": {
-    "total_claims": 50,
-    "verified": 45,
+    "total_claims": 49,
+    "verified": 44,
     "unverified": 5,
     "incorrecto": 0,
     "no_verificable": 0,
@@ -33,7 +33,7 @@
     "holidays": {
       "id": "holidays",
       "status": "correcto",
-      "claims_count": 15,
+      "claims_count": 14,
       "sources": [
         "Ley 2.977 — Feriados legales de Chile",
         "Ley 21.357 — Dia Nacional de los Pueblos Indigenas",
