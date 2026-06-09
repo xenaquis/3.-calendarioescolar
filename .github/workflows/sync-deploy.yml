@@ -28,6 +28,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # historia completa: generate-pages.js deriva <lastmod> del sitemap del git log real
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
