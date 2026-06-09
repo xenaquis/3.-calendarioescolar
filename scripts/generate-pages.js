@@ -22,6 +22,32 @@
 var fs = require('fs');
 var path = require('path');
 var crypto = require('crypto');
+var execSync = require('child_process').execSync;
+
+var REPO_ROOT = path.join(__dirname, '..');
+var TODAY = new Date().toISOString().slice(0, 10);
+
+// lastmod REAL desde git: fecha (YYYY-MM-DD) del ultimo commit que toco
+// cualquiera de los paths dados (repo-relativos). Evita estampar la fecha de
+// build en TODAS las URLs (anti-patron que erosiona la confianza de crawl).
+// Fallback a TODAY si git no esta disponible o el checkout es shallow sin
+// historia — por eso los workflows que corren este script usan fetch-depth: 0.
+function gitLastMod(paths) {
+  try {
+    var list = Array.isArray(paths) ? paths : [paths];
+    var quoted = list.map(function (p) { return '"' + p + '"'; }).join(' ');
+    var out = execSync('git log -1 --format=%cs -- ' + quoted, {
+      cwd: REPO_ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore']
+    }).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(out) ? out : TODAY;
+  } catch (e) {
+    return TODAY;
+  }
+}
+
+// Las paginas de region se derivan de estos datos: su lastmod cambia solo
+// cuando el contenido real cambia, no en cada build.
+var DATA_LASTMOD = gitLastMod(['data/pages.json', 'data/calendar-config.json', 'data/template.html']);
 
 var DATA_FILE          = path.join(__dirname, '..', 'data', 'pages.json');
 var TEMPLATE_FILE      = path.join(__dirname, '..', 'data', 'template.html');
@@ -72,7 +98,7 @@ var STATIC_PAGES = [
 STATIC_PAGES.forEach(function (p) {
   if (fs.existsSync(path.join(OUTPUT_DIR, p.file))) {
     var slug = p.file === 'index.html' ? '' : p.file.replace(/\.html$/, '');
-    sitemapUrls.push({ loc: 'https://' + domain + '/' + slug, priority: p.pri, changefreq: p.freq });
+    sitemapUrls.push({ loc: 'https://' + domain + '/' + slug, priority: p.pri, changefreq: p.freq, lastmod: gitLastMod('public/' + p.file) });
   }
 });
 
@@ -99,18 +125,19 @@ pages.forEach(function (page) {
   sitemapUrls.push({
     loc: 'https://' + domain + '/' + page.slug + '/',
     priority: page.priority || '0.6',
-    changefreq: 'monthly'
+    changefreq: 'monthly',
+    lastmod: DATA_LASTMOD
   });
 });
 
 // Generar sitemap
-var today = new Date().toISOString().slice(0, 10);
+var today = TODAY;
 var sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
 sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 sitemapUrls.forEach(function (u) {
   sitemap += '  <url>\n';
   sitemap += '    <loc>' + u.loc + '</loc>\n';
-  sitemap += '    <lastmod>' + today + '</lastmod>\n';
+  sitemap += '    <lastmod>' + (u.lastmod || today) + '</lastmod>\n';
   if (u.changefreq) sitemap += '    <changefreq>' + u.changefreq + '</changefreq>\n';
   sitemap += '    <priority>' + u.priority + '</priority>\n';
   sitemap += '  </url>\n';
