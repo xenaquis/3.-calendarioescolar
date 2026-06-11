@@ -228,8 +228,8 @@ window.REGIONS_DATA = {
   "aysen": {
     "name": "Aysén",
     "inicio": "4 de marzo",
-    "vacIni": "29 de junio",
-    "vacFin": "17 de julio",
+    "vacIni": "6 de julio",
+    "vacFin": "24 de julio",
     "fpIni": "14 de septiembre",
     "fpFin": "18 de septiembre",
     "fin": "11 de diciembre",

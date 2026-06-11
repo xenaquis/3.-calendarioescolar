@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-05-12T12:53:30.643Z",
+  "generated_at": "2026-06-11T16:47:22.011Z",
   "summary": {
-    "total_claims": 49,
-    "verified": 44,
+    "total_claims": 48,
+    "verified": 43,
     "unverified": 5,
     "incorrecto": 0,
     "no_verificable": 0,
@@ -51,7 +51,7 @@
     "context": {
       "id": "context",
       "status": "correcto",
-      "claims_count": 9,
+      "claims_count": 8,
       "sources": [
         "Resolucion Exenta Calendario Escolar 2026",
         "Ley 2.977 — Feriados legales de Chile",

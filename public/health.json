@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-05-12T12:53:30.617Z",
-  "generatedDate": "2026-05-12",
+  "generatedAt": "2026-06-11T16:47:21.799Z",
+  "generatedDate": "2026-06-11",
   "dataYear": 2026,
   "regionsCount": 16,
   "pagesCount": 16,
   "sitemap": "23 URLs",
   "dataFingerprint": {
-    "pagesJson": "af7b669ae1a31783cb980d1ac9a17a3e",
-    "calendarConfigJson": "3d6ab6a66151b89d7454b3a924c3da6c"
+    "pagesJson": "cb8f97b0ee6eae8830c3a5129c56fc1c",
+    "calendarConfigJson": "31b721e048d2f5663252cc143d7381f0"
   },
   "calendarConfig": {
     "schoolStart": "2026-03-04",

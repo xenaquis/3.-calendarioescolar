@@ -214,7 +214,7 @@ window.CLAIMS_DATA = {
   "region-vacaciones-inicio-sur": {
     "id": "region-vacaciones-inicio-sur",
     "pregunta": "Cuando empiezan las vacaciones de invierno en Aysen y Magallanes?",
-    "respuesta": "Las vacaciones de invierno comienzan el 29 de junio en Aysen y Magallanes",
+    "respuesta": "Las vacaciones de invierno comienzan el 6 de julio en Aysen y el 29 de junio en Magallanes",
     "status": "verified"
   },
   "region-vacaciones-fin": {
@@ -274,9 +274,9 @@ window.CLAIMS_DATA = {
   "total-feriados": {
     "id": "total-feriados",
     "pregunta": "Cuantos feriados nacionales hay en 2026?",
-    "respuesta": "Chile tiene 15 feriados nacionales en 2026",
+    "respuesta": "Chile tiene 14 feriados nacionales en 2026",
     "status": "unverified",
-    "source_reference": "Conteo de feriados legales vigentes para 2026 — Art. PRIMERO de ley 2977 y sus modificaciones",
+    "source_reference": "Conteo de feriados legales vigentes para 2026",
     "source_name": "Ley 2.977 — Feriados legales de Chile",
     "extracto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
     "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=23639",
@@ -295,18 +295,6 @@ window.CLAIMS_DATA = {
     "respuesta": "8 feriados no afectan el calendario escolar en 2026",
     "status": "unverified"
   },
-  "corpus-christi-movil": {
-    "id": "corpus-christi-movil",
-    "pregunta": "Como se calcula Corpus Christi?",
-    "respuesta": "Corpus Christi es un feriado movil que se calcula como Pascua + 60 dias",
-    "status": "unverified",
-    "source_reference": "Art. PRIMERO inciso 2 — fiestas movibles eclesiasticas (Corpus Christi reemplazado por Virgen del Carmen via Ley 20.148)",
-    "source_name": "Ley 2.977 — Feriados legales de Chile",
-    "extracto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
-    "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=23639",
-    "articulo_numero": "PRIMERO",
-    "inciso": "2"
-  },
   "pascua-2026": {
     "id": "pascua-2026",
     "pregunta": "Cuando cae el Domingo de Pascua 2026?",
@@ -318,7 +306,7 @@ window.CLAIMS_DATA = {
     "pregunta": "San Pedro y San Pablo 2026 requiere traslado a lunes?",
     "respuesta": "San Pedro y San Pablo 2026 cae lunes 29 de junio: no requiere traslado",
     "status": "unverified",
-    "source_reference": "Ley 19.668 Art. UNICO — traslado San Pedro y San Pablo y Encuentro Dos Mundos",
+    "source_reference": "Ley 19.668: si cae sabado o domingo se traslada al lunes siguiente",
     "source_name": "Ley 19.668 — Traslado de feriados a lunes",
     "extracto_verbatim": "\"Artículo único.- Trasládanse los feriados correspondientes al 29 de junio, día de San Pedro y San Pablo; 12 de octubre, día del descubrimiento de dos mundos; a los días lunes de la semana en que ocurren, LEY 20148 Art. 2 D.O. 06.01.2007 en caso de corresponder a día martes, miércoles o jueves, o los días lunes de la semana siguiente, en caso de corresponder a día viernes.\".",
     "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=160270",
@@ -358,7 +346,7 @@ window.CLAIMS_DATA = {
   "dias-vacaciones-invierno-calc-sur": {
     "id": "dias-vacaciones-invierno-calc-sur",
     "pregunta": "Como se calculan los 19 dias de vacaciones de invierno en el sur?",
-    "respuesta": "19 dias de vacaciones de invierno en Aysen y Magallanes (29 jun - 17 jul)",
+    "respuesta": "19 dias de vacaciones de invierno en Aysen (6 jul - 24 jul) y Magallanes (29 jun - 17 jul)",
     "status": "unverified"
   },
   "dias-fiestas-patrias-calc": {

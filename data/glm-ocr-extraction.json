@@ -1,0 +1,887 @@
+{
+  "_meta": {
+    "pipeline": "glm-ocr-local",
+    "date": "2026-04-02",
+    "model": "glm-ocr",
+    "note": "Extraccion OCR local via Ollama. Para dev/testing sin API keys."
+  },
+  "regions": {
+    "antofagasta": {
+      "_meta": {
+        "region": "Antofagasta",
+        "regionSlug": "antofagasta",
+        "source_pdf": "mineduc-antofagasta.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 12902,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio - viernes 03 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del Profesor y Profesora",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases, sin recuperación)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "araucania": {
+      "_meta": {
+        "region": "La Araucanía",
+        "regionSlug": "araucania",
+        "source_pdf": "mineduc-araucania.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 15311,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio – viernes 03 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "arica-y-parinacota": {
+      "_meta": {
+        "region": "Arica y Parinacota",
+        "regionSlug": "arica-y-parinacota",
+        "source_pdf": "mineduc-arica-y-parinacota.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 15649,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-07-13",
+          "date_end": "2026-07-24",
+          "raw_text": "Lunes 13 de julio - viernes 24 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-27",
+          "raw_text": "Lunes 27 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases, no se deben recuperar)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "atacama": {
+      "_meta": {
+        "region": "Atacama",
+        "regionSlug": "atacama",
+        "source_pdf": "mineduc-atacama.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 30799,
+        "pages_processed": 2
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4º Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio - viernes 03 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "aysen": {
+      "_meta": {
+        "region": "Aysén",
+        "regionSlug": "aysen",
+        "source_pdf": "mineduc-aysen.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 30203,
+        "pages_processed": 2
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-29",
+          "date_end": "2026-07-17",
+          "raw_text": "Lunes 29 de junio - viernes 17 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-20",
+          "raw_text": "Lunes 20 de julio.",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del Profesor y Profesora",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-11",
+          "raw_text": "Viernes 11 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-23",
+          "raw_text": "Martes 23 de diciembre",
+          "day_of_week": "Martes"
+        }
+      ],
+      "trimestral": []
+    },
+    "biobio": {
+      "_meta": {
+        "region": "Biobío",
+        "regionSlug": "biobio",
+        "source_pdf": "mineduc-biobio.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 17955,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "03.- Inicio de clases primer semestre",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 4 de marzo 2026",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "08.- Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 6 de julio 2026",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "09.- Día del profesor y la profesora",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre 2026 (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "12.- Término de clases segundo semestre establecimientos con JECD",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 4 de diciembre 2026",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "13.- Término de clases segundo semestre establecimientos sin JECD",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre 2026",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "coquimbo": {
+      "_meta": {
+        "region": "Coquimbo",
+        "regionSlug": "coquimbo",
+        "source_pdf": "mineduc-coquimbo.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 14681,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "INGRESO DE ESTUDIANTES NT 1 A 4° MEDIO",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "RECESO DE INVIERNO RÉGIMEN SEMESTRAL",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio - viernes 03 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "INICIO DE CLASES SEGUNDO SEMESTRE",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "DÍA DEL PROFESOR",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "ÚLTIMO DÍA DE CLASES ESTABLECIMIENTOS CON JEC (38 SEMANAS)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "ÚLTIMO DÍA DE CLASES ESTABLECIMIENTO SIN JEC (40 SEMANAS)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "los-lagos": {
+      "_meta": {
+        "region": "Los Lagos",
+        "regionSlug": "los-lagos",
+        "source_pdf": "mineduc-los-lagos.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 15540,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT",
+          "date": "2026-03-04",
+          "raw_text": "1 a 4º Medio Miércoles 04 de marzo\nIngreso de estudiantes E"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral Lunes 06 de julio - vie",
+          "date_start": "2026-07-06",
+          "date_end": "2026-07-17",
+          "raw_text": "Receso de invierno régimen semestral Lunes 06 de julio - viernes 17 de julio\nInicio de clases segund"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-20",
+          "raw_text": "Lunes 20 de julio\nDía del profesor Viernes 16 de octubre(si"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre(sin clases)\nCierre actas 4º Medio Vie"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38",
+          "date": "2026-12-04",
+          "raw_text": "semanas) Viernes 04 de diciembre\nÚltimo día de clases estab"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40",
+          "date": "2026-12-18",
+          "raw_text": "semanas) Viernes 18 de diciembre\nÚltimo día de clases EPJA"
+        }
+      ],
+      "trimestral": []
+    },
+    "los-rios": {
+      "_meta": {
+        "region": "Los Ríos",
+        "regionSlug": "los-rios",
+        "source_pdf": "mineduc-los-rios.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 18636,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes (NT1 a 4° Medio)",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo de 2026",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio al viernes 03 de julio de 2026"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases posterior a receso semestral",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio de 2026",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre de 2026 (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JECD (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre de 2026",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimientos sin JECD (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre de 2026",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "magallanes": {
+      "_meta": {
+        "region": "Magallanes",
+        "regionSlug": "magallanes",
+        "source_pdf": "mineduc-magallanes.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 13839,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-29",
+          "date_end": "2026-07-17",
+          "raw_text": "Lunes 29 de junio – viernes 17 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-20",
+          "raw_text": "Lunes 20 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-11",
+          "raw_text": "viernes 11 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "maule": {
+      "_meta": {
+        "region": "Maule",
+        "regionSlug": "maule",
+        "source_pdf": "mineduc-maule.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 56818,
+        "pages_processed": 4
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "5. Inicio del año lectivo de NT1 a 4º E. Media (ingresos estudiantes)",
+          "date": "2026-03-04",
+          "raw_text": "miércoles 04 de marzo.",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "10. Vacaciones de invierno",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio al viernes 03 de julio."
+        },
+        {
+          "_field": "finAno",
+          "label": "• Establecimientos Educacionales con JEC: viernes 04 de diciembre. (38 semanas de clases)",
+          "date": "2026-12-04",
+          "raw_text": "• Establecimientos Educacionales con JEC: viernes 04 de diciembre. (38 semanas de clases)"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "• Establecimientos Educacionales sin JEC: viernes 18 de diciembre. (40 semanas de clases)",
+          "date": "2026-12-18",
+          "raw_text": "• Establecimientos Educacionales sin JEC: viernes 18 de diciembre. (40 semanas de clases)"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "</td><td>Lunes 06 de julio<br>Establecimientos educacionales"
+        }
+      ],
+      "trimestral": []
+    },
+    "metropolitana": {
+      "_meta": {
+        "region": "Región Metropolitana",
+        "regionSlug": "metropolitana",
+        "source_pdf": "mineduc-metropolitana.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 42286,
+        "pages_processed": 3
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio - viernes 03 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "nuble": {
+      "_meta": {
+        "region": "Ñuble",
+        "regionSlug": "nuble",
+        "source_pdf": "mineduc-nuble.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 31296,
+        "pages_processed": 2
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio - viernes 03 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "ohiggins": {
+      "_meta": {
+        "region": "O'Higgins",
+        "regionSlug": "ohiggins",
+        "source_pdf": "mineduc-ohiggins.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 14206,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4° Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Lunes 22 de junio - viernes 03 de julio"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        }
+      ],
+      "trimestral": []
+    },
+    "tarapaca": {
+      "_meta": {
+        "region": "Tarapacá",
+        "regionSlug": "tarapaca",
+        "source_pdf": "mineduc-tarapaca.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 32103,
+        "pages_processed": 2
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT 1 a 4º Medio",
+          "date": "2026-03-04",
+          "raw_text": "Miércoles 04 de marzo",
+          "day_of_week": "Miércoles"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral",
+          "date_start": "2026-07-13",
+          "date_end": "2026-07-24",
+          "raw_text": "Lunes 13 de julio - viernes 24 de julio inclusive."
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-27",
+          "raw_text": "Lunes 27 de julio",
+          "day_of_week": "Lunes"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38 semanas)",
+          "date": "2026-12-04",
+          "raw_text": "Viernes 04 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40 semanas)",
+          "date": "2026-12-18",
+          "raw_text": "Viernes 18 de diciembre",
+          "day_of_week": "Viernes"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "<br>Día Educadora párvulos</td><td>Viernes 16 de octubre<br>"
+        }
+      ],
+      "trimestral": []
+    },
+    "valparaiso": {
+      "_meta": {
+        "region": "Valparaíso",
+        "regionSlug": "valparaiso",
+        "source_pdf": "mineduc-valparaiso.pdf",
+        "extracted_by": "glm-ocr-local",
+        "extracted_date": "2026-04-02",
+        "ocr_time_ms": 16352,
+        "pages_processed": 1
+      },
+      "year": 2026,
+      "semestral": [
+        {
+          "_field": "inicio",
+          "label": "Ingreso de estudiantes NT",
+          "date": "2026-03-04",
+          "raw_text": "1 a 4° Medio Miércoles 04 de marzo\nIngreso de estudiantes E"
+        },
+        {
+          "_field": "vacaciones",
+          "label": "Receso de invierno régimen semestral Lunes 22 de junio - vie",
+          "date_start": "2026-06-22",
+          "date_end": "2026-07-03",
+          "raw_text": "Receso de invierno régimen semestral Lunes 22 de junio - viernes 03 de julio\nInicio de clases segund"
+        },
+        {
+          "_field": "inicioSegundoSemestre",
+          "label": "Inicio de clases segundo semestre",
+          "date": "2026-07-06",
+          "raw_text": "Lunes 06 de julio\nDía del profesor Viernes 16 de octubre (s"
+        },
+        {
+          "_field": "diaProfesor",
+          "label": "Día del profesor",
+          "date": "2026-10-16",
+          "raw_text": "Viernes 16 de octubre (sin clases)\nCierre actas 4° Medio Vi"
+        },
+        {
+          "_field": "finAno",
+          "label": "Último día de clases establecimientos con JEC (38",
+          "date": "2026-12-04",
+          "raw_text": "semanas) Viernes 04 de diciembre\nÚltimo día de clases estab"
+        },
+        {
+          "_field": "finAnoSinJEC",
+          "label": "Último día de clases establecimiento sin JEC (40",
+          "date": "2026-12-18",
+          "raw_text": "semanas) Viernes 18 de diciembre\nÚltimo día de clases EPJA"
+        }
+      ],
+      "trimestral": []
+    }
+  }
+}

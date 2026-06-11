@@ -1,0 +1,224 @@
+{
+  "date": "2026-04-02",
+  "visual_source": "2026-03-24",
+  "ocr_source": "2026-04-02",
+  "regions": {
+    "antofagasta": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "araucania": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "arica-y-parinacota": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "atacama": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "aysen": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "biobio": {
+      "matches": {
+        "inicio": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": [
+        "vacacionesInicio",
+        "vacacionesFin"
+      ]
+    },
+    "coquimbo": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "los-lagos": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "los-rios": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "magallanes": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true
+      },
+      "mismatches": [],
+      "missing": [
+        "finAnoSinJEC"
+      ]
+    },
+    "maule": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": [
+        "diaProfesor"
+      ]
+    },
+    "metropolitana": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "nuble": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "ohiggins": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "tarapaca": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    },
+    "valparaiso": {
+      "matches": {
+        "inicio": true,
+        "vacacionesInicio": true,
+        "vacacionesFin": true,
+        "inicioSegundoSemestre": true,
+        "diaProfesor": true,
+        "finAno": true,
+        "finAnoSinJEC": true
+      },
+      "mismatches": [],
+      "missing": []
+    }
+  },
+  "summary": {
+    "total_fields": 112,
+    "matches": 108,
+    "mismatches": 0,
+    "missing": 4
+  }
+}
