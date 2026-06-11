@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11T16:55:35.016Z",
+  "generated_at": "2026-06-11T16:59:06.816Z",
   "summary": {
     "total_claims": 48,
     "verified": 42,
@@ -7,10 +7,10 @@
     "incorrecto": 1,
     "no_verificable": 5,
     "fuente_inaccesible": 0,
-    "sources_ok": 6,
+    "sources_ok": 1,
     "sources_total": 6,
-    "last_source_check": "2026-03-18T00:53:13.886Z",
-    "last_source_check_formatted": "17 de marzo de 2026",
+    "last_source_check": "2026-06-11T16:57:10.995Z",
+    "last_source_check_formatted": "11 de junio de 2026",
     "source_names": [
       "Mineduc",
       "Biblioteca del Congreso Nacional"
