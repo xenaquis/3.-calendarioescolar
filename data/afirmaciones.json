@@ -101,7 +101,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T02:37:18.186Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "fecha-inicio-vacaciones-invierno",
@@ -119,7 +119,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T01:46:01.211Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "fecha-fin-vacaciones-invierno",
@@ -137,7 +137,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T01:46:01.215Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "fecha-fin-ano-escolar",
@@ -155,7 +155,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T02:37:18.186Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "ano-escolar",
@@ -173,7 +173,7 @@
       "verification_tier": 1,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-ano-nuevo",
@@ -192,7 +192,7 @@
       "expected_check": "Fecha fija: siempre 1 de enero",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-viernes-santo",
@@ -212,7 +212,7 @@
       "expected_check": "Pascua 2026 = 5 abril, Viernes Santo = Pascua - 2 = 3 abril",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-sabado-santo",
@@ -232,7 +232,7 @@
       "expected_check": "Pascua 2026 = 5 abril, Sabado Santo = Pascua - 1 = 4 abril",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-dia-trabajo",
@@ -251,7 +251,7 @@
       "expected_check": "Fecha fija: siempre 1 de mayo",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-glorias-navales",
@@ -270,7 +270,7 @@
       "expected_check": "Fecha fija: siempre 21 de mayo",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-pueblos-indigenas",
@@ -290,7 +290,7 @@
       "expected_check": "Solsticio de invierno 2026 = 21 junio (calculo astronomico)",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-san-pedro-san-pablo",
@@ -309,7 +309,7 @@
       "expected_check": "29 junio 2026 = lunes. No requiere traslado.",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-virgen-carmen",
@@ -328,7 +328,7 @@
       "expected_check": "Fecha fija: siempre 16 de julio",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-fiestas-patrias",
@@ -347,7 +347,7 @@
       "expected_check": "Fecha fija: siempre 18 de septiembre",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-glorias-ejercito",
@@ -366,7 +366,7 @@
       "expected_check": "Fecha fija: siempre 19 de septiembre",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-encuentro-dos-mundos",
@@ -385,7 +385,7 @@
       "expected_check": "12 octubre 2026 = lunes. No requiere traslado.",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-iglesias-evangelicas",
@@ -404,7 +404,7 @@
       "expected_check": "Fecha fija: siempre 31 de octubre",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-inmaculada-concepcion",
@@ -423,7 +423,7 @@
       "expected_check": "Fecha fija: siempre 8 de diciembre",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriado-navidad",
@@ -442,7 +442,7 @@
       "expected_check": "Fecha fija: siempre 25 de diciembre",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "region-inicio",
@@ -460,7 +460,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T02:37:18.186Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-vacaciones-inicio-standard",
@@ -478,7 +478,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T01:46:01.215Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-vacaciones-inicio-sur",
@@ -496,7 +496,7 @@
       "verification_tier": 0,
       "last_verified": "2026-06-11T16:00:00.000Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-vacaciones-fin",
@@ -514,7 +514,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T01:46:01.215Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-fiestas-patrias-inicio",
@@ -532,7 +532,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-17T00:00:00Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-fiestas-patrias-fin",
@@ -550,7 +550,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-17T00:00:00Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-fin-ano-standard",
@@ -568,7 +568,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T02:37:18.186Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-fin-ano-sur",
@@ -586,7 +586,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T02:37:18.186Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "region-dias-vacaciones-invierno",
@@ -605,7 +605,7 @@
       "expected_check": "vacacionesFin - vacacionesInicio + 1 (o segun convencion del Mineduc)",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "region-dias-vacaciones-invierno-sur",
@@ -624,7 +624,7 @@
       "expected_check": "vacacionesFin - vacacionesInicioSur + 1 = 17 jul - 29 jun + 1 = 19",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "region-dias-fiestas-patrias",
@@ -643,7 +643,7 @@
       "expected_check": "18 sep - 14 sep + 1 = 5 dias",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "total-regiones",
@@ -661,7 +661,7 @@
       "verification_tier": 1,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "total-feriados",
@@ -679,7 +679,7 @@
       "verification_tier": 1,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriados-en-clases",
@@ -687,8 +687,8 @@
         "derivados",
         "feriados"
       ],
-      "claim": "7 feriados caen en dias de clases en 2026",
-      "displayed_value": "7",
+      "claim": "6 feriados caen en dias de clases en 2026",
+      "displayed_value": "6",
       "data_key": "feriadosEnClases",
       "data_path": null,
       "source_id": null,
@@ -698,7 +698,7 @@
       "expected_check": "count(feriadosCompletos where contexto == 'en-clases') == 7",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "feriados-sin-impacto",
@@ -717,7 +717,7 @@
       "expected_check": "count(feriadosCompletos where contexto == 'sin-impacto') == 8",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "pascua-2026",
@@ -736,7 +736,7 @@
       "expected_check": "Meeus/Jones/Butcher para 2026 = 5 abril",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "san-pedro-traslado-2026",
@@ -755,7 +755,7 @@
       "expected_check": "29 junio 2026 = lunes (new Date(2026,5,29).getDay() === 1)",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "virgen-carmen-en-vacaciones",
@@ -775,7 +775,7 @@
       "expected_check": "NOT(2026-06-22 <= 2026-07-16 <= 2026-07-03) — 16 julio > 3 julio",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "fiestas-patrias-en-vacaciones",
@@ -795,7 +795,7 @@
       "expected_check": "fiestasPatriasInicio <= 2026-09-18 <= fiestasPatriasFin",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "inicio-todas-regiones",
@@ -814,7 +814,7 @@
       "expected_check": "all(pages.json[*].inicio == '4 de marzo')",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "regiones-sur-extra-vacaciones",
@@ -832,7 +832,7 @@
       "verification_tier": 0,
       "last_verified": "2026-03-18T02:37:18.186Z",
       "last_verified_by": "operator",
-      "status": "verified"
+      "status": "correcto"
     },
     {
       "id": "dias-vacaciones-invierno-calc-standard",
@@ -852,7 +852,7 @@
       "expected_check": "daysDiff('2026-06-22', '2026-07-03') + 1 == 12",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "dias-vacaciones-invierno-calc-sur",
@@ -872,7 +872,7 @@
       "expected_check": "daysDiff('2026-07-06', '2026-07-24') + 1 == 19 && daysDiff('2026-06-29', '2026-07-17') + 1 == 19",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "dias-fiestas-patrias-calc",
@@ -892,7 +892,7 @@
       "expected_check": "daysDiff('2026-09-14', '2026-09-18') + 1 == 5",
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "correcto"
     },
     {
       "id": "region-fin-ano-sin-jec",
@@ -911,7 +911,7 @@
       "verification_tier": 0,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "no_verificable"
     },
     {
       "id": "region-fin-ano-epja",
@@ -930,7 +930,7 @@
       "verification_tier": 0,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "no_verificable"
     },
     {
       "id": "region-cierre-actas-4-medio",
@@ -948,7 +948,7 @@
       "verification_tier": 0,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "no_verificable"
     },
     {
       "id": "region-dia-profesor",
@@ -966,7 +966,7 @@
       "verification_tier": 0,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "no_verificable"
     },
     {
       "id": "region-inicio-segundo-semestre",
@@ -985,7 +985,7 @@
       "verification_tier": 0,
       "last_verified": null,
       "last_verified_by": null,
-      "status": "unverified"
+      "status": "no_verificable"
     }
   ]
 }

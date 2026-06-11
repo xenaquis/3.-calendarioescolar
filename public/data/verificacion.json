@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-11T16:59:06.816Z",
+  "generated_at": "2026-06-11T17:02:11.845Z",
   "summary": {
     "total_claims": 48,
-    "verified": 42,
+    "verified": 43,
     "unverified": 0,
-    "incorrecto": 1,
+    "incorrecto": 0,
     "no_verificable": 5,
     "fuente_inaccesible": 0,
     "sources_ok": 1,
@@ -28,7 +28,7 @@
       "source_ids": [
         "mineduc-resolucion-2026"
       ],
-      "last_verified": "2026-06-11T16:53:57.751Z"
+      "last_verified": "2026-06-11T17:02:11.392Z"
     },
     "holidays": {
       "id": "holidays",
@@ -46,7 +46,7 @@
         "bcn-ley-20148",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-06-11T16:53:57.749Z"
+      "last_verified": "2026-06-11T17:02:11.391Z"
     },
     "context": {
       "id": "context",
@@ -62,15 +62,15 @@
         "bcn-ley-2977",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-06-11T16:53:57.751Z"
+      "last_verified": "2026-06-11T17:02:11.392Z"
     },
     "stats": {
       "id": "stats",
-      "status": "incorrecto",
+      "status": "correcto",
       "claims_count": 5,
       "sources": [],
       "source_ids": [],
-      "last_verified": "2026-06-11T16:53:57.751Z"
+      "last_verified": "2026-06-11T17:02:11.392Z"
     }
   }
 }

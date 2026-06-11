@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-11T16:47:21.799Z",
+  "generatedAt": "2026-06-11T17:02:11.612Z",
   "generatedDate": "2026-06-11",
   "dataYear": 2026,
   "regionsCount": 16,
@@ -18,10 +18,10 @@
   },
   "status": "ok",
   "sourceHealth": {
-    "lastChecked": "2026-03-18T00:53:13.886Z",
+    "lastChecked": "2026-06-11T16:57:10.995Z",
     "totalSources": 6,
-    "ok": 6,
+    "ok": 1,
     "broken": 0,
-    "changed": 0
+    "changed": 1
   }
 }
