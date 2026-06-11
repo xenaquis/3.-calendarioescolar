@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-04-23 (SEO Recovery v3: canonical/hreflang sin .html, title ranker revertido, link graph 16 regiones, stats bar home-stats, dateModified refrescado, sitemap loc sin .html. Respuesta al March 2026 Core Update).
+Ultimo update de este blueprint: 2026-06-11 (FIX CRITICO Aysén: REX 632 de 22-dic-2025 movió receso invierno a 6-24 jul — el sitio publicaba la REX 618 derogada. Auditadas las 6 regiones con fechas especiales contra PDFs vigentes; solo Aysén estaba mal. Reparado validate.js roto desde 8fadaf1 (índices claims post-Corpus Christi). Repo git reparado con fetch --refetch (corrupción OneDrive). Plan recuperación/pivote: .planning/quick/260611-plan-recuperacion-pivote/PLAN.md).
 
 ---
 
@@ -20,7 +20,7 @@ Ultimo update de este blueprint: 2026-04-23 (SEO Recovery v3: canonical/hreflang
 | Search Console        | PENDIENTE       | Verificar propiedad + enviar sitemap               |
 | OG Image              | ACTIVO          | Archivo `public/icons/og-image.png` existe (verificado 2026-03-24) |
 | Bot Fight Mode        | DOCUMENTADO     | Guia de activacion en seccion "Bot Fight Mode" abajo |
-| Datos Mineduc 2026    | CORREGIDOS      | Vacaciones invierno corregidas (jun-jul). Inicio clases = 4 mar. Fin = 4 dic. Aysén/Magallanes diferenciados |
+| Datos Mineduc 2026    | CORREGIDOS      | 2026-06-11: Aysén = 6-24 jul (REX 632 modifica REX 618). Magallanes 29 jun-17 jul. Los Lagos 6-17 jul. Arica/Tarapacá 13-24 jul. Inicio = 4 mar. Las resoluciones SE MODIFICAN durante el año — ver PDFs en data/resoluciones-modificatorias/ |
 | Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
 | Frontend              | COMPLETADO      | Auditoría 360° 2026-04-08: SVG dark mode fix, ads.css collapse, CSP fix (CF Insights + AdSense quality), hero padding, mini-fact/panel borders, zebra table, placeholder icon |
 | Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
@@ -672,7 +672,7 @@ cobertura HTML meta tags, freshness de resultados, y test de regresión.
 | winterEnd | 2026-07-25 | **2026-07-03** | Resolución Mineduc reg. semestral |
 | schoolStart | 2026-03-02 | **2026-03-04** | "Ingreso de estudiantes" (no "Inicio año escolar") |
 | schoolEnd | 2026-12-11 | **2026-12-04** | "Último día clases JEC 38 sem" |
-| Aysén vacaciones | standard | **29 jun - 17 jul** (19 días) | Resolución regional diferenciada |
+| Aysén vacaciones | 29 jun - 17 jul (REX 618 derogada) | **6 jul - 24 jul** (19 días) | **REX 632 de 22/12/2025** — calidad del aire Coyhaique (corregido 2026-06-11) |
 | Magallanes vacaciones | standard | **29 jun - 17 jul** (19 días) | Resolución regional diferenciada |
 | Aysén fin año | 4 dic | **23 dic** | Resolución regional |
 | Magallanes fin año | 4 dic | **11 dic** | Resolución regional |
