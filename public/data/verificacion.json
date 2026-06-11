@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-06-11T16:47:22.011Z",
+  "generated_at": "2026-06-11T16:55:35.016Z",
   "summary": {
     "total_claims": 48,
-    "verified": 43,
-    "unverified": 5,
-    "incorrecto": 0,
-    "no_verificable": 0,
+    "verified": 42,
+    "unverified": 0,
+    "incorrecto": 1,
+    "no_verificable": 5,
     "fuente_inaccesible": 0,
     "sources_ok": 6,
     "sources_total": 6,
@@ -20,7 +20,7 @@
   "sections": {
     "school-dates": {
       "id": "school-dates",
-      "status": "unverified",
+      "status": "no_verificable",
       "claims_count": 21,
       "sources": [
         "Resolucion Exenta Calendario Escolar 2026"
@@ -28,7 +28,7 @@
       "source_ids": [
         "mineduc-resolucion-2026"
       ],
-      "last_verified": "2026-03-18T03:25:32.112Z"
+      "last_verified": "2026-06-11T16:53:57.751Z"
     },
     "holidays": {
       "id": "holidays",
@@ -46,7 +46,7 @@
         "bcn-ley-20148",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-03-18T03:25:32.112Z"
+      "last_verified": "2026-06-11T16:53:57.749Z"
     },
     "context": {
       "id": "context",
@@ -62,15 +62,15 @@
         "bcn-ley-2977",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-03-18T03:25:32.113Z"
+      "last_verified": "2026-06-11T16:53:57.751Z"
     },
     "stats": {
       "id": "stats",
-      "status": "correcto",
+      "status": "incorrecto",
       "claims_count": 5,
       "sources": [],
       "source_ids": [],
-      "last_verified": "2026-03-18T03:25:32.113Z"
+      "last_verified": "2026-06-11T16:53:57.751Z"
     }
   }
 }
