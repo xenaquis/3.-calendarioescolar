@@ -82,6 +82,7 @@ jobs:
           fi
 
           git diff --staged --quiet || git commit -m "chore: update visual extraction report [skip ci]"
+          git pull --rebase origin main
           git push
 
       - name: Regenerate if fixed
@@ -92,6 +93,7 @@ jobs:
 
           git add public/ data/
           git diff --staged --quiet || git commit -m "chore: regenerate pages from visual-corrected data [skip ci]"
+          git pull --rebase origin main
           git push
 
       - name: Alert on discrepancies
