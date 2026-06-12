@@ -43,6 +43,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "civil",
       "contexto": "sin-impacto",
       "notaContexto": "Fuera del año escolar",
+      "irrenunciable": true,
       "nota": null
     },
     {
@@ -76,6 +77,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "laboral",
       "contexto": "en-clases",
       "notaContexto": null,
+      "irrenunciable": true,
       "nota": null
     },
     {
@@ -123,6 +125,17 @@ window.CALENDAR_CONFIG = {
       "nota": null
     },
     {
+      "date": "2026-08-15",
+      "nombre": "Asunción de la Virgen",
+      "diaSemana": "Sábado",
+      "diaNum": 15,
+      "mes": "agosto",
+      "tipo": "religioso",
+      "contexto": "sin-impacto",
+      "notaContexto": "Fin de semana",
+      "nota": null
+    },
+    {
       "date": "2026-09-18",
       "nombre": "Fiestas Patrias",
       "diaSemana": "Viernes",
@@ -131,6 +144,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "patrio",
       "contexto": "sin-impacto",
       "notaContexto": "En vacaciones Fiestas Patrias",
+      "irrenunciable": true,
       "nota": null
     },
     {
@@ -142,6 +156,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "patrio",
       "contexto": "sin-impacto",
       "notaContexto": "Fin de semana + vacaciones",
+      "irrenunciable": true,
       "nota": null
     },
     {
@@ -167,6 +182,17 @@ window.CALENDAR_CONFIG = {
       "nota": null
     },
     {
+      "date": "2026-11-01",
+      "nombre": "Día de Todos los Santos",
+      "diaSemana": "Domingo",
+      "diaNum": 1,
+      "mes": "noviembre",
+      "tipo": "religioso",
+      "contexto": "sin-impacto",
+      "notaContexto": "Fin de semana",
+      "nota": null
+    },
+    {
       "date": "2026-12-08",
       "nombre": "Inmaculada Concepción",
       "diaSemana": "Martes",
@@ -186,6 +212,7 @@ window.CALENDAR_CONFIG = {
       "tipo": "religioso",
       "contexto": "sin-impacto",
       "notaContexto": "Después del fin de año escolar",
+      "irrenunciable": true,
       "nota": null
     }
   ]

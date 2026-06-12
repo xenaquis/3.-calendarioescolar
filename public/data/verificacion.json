@@ -1,8 +1,8 @@
 {
-  "generated_at": "2026-06-11T17:02:11.845Z",
+  "generated_at": "2026-06-12T23:51:59.475Z",
   "summary": {
-    "total_claims": 48,
-    "verified": 43,
+    "total_claims": 50,
+    "verified": 45,
     "unverified": 0,
     "incorrecto": 0,
     "no_verificable": 5,
@@ -28,12 +28,12 @@
       "source_ids": [
         "mineduc-resolucion-2026"
       ],
-      "last_verified": "2026-06-11T17:02:11.392Z"
+      "last_verified": "2026-06-12T23:51:49.913Z"
     },
     "holidays": {
       "id": "holidays",
       "status": "correcto",
-      "claims_count": 14,
+      "claims_count": 16,
       "sources": [
         "Ley 2.977 — Feriados legales de Chile",
         "Ley 21.357 — Dia Nacional de los Pueblos Indigenas",
@@ -46,7 +46,7 @@
         "bcn-ley-20148",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-06-11T17:02:11.391Z"
+      "last_verified": "2026-06-12T23:51:49.911Z"
     },
     "context": {
       "id": "context",
@@ -62,7 +62,7 @@
         "bcn-ley-2977",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-06-11T17:02:11.392Z"
+      "last_verified": "2026-06-12T23:51:49.913Z"
     },
     "stats": {
       "id": "stats",
@@ -70,7 +70,7 @@
       "claims_count": 5,
       "sources": [],
       "source_ids": [],
-      "last_verified": "2026-06-11T17:02:11.392Z"
+      "last_verified": "2026-06-12T23:51:49.913Z"
     }
   }
 }

@@ -134,6 +134,24 @@
     "last_checked": "2026-06-08T10:51:57Z",
     "texto_anterior": null
   },
+  "feriado_asuncion_virgen": {
+    "ley_id": "bcn-ley-2977",
+    "articulo_numero": "PRIMERO",
+    "inciso": "2",
+    "texto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
+    "hash_sha256": "6af996a86e7cd0f1cef48767fc423c58ca2e73f396003abc9d088ba29dcddc30",
+    "last_checked": "2026-06-08T10:51:57Z",
+    "texto_anterior": null
+  },
+  "feriado_todos_los_santos": {
+    "ley_id": "bcn-ley-2977",
+    "articulo_numero": "PRIMERO",
+    "inciso": "2",
+    "texto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
+    "hash_sha256": "6af996a86e7cd0f1cef48767fc423c58ca2e73f396003abc9d088ba29dcddc30",
+    "last_checked": "2026-06-08T10:51:57Z",
+    "texto_anterior": null
+  },
   "_meta": {
     "generated_at": "2026-03-25T04:12:01Z",
     "script_version": "1.0.0",

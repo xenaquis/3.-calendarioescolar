@@ -389,9 +389,11 @@ function verifyDeterministic(claim) {
     'feriado-dia-trabajo': '2026-05-01',
     'feriado-glorias-navales': '2026-05-21',
     'feriado-virgen-carmen': '2026-07-16',
+    'feriado-asuncion-virgen': '2026-08-15',
     'feriado-fiestas-patrias': '2026-09-18',
     'feriado-glorias-ejercito': '2026-09-19',
     'feriado-iglesias-evangelicas': '2026-10-31',
+    'feriado-todos-los-santos': '2026-11-01',
     'feriado-inmaculada-concepcion': '2026-12-08',
     'feriado-navidad': '2026-12-25'
   };

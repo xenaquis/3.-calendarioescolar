@@ -127,6 +127,18 @@ window.CLAIMS_DATA = {
     "articulo_numero": "PRIMERO",
     "inciso": null
   },
+  "feriado-asuncion-virgen": {
+    "id": "feriado-asuncion-virgen",
+    "pregunta": "Asuncion de la Virgen es feriado el 15 de agosto de 2026",
+    "respuesta": "Asuncion de la Virgen es feriado el 15 de agosto de 2026",
+    "status": "correcto",
+    "source_reference": "Art. 1 — 15 de agosto",
+    "source_name": "Ley 2.977 — Feriados legales de Chile",
+    "extracto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
+    "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=23639",
+    "articulo_numero": "PRIMERO",
+    "inciso": "2"
+  },
   "feriado-fiestas-patrias": {
     "id": "feriado-fiestas-patrias",
     "pregunta": "Cuando es el feriado de Fiestas Patrias 2026?",
@@ -174,6 +186,18 @@ window.CLAIMS_DATA = {
     "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=23639",
     "articulo_numero": "Artículo PRIMERO",
     "inciso": null
+  },
+  "feriado-todos-los-santos": {
+    "id": "feriado-todos-los-santos",
+    "pregunta": "Dia de Todos los Santos es feriado el 1 de noviembre de 2026",
+    "respuesta": "Dia de Todos los Santos es feriado el 1 de noviembre de 2026",
+    "status": "correcto",
+    "source_reference": "Art. 1 — 1 de noviembre",
+    "source_name": "Ley 2.977 — Feriados legales de Chile",
+    "extracto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
+    "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=23639",
+    "articulo_numero": "PRIMERO",
+    "inciso": "2"
   },
   "feriado-inmaculada-concepcion": {
     "id": "feriado-inmaculada-concepcion",
@@ -274,7 +298,7 @@ window.CLAIMS_DATA = {
   "total-feriados": {
     "id": "total-feriados",
     "pregunta": "Cuantos feriados nacionales hay en 2026?",
-    "respuesta": "Chile tiene 14 feriados nacionales en 2026",
+    "respuesta": "Chile tiene 16 feriados nacionales en 2026",
     "status": "correcto",
     "source_reference": "Conteo de feriados legales vigentes para 2026",
     "source_name": "Ley 2.977 — Feriados legales de Chile",
@@ -287,12 +311,12 @@ window.CLAIMS_DATA = {
     "id": "feriados-en-clases",
     "pregunta": "Cuantos feriados caen en dias de clases en 2026?",
     "respuesta": "6 feriados caen en dias de clases en 2026",
-    "status": "incorrecto"
+    "status": "correcto"
   },
   "feriados-sin-impacto": {
     "id": "feriados-sin-impacto",
     "pregunta": "Cuantos feriados no afectan el calendario escolar en 2026?",
-    "respuesta": "8 feriados no afectan el calendario escolar en 2026",
+    "respuesta": "10 feriados no afectan el calendario escolar en 2026",
     "status": "correcto"
   },
   "pascua-2026": {
