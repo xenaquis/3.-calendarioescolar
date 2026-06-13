@@ -483,6 +483,25 @@
       "status": "correcto"
     },
     {
+      "id": "corpus-christi-no-feriado",
+      "tags": [
+        "feriados",
+        "contextuales"
+      ],
+      "claim": "Corpus Christi no es feriado legal vigente en Chile (suprimido por art. 144 Ley 16.840; reemplazado por el 16 de julio, Ley 20.148)",
+      "displayed_value": "2026-06-04",
+      "data_key": "feriado_corpus_christi",
+      "data_path": null,
+      "source_id": "bcn-ley-2977",
+      "source_reference": "Nota al Art. 1 — el art. 144 de la Ley 16.840 suprimio Corpus Christi",
+      "verification_method": "deterministic",
+      "verification_tier": 1,
+      "expected_check": "Pascua+60 = 2026-06-04 y NO debe figurar en feriadosCompletos",
+      "last_verified": null,
+      "last_verified_by": null,
+      "status": "correcto"
+    },
+    {
       "id": "region-inicio",
       "tags": [
         "regional",

@@ -63,6 +63,8 @@ var sitemapUrls = [];
 var STATIC_PAGES = [
   { file: 'index.html',                      pri: '1.0', freq: 'weekly' },
   { file: 'feriados-2026.html',              pri: '0.8', freq: 'monthly' },
+  { file: 'feriados-2027.html',              pri: '0.6', freq: 'monthly' },
+  { file: 'corpus-christi-2026.html',        pri: '0.6', freq: 'monthly' },
   { file: 'vacaciones-invierno-2026.html',   pri: '0.9', freq: 'monthly' },
   { file: 'cuando-empiezan-clases-2026.html',pri: '0.9', freq: 'monthly' },
   { file: 'about.html',                      pri: '0.3', freq: 'monthly' },

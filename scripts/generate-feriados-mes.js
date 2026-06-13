@@ -104,7 +104,8 @@ var MES_EXTRA = {
   junio: {
     claimKeys: ['winterStart'],
     contexto: '<p>Junio 2026 tiene dos feriados, pero <strong>ninguno suspende clases</strong>: el D&iacute;a Nacional de los Pueblos Ind&iacute;genas cae <strong>domingo 21 de junio</strong> (coincide con el solsticio de invierno, Ley 21.357) y San Pedro y San Pablo cae <strong>lunes 29 de junio</strong>, cuando la mayor&iacute;a de las regiones ya est&aacute; en <strong>vacaciones de invierno</strong> (desde el lunes 22 de junio).</p>' +
-      '<p>El fin de semana del <strong>s&aacute;bado 27 al lunes 29 de junio</strong> es fin de semana largo &mdash; el primero de las vacaciones de invierno escolares.</p>',
+      '<p>El fin de semana del <strong>s&aacute;bado 27 al lunes 29 de junio</strong> es fin de semana largo &mdash; el primero de las vacaciones de invierno escolares.</p>' +
+      '<p>Ojo: <a href="/corpus-christi-2026">Corpus Christi (4 de junio) no es feriado en Chile</a> desde 2007.</p>',
     faqs: [
       { q: '¿Corpus Christi (4 de junio) es feriado en Chile 2026?',
         a: 'No. Corpus Christi fue suprimido como feriado legal por el artículo 144 de la Ley 16.840 y reemplazado por el 16 de julio (Virgen del Carmen, Ley 20.148). El jueves 4 de junio de 2026 es día de clases normal.' },

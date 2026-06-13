@@ -383,6 +383,21 @@ function verifyDeterministic(claim) {
     };
   }
 
+  // Corpus Christi NO es feriado (suprimido — la fecha calculada debe estar AUSENTE)
+  if (id === 'corpus-christi-no-feriado') {
+    var easter = easterDate(calConfig.year);
+    var cc = addDays(easter, 60);
+    var ccIso = dateToIso(cc);
+    var ok = ccIso === claim.displayed_value && findFeriadoByDate(ccIso) === null;
+    return {
+      verdict: ok ? 'CORRECTO' : 'INCORRECTO',
+      evidence: ok
+        ? 'Pascua + 60 = ' + ccIso + '. Correctamente AUSENTE de feriadosCompletos (no es feriado vigente).'
+        : 'Pascua + 60 = ' + ccIso + ', displayed=' + claim.displayed_value +
+          ', presente=' + (findFeriadoByDate(ccIso) !== null)
+    };
+  }
+
   // Feriados de fecha fija
   var FIXED_DATES = {
     'feriado-ano-nuevo': '2026-01-01',

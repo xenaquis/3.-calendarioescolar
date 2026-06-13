@@ -1,9 +1,9 @@
 {
   "_meta": {
     "version": "2.0.0",
-    "generatedAt": "2026-06-12T23:51:21.046Z",
+    "generatedAt": "2026-06-13T00:10:49.085Z",
     "description": "Modelo unificado de claims. Fuente de verdad para todas las afirmaciones del sitio.",
-    "totalClaims": 50,
+    "totalClaims": 51,
     "model": "claim-centric-unified",
     "merged_from": [
       "afirmaciones.json",
@@ -656,6 +656,34 @@
       "verification_method": "deterministic",
       "verification_tier": 1,
       "expected_check": "Fecha fija: siempre 25 de diciembre",
+      "last_verified": null,
+      "last_verified_by": null,
+      "status": "correcto"
+    },
+    {
+      "id": "corpus-christi-no-feriado",
+      "tags": [
+        "feriados",
+        "contextuales"
+      ],
+      "pregunta": "Corpus Christi no es feriado legal vigente en Chile (suprimido por art. 144 Ley 16.840; reemplazado por el 16 de julio, Ley 20.148)",
+      "respuesta": "Corpus Christi no es feriado legal vigente en Chile (suprimido por art. 144 Ley 16.840; reemplazado por el 16 de julio, Ley 20.148)",
+      "displayed_value": "2026-06-04",
+      "data_key": "feriado_corpus_christi",
+      "data_path": null,
+      "source_id": "bcn-ley-2977",
+      "source_reference": "Nota al Art. 1 — el art. 144 de la Ley 16.840 suprimio Corpus Christi",
+      "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=23639",
+      "fuente_tipo": "xml",
+      "extracto_verbatim": "ARTICULO PRIMERO.- Desde la fecha de la presente lei, sólo se considerarán como feriados los dias siguientes; 1° Los Domingos de todo el año. 2° Los festivos correspondientes al 1° de Enero, 29 NOTA: 1 de Junio, 15 de Agosto, 1° de Noviembre, 8 i 25 de Diciembre i las fiestas movibles de la Ascension del Señor i de Corpus Cristi. Estas festividades relijiosas podrán ser modificadas por el Presidente de la República, en virtud de concordato con la Santa Sede. 3° Los Viérnes i Sábados de la Semana Santa. 4° El 18 de setiembre, en conmemoracion de la Independencia Nacional. 5° El 19 de Setiembre i el 21 de Mayo, en celebracion de todas las glorias del Ejército i la Armada de la República. 6° El dia que deba tener lugar la eleccion de electores de Presidente de la República. NOTA: 1 El artículo 144 de la ley 16.840 suprimió los siguientes días feriados: 29 de junio y las fiestas movibles de la Ascención del Señor y de Corpus Christi.",
+      "hash_sha256": "6af996a86e7cd0f1cef48767fc423c58ca2e73f396003abc9d088ba29dcddc30",
+      "last_checked": "2026-06-08T10:51:57Z",
+      "articulo_numero": "PRIMERO",
+      "inciso": "2",
+      "texto_anterior": null,
+      "verification_method": "deterministic",
+      "verification_tier": 1,
+      "expected_check": "Pascua+60 = 2026-06-04 y NO debe figurar en feriadosCompletos",
       "last_verified": null,
       "last_verified_by": null,
       "status": "correcto"

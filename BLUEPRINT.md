@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-06-11 (FIX CRITICO Aysén: REX 632 de 22-dic-2025 movió receso invierno a 6-24 jul — el sitio publicaba la REX 618 derogada. Auditadas las 6 regiones con fechas especiales contra PDFs vigentes; solo Aysén estaba mal. Reparado validate.js roto desde 8fadaf1 (índices claims post-Corpus Christi). Repo git reparado con fetch --refetch (corrupción OneDrive). Plan recuperación/pivote: .planning/quick/260611-plan-recuperacion-pivote/PLAN.md).
+Ultimo update de este blueprint: 2026-06-12 (ESTRATEGIA FERIADOS post-análisis GSC: ver sección "Estrategia Feriados" abajo. FIX datos: feriadosCompletos 14→16 — faltaban 15-ago Asunción y 1-nov Todos los Santos; flag irrenunciable agregado. FIX legal hub: lista de irrenunciables estaba incorrecta. 12 páginas nuevas /feriados/[mes]-2026/ + /corpus-christi-2026 + feriados-2027 con fechas reales).
 
 ---
 
@@ -223,6 +223,41 @@ Revisar GSC semanalmente:
 - Appearance de rich results (FAQ, HowTo, Event) → GSC > Enhancements
 
 ---
+
+## Estrategia Feriados (2026-06-12)
+
+### Diagnóstico GSC (export 16-mar → 10-jun)
+- Caída total persiste: 3.503 impr/día (14-abr) → 1-40/día desde 15-abr. 2 meses sin recuperación. Gates de escalación v3 fallaron todos.
+- Demanda: vacaciones invierno 401 queries/18k impr (CTR 0,1% — canibalizado por AI Overview + prensa), calendario escolar 311/3k, **feriados 123 queries/803 impr con CTR 5-8% — el mejor del sitio**.
+- Ya rankeábamos #1 esporádico en "feriados marzo 2026", "feriados mayo 2026", "feriados octubre 2026 chile" SIN página dedicada.
+- Cluster "biblioteca del congreso nacional feriados 2026" (~45 impr) — nuestra ventaja BCN verbatim+SHA256.
+
+### Competencia (revisada 2026-06-12)
+- feriados.cl (#1): tabla estática única, sin meses, sin countdown. Gana por exact-match domain + antigüedad.
+- feriados-chile.cl (#2), calendario.cl (widget próximo feriado), turismocity (countdown), feriadoslegales.cl (con errores).
+- Prensa (T13, El Mostrador) publica "feriados de junio" mensual — dueños del freshness, contenido desechable.
+
+### Apuesta: long-tail mensual + intención, NO head term
+1. **12 páginas /feriados/[mes]-2026/** — generadas por `scripts/generate-feriados-mes.js` (módulo llamado desde generate-pages.js, template `data/template-mes.html`). Contenido curado por mes en MES_EXTRA (REVISAR ANUALMENTE): feriados + ¿hay clases? + finde largo + contexto regional (16-jul en 5 regiones de vacaciones; 8-dic vs fin JEC) + FAQ/FAQPage + claim-data meta.
+2. **Hub /feriados-2026 robustecido**: 16 feriados, sección 6 findes largos, grid 12 meses, badge irrenunciable, botón imprimir + @media print, FAQ irrenunciables corregido.
+3. **/corpus-christi-2026**: responde "NO es feriado" (70+ impr GSC sin respuesta directa en SERP). Claim `corpus-christi-no-feriado` con verificación determinística INVERSA (Pascua+60 debe estar AUSENTE de feriadosCompletos).
+4. **/feriados-2027**: fechas reales calculadas según leyes (era thin content "próximamente" y listaba Corpus Christi como feriado vigente — corregido). 8 findes largos 2027. Traslados: San Pedro lun 28-jun, Dos Mundos lun 11-oct.
+
+### Datos corregidos 2026-06-12
+| Dato | Antes | Ahora |
+|------|-------|-------|
+| feriadosCompletos | 14 | **16** (+ Asunción sáb 15-ago, Todos los Santos dom 1-nov, ambos sin-impacto) |
+| Irrenunciables | sin flag / FAQ INCORRECTO | flag `irrenunciable:true` en 1-ene, 1-may, 18-sep, 19-sep, 25-dic (Leyes 19.973 + 20.629) |
+| Claims | 48 | 51 (feriado-asuncion-virgen, feriado-todos-los-santos, corpus-christi-no-feriado) — todos CORRECTO |
+| FAQ schema hub | "7 feriados en clases" | 6 |
+| Tabs hub | 15/7/8 | 16/6/10 |
+
+### Pendientes estrategia feriados
+- [ ] Google Sheet: actualizar celda feriadosCompletos (JSON crudo) cuando se configure el sync — si no, el primer sync pisará los 16 feriados con los 14 viejos
+- [ ] Tras deploy: GSC Request Indexing en /feriados-2026, /feriados/junio-2026/, /feriados/julio-2026/, /corpus-christi-2026
+- [ ] Monitorear 2-6 semanas: queries "feriados [mes] 2026" en GSC
+- [ ] Cuestión de datos abierta: 8-dic marcado "en-clases" pero schoolEnd JEC = 4-dic (aplica a sin-JEC/EPJA/Aysén/Magallanes) — el contexto está explicado en /feriados/diciembre-2026/
+- [ ] Evaluar página /proximo-feriado (queries "mañana es feriado", "próximo feriado") — countdown client-side ya existe en hub y páginas de mes
 
 ## SEO Recovery v3 — Core Update response (2026-04-23)
 
