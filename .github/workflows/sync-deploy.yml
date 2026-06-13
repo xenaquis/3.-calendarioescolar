@@ -1,8 +1,21 @@
-name: Sync desde Sheet + Deploy
+name: Verificación diaria + Deploy
 
 # Ejecuta automaticamente cada dia a las 6:00 UTC (03:00 Chile)
 # También disponible como trigger manual desde GitHub Actions UI
 # NUNCA disparado por push (eso lo maneja deploy.yml)
+#
+# 2026-06-12: SYNC DESDE GOOGLE SHEET DESACTIVADO (decisión: el repo es la
+# fuente de verdad de datos; el Sheet quedó desactualizado — tenía 14 feriados
+# vs los 16 correctos — y un sync lo habría sobreescrito). El script
+# scripts/sync-from-sheet.js sigue disponible para uso manual si se reactiva,
+# previa actualización de la celda feriadosCompletos del Sheet.
+#
+# Qué hace este workflow ahora:
+#   1. check-feriados.js — verificación determinística de feriados contra
+#      las reglas legales codificadas (sin red, no puede flakear)
+#   2. generate + validate + build
+#   3. deploy diario a Cloudflare Pages (freshness: sitemap lastmod,
+#      dateModified, próximo-feriado estático recalculado)
 
 on:
   schedule:
@@ -16,44 +29,25 @@ on:
         type: boolean
 
 jobs:
-  sync-and-deploy:
-    name: Sync Sheet → Generar → Validar → Deploy
+  verify-and-deploy:
+    name: Verificar → Generar → Validar → Deploy
     runs-on: ubuntu-latest
     permissions:
-      contents: write      # Para commitear cambios en data/
+      contents: read
       deployments: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      # ── Paso 1: Sync datos desde Google Sheet (tab Datos) ─────────────
-      - name: Sync datos desde Google Sheet (tab Datos)
-        id: sync
-        env:
-          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
-        run: |
-          node scripts/sync-from-sheet.js 2>&1 | tee /tmp/sync-output.txt
-          # Detectar si hubo cambios (script escribe "ACTUALIZADO" si cambió)
-          if grep -q "ACTUALIZADO" /tmp/sync-output.txt; then
-            echo "data_changed=true" >> $GITHUB_OUTPUT
-          else
-            echo "data_changed=false" >> $GITHUB_OUTPUT
-          fi
-        continue-on-error: true  # Si falla el sync, usar datos del repo (no bloquear)
-
-      - name: Advertencia si sync falló
-        if: steps.sync.outcome == 'failure'
-        run: |
-          echo "::warning::Sync desde Google Sheet falló. Usando datos existentes en el repo."
-          echo "::warning::Verificar GOOGLE_API_KEY y sheet.spreadsheetId en config.json"
+      # ── Paso 1: Verificación determinística de feriados ────────────────
+      - name: Verificar feriados contra cálculo legal
+        run: node scripts/check-feriados.js
 
       # ── Paso 2: Generar páginas ─────────────────────────────────────────
       - name: Generar páginas
@@ -67,36 +61,19 @@ jobs:
       - name: Build
         run: bash scripts/build.sh
 
-      # ── Paso 5: Commitear datos si cambiaron ───────────────────────────
-      - name: Commitear cambios de datos
-        if: steps.sync.outputs.data_changed == 'true'
-        run: |
-          git config user.name "calendarioescolar-bot"
-          git config user.email "bot@calendarioescolar.cl"
-          git add data/pages.json data/calendar-config.json data/claims.json
-          if git diff --staged --quiet; then
-            echo "No hay cambios staged para commitear"
-          else
-            git commit -m "chore: sync datos desde Google Sheet (Datos tab) [skip ci]"
-            git push origin ${{ github.ref_name }}
-          fi
-
-      # ── Paso 6: Deploy a Cloudflare Pages ─────────────────────────────
+      # ── Paso 5: Deploy a Cloudflare Pages ─────────────────────────────
       - name: Deploy a Cloudflare Pages
-        if: steps.sync.outputs.data_changed == 'true' || github.event.inputs.force_deploy == 'true' || github.event_name == 'schedule'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: npx wrangler pages deploy public --project-name=${{ vars.CF_PROJECT_NAME }}
 
-      # ── Paso 7: Notificación de resultado ─────────────────────────────
-      - name: Resumen del sync
+      # ── Paso 6: Resumen ────────────────────────────────────────────────
+      - name: Resumen
         if: always()
         run: |
           echo "=== Resumen ==="
-          echo "Sync Sheet:    ${{ steps.sync.outcome }}"
-          echo "Datos cambiaron: ${{ steps.sync.outputs.data_changed }}"
-          echo "Trigger:       ${{ github.event_name }}"
+          echo "Trigger: ${{ github.event_name }}"
           if [ -f public/health.json ]; then
             echo "Health JSON:"
             cat public/health.json

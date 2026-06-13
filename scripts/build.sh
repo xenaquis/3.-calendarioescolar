@@ -12,6 +12,13 @@ if ! node scripts/validate.js; then
   exit 1
 fi
 
+# Verificacion deterministica de feriados (reglas legales, sin red)
+echo "  Verificando feriados contra calculo legal..."
+if ! node scripts/check-feriados.js; then
+  echo "ERROR: Feriados en calendar-config.json no coinciden con el calculo legal."
+  exit 1
+fi
+
 # Actualizar fecha en sitemap
 TODAY=$(date +%Y-%m-%d)
 if [ -f public/sitemap.xml ]; then

@@ -252,12 +252,20 @@ Revisar GSC semanalmente:
 | FAQ schema hub | "7 feriados en clases" | 6 |
 | Tabs hub | 15/7/8 | 16/6/10 |
 
+### Auto-mantenimiento (2026-06-12) — página que se mantiene sola
+- **Sync Google Sheet DESACTIVADO** en sync-deploy.yml (decisión usuario): el repo es la fuente de verdad. El Sheet quedó con los 14 feriados viejos y un sync los habría restaurado. `scripts/sync-from-sheet.js` sigue disponible para uso manual; si se reactiva, actualizar ANTES la celda feriadosCompletos del Sheet.
+- **APIs de feriados evaluadas (2026-06-12): NINGUNA viable para CI.** apis.digital.gob.cl/fl/feriados muerta; feriadosapp.com/api redirige a api.boostr.cl; boostr está detrás de bot-protection Cloudflare (403 a curl/node). NO construir dependencias sobre estas APIs.
+- **Solución: motor determinístico propio** — `scripts/check-feriados.js` recalcula los 16 feriados desde reglas legales codificadas (Pascua Meeus → VS/SS; traslados lunes Ley 19.668 para 29-jun/12-oct; traslado viernes Ley 20.299 para 31-oct; tabla solsticio Ley 21.357 2024-2028; irrenunciables 19.973/20.629) y compara contra calendar-config.json. Sin red, no flakea. Mutation-tested (detecta faltantes/sobrantes/Corpus/flags). Corre en build.sh (cada push) + workflow diario.
+- **TABLA SOLSTICIO**: extender en check-feriados.js antes de cargar un año nuevo (falla a propósito si el año no está — fuerza verificación humana contra anexo Ley 21.357 BCN).
+- Capas de auto-mantenimiento: (1) check determinístico diario, (2) monitor legal BCN semanal (workers/calendar-monitor, fechaVersion de leyes), (3) verify-content mensual (claims), (4) countdown próximo-feriado client-side (siempre fresco), (5) deploy diario (sitemap lastmod + próximo-feriado estático recalculado).
+- Verificación pre-push 2026-06-12: enjambre 5 agentes Sonnet (45/47 checks PASS) + validador Opus → GO. Los 2 hallazgos eran falsos positivos inducidos por anotación errónea en afirmaciones.json (decía que 16-jul era irrenunciable; el texto BCN de la Ley 20.148 no contiene "irrenunciable") — corregida.
+
 ### Pendientes estrategia feriados
-- [ ] Google Sheet: actualizar celda feriadosCompletos (JSON crudo) cuando se configure el sync — si no, el primer sync pisará los 16 feriados con los 14 viejos
 - [ ] Tras deploy: GSC Request Indexing en /feriados-2026, /feriados/junio-2026/, /feriados/julio-2026/, /corpus-christi-2026
 - [ ] Monitorear 2-6 semanas: queries "feriados [mes] 2026" en GSC
 - [ ] Cuestión de datos abierta: 8-dic marcado "en-clases" pero schoolEnd JEC = 4-dic (aplica a sin-JEC/EPJA/Aysén/Magallanes) — el contexto está explicado en /feriados/diciembre-2026/
 - [ ] Evaluar página /proximo-feriado (queries "mañana es feriado", "próximo feriado") — countdown client-side ya existe en hub y páginas de mes
+- [ ] verify-content.js: lógica de traslado San Pedro mueve sáb/dom a lunes, pero el verbatim Ley 19.668 solo traslada mar-jue/vie — irrelevante en 2026 (cae lunes), revisar antes de 2027
 
 ## SEO Recovery v3 — Core Update response (2026-04-23)
 
