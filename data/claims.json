@@ -1,7 +1,7 @@
 {
   "_meta": {
     "version": "2.0.0",
-    "generatedAt": "2026-06-13T00:10:49.085Z",
+    "generatedAt": "2026-06-13T00:19:07.659Z",
     "description": "Modelo unificado de claims. Fuente de verdad para todas las afirmaciones del sitio.",
     "totalClaims": 51,
     "model": "claim-centric-unified",
@@ -420,7 +420,7 @@
       "data_key": "feriado_virgen_carmen",
       "data_path": "calendar-config.json → feriadosCompletos[7].date",
       "source_id": "bcn-ley-20148",
-      "source_reference": "Art. unico — 16 de julio irrenunciable",
+      "source_reference": "Art. 1 — feriado el 16 de julio en reemplazo de Corpus Christi. NO es irrenunciable (Leyes 19.973/20.629 no lo incluyen)",
       "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=257080",
       "fuente_tipo": "xml",
       "extracto_verbatim": "\"Artículo 1º.- Declárase feriado el día 16 de julio de cada año, en que se celebra y honra a la Virgen del Carmen, en reemplazo del feriado correspondiente a Corpus Christi.",

@@ -322,7 +322,7 @@
       "data_key": "feriado_virgen_carmen",
       "data_path": "calendar-config.json → feriadosCompletos[7].date",
       "source_id": "bcn-ley-20148",
-      "source_reference": "Art. unico — 16 de julio irrenunciable",
+      "source_reference": "Art. 1 — feriado el 16 de julio en reemplazo de Corpus Christi. NO es irrenunciable (Leyes 19.973/20.629 no lo incluyen)",
       "verification_method": "deterministic",
       "verification_tier": 1,
       "expected_check": "Fecha fija: siempre 16 de julio",

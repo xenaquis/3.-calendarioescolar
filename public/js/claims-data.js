@@ -120,7 +120,7 @@ window.CLAIMS_DATA = {
     "pregunta": "Cuando es el feriado de la Virgen del Carmen 2026?",
     "respuesta": "Virgen del Carmen es feriado el 16 de julio de 2026",
     "status": "correcto",
-    "source_reference": "Art. unico — 16 de julio irrenunciable",
+    "source_reference": "Art. 1 — feriado el 16 de julio en reemplazo de Corpus Christi. NO es irrenunciable (Leyes 19.973/20.629 no lo incluyen)",
     "source_name": "Ley 20.148 — Virgen del Carmen feriado irrenunciable",
     "extracto_verbatim": "\"Artículo 1º.- Declárase feriado el día 16 de julio de cada año, en que se celebra y honra a la Virgen del Carmen, en reemplazo del feriado correspondiente a Corpus Christi.",
     "fuente_url": "https://www.bcn.cl/leychile/navegar?idNorma=257080",
