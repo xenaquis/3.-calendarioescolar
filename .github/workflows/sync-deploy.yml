@@ -35,6 +35,7 @@ jobs:
     permissions:
       contents: read
       deployments: write
+      issues: write        # Para crear issue de alerta si el workflow falla
 
     steps:
       - name: Checkout
@@ -68,7 +69,30 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: npx wrangler pages deploy public --project-name=${{ vars.CF_PROJECT_NAME }}
 
-      # ── Paso 6: Resumen ────────────────────────────────────────────────
+      # ── Paso 6: Alerta si falló (issue en GitHub → notificación email) ──
+      # Sin secrets nuevos: usa GITHUB_TOKEN. Si ya hay un issue abierto de
+      # ci-failure, comenta en él en vez de crear duplicados.
+      - name: Crear issue de alerta si falló
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --search "ALERTA verificacion diaria in:title" --json number --jq '.[0].number // empty')
+          BODY="La verificación diaria falló el $(date -u +%Y-%m-%d\ %H:%M) UTC.
+
+          Posibles causas: check-feriados detectó discrepancia en los datos, validate.js encontró errores, o falló el deploy a Cloudflare.
+
+          Log del run: $RUN_URL"
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$BODY"
+          else
+            gh issue create --repo "${{ github.repository }}" \
+              --title "ALERTA verificacion diaria fallo $(date -u +%Y-%m-%d)" \
+              --body "$BODY"
+          fi
+
+      # ── Paso 7: Resumen ────────────────────────────────────────────────
       - name: Resumen
         if: always()
         run: |
