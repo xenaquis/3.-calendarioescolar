@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es-CL" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO -->
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, noai, noimageai">
+  <meta name="claim-data" content="{{claimKeys}}">
+  <link rel="canonical" href="https://{{domain}}/feriados/{{slug}}/">
+
+  <!-- Hreflang -->
+  <link rel="alternate" hreflang="es-CL" href="https://{{domain}}/feriados/{{slug}}/">
+  <link rel="alternate" hreflang="es" href="https://{{domain}}/feriados/{{slug}}/">
+  <link rel="alternate" hreflang="x-default" href="https://{{domain}}/feriados/{{slug}}/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://{{domain}}/feriados/{{slug}}/">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:image" content="https://{{domain}}/icons/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:site_name" content="Calendario Escolar Chile">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{title}}">
+  <meta name="twitter:description" content="{{description}}">
+  <meta name="twitter:image" content="https://{{domain}}/icons/og-image.png">
+
+  <!-- AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-2859628961076196">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2859628961076196" crossorigin="anonymous"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <meta name="theme-color" content="#7c3aed">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/base.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/ads.css">
+
+  <style>
+    /* Badges de tipo e impacto (mismos del hub feriados-2026) */
+    .badge--patrio { background: var(--color-warning-light); color: #92400e; }
+    .badge--religioso { background: var(--color-primary-light); color: var(--color-primary-dark); }
+    .badge--laboral { background: var(--color-accent-light); color: var(--color-accent); }
+    .badge--clases { background: #fee2e2; color: #991b1b; }
+    .badge--sin-impacto { background: var(--color-success-light); color: var(--color-success); }
+    .badge--civil { background: var(--color-surface-alt); color: var(--color-text-secondary); }
+    .badge--conmemorativo { background: #fce7f3; color: #9d174d; }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .badge--conmemorativo { background: rgba(157, 23, 77, 0.25); color: #f9a8d4; }
+      :root:not([data-theme="light"]) .badge--clases { background: rgba(153, 27, 27, 0.25); color: #fca5a5; }
+    }
+    [data-theme="dark"] .badge--conmemorativo { background: rgba(157, 23, 77, 0.25); color: #f9a8d4; }
+    [data-theme="dark"] .badge--clases { background: rgba(153, 27, 27, 0.25); color: #fca5a5; }
+  </style>
+
+  <!-- article:meta para OG -->
+  <meta property="article:published_time" content="2026-06-12T00:00:00-03:00">
+  <meta property="article:modified_time" content="{{modifiedDate}}T00:00:00-03:00">
+  <meta property="article:author" content="https://{{domain}}/about.html">
+  <meta property="article:section" content="Feriados">
+  <meta property="article:tag" content="feriados {{mesNombre}} 2026 chile">
+  <meta property="article:tag" content="feriados 2026">
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{{schemaJson}}
+  </script>
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Saltar al contenido</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-header__brand">Calendario Escolar Chile</a>
+      <nav class="site-header__nav" aria-label="Principal">
+        <a href="/">Inicio</a>
+        <a href="/feriados-2026.html" aria-current="page">Feriados</a>
+        <a href="/about.html">Info</a>
+        <button id="theme-toggle" type="button" aria-label="Cambiar tema">&#9790;</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main id="main">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Inicio</a> <span>&rsaquo;</span> <a href="/feriados-2026.html">Feriados 2026</a> <span>&rsaquo;</span> {{mesCap}} 2026
+      </nav>
+
+      <div class="hero-section">
+        <h1>Feriados de {{mesNombre}} 2026 en Chile</h1>
+        <p class="hero-sub">
+          {{answerLead}}
+        </p>
+      </div>
+
+      <!-- Key facts -->
+      <section class="key-facts" aria-label="Resumen feriados {{mesNombre}} 2026">
+        <div class="key-fact key-fact--primary">
+          <p class="key-fact__label">Feriados en {{mesNombre}}</p>
+          <p class="key-fact__date">{{numFeriados}}</p>
+          <p class="key-fact__note">De 16 en el a&ntilde;o</p>
+        </div>
+        <div class="key-fact key-fact--warning">
+          <p class="key-fact__label">Suspenden clases</p>
+          <p class="key-fact__date">{{numEnClases}}</p>
+          <p class="key-fact__note">{{notaEnClases}}</p>
+        </div>
+        <div class="key-fact key-fact--accent">
+          <p class="key-fact__label">Fin de semana largo</p>
+          <p class="key-fact__date">{{findeLargo}}</p>
+          <p class="key-fact__note">{{findeLargoNota}}</p>
+        </div>
+        <div class="key-fact key-fact--success">
+          <p class="key-fact__label">Pr&oacute;ximo feriado</p>
+          <p class="key-fact__date" id="proximo-nombre">{{proximoEstatico}}</p>
+          <p class="key-fact__note" id="proximo-fecha">{{proximoFechaEstatica}}</p>
+        </div>
+      </section>
+
+{{feriadosSection}}
+
+      <!-- Ad: Mid -->
+      <div class="ad-slot ad-slot--rect" aria-hidden="true">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2859628961076196"
+             data-ad-slot="0987654321"
+             data-ad-format="rectangle"
+             data-full-width-responsive="true"></ins>
+      </div>
+
+      <!-- Contexto escolar -->
+      <section class="section" aria-label="Contexto escolar de {{mesNombre}} 2026">
+        <h2>&iquest;Hay clases en {{mesNombre}} 2026?</h2>
+{{contextoEscolar}}
+      </section>
+
+      <!-- FAQ -->
+      <section class="section" id="faq">
+        <h2>Preguntas frecuentes</h2>
+{{faqHtml}}
+      </section>
+
+      <!-- Navegación de meses -->
+      <section class="section" aria-label="Otros meses">
+        <h2>Feriados de otros meses</h2>
+        <div class="card-grid">
+          <a href="/feriados/{{mesPrevSlug}}/" class="card" style="text-decoration:none; color:inherit;">
+            <h3 class="card__title" style="color:var(--color-accent);">&larr; Feriados {{mesPrevNombre}} 2026</h3>
+            <p>Mes anterior</p>
+          </a>
+          <a href="/feriados-2026.html" class="card" style="text-decoration:none; color:inherit;">
+            <h3 class="card__title" style="color:var(--color-primary);">Feriados 2026 completos</h3>
+            <p>Los 16 feriados del a&ntilde;o, fines de semana largos e irrenunciables.</p>
+          </a>
+          <a href="/feriados/{{mesNextSlug}}/" class="card" style="text-decoration:none; color:inherit;">
+            <h3 class="card__title" style="color:var(--color-success);">Feriados {{mesNextNombre}} 2026 &rarr;</h3>
+            <p>Mes siguiente</p>
+          </a>
+        </div>
+        <ul class="region-index__list" style="margin-top:var(--space-5)">
+{{mesIndexLinks}}
+        </ul>
+      </section>
+
+      <!-- Consulta también -->
+      <section class="section">
+        <h2>Consulta tambi&eacute;n</h2>
+        <div class="card-grid">
+          <a href="/vacaciones-invierno-2026.html" class="card" style="text-decoration:none; color:inherit;">
+            <h3 class="card__title" style="color:var(--color-accent);">Vacaciones de Invierno 2026</h3>
+            <p>Fechas exactas por regi&oacute;n y comparativa norte&nbsp;/&nbsp;centro&nbsp;/&nbsp;sur.</p>
+          </a>
+          <a href="/" class="card" style="text-decoration:none; color:inherit;">
+            <h3 class="card__title" style="color:var(--color-primary);">Calendario por regi&oacute;n</h3>
+            <p>Selecciona tu regi&oacute;n para ver inicio, vacaciones y fin de a&ntilde;o.</p>
+          </a>
+          <a href="/cuando-empiezan-clases-2026.html" class="card" style="text-decoration:none; color:inherit;">
+            <h3 class="card__title" style="color:var(--color-success);">&iquest;Cu&aacute;ndo empiezan las clases?</h3>
+            <p>Fechas de ingreso 2026 por regi&oacute;n.</p>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Verificación de fuentes -->
+  <div data-verificacion-footer>
+    <div class="verificacion-footer">
+      <p>Fuentes: Biblioteca del Congreso Nacional (Ley 2.977 y modificaciones) &middot; Ministerio de Educaci&oacute;n de Chile</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <ul class="site-footer__links">
+        <li><a href="/">Inicio</a></li>
+        <li><a href="/feriados-2026.html">Feriados 2026</a></li>
+        <li><a href="/about.html">Acerca de</a></li>
+        <li><a href="/quienes-somos.html">Qui&eacute;nes Somos</a></li>
+        <li><a href="/contacto.html">Contacto</a></li>
+        <li><a href="/privacidad.html">Privacidad</a></li>
+        <li><a href="/avisolegal.html">Aviso Legal</a></li>
+        <li><a href="https://dolaruf.cl" rel="noopener">Valor UF hoy</a></li>
+      </ul>
+      <p class="site-footer__copy">&copy; 2026 Calendario Escolar Chile</p>
+      <p class="site-footer__source">Fuente: Biblioteca del Congreso Nacional &middot; Mineduc</p>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script defer src="/js/theme.js"></script>
+  <script defer src="/js/ads.js"></script>
+  <script defer src="/js/analytics.js"></script>
+  <script defer src="/js/calendar-config.js"></script>
+
+  <script>
+  (function () {
+    'use strict';
+    var MESES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+    function parseDate(str) { var p = str.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
+    document.addEventListener('DOMContentLoaded', function () {
+      if (typeof Theme !== 'undefined') Theme.init();
+      if (typeof Ads !== 'undefined') Ads.init();
+      if (typeof Analytics !== 'undefined') Analytics.init('G-6FVLKF6PFQ');
+
+      // Próximo feriado en vivo (mejora progresiva sobre el valor estático)
+      var src = (window.CALENDAR_CONFIG && window.CALENDAR_CONFIG.feriadosCompletos) || [];
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      var proximo = null;
+      for (var i = 0; i < src.length; i++) {
+        if (parseDate(src[i].date) >= today) { proximo = src[i]; break; }
+      }
+      var elN = document.getElementById('proximo-nombre');
+      var elF = document.getElementById('proximo-fecha');
+      if (proximo && elN && elF) {
+        var d = parseDate(proximo.date);
+        var dias = Math.round((d - today) / 86400000);
+        elN.textContent = proximo.nombre;
+        elF.textContent = d.getDate() + ' ' + MESES[d.getMonth()] + (dias === 0 ? ' · hoy' : ' · en ' + dias + ' días');
+      }
+    });
+  }());
+  </script>
+
+</body>
+</html>

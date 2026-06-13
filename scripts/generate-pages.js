@@ -103,6 +103,14 @@ pages.forEach(function (page) {
   });
 });
 
+// Generar páginas de feriados por mes (public/feriados/[mes]-2026/)
+var TEMPLATE_MES_FILE = path.join(__dirname, '..', 'data', 'template-mes.html');
+if (calConfig && fs.existsSync(TEMPLATE_MES_FILE)) {
+  var generateFeriadosMes = require('./generate-feriados-mes.js');
+  var mesUrls = generateFeriadosMes(calConfig, TEMPLATE_MES_FILE, OUTPUT_DIR, domain);
+  mesUrls.forEach(function (u) { sitemapUrls.push(u); });
+}
+
 // Generar sitemap
 var today = new Date().toISOString().slice(0, 10);
 var sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
