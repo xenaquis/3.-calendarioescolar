@@ -85,8 +85,12 @@ var MES_EXTRA = {
   abril: {
     claimKeys: [],
     contexto: '<p>En abril hay clases todo el mes, con una excepci&oacute;n: el <strong>viernes 3 de abril (Viernes Santo) se suspenden las clases</strong> en todos los establecimientos. El s&aacute;bado 4 (S&aacute;bado Santo) tambi&eacute;n es feriado, pero cae en fin de semana.</p>' +
-      '<p>Semana Santa genera el <strong>primer fin de semana largo</strong> del a&ntilde;o escolar: viernes 3 a domingo 5 de abril. El lunes 6 de abril hay clases normalmente.</p>',
+      '<p><strong>Semana Santa 2026</strong> (del domingo 29 de marzo al domingo 5 de abril) genera el <strong>primer fin de semana largo</strong> del a&ntilde;o escolar: viernes 3 a domingo 5 de abril. En el calendario escolar chileno <strong>no hay &laquo;vacaciones de Semana Santa&raquo;</strong>: solo el Viernes y el S&aacute;bado Santo son feriado, y el lunes 6 de abril hay clases normalmente.</p>',
     faqs: [
+      { q: '¿Hay vacaciones de Semana Santa en Chile 2026?',
+        a: 'No. El calendario escolar chileno no contempla vacaciones de Semana Santa. Solo son feriado el Viernes Santo (3 de abril) y el Sábado Santo (4 de abril) de 2026; el resto de la semana hay clases normales.' },
+      { q: '¿Qué días son feriado en Semana Santa 2026?',
+        a: 'Viernes Santo, el viernes 3 de abril, y Sábado Santo, el sábado 4 de abril de 2026. El Jueves Santo y el Domingo de Resurrección no son feriados legales en Chile.' },
       { q: '¿El lunes 6 de abril de 2026 hay clases?',
         a: 'Sí. El feriado de Semana Santa 2026 cubre solo viernes 3 y sábado 4 de abril. El lunes 6 es día de clases normal.' },
       { q: '¿Cuándo cae el Domingo de Pascua 2026?',
