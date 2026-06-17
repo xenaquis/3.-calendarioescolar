@@ -115,6 +115,12 @@ if (calConfig && fs.existsSync(TEMPLATE_MES_FILE)) {
   mesUrls.forEach(function (u) { sitemapUrls.push(u); });
 }
 
+// Generar public/proximo-feriado.html (countdown nacional, estatico en build + cliente)
+if (calConfig) {
+  var generateProximoFeriado = require('./generate-proximo-feriado.js');
+  sitemapUrls.push(generateProximoFeriado(calConfig, OUTPUT_DIR, domain));
+}
+
 // Generar sitemap
 var today = new Date().toISOString().slice(0, 10);
 var sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
