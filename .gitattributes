@@ -1,0 +1,12 @@
+# Normalizar fin de línea. Los scripts shell DEBEN ser LF o el runner Linux falla
+# ($'\r': command not found). Ver deploy fallido 2026-06-17 (build.sh con CRLF).
+* text=auto eol=lf
+*.sh text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.png binary
+*.jpg binary
+*.svg text eol=lf
