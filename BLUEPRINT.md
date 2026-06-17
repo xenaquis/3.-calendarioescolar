@@ -305,10 +305,21 @@ Detalle completo y backlog priorizado en `MILESTONE-360.md` (raíz). Cambios apl
 (Todo OK, 2 warnings benignos preexistentes). Home cargada en BrowserOS: sin errores de consola, grid de
 meses + "16 feriados" + label de frescura OK.
 
-**Pendiente (backlog Fase D en MILESTONE-360.md):** `/proximo-feriado` (countdown, cero mantenimiento);
-`/efemerides-escolares-2026` (CTR 37%, **requiere fuente Mineduc verificada**); ancla Semana Santa en abril.
+**Páginas nuevas DESPLEGADAS (17-jun):**
+- `/proximo-feriado` — `scripts/generate-proximo-feriado.js`. Countdown nacional (todos los feriados, no solo
+  escolares) generado en build + recálculo client-side desde `CALENDAR_CONFIG`. Cero mantenimiento.
+- `/efemerides-escolares-2026` — `scripts/generate-efemerides.js`. 18 efemérides curadas y verificadas con
+  fuente citable (BCN/leyes, Mineduc, ONU/UNESCO). Mayoría fecha fija = bajo mantenimiento; móviles marcadas.
+  Las que también son feriado toman la fecha de `calendar-config.json` (fuente de verdad) para no contradecir
+  al sitio — esto corrigió un dato erróneo de la investigación (Pueblos Indígenas 24→21 jun, solsticio Ley 21.357).
+  Datos curados viven en el array `buildEfemerides()` del módulo (REVISAR las móviles anualmente).
+
+**Fix CI (17-jun):** `scripts/build.sh` tenía CRLF → el runner Linux fallaba (`$'\r': command not found`,
+exit 2) y bloqueaba el deploy (también el cron diario). Normalizado a LF + `.gitattributes` con `eol=lf`.
+
+**Pendiente Fase D:** ancla Semana Santa en `/feriados/abril-2026/` (98 impr).
 **Acción humana:** pegar slot IDs reales de AdSense; verificar "Always Use HTTPS" en Cloudflare; tras deploy
-re-enviar sitemap + Request Indexing en GSC.
+re-enviar sitemap + Request Indexing en GSC; opcional: actualizar actions/checkout+setup-node a Node 24.
 
 ## SEO Recovery v3 — Core Update response (2026-04-23)
 

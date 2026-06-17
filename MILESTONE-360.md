@@ -74,13 +74,13 @@
 | C3 | `verify-content.yml`: `continue-on-error` en el commit (evita rojos espurios) | 22 |
 | C4 | `ads.js`: no hacer push de slots placeholder (protege la cuenta AdSense) | 70 |
 
-### Fase D — Páginas nuevas de impresiones (siguiente iteración; requieren build/QA)
-| # | Acción | Score | Nota |
-|---|--------|-------|------|
-| D1 | `/proximo-feriado` (countdown, estático en build + cliente; cero mantenimiento) | 72 | reusa `CALENDAR_CONFIG` |
-| D2 | Optimizar `/feriados/septiembre-2026/` para "vacaciones de septiembre 2026" (title/H1/desc) | 55 | NO crear página nueva |
-| D3 | `/efemerides-escolares-2026` (CTR 37%) | 62 | **sólo con fuente Mineduc verificada**; datos estables |
-| D4 | Semana Santa: sección/ancla en `/feriados/abril-2026/` (98 impr) | 45 | no página nueva |
+### Fase D — Páginas nuevas de impresiones
+| # | Acción | Score | Estado |
+|---|--------|-------|--------|
+| D1 | `/proximo-feriado` (countdown, estático en build + cliente; cero mantenimiento) | 72 | **HECHO (deploy 17-jun)** — `scripts/generate-proximo-feriado.js` |
+| D2 | Optimizar `/feriados/septiembre-2026/` para "vacaciones de septiembre 2026" (title/H1/desc) | 55 | **HECHO** (titleSeo/descSeo en `generate-feriados-mes.js`) |
+| D3 | `/efemerides-escolares-2026` (CTR 37%) | 62 | **HECHO (deploy 17-jun)** — `scripts/generate-efemerides.js`, 18 efemérides verificadas con fuente; las que son feriado toman fecha de `calendar-config.json` (corrigió Pueblos Indígenas 24→21 jun) |
+| D4 | Semana Santa: sección/ancla en `/feriados/abril-2026/` (98 impr) | 45 | pendiente (no página nueva) |
 
 ### RECHAZADO por los validadores (no tocar)
 - "Corregir" `trasladoLunes` → introduciría **fechas incorrectas** (la lógica replica la Ley 19.668 y las
