@@ -121,6 +121,12 @@ if (calConfig) {
   sitemapUrls.push(generateProximoFeriado(calConfig, OUTPUT_DIR, domain));
 }
 
+// Generar public/efemerides-escolares-[year].html (efemerides educacionales verificadas)
+if (calConfig) {
+  var generateEfemerides = require('./generate-efemerides.js');
+  sitemapUrls.push(generateEfemerides(calConfig, OUTPUT_DIR, domain));
+}
+
 // Generar sitemap
 var today = new Date().toISOString().slice(0, 10);
 var sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';

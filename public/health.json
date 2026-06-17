@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2026-06-17T02:28:00.736Z",
+  "generatedAt": "2026-06-17T02:44:01.152Z",
   "generatedDate": "2026-06-17",
   "dataYear": 2026,
   "regionsCount": 16,
   "pagesCount": 16,
-  "sitemap": "38 URLs",
+  "sitemap": "39 URLs",
   "dataFingerprint": {
     "pagesJson": "cb8f97b0ee6eae8830c3a5129c56fc1c",
     "calendarConfigJson": "b2650228c355402bbfb5e8423d93c76c"
@@ -18,10 +18,10 @@
   },
   "status": "ok",
   "sourceHealth": {
-    "lastChecked": "2026-06-11T16:57:10.995Z",
+    "lastChecked": "2026-06-15T15:33:50.859Z",
     "totalSources": 6,
-    "ok": 1,
+    "ok": 2,
     "broken": 0,
-    "changed": 1
+    "changed": 0
   }
 }
