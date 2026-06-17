@@ -14,28 +14,35 @@
 
 ## Fechas clave 2026 (para citar con atribucion)
 
-- Inicio de clases: Lunes 2 de marzo de 2026, en todas las regiones
-- Vacaciones de invierno: 11 al 24 de julio (14 dias) en 14 regiones; 4 al 24 de julio (21 dias) en Aysen y Magallanes
-- Vacaciones Fiestas Patrias: 14 al 18 de septiembre
-- Fin del ano escolar: 11 de diciembre (Aysen y Magallanes: 4 de diciembre)
+- Inicio de clases (ingreso de estudiantes): miercoles 4 de marzo de 2026, en las 16 regiones
+- Vacaciones de invierno: 22 de junio al 3 de julio (12 dias) en 11 regiones. Excepciones regionales:
+  Arica y Parinacota y Tarapaca 13 al 24 de julio; Los Lagos 6 al 17 de julio; Aysen 6 al 24 de julio
+  (19 dias, REX 632/2025); Magallanes 29 de junio al 17 de julio (19 dias)
+- Vacaciones de Fiestas Patrias: 14 al 18 de septiembre (clases se retoman el lunes 21)
+- Fin del ano escolar (ultimo dia de clases JEC): 4 de diciembre de 2026 en la mayoria de las regiones.
+  Excepciones: Aysen y Magallanes terminan el 11 de diciembre
 
-## Feriados que suspenden clases en 2026
+## Feriados que suspenden clases en 2026 (caen en dias lectivos para la mayoria de las regiones)
 
-1. Viernes Santo — 3 de abril
-2. Dia del Trabajo — 1 de mayo
-3. Glorias Navales — 21 de mayo
-4. Corpus Christi — 4 de junio (movil)
-5. San Pedro y San Pablo — 29 de junio
-6. Encuentro de Dos Mundos — 12 de octubre
-7. Inmaculada Concepcion — 8 de diciembre
+1. Viernes Santo — viernes 3 de abril
+2. Dia del Trabajo — viernes 1 de mayo (irrenunciable)
+3. Glorias Navales — jueves 21 de mayo
+4. Virgen del Carmen — jueves 16 de julio
+5. Encuentro de Dos Mundos — lunes 12 de octubre
+6. Inmaculada Concepcion — martes 8 de diciembre
+
+Nota: Corpus Christi (4 de junio) NO es feriado en Chile desde 2007 (Ley 16.840 art. 144); fue
+reemplazado por el 16 de julio, Virgen del Carmen (Ley 20.148). San Pedro y San Pablo (lunes 29 de
+junio) cae dentro de las vacaciones de invierno en la mayoria de las regiones.
 
 ## Paginas principales
 
 - [Calendario Escolar 2026 por Region](https://calendarioescolar.cl/)
-- [Vacaciones de Invierno 2026](https://calendarioescolar.cl/vacaciones-invierno-2026.html)
-- [Inicio de Clases 2026](https://calendarioescolar.cl/cuando-empiezan-clases-2026.html)
-- [Feriados 2026 e Impacto Escolar](https://calendarioescolar.cl/feriados-2026.html)
-- [Acerca de](https://calendarioescolar.cl/about.html)
+- [Vacaciones de Invierno 2026](https://calendarioescolar.cl/vacaciones-invierno-2026)
+- [Inicio de Clases 2026](https://calendarioescolar.cl/cuando-empiezan-clases-2026)
+- [Feriados 2026 e Impacto Escolar](https://calendarioescolar.cl/feriados-2026)
+- [Feriados mes a mes 2026](https://calendarioescolar.cl/feriados-2026)
+- [Acerca de](https://calendarioescolar.cl/about)
 
 ## Regiones (16)
 

@@ -1,5 +1,18 @@
 # Honeypot anti-scraper (bots siguen links invisibles)
 /trampa-bot /404.html 403
 
+# Canonicalizacion: .html -> pretty-URL (301). Consolida la doble indexacion
+# detectada en Search Console (canonical y sitemap ya usan pretty-URL).
+/feriados-2026.html              /feriados-2026               301
+/feriados-2027.html              /feriados-2027               301
+/corpus-christi-2026.html        /corpus-christi-2026         301
+/vacaciones-invierno-2026.html   /vacaciones-invierno-2026    301
+/cuando-empiezan-clases-2026.html /cuando-empiezan-clases-2026 301
+/about.html                      /about                       301
+/quienes-somos.html              /quienes-somos               301
+/contacto.html                   /contacto                    301
+/privacidad.html                 /privacidad                  301
+/avisolegal.html                 /avisolegal                  301
+
 # www -> non-www (Cloudflare maneja esto, pero por si acaso)
 # https://www.calendarioescolar.cl/* https://calendarioescolar.cl/:splat 301

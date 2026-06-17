@@ -243,8 +243,8 @@ window.CLAIMS_DATA = {
   },
   "region-vacaciones-inicio-standard": {
     "id": "region-vacaciones-inicio-standard",
-    "pregunta": "Cuando empiezan las vacaciones de invierno en las 14 regiones estandar?",
-    "respuesta": "Las vacaciones de invierno comienzan el 22 de junio en 14 regiones",
+    "pregunta": "Cuando empiezan las vacaciones de invierno en las 11 regiones estandar?",
+    "respuesta": "Las vacaciones de invierno comienzan el 22 de junio en 11 regiones",
     "status": "correcto"
   },
   "region-vacaciones-inicio-sur": {
@@ -255,8 +255,8 @@ window.CLAIMS_DATA = {
   },
   "region-vacaciones-fin": {
     "id": "region-vacaciones-fin",
-    "pregunta": "Cuando terminan las vacaciones de invierno en las 16 regiones?",
-    "respuesta": "Las vacaciones de invierno terminan el 3 de julio en las 16 regiones",
+    "pregunta": "Cuando terminan las vacaciones de invierno en las 11 regiones estandar?",
+    "respuesta": "Las vacaciones de invierno terminan el 3 de julio en 11 regiones",
     "status": "correcto"
   },
   "region-fiestas-patrias-inicio": {
@@ -285,8 +285,8 @@ window.CLAIMS_DATA = {
   },
   "region-dias-vacaciones-invierno": {
     "id": "region-dias-vacaciones-invierno",
-    "pregunta": "Cuantos dias de vacaciones de invierno tienen las 14 regiones estandar?",
-    "respuesta": "Las vacaciones de invierno duran 12 dias en 14 regiones",
+    "pregunta": "Cuantos dias de vacaciones de invierno tienen las 11 regiones estandar?",
+    "respuesta": "Las vacaciones de invierno duran 12 dias en 11 regiones",
     "status": "correcto"
   },
   "region-dias-vacaciones-invierno-sur": {

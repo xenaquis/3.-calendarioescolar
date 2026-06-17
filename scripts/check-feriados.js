@@ -152,6 +152,14 @@ if (actualDates.indexOf(corpus) !== -1) {
   errors.push('CORPUS: ' + corpus + ' (Pascua+60) figura como feriado — Corpus Christi NO es feriado legal vigente');
 }
 
+// Aviso proactivo (no bloqueante): la tabla SOLSTICIO debe cubrir el año siguiente con
+// anticipación, para no toparse con el process.exit(1) recién al cargar datos del año nuevo.
+if (!SOLSTICIO[cal.year + 1]) {
+  console.warn('check-feriados: AVISO — falta el solsticio de ' + (cal.year + 1) +
+    ' en la tabla SOLSTICIO (check-feriados.js). Agregarlo desde el anexo de la Ley 21.357 (BCN) ' +
+    'antes de cargar el calendario ' + (cal.year + 1) + '.');
+}
+
 if (errors.length) {
   console.error('=== check-feriados: ' + errors.length + ' discrepancia(s) en feriados ' + cal.year + ' ===');
   errors.forEach(function (e) { console.error('  ERROR: ' + e); });

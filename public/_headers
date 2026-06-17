@@ -18,6 +18,10 @@
 /region/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
 
+# Feriados por mes: misma estrategia (paginas /feriados/[mes]-2026/)
+/feriados/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
 # Static assets: 1h + revalidar (sin hash de versión — stale corto para evitar CSS/JS obsoleto)
 /css/*
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400

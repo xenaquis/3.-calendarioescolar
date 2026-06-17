@@ -13,24 +13,25 @@
 var fs = require('fs');
 var path = require('path');
 
-// data_key de afirmaciones.json por fecha de feriado
-var DATA_KEY_BY_DATE = {
-  '2026-01-01': 'feriado_ano_nuevo',
-  '2026-04-03': 'feriado_viernes_santo',
-  '2026-04-04': 'feriado_sabado_santo',
-  '2026-05-01': 'feriado_dia_trabajo',
-  '2026-05-21': 'feriado_glorias_navales',
-  '2026-06-21': 'feriado_pueblos_indigenas',
-  '2026-06-29': 'feriado_san_pedro_san_pablo',
-  '2026-07-16': 'feriado_virgen_carmen',
-  '2026-08-15': 'feriado_asuncion_virgen',
-  '2026-09-18': 'feriado_fiestas_patrias',
-  '2026-09-19': 'feriado_glorias_ejercito',
-  '2026-10-12': 'feriado_encuentro_dos_mundos',
-  '2026-10-31': 'feriado_iglesias_evangelicas',
-  '2026-11-01': 'feriado_todos_los_santos',
-  '2026-12-08': 'feriado_inmaculada_concepcion',
-  '2026-12-25': 'feriado_navidad'
+// data_key de afirmaciones.json por NOMBRE de feriado (year-agnostic:
+// las fechas cambian cada año pero el nombre no, evitando fallo silencioso en 2027).
+var DATA_KEY_BY_NAME = {
+  'Año Nuevo': 'feriado_ano_nuevo',
+  'Viernes Santo': 'feriado_viernes_santo',
+  'Sábado Santo': 'feriado_sabado_santo',
+  'Día del Trabajo': 'feriado_dia_trabajo',
+  'Glorias Navales': 'feriado_glorias_navales',
+  'Día de los Pueblos Indígenas': 'feriado_pueblos_indigenas',
+  'San Pedro y San Pablo': 'feriado_san_pedro_san_pablo',
+  'Virgen del Carmen': 'feriado_virgen_carmen',
+  'Asunción de la Virgen': 'feriado_asuncion_virgen',
+  'Fiestas Patrias': 'feriado_fiestas_patrias',
+  'Glorias del Ejército': 'feriado_glorias_ejercito',
+  'Encuentro de Dos Mundos': 'feriado_encuentro_dos_mundos',
+  'Día Iglesias Evangélicas y Protestantes': 'feriado_iglesias_evangelicas',
+  'Día de Todos los Santos': 'feriado_todos_los_santos',
+  'Inmaculada Concepción': 'feriado_inmaculada_concepcion',
+  'Navidad': 'feriado_navidad'
 };
 
 var MESES = [
@@ -139,6 +140,8 @@ var MES_EXTRA = {
   },
   septiembre: {
     claimKeys: [],
+    titleSeo: 'Vacaciones de Septiembre 2026 en Chile — Fiestas Patrias y feriados',
+    descSeo: 'Vacaciones de Fiestas Patrias 2026: del 14 al 18 de septiembre; las clases vuelven el lunes 21. Feriados viernes 18 y sábado 19 (irrenunciables). Detalle con respaldo legal Mineduc y BCN.',
     contexto: '<p>Los feriados de Fiestas Patrias 2026 &mdash; <strong>viernes 18 y s&aacute;bado 19 de septiembre</strong>, ambos irrenunciables &mdash; caen dentro de las <strong>vacaciones escolares de Fiestas Patrias (14 al 18 de septiembre)</strong> fijadas por el calendario Mineduc, por lo que no restan d&iacute;as de clases.</p>' +
       '<p>El fin de semana del <strong>18 al 20 de septiembre</strong> es fin de semana largo para todo el pa&iacute;s. Las clases se retoman el lunes 21 de septiembre.</p>',
     faqs: [
@@ -366,9 +369,13 @@ module.exports = function generateFeriadosMes(calConfig, templateFile, outputDir
       answerLead = mes.cap + ' 2026 tiene <strong>' + (feriadosMes.length === 1 ? 'un feriado' : feriadosMes.length + ' feriados') + '</strong>: ' + nombres + '.';
     }
 
+    // Override SEO por mes (ej. septiembre apunta a "vacaciones de septiembre 2026")
+    if (extra.titleSeo) title = extra.titleSeo;
+    if (extra.descSeo) description = extra.descSeo;
+
     // Claim keys: feriados del mes + extras curados
     var claimKeys = feriadosMes
-      .map(function (f) { return DATA_KEY_BY_DATE[f.date]; })
+      .map(function (f) { return DATA_KEY_BY_NAME[f.nombre]; })
       .filter(Boolean)
       .concat(extra.claimKeys || []);
 

@@ -267,6 +267,49 @@ Revisar GSC semanalmente:
 - [ ] Evaluar página /proximo-feriado (queries "mañana es feriado", "próximo feriado") — countdown client-side ya existe en hub y páginas de mes
 - [ ] verify-content.js: lógica de traslado San Pedro mueve sáb/dom a lunes, pero el verbatim Ley 19.668 solo traslada mar-jue/vie — irrelevante en 2026 (cae lunes), revisar antes de 2027
 
+## Milestone 360 (2026-06-16) — Recuperación + monetización
+
+Análisis 360 con swarm Sonnet (6 investigadores) + validadores Opus + GSC real + BrowserOS.
+Detalle completo y backlog priorizado en `MILESTONE-360.md` (raíz). Cambios aplicados (rama `milestone-360`):
+
+**Veracidad (prioridad del dueño):**
+- Home "15 feriados" → **16** (era el único error factual visible, en la página de mayor PageRank).
+- `llms.txt` reescrito: tenía datos **gravemente falsos** servidos a crawlers de IA (inicio 2-mar, vacaciones
+  invierno invertidas, fin de año invertido, y **Corpus Christi listado como feriado** que suspende clases).
+  Ahora coincide con `calendar-config.json` + FAQ del home.
+- `claims.json` + `afirmaciones.json`: vacaciones de invierno "14/16 regiones" → **11** (5 excepciones
+  regionales). NO se tocó el "14 regiones" de fin de año (ése es correcto: solo 2 excepciones). Regenerado.
+
+**Consolidación SEO (sobre tráfico existente):**
+- Enlaces internos `.html` → **pretty-URL** en todo el sitio (145 enlaces, 12 archivos) vía
+  `scripts/normalize-internal-links.js`. Resuelve la doble indexación GSC (canonical/sitemap ya eran pretty).
+- `_redirects`: 301 `.html` → pretty para las 10 páginas standalone indexadas.
+- Home: nueva sección **"Feriados mes a mes 2026"** enlaza las 12 páginas `/feriados/[mes]-2026/` (eran
+  huérfanas del home). Reusa `.region-index` (cero CSS nuevo).
+- `feriados-2027` canonical/og/hreflang → pretty. `_headers`: regla cache `/feriados/*`.
+
+**Freshness automática (cero mantenimiento):**
+- `dateModified` de las 16 regiones ahora es `{{buildDate}}` (stampeado en cada deploy diario).
+- Home: label visible "Actualizado: <mes> <año>" se autopobla desde `CALENDAR_CONFIG.generatedDate`
+  (nuevo campo) en `app.js` → siempre fresco sin editar a mano. Meta/dateModified del home a junio 2026.
+
+**Mantenimiento / robustez:**
+- `generate-feriados-mes.js`: `DATA_KEY_BY_DATE` → `DATA_KEY_BY_NAME` (year-agnostic; evita que las claim-keys
+  de las páginas de mes se rompan en silencio en 2027 al cambiar las fechas).
+- `check-feriados.js`: aviso proactivo (no bloqueante) si falta el solsticio del año+1 en la tabla.
+- `verify-content.yml`: `continue-on-error` en el commit (evita rojos espurios por conflicto de rebase).
+- `ads.js`: ya **no** hace push de slots placeholder (`1234567890`, etc.) → protege la cuenta AdSense de
+  requests a slots inexistentes. Solo carga AdSense si hay ≥1 slot real.
+
+**Verificado:** `node scripts/generate-pages.js` + `check-feriados.js` (OK, 16 feriados) + `validate.js`
+(Todo OK, 2 warnings benignos preexistentes). Home cargada en BrowserOS: sin errores de consola, grid de
+meses + "16 feriados" + label de frescura OK.
+
+**Pendiente (backlog Fase D en MILESTONE-360.md):** `/proximo-feriado` (countdown, cero mantenimiento);
+`/efemerides-escolares-2026` (CTR 37%, **requiere fuente Mineduc verificada**); ancla Semana Santa en abril.
+**Acción humana:** pegar slot IDs reales de AdSense; verificar "Always Use HTTPS" en Cloudflare; tras deploy
+re-enviar sitemap + Request Indexing en GSC.
+
 ## SEO Recovery v3 — Core Update response (2026-04-23)
 
 ### Diagnóstico

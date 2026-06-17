@@ -722,8 +722,8 @@
         "regional",
         "vacaciones_invierno"
       ],
-      "pregunta": "Cuando empiezan las vacaciones de invierno en las 14 regiones estandar?",
-      "respuesta": "Las vacaciones de invierno comienzan el 22 de junio en 14 regiones",
+      "pregunta": "Cuando empiezan las vacaciones de invierno en las 11 regiones estandar?",
+      "respuesta": "Las vacaciones de invierno comienzan el 22 de junio en 11 regiones",
       "displayed_value": "22 de junio",
       "data_key": "vacacionesInicio",
       "data_path": "pages.json → [region].vacacionesInicio",
@@ -778,8 +778,8 @@
         "regional",
         "vacaciones_invierno"
       ],
-      "pregunta": "Cuando terminan las vacaciones de invierno en las 16 regiones?",
-      "respuesta": "Las vacaciones de invierno terminan el 3 de julio en las 16 regiones",
+      "pregunta": "Cuando terminan las vacaciones de invierno en las 11 regiones estandar?",
+      "respuesta": "Las vacaciones de invierno terminan el 3 de julio en 11 regiones",
       "displayed_value": "3 de julio",
       "data_key": "vacacionesFin",
       "data_path": "pages.json → [region].vacacionesFin",
@@ -918,8 +918,8 @@
         "regional",
         "vacaciones_invierno"
       ],
-      "pregunta": "Cuantos dias de vacaciones de invierno tienen las 14 regiones estandar?",
-      "respuesta": "Las vacaciones de invierno duran 12 dias en 14 regiones",
+      "pregunta": "Cuantos dias de vacaciones de invierno tienen las 11 regiones estandar?",
+      "respuesta": "Las vacaciones de invierno duran 12 dias en 11 regiones",
       "displayed_value": "12",
       "data_key": "diasVacacionesInvierno",
       "data_path": "pages.json → [region].diasVacacionesInvierno",

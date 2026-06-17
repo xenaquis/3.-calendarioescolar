@@ -12,6 +12,16 @@ var Ads = (function () {
     setTimeout(load, 3000);
   }
 
+  // Slots de ejemplo del scaffold — NO existen en la cuenta AdSense. Pushearlos genera
+  // requests a slots inexistentes y arriesga la política de la cuenta. Se ignoran hasta
+  // tener IDs reales del panel AdSense.
+  var PLACEHOLDER_SLOTS = ['1234567890', '0987654321', '1122334455'];
+
+  function isReal(slot) {
+    var id = slot.getAttribute('data-ad-slot');
+    return id && PLACEHOLDER_SLOTS.indexOf(id) === -1;
+  }
+
   function load() {
     if (loaded) return;
     loaded = true;
@@ -22,6 +32,14 @@ var Ads = (function () {
     var client = slot.getAttribute('data-ad-client');
     if (!client || client.indexOf('XXXX') !== -1) return; // No configurado
 
+    // Solo cargar AdSense si hay al menos un slot REAL (no placeholder del scaffold).
+    var realSlots = [];
+    var all = document.querySelectorAll('.adsbygoogle');
+    for (var j = 0; j < all.length; j++) {
+      if (isReal(all[j])) realSlots.push(all[j]);
+    }
+    if (realSlots.length === 0) return;
+
     var s = document.createElement('script');
     s.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=' + client;
     s.async = true;
@@ -29,8 +47,7 @@ var Ads = (function () {
     document.head.appendChild(s);
 
     s.onload = function () {
-      var slots = document.querySelectorAll('.adsbygoogle');
-      for (var i = 0; i < slots.length; i++) {
+      for (var i = 0; i < realSlots.length; i++) {
         try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
         } catch (e) { /* slot ya inicializado */ }

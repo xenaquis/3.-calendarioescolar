@@ -86,10 +86,19 @@ var App = (function () {
     if (CAL) {
       initFeriadoCard();
       initHomeStats();
+      initFreshness();
     } else {
       console.warn('[app.js] CALENDAR_CONFIG no disponible — ejecutar: npm run generate');
     }
     initRegionPicker();
+  }
+
+  // Label "Actualizado: <mes> <ano>" desde la fecha de build (deploy diario) — cero mantenimiento.
+  function initFreshness() {
+    var el = document.getElementById('hero-updated');
+    if (!el || !CAL || !CAL.generatedDate) return;
+    var d = parseDate(CAL.generatedDate);
+    el.textContent = 'Actualizado: ' + MESES[d.getUTCMonth()] + ' ' + d.getUTCFullYear();
   }
 
   // Próximo feriado escolar: primero en feriadosCompletos con contexto="en-clases" y fecha >= hoy.

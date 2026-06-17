@@ -215,5 +215,6 @@ window.CALENDAR_CONFIG = {
       "irrenunciable": true,
       "nota": null
     }
-  ]
+  ],
+  "generatedDate": "2026-06-17"
 };

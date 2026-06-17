@@ -58,6 +58,7 @@ try {
 var domain = config.domain || 'DOMAIN.cl';
 var generated = 0;
 var sitemapUrls = [];
+var buildDate = new Date().toISOString().slice(0, 10); // stamp de frescura (deploy diario)
 
 // Agregar páginas estáticas al sitemap
 var STATIC_PAGES = [
@@ -88,9 +89,10 @@ pages.forEach(function (page) {
     var re = new RegExp('\\{\\{' + key + '\\}\\}', 'g');
     html = html.replace(re, page[key] || '');
   });
-  // Reemplazar {{domain}} y {{siteName}}
+  // Reemplazar {{domain}}, {{siteName}} y {{buildDate}} (freshness automatica)
   html = html.replace(/\{\{domain\}\}/g, domain);
   html = html.replace(/\{\{siteName\}\}/g, config.siteName || 'SITENAME');
+  html = html.replace(/\{\{buildDate\}\}/g, buildDate);
 
   // Crear directorio y escribir
   var dir = path.join(OUTPUT_DIR, page.slug);
@@ -160,6 +162,7 @@ console.log('Generado public/js/regions-data.js (' + Object.keys(regionsData).le
 
 // Generar public/js/calendar-config.js (elimina fechas hardcodeadas en app.js)
 if (calConfig) {
+  calConfig.generatedDate = buildDate; // freshness automatica para el label visible del home (app.js)
   var calJs = '/* calendar-config.js — generado automaticamente por scripts/generate-pages.js\n' +
     '   NO EDITAR DIRECTAMENTE — editar data/calendar-config.json y ejecutar: npm run generate */\n' +
     'window.CALENDAR_CONFIG = ' + JSON.stringify(calConfig, null, 2) + ';\n';
