@@ -321,6 +321,17 @@ exit 2) y bloqueaba el deploy (también el cron diario). Normalizado a LF + `.gi
 **Acción humana:** pegar slot IDs reales de AdSense; verificar "Always Use HTTPS" en Cloudflare; tras deploy
 re-enviar sitemap + Request Indexing en GSC; opcional: actualizar actions/checkout+setup-node a Node 24.
 
+## Auditoría 360 AdSense/feriados/crons (2026-07-06)
+
+Workflow multi-agente Fable (22 agentes, verificación adversarial + BrowserOS). **Informe completo y backlog P0-P3 en `AUDITORIA-360-2026-07.md`** (raíz). **Plan de ejecución autónomo: `MILESTONE-361.md`** (raíz — incluye el prompt de arranque para sesión limpia; rama `milestone-361`, PENDIENTE de ejecutar). Resumen:
+
+- **Causa del rechazo AdSense "low value content"**: 16 páginas región = 96% boilerplate (16-20 palabras únicas) con 3 ad-units placeholder c/u; loader adsbygoogle en páginas dead-end (contacto/privacidad/avisolegal/about/quienes-somos); 72 `<ins>` con slots falsos. Arreglable: fix de contenido (diferenciar regiones con REX + notaRegional en pages.json), no técnico.
+- **Infra de alertas MUERTA**: secrets TELEGRAM_* no existen (no-ops silenciosos en 4 workflows); apagón total de crons 23-30 jun por billing del repo privado, sin alerta. check-bcn-changes sobreescribe hash aunque la alerta falle → cambios legales se pierden permanentemente. extract-pdf.yml roto (falló 15-may, PDFs gitignoreados, alerta nunca dispara).
+- **Contradicción factual detectada**: Aysén fin de año 11-dic (index/pages.json) vs 23-dic (texto /feriados/diciembre-2026 + su FAQPage). Verificar contra REX 632.
+- **Schema muerto**: FAQPage eliminado de Google Search 7-may-2026, HowTo deprecado 2023, Event no aplica (feature solo 8 países, sin Chile) — retirar; conservar Article/Breadcrumb/Organization.
+- **Competencia**: no pelear head terms (4 dominios exact-match + prensa); ser dueños del puente "¿hay clases el feriado X?" (ya #1 en esa query, nadie más tiene datos escolares regionales). /proximo-feriado verificado VIVO y correcto en producción (el HTML en git queda stale a propósito — sync-deploy lo regenera a diario sin commitear; no confundir en futuras auditorías).
+- **P0**: repo público (o spending limit), alertas → issues+GITHUB_TOKEN, quitar ads de dead-end + placeholders, fix contradicción Aysén.
+
 ## SEO Recovery v3 — Core Update response (2026-04-23)
 
 ### Diagnóstico
