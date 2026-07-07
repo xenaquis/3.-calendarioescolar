@@ -420,5 +420,149 @@ window.CLAIMS_DATA = {
     "pregunta": "Cuando comienza el segundo semestre?",
     "respuesta": "Inicio segundo semestre: 6 de julio en regiones estandar",
     "status": "no_verificable"
+  },
+  "rex-arica-y-parinacota": {
+    "id": "rex-arica-y-parinacota",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Arica y Parinacota?",
+    "respuesta": "El calendario escolar 2026 de Arica y Parinacota fue fijado por la Resolucion Exenta N° 1224 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-tarapaca": {
+    "id": "rex-tarapaca",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Tarapacá?",
+    "respuesta": "El calendario escolar 2026 de Tarapacá fue fijado por la Resolucion Exenta N° 687 del 2025-12-15 de la Seremi de Educacion — Rectificada por la REX N° 693 del 16-12-2025 (Día del Profesor: sin clases y sin recuperación).",
+    "status": "correcto"
+  },
+  "rex-antofagasta": {
+    "id": "rex-antofagasta",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Antofagasta?",
+    "respuesta": "El calendario escolar 2026 de Antofagasta fue fijado por la Resolucion Exenta N° 893 del 2025-12-15 de la Seremi de Educacion — Complementada por la REX N° 46 del 28-01-2026, que autoriza fechas distintas a establecimientos específicos (anexo por RBD).",
+    "status": "correcto"
+  },
+  "rex-atacama": {
+    "id": "rex-atacama",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Atacama?",
+    "respuesta": "El calendario escolar 2026 de Atacama fue fijado por la Resolucion Exenta N° 888 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-coquimbo": {
+    "id": "rex-coquimbo",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Coquimbo?",
+    "respuesta": "El calendario escolar 2026 de Coquimbo fue fijado por la Resolucion Exenta N° 2233 del 2025-12-15 de la Seremi de Educacion — Incluye resolución modificatoria del 16-12-2025 (Día del Profesor excluido de los días recuperables).",
+    "status": "correcto"
+  },
+  "rex-valparaiso": {
+    "id": "rex-valparaiso",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Valparaíso?",
+    "respuesta": "El calendario escolar 2026 de Valparaíso fue fijado por la Resolucion Exenta N° 2881 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-metropolitana": {
+    "id": "rex-metropolitana",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Metropolitana?",
+    "respuesta": "El calendario escolar 2026 de Metropolitana fue fijado por la Resolucion Exenta N° 2803 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-ohiggins": {
+    "id": "rex-ohiggins",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de O’Higgins?",
+    "respuesta": "El calendario escolar 2026 de O’Higgins fue fijado por la Resolucion Exenta N° 1198 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-maule": {
+    "id": "rex-maule",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Maule?",
+    "respuesta": "El calendario escolar 2026 de Maule fue fijado por la Resolucion Exenta N° 1642 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-nuble": {
+    "id": "rex-nuble",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Ñuble?",
+    "respuesta": "El calendario escolar 2026 de Ñuble fue fijado por la Resolucion Exenta N° 1398 del 2025-12-12 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-biobio": {
+    "id": "rex-biobio",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Biobío?",
+    "respuesta": "El calendario escolar 2026 de Biobío fue fijado por la Resolucion Exenta N° 2159 del 2025-12-12 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-araucania": {
+    "id": "rex-araucania",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de La Araucanía?",
+    "respuesta": "El calendario escolar 2026 de La Araucanía fue fijado por la Resolucion Exenta N° 2088 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-los-rios": {
+    "id": "rex-los-rios",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Los Ríos?",
+    "respuesta": "El calendario escolar 2026 de Los Ríos fue fijado por la Resolucion Exenta N° 1345 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-los-lagos": {
+    "id": "rex-los-lagos",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Los Lagos?",
+    "respuesta": "El calendario escolar 2026 de Los Lagos fue fijado por la Resolucion Exenta N° 1738 del 2025-12-16 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "rex-aysen": {
+    "id": "rex-aysen",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Aysén?",
+    "respuesta": "El calendario escolar 2026 de Aysén fue fijado por la Resolucion Exenta N° 618 del 2025-12-16 de la Seremi de Educacion — Modificada por la REX N° 632 del 22-12-2025: receso de invierno movido al 6-24 de julio por calidad del aire en Coyhaique.",
+    "status": "correcto"
+  },
+  "rex-magallanes": {
+    "id": "rex-magallanes",
+    "pregunta": "Que resolucion fija el calendario escolar 2026 de Magallanes?",
+    "respuesta": "El calendario escolar 2026 de Magallanes fue fijado por la Resolucion Exenta N° 711 del 2025-12-15 de la Seremi de Educacion",
+    "status": "correcto"
+  },
+  "paes-regular-2026": {
+    "id": "paes-regular-2026",
+    "pregunta": "Cuando se rinde la PAES regular 2026?",
+    "respuesta": "La PAES regular (admision 2027) se rinde del 30 de noviembre al 2 de diciembre de 2026",
+    "status": "correcto"
+  },
+  "paes-invierno-2026": {
+    "id": "paes-invierno-2026",
+    "pregunta": "Cuando es la PAES de invierno 2026?",
+    "respuesta": "La PAES de invierno 2026 se aplica del 15 al 17 de junio; inscripcion del 4 al 17 de marzo; puntajes el 17 de julio de 2026",
+    "status": "correcto"
+  },
+  "paes-admision-2027": {
+    "id": "paes-admision-2027",
+    "pregunta": "Cuando se publican los puntajes PAES para la admision 2027?",
+    "respuesta": "Para la admision 2027, los puntajes PAES se publican el 4 de enero de 2027 y las postulaciones van del 4 al 7 de enero de 2027",
+    "status": "correcto"
+  },
+  "inicio-docentes-2026": {
+    "id": "inicio-docentes-2026",
+    "pregunta": "Cuando ingresan los docentes en 2026?",
+    "respuesta": "Los docentes ingresan el lunes 2 de marzo de 2026; la jornada de planificacion es el 2 y 3 de marzo, y los estudiantes entran el miercoles 4 de marzo",
+    "status": "correcto"
+  },
+  "inicio-clases-2022": {
+    "id": "inicio-clases-2022",
+    "pregunta": "Cuando empezaron las clases en Chile en 2022?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2022 en Chile fue el miercoles 2 de marzo de 2022 (mayoria de las regiones)",
+    "status": "correcto"
+  },
+  "inicio-clases-2023": {
+    "id": "inicio-clases-2023",
+    "pregunta": "Cuando empezaron las clases en Chile en 2023?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2023 en Chile fue el viernes 3 de marzo de 2023 (ano escolar inicio el miercoles 1 con docentes) (mayoria de las regiones)",
+    "status": "correcto"
+  },
+  "inicio-clases-2024": {
+    "id": "inicio-clases-2024",
+    "pregunta": "Cuando empezaron las clases en Chile en 2024?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2024 en Chile fue el martes 5 de marzo de 2024 (docentes el viernes 1 de marzo) (mayoria de las regiones)",
+    "status": "correcto"
+  },
+  "inicio-clases-2025": {
+    "id": "inicio-clases-2025",
+    "pregunta": "Cuando empezaron las clases en Chile en 2025?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2025 en Chile fue el miercoles 5 de marzo de 2025 (docentes el lunes 3; Aysen con fecha propia) (mayoria de las regiones)",
+    "status": "correcto"
   }
 };

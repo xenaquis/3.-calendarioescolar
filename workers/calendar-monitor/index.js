@@ -46,22 +46,27 @@ var NEXT_YEAR = CURRENT_YEAR + 1;
 var RATE_LIMIT_MS = 2000; // ms entre requests a BCN
 
 // Periodo escolar actual — actualizar cada noviembre
-var SCHOOL_START  = '2026-03-02';
-var SCHOOL_END    = '2026-12-11';
-var WINTER_START  = '2026-07-11';
-var WINTER_END    = '2026-07-25';
+// Sincronizado con data/calendar-config.json (milestone-361, 2026-07-06):
+// schoolStart = ingreso de estudiantes; schoolEnd = ultimo dia JEC nacional.
+var SCHOOL_START  = '2026-03-04';
+var SCHOOL_END    = '2026-12-04';
+var WINTER_START  = '2026-06-22';
+var WINTER_END    = '2026-07-03';
 
 // ============================================================
 // FERIADOS ACTUALES DEL SITIO
 // Mantener sincronizado con data/calendar-config.json → feriados[]
 // Estos son los feriados que caen en periodo escolar
 // ============================================================
+// CORREGIDO milestone-361: la lista anterior incluia Corpus Christi 4-jun
+// (NO es feriado desde 2007 — check-feriados.js lo bloquearia en build) y
+// omitia Virgen del Carmen 16-jul. Fuente: data/calendar-config.json
+// (feriadosCompletos con contexto 'en-clases').
 var SITE_FERIADOS = [
   { date: '2026-04-03', nombre: 'Viernes Santo' },
   { date: '2026-05-01', nombre: 'Dia del Trabajo' },
   { date: '2026-05-21', nombre: 'Glorias Navales' },
-  { date: '2026-06-04', nombre: 'Corpus Christi' },
-  { date: '2026-06-29', nombre: 'San Pedro y San Pablo' },
+  { date: '2026-07-16', nombre: 'Virgen del Carmen' },
   { date: '2026-10-12', nombre: 'Encuentro de Dos Mundos' },
   { date: '2026-12-08', nombre: 'Inmaculada Concepcion' }
 ];
@@ -331,8 +336,10 @@ async function checkSiteHealth() {
   if (health.generatedDate) {
     var generated = new Date(health.generatedDate);
     var daysDiff = Math.floor((Date.now() - generated.getTime()) / (1000 * 60 * 60 * 24));
-    if (daysDiff > 30) {
-      warnings.push('Sin regenerar hace ' + daysDiff + ' dias');
+    // Umbral 3 dias (antes 30): el deploy es DIARIO — con 3 dias este
+    // watchdog habria detectado el apagon de crons del 23-30 jun en 72h.
+    if (daysDiff > 3) {
+      warnings.push('Sin regenerar hace ' + daysDiff + ' dias (deploy diario caido?)');
     }
   } else {
     warnings.push('Falta campo generatedDate');

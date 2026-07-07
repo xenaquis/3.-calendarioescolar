@@ -54,32 +54,45 @@ var MESES = [
    y pages.json (regiones con vacaciones de invierno diferenciadas). */
 var MES_EXTRA = {
   enero: {
-    claimKeys: [],
-    contexto: '<p>En enero no hay clases: es el per&iacute;odo de <strong>vacaciones de verano</strong> en todo Chile. El feriado de A&ntilde;o Nuevo no afecta el calendario escolar.</p>' +
-      '<p>El pr&oacute;ximo hito escolar es el <strong>ingreso de estudiantes el mi&eacute;rcoles 4 de marzo de 2026</strong>, igual en las 16 regiones.</p>',
+    claimKeys: ['schoolStart', 'paes_admision_2027'],
+    contexto: '<p>En enero no hay clases: es el per&iacute;odo de <strong>vacaciones de verano</strong> en todo Chile. El feriado de A&ntilde;o Nuevo (jueves 1, irrenunciable) no afecta el calendario escolar.</p>' +
+      '<p>Enero s&iacute; es un mes administrativo clave para los colegios: las Seremis de Educaci&oacute;n reciben durante enero las <strong>solicitudes de modificaci&oacute;n del calendario regional</strong> &mdash; suspensiones por interferiados, d&iacute;as adicionales en Fiestas Patrias, cambios de r&eacute;gimen &mdash; con plazos fijados por cada resoluci&oacute;n exenta (en 2026: 15 de enero en Ays&eacute;n; 30 de enero en la Metropolitana y Valpara&iacute;so).</p>' +
+      '<p>La primera semana de enero concentra adem&aacute;s el <strong>proceso de admisi&oacute;n a la educaci&oacute;n superior</strong>: para la admisi&oacute;n 2027, los puntajes PAES se publican el 4 de enero de 2027 y las postulaciones van del 4 al 7 de enero, seg&uacute;n el calendario oficial del proceso.</p>' +
+      '<p>El pr&oacute;ximo hito escolar es el <strong>ingreso de estudiantes el mi&eacute;rcoles 4 de marzo de 2026</strong>, igual en las 16 regiones; los docentes vuelven el lunes 2 de marzo.</p>',
     faqs: [
       { q: '¿El 2 de enero de 2026 es feriado en Chile?',
-        a: 'No. El 2 de enero solo es feriado cuando el 1 de enero cae domingo (Ley 20.983). En 2026 el 1 de enero cae jueves, por lo que el viernes 2 de enero es día hábil normal.' }
+        a: 'No. El 2 de enero solo es feriado cuando el 1 de enero cae domingo (Ley 20.983). En 2026 el 1 de enero cae jueves, por lo que el viernes 2 de enero es día hábil normal.' },
+      { q: '¿Hay clases en enero en Chile?',
+        a: 'No. Enero es vacaciones de verano en todo el país. El año escolar legalmente termina el 31 de diciembre, pero las clases lectivas JEC cierran antes (4 de diciembre de 2026 en la mayoría de las regiones).' },
+      { q: '¿Quién puede pedir cambios al calendario escolar y cuándo?',
+        a: 'Los sostenedores presentan las solicitudes ante la Seremi de Educación de su región durante enero, en los plazos que fija cada resolución regional (por ejemplo, 15 de enero en Aysén y 30 de enero en la RM para 2026).' }
     ]
   },
   febrero: {
-    claimKeys: ['schoolStart'],
+    claimKeys: ['schoolStart', 'inicio_docentes_2026'],
     contexto: '<p>Febrero es uno de los dos meses del a&ntilde;o <strong>sin ning&uacute;n feriado</strong> en Chile (el otro es marzo, salvo a&ntilde;os con feriados electorales). Tampoco hay clases: contin&uacute;an las <strong>vacaciones de verano</strong>.</p>' +
+      '<p>Para los equipos directivos, febrero es el mes de <strong>preparaci&oacute;n del a&ntilde;o escolar</strong>: se completan las matr&iacute;culas, se organizan los planes de estudio y se alista la jornada oficial de planificaci&oacute;n docente, que las resoluciones regionales 2026 fijan para el <strong>lunes 2 y martes 3 de marzo</strong>, justo antes del ingreso de estudiantes.</p>' +
       '<p>Las clases 2026 comienzan el <strong>mi&eacute;rcoles 4 de marzo</strong> en las 16 regiones, seg&uacute;n los calendarios escolares regionales del Mineduc.</p>',
     faqs: [
       { q: '¿Por qué febrero nunca tiene feriados en Chile?',
-        a: 'Ninguna de las leyes de feriados vigentes (Ley 2.977 y sus modificaciones) fija fechas en febrero. Solo puede haber feriados excepcionales, como plebiscitos o elecciones.' }
+        a: 'Ninguna de las leyes de feriados vigentes (Ley 2.977 y sus modificaciones) fija fechas en febrero. Solo puede haber feriados excepcionales, como plebiscitos o elecciones.' },
+      { q: '¿Cuándo vuelven los profesores en 2026?',
+        a: 'El lunes 2 de marzo de 2026: los docentes ingresan ese día y dedican el 2 y 3 de marzo a la jornada de planificación. Los estudiantes entran el miércoles 4 de marzo.' }
     ]
   },
   marzo: {
-    claimKeys: ['schoolStart'],
+    claimKeys: ['schoolStart', 'inicio_docentes_2026', 'paes_invierno_2026'],
     contexto: '<p>Marzo 2026 <strong>no tiene feriados</strong> y es el mes de regreso a clases: el <strong>ingreso de estudiantes es el mi&eacute;rcoles 4 de marzo</strong> en las 16 regiones del pa&iacute;s.</p>' +
+      '<p>La primera semana es escalonada: los <strong>docentes ingresan el lunes 2 de marzo</strong>, el 2 y 3 son jornada de planificaci&oacute;n, y los estudiantes de NT1 a 4&deg; medio entran el mi&eacute;rcoles 4. La excepci&oacute;n es <a href="/region/los-lagos/">Los Lagos</a>, donde los estudiantes EPJA ingresan el martes 10 de marzo &mdash; el &uacute;nico ingreso diferido del pa&iacute;s.</p>' +
+      '<p>En marzo tambi&eacute;n corre la <strong>inscripci&oacute;n para la PAES de invierno</strong>: del 4 al 17 de marzo de 2026, seg&uacute;n el calendario oficial del proceso. Las resoluciones regionales sugieren adem&aacute;s constituir los consejos escolares antes del 31 de marzo.</p>' +
       '<p>Es un mes completo de clases, sin interrupciones. El primer feriado del a&ntilde;o escolar llega reci&eacute;n con Semana Santa: <strong>viernes 3 de abril</strong>.</p>',
     faqs: [
       { q: '¿Cuándo empiezan las clases en marzo 2026?',
-        a: 'El ingreso de estudiantes es el miércoles 4 de marzo de 2026 en las 16 regiones, según las resoluciones regionales del Mineduc.' },
+        a: 'El ingreso de estudiantes es el miércoles 4 de marzo de 2026 en las 16 regiones, según las resoluciones regionales del Mineduc. Los docentes ingresan el lunes 2 de marzo.' },
       { q: '¿Cuál es el primer feriado después del inicio de clases 2026?',
-        a: 'Viernes Santo, el 3 de abril de 2026. Es el primer feriado que suspende clases en el año escolar.' }
+        a: 'Viernes Santo, el 3 de abril de 2026. Es el primer feriado que suspende clases en el año escolar.' },
+      { q: '¿Cuándo es la inscripción de la PAES de invierno 2026?',
+        a: 'Del 4 al 17 de marzo de 2026. La prueba se aplica del 15 al 17 de junio y los puntajes se publican el 17 de julio de 2026.' }
     ]
   },
   abril: {
@@ -167,21 +180,27 @@ var MES_EXTRA = {
     ]
   },
   noviembre: {
-    claimKeys: [],
+    claimKeys: ['cierreActas4Medio', 'finAnoEPJA', 'paes_regular_2026'],
     contexto: '<p>Noviembre 2026 tiene un solo feriado: el <strong>D&iacute;a de Todos los Santos, domingo 1 de noviembre</strong> (Ley 2.977). Al caer domingo, <strong>no afecta las clases</strong>.</p>' +
-      '<p>Es el &uacute;ltimo mes completo de clases del a&ntilde;o escolar 2026: el cierre JEC es el viernes 4 de diciembre en la mayor&iacute;a de las regiones.</p>',
+      '<p>Es el mes decisivo para los <strong>cuartos medios</strong>: el cierre oficial de actas de 4&deg; medio es el <strong>viernes 20 de noviembre</strong>, y las resoluciones regionales permiten a ese nivel terminar sus clases hasta dos semanas antes de la PAES (en el Maule, solo si no hay recuperaciones pendientes; en Biob&iacute;o la fecha expl&iacute;cita es el 13 de noviembre).</p>' +
+      '<p>La <strong>educaci&oacute;n de personas j&oacute;venes y adultas (EPJA)</strong> tambi&eacute;n cierra su a&ntilde;o en noviembre: el 20 de noviembre en la mayor&iacute;a de las regiones y el 27 de noviembre en Ays&eacute;n y Magallanes. La <strong>PAES regular se rinde del lunes 30 de noviembre al mi&eacute;rcoles 2 de diciembre</strong>, as&iacute; que la &uacute;ltima semana del mes es de cierre y preparaci&oacute;n.</p>' +
+      '<p>Para el resto de los niveles es el &uacute;ltimo mes completo de clases del a&ntilde;o escolar 2026: el cierre JEC es el viernes 4 de diciembre en la mayor&iacute;a de las regiones.</p>',
     faqs: [
       { q: '¿El lunes 2 de noviembre de 2026 es feriado?',
-        a: 'No. En Chile el Día de Todos los Santos no se traslada cuando cae domingo. El lunes 2 de noviembre de 2026 es día de clases normal.' }
+        a: 'No. En Chile el Día de Todos los Santos no se traslada cuando cae domingo. El lunes 2 de noviembre de 2026 es día de clases normal.' },
+      { q: '¿Cuándo es la PAES 2026?',
+        a: 'La PAES regular (admisión 2027) se rinde del lunes 30 de noviembre al miércoles 2 de diciembre de 2026. Los puntajes se publican el 4 de enero de 2027.' },
+      { q: '¿Cuándo terminan las clases los cuartos medios en 2026?',
+        a: 'El cierre de actas de 4° medio es el viernes 20 de noviembre de 2026. Los establecimientos pueden adelantar el término de clases de ese nivel hasta dos semanas antes de la PAES, según su resolución regional.' }
     ]
   },
   diciembre: {
     claimKeys: ['schoolEnd'],
     contexto: '<p>Diciembre 2026 tiene dos feriados: la <strong>Inmaculada Concepci&oacute;n, martes 8 de diciembre</strong>, y <strong>Navidad, viernes 25 de diciembre</strong> (irrenunciable).</p>' +
-      '<p>El <strong>&uacute;ltimo d&iacute;a de clases JEC es el viernes 4 de diciembre</strong> en la mayor&iacute;a de las regiones, por lo que el 8 de diciembre afecta principalmente a establecimientos con calendario extendido (sin JEC, EPJA) y a las regiones con t&eacute;rmino posterior: <a href="/region/magallanes/">Magallanes</a> (11 de diciembre) y <a href="/region/aysen/">Ays&eacute;n</a> (23 de diciembre).</p>',
+      '<p>El <strong>&uacute;ltimo d&iacute;a de clases JEC es el viernes 4 de diciembre</strong> en la mayor&iacute;a de las regiones, por lo que el 8 de diciembre afecta principalmente a establecimientos con calendario extendido y a las regiones con t&eacute;rmino posterior: en <a href="/region/aysen/">Ays&eacute;n</a> y <a href="/region/magallanes/">Magallanes</a> las clases JEC terminan el <strong>viernes 11 de diciembre</strong>, y los establecimientos sin JEC (40 semanas) el <strong>23 de diciembre</strong> (REX 632/2025 Ays&eacute;n).</p>',
     faqs: [
       { q: '¿Hasta cuándo hay clases en diciembre 2026?',
-        a: 'El último día de clases JEC es el viernes 4 de diciembre en la mayoría de las regiones. Magallanes termina el 11 de diciembre y Aysén el 23 de diciembre, según sus resoluciones regionales.' },
+        a: 'El último día de clases JEC es el viernes 4 de diciembre en la mayoría de las regiones. En Aysén y Magallanes las clases JEC terminan el viernes 11 de diciembre, y los establecimientos sin JEC (40 semanas) el 23 de diciembre, según sus resoluciones regionales.' },
       { q: '¿El lunes 7 de diciembre de 2026 es feriado?',
         a: 'No. El feriado es solo el martes 8 (Inmaculada Concepción). El lunes 7 queda como día "sándwich": es hábil, aunque algunos empleadores y establecimientos lo otorgan con cargo a recuperación.' }
     ]
@@ -318,17 +337,10 @@ function buildSchema(mes, slug, title, description, faqs, domain, today) {
         publisher: { '@id': 'https://' + domain + '/#org' },
         mainEntityOfPage: url,
         isPartOf: { '@id': 'https://' + domain + '/#website' }
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqs.map(function (f) {
-          return {
-            '@type': 'Question',
-            name: f.q,
-            acceptedAnswer: { '@type': 'Answer', text: f.a }
-          };
-        })
       }
+      // FAQPage retirado (milestone-361): Google elimino el rich result FAQ
+      // de la busqueda el 07-may-2026. El texto FAQ visible se conserva
+      // (lo leen usuarios y AI Overviews).
     ]
   };
   return JSON.stringify(schema, null, 2);
@@ -366,11 +378,18 @@ module.exports = function generateFeriadosMes(calConfig, templateFile, outputDir
         (proximoDespues ? ' El próximo es <strong>' + proximoDespues.nombre + '</strong> (' + proximoDespues.diaNum + ' de ' + proximoDespues.mes + ').' : '');
     } else {
       var nombres = feriadosMes.map(function (f) { return f.nombre + ' (' + f.diaSemana.toLowerCase() + ' ' + f.diaNum + ')'; }).join(' y ');
-      title = 'Feriados de ' + mes.nombre + ' 2026 en Chile — Fechas y si hay clases';
+      // Angulo competitivo "¿hay clases?": el cruce feriado × calendario
+      // escolar regional es la lane donde el sitio ya es #1 y nadie mas
+      // tiene los datos (auditoria 06-jul). "Feriados [mes] 2026" se
+      // mantiene al inicio del title para las queries que ya rankean.
+      title = 'Feriados de ' + mes.nombre + ' 2026 en Chile — ¿Hay clases? Fechas oficiales';
       description = mes.cap + ' 2026 en Chile: ' + feriadosMes.length + (feriadosMes.length === 1 ? ' feriado' : ' feriados') + ', ' +
         (enClases.length === 0 ? 'sin suspensión de clases' : enClases.length + ' con suspensión de clases') +
         (finde.si ? ' y fin de semana largo' : '') + '. Detalle con respaldo legal BCN.';
-      answerLead = mes.cap + ' 2026 tiene <strong>' + (feriadosMes.length === 1 ? 'un feriado' : feriadosMes.length + ' feriados') + '</strong>: ' + nombres + '.';
+      answerLead = mes.cap + ' 2026 tiene <strong>' + (feriadosMes.length === 1 ? 'un feriado' : feriadosMes.length + ' feriados') + '</strong>: ' + nombres + '. ' +
+        (enClases.length === 0
+          ? '<strong>Ninguno suspende clases.</strong>'
+          : '<strong>' + (enClases.length === 1 ? 'Uno suspende clases' : enClases.length + ' suspenden clases') + '</strong> seg&uacute;n el calendario escolar.');
     }
 
     // Override SEO por mes (ej. septiembre apunta a "vacaciones de septiembre 2026")

@@ -2,9 +2,11 @@ name = "calendar-monitor"
 main = "index.js"
 compatibility_date = "2024-01-01"
 
-# Cron: todos los lunes a las 08:00 UTC (05:00 Chile horario invierno, 04:00 verano)
+# Cron: jueves 08:00 UTC (en Cloudflare cron 1=domingo; el "0 8 * * 1" anterior
+# corria DOMINGO, no lunes como decia el comentario). Jueves = cobertura de
+# mitad de semana entre los crons de GitHub Actions (lunes).
 [triggers]
-crons = ["0 8 * * 1"]
+crons = ["0 8 * * THU"]
 
 # KV Namespace para almacenar hashes, estado y sugerencias pendientes
 # Crear con: npx wrangler kv namespace create CALENDAR_KV

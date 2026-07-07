@@ -28,6 +28,12 @@ on:
         default: 'false'
         type: boolean
 
+# Mismo grupo que deploy.yml: evita dos deploys en carrera cuando un push
+# coincide con la ventana del cron diario.
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
 jobs:
   verify-and-deploy:
     name: Verificar → Generar → Validar → Deploy
@@ -39,16 +45,15 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
 
-      # ── Paso 1: Verificación determinística de feriados ────────────────
-      - name: Verificar feriados contra cálculo legal
-        run: node scripts/check-feriados.js
+      # (check-feriados.js corre dentro de build.sh en el Paso 4 —
+      #  la ejecucion duplicada como paso separado fue eliminada)
 
       # ── Paso 2: Generar páginas ─────────────────────────────────────────
       - name: Generar páginas

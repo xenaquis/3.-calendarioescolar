@@ -16,6 +16,7 @@ on:
         required: false
         default: 'false'
   schedule:
+    - cron: '0 14 15 2 *'    # 15 febrero 14:00 UTC — las REX se modifican ANTES del inicio de clases (caso Aysen REX 632)
     - cron: '0 14 15 5 *'    # 15 mayo 14:00 UTC — verificacion primer semestre
     - cron: '0 14 31 12 *'   # 31 diciembre 14:00 UTC — resoluciones Mineduc ya publicadas
 
@@ -25,13 +26,13 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '20'
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
@@ -42,6 +43,36 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq poppler-utils tesseract-ocr tesseract-ocr-spa
+
+      # Los PDFs estan gitignoreados y el runner parte sin ellos — este paso
+      # era el eslabon faltante (fallo del 15-may: "Generate PNGs" sin PDFs).
+      # Las URLs oficiales por region viven en pages.json → resolucion.url.
+      - name: Download regional PDFs (from pages.json resolucion.url)
+        run: |
+          mkdir -p data/extraction-tests
+          node -e '
+            var fs = require("fs");
+            var pages = JSON.parse(fs.readFileSync("data/pages.json", "utf8"));
+            var cmds = [];
+            pages.forEach(function (p) {
+              if (p.resolucion && p.resolucion.url) {
+                cmds.push([p.regionSlug, p.resolucion.url]);
+              }
+            });
+            fs.writeFileSync("/tmp/pdf-urls.txt", cmds.map(function (c) { return c.join(" "); }).join("\n"));
+            console.log(cmds.length + " URLs de REX regionales");
+          '
+          FAILED=0
+          while read -r SLUG URL; do
+            if [ -n "${{ github.event.inputs.region }}" ] && [ "$SLUG" != "${{ github.event.inputs.region }}" ]; then continue; fi
+            DEST="data/extraction-tests/mineduc-${SLUG}.pdf"
+            if [ -f "$DEST" ] && [ "${{ github.event.inputs.force_download }}" != "true" ]; then continue; fi
+            echo "Descargando $SLUG..."
+            curl -fsSL --retry 3 --retry-delay 5 -o "$DEST" "$URL" || { echo "FALLO descarga $SLUG"; FAILED=$((FAILED+1)); }
+          done < /tmp/pdf-urls.txt
+          echo "Descargas fallidas: $FAILED"
+          # No abortar por descargas fallidas individuales: el validador
+          # reportara las regiones sin datos y la alerta se disparara.
 
       - name: Generate PNGs from PDFs
         run: python scripts/pdf-to-png.py --all --output-dir=data/snapshots
@@ -63,6 +94,7 @@ jobs:
         continue-on-error: true
 
       - name: Validate extraction
+        id: validate
         run: node scripts/validate-extraction.js --strict
 
       - name: Commit snapshots and report
@@ -96,11 +128,15 @@ jobs:
           git pull --rebase --autostash origin main
           git push
 
-      - name: Alert on discrepancies
-        if: steps.extract.outcome == 'failure'
+      # Alerta via issue + GITHUB_TOKEN (patrón probado de sync-deploy.yml).
+      # Antes: curl-Telegram con secrets inexistentes, condicionado a
+      # steps.extract.outcome (con continue-on-error) → quedaba SKIPPED en
+      # casi cualquier fallo real (p.ej. el del 15-may fue en Generate PNGs).
+      - name: Alert on failure (issue)
+        if: failure() || steps.extract.outcome == 'failure'
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           MISMATCHES=$(node -e "
             var fs = require('fs');
@@ -110,20 +146,25 @@ jobs:
               var failedRegions = Object.keys(r.per_region || {}).filter(function(k) { return !r.per_region[k].passed; });
               failedRegions.slice(0, 10).forEach(function(region) {
                 var errs = r.per_region[region].errors || [];
-                errs.forEach(function(e) { console.log('• ' + region + ': ' + e); });
+                errs.forEach(function(e) { console.log('- ' + region + ': ' + e); });
               });
               if (failedRegions.length > 10) console.log('... y ' + (failedRegions.length - 10) + ' regiones mas');
             } catch(e) { process.exit(1); }
-          " 2>/dev/null) || exit 0
+          " 2>/dev/null) || true
 
-          if [ -z "$MISMATCHES" ]; then exit 0; fi
+          BODY="El pipeline de extracción visual de PDFs Mineduc falló el $(date -u +%Y-%m-%d\ %H:%M) UTC.
 
-          MSG=$(printf '📄 *Errores extraccion visual — calendarioescolar.cl*\n\n%s\n\nRevisar data/extraction-validation-report.json' "$MISMATCHES")
+          ${MISMATCHES:-Sin reporte de discrepancias disponible — el fallo fue antes de la validación (revisar el log).}
 
-          curl -s -X POST \
-            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -H "Content-Type: application/json" \
-            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+          Log del run: $RUN_URL"
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --search "ALERTA extraccion PDF in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$BODY"
+          else
+            gh issue create --repo "${{ github.repository }}" \
+              --title "ALERTA extraccion PDF fallo $(date -u +%Y-%m-%d)" \
+              --body "$BODY"
+          fi
 
       - name: Summary
         if: always()

@@ -10,10 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write        # Alertas via issue + GITHUB_TOKEN (los secrets TELEGRAM_* no existen)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '20'
 
@@ -32,11 +33,14 @@ jobs:
           git pull --rebase --autostash origin main
           git push
 
-      - name: Alert on problems
+      # Alertas via issue + GITHUB_TOKEN (patrón probado de sync-deploy.yml).
+      # Los secrets TELEGRAM_* no existen en el repo — el curl anterior era un
+      # no-op silencioso (404 sin -f = step verde, alerta perdida).
+      - name: Alert on problems (issue)
         if: steps.check.outcome == 'failure'
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           PROBLEMS=$(node -e "
             var h = require('./data/source-health.json');
@@ -45,35 +49,49 @@ jobs:
             });
             if (p.length === 0) process.exit(1);
             p.forEach(function(s) {
-              console.log('• ' + s.id + ': ' + s.status + (s.error ? ' — ' + s.error : ' (HTTP ' + s.http_status + ')'));
+              console.log('- ' + s.id + ': ' + s.status + (s.error ? ' — ' + s.error : ' (HTTP ' + s.http_status + ')'));
             });
           " 2>/dev/null) || exit 0
 
-          MSG=$(printf '⚠️ *Fuentes con problemas — calendarioescolar.cl*\n\n%s\n\nRevisado: %s' "$PROBLEMS" "$(date -u +%Y-%m-%dT%H:%M:%SZ)")
+          BODY="Fuentes con problemas detectadas el $(date -u +%Y-%m-%d\ %H:%M) UTC:
 
-          curl -s -X POST \
-            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -H "Content-Type: application/json" \
-            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+          $PROBLEMS
 
-      - name: Alert on content changes
+          Log del run: $RUN_URL"
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --search "ALERTA fuentes con problemas in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$BODY"
+          else
+            gh issue create --repo "${{ github.repository }}" \
+              --title "ALERTA fuentes con problemas $(date -u +%Y-%m-%d)" \
+              --body "$BODY"
+          fi
+
+      - name: Alert on content changes (issue)
         if: always()
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           CHANGED=$(node -e "
             var h = require('./data/source-health.json');
             var c = Object.values(h.sources).filter(function(s) { return s.hash_changed; });
             if (c.length === 0) process.exit(1);
             c.forEach(function(s) {
-              console.log('• ' + s.id + ': contenido cambio');
+              console.log('- ' + s.id + ': contenido cambio');
             });
           " 2>/dev/null) || exit 0
 
-          MSG=$(printf '🔄 *Contenido cambio en fuentes — calendarioescolar.cl*\n\n%s\n\nVerificar si los datos del sitio siguen siendo correctos.' "$CHANGED")
+          BODY="Contenido cambió en fuentes oficiales — verificar si los datos del sitio siguen correctos:
 
-          curl -s -X POST \
-            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -H "Content-Type: application/json" \
-            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+          $CHANGED
+
+          Log del run: $RUN_URL"
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --search "ALERTA cambio en fuentes in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$BODY"
+          else
+            gh issue create --repo "${{ github.repository }}" \
+              --title "ALERTA cambio en fuentes $(date -u +%Y-%m-%d)" \
+              --body "$BODY"
+          fi

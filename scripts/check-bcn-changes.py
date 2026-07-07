@@ -5,8 +5,10 @@ check-bcn-changes.py — Pipeline de deteccion de cambios en articulos legales B
 Compara los hashes SHA256 de los articulos legales en BCN.cl contra los hashes
 almacenados en data/legal-articles.json. Si detecta cambios:
   1. Evalua impacto con DeepSeek API (sin_impacto|requiere_revision|actualizar)
-  2. Envia notificacion via Telegram con diff, evaluacion IA, claims y recomendacion
+  2. Notifica via GitHub issue (gh + GITHUB_TOKEN); fallback: Telegram
 
+Los hashes nuevos SOLO se persisten si la notificacion salio con exito — si
+fallo, el cambio se re-detecta en la proxima corrida (no se pierde).
 Siempre actualiza last_checked en legal-articles.json despues de una corrida exitosa.
 Si BCN esta caido: fallo silencioso (exit 0), sin actualizacion de last_checked.
 
@@ -85,6 +87,61 @@ def evaluate_impact(client, data_key, claim_text, texto_anterior, texto_nuevo):
     if 'requiere_revision' in raw or 'revision' in raw:
         return 'requiere_revision'
     return 'sin_impacto'
+
+
+def send_github_issue_notification(changes, evaluations, claims_by_key, total_claims):
+    """
+    Crea (o comenta) un issue de GitHub con los cambios legales detectados.
+
+    Usa el CLI `gh` con GH_TOKEN/GITHUB_TOKEN del runner — patron probado en
+    sync-deploy.yml. Lanza RuntimeError si no se pudo notificar, para que el
+    caller NO persista los hashes (el cambio se re-detecta la proxima corrida).
+    """
+    repo = os.environ.get('GITHUB_REPOSITORY')
+    if not repo:
+        raise RuntimeError('GITHUB_REPOSITORY no definido — no se puede crear issue')
+
+    now_iso = datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
+    lines = [
+        'Cambios detectados en articulos legales BCN ({}).'.format(now_iso),
+        '',
+        'Claims verificados: {}'.format(total_claims),
+        '',
+    ]
+    for ch in changes:
+        dk = ch['data_key']
+        claim_obj = claims_by_key.get(dk, {})
+        lines.append('## {}'.format(dk))
+        lines.append('- Evaluacion IA: **{}**'.format(evaluations.get(dk, 'requiere_revision')))
+        lines.append('- Claim del sitio: {}'.format(claim_obj.get('claim', '(sin claim registrado)')))
+        lines.append('- Texto anterior:')
+        lines.append('  > {}'.format((ch['texto_antes'] or '(no disponible)')[:500]))
+        lines.append('- Texto nuevo:')
+        lines.append('  > {}'.format((ch['texto_despues'] or '')[:500]))
+        lines.append('')
+    lines.append('Accion: revisar los claims afectados en data/afirmaciones.json y el contenido del sitio.')
+    body = '\n'.join(lines)
+
+    # Buscar issue abierto existente para no duplicar
+    result = subprocess.run(
+        ['gh', 'issue', 'list', '--repo', repo, '--state', 'open',
+         '--search', 'ALERTA cambio legal BCN in:title',
+         '--json', 'number', '--jq', '.[0].number // empty'],
+        capture_output=True, text=True, timeout=30,
+    )
+    existing = result.stdout.strip() if result.returncode == 0 else ''
+
+    if existing:
+        cmd = ['gh', 'issue', 'comment', existing, '--repo', repo, '--body', body]
+    else:
+        title = 'ALERTA cambio legal BCN {}'.format(datetime.utcnow().strftime('%Y-%m-%d'))
+        cmd = ['gh', 'issue', 'create', '--repo', repo, '--title', title, '--body', body]
+
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
+    if result.returncode != 0:
+        raise RuntimeError('gh issue fallo: {}'.format(result.stderr.strip()))
+    if result.stdout:
+        print(result.stdout)
 
 
 def send_telegram_notification(changes, evaluations, claims_by_key, total_claims, dry_run=False):
@@ -295,24 +352,39 @@ def main():
             evaluations[dk] = estado
             print('  {} -> {}'.format(dk, estado))
 
-        # Enviar notificacion via Telegram
+        # Notificar via GitHub issue (canal primario), con fallback Telegram.
+        # CRITICO: los hashes SOLO se persisten si la notificacion salio con
+        # exito. Antes el fallo se tragaba y el hash se sobreescribia igual →
+        # un cambio legal detectado se perdia PERMANENTEMENTE en silencio.
         print()
-        print('Sending Telegram notification...')
+        notification_ok = False
+        print('Creating GitHub issue notification...')
         try:
-            send_telegram_notification(changes, evaluations, claims_by_key, total_claims)
-            print('Telegram notification sent successfully.')
-        except RuntimeError as e:
-            print('ERROR sending Telegram notification: {}'.format(e), file=sys.stderr)
-            # Continuar — actualizar last_checked igualmente
+            send_github_issue_notification(changes, evaluations, claims_by_key, total_claims)
+            print('GitHub issue notification sent successfully.')
+            notification_ok = True
+        except (RuntimeError, OSError, subprocess.TimeoutExpired) as e:
+            print('ERROR creating GitHub issue: {}'.format(e), file=sys.stderr)
+            print('Trying Telegram fallback...')
+            try:
+                send_telegram_notification(changes, evaluations, claims_by_key, total_claims)
+                print('Telegram notification sent successfully.')
+                notification_ok = True
+            except (RuntimeError, OSError, subprocess.TimeoutExpired) as e2:
+                print('ERROR sending Telegram notification: {}'.format(e2), file=sys.stderr)
 
-        # Actualizar legal_articles con los cambios detectados
-        for ch in changes:
-            dk = ch['data_key']
-            if dk in legal_articles:
-                # Preservar texto anterior (el verbatim actual antes de sobreescribir)
-                legal_articles[dk]['texto_anterior'] = legal_articles[dk].get('texto_verbatim')
-                legal_articles[dk]['texto_verbatim'] = ch['texto_despues']
-                legal_articles[dk]['hash_sha256'] = ch['new_hash']
+        if notification_ok:
+            # Actualizar legal_articles con los cambios detectados
+            for ch in changes:
+                dk = ch['data_key']
+                if dk in legal_articles:
+                    # Preservar texto anterior (el verbatim actual antes de sobreescribir)
+                    legal_articles[dk]['texto_anterior'] = legal_articles[dk].get('texto_verbatim')
+                    legal_articles[dk]['texto_verbatim'] = ch['texto_despues']
+                    legal_articles[dk]['hash_sha256'] = ch['new_hash']
+        else:
+            print('NOTIFICATION FAILED — hashes NOT updated; el cambio se '
+                  're-detectara en la proxima corrida.', file=sys.stderr)
 
     elif changes and args.dry_run:
         print()

@@ -11,7 +11,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var DIAS = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'];
+var DIAS = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function parseISO(s) { var p = s.split('-'); return new Date(+p[0], +p[1] - 1, +p[2]); }
@@ -115,9 +115,8 @@ module.exports = function generateEfemerides(calConfig, outputDir, domain) {
       { '@type': 'Article', headline: 'Efemerides escolares ' + year + ' en Chile',
         description: desc, url: url, inLanguage: 'es-CL', datePublished: buildDate, dateModified: buildDate,
         author: { '@id': 'https://' + domain + '/#author' }, publisher: { '@id': 'https://' + domain + '/#org' },
-        mainEntityOfPage: url, isPartOf: { '@id': 'https://' + domain + '/#website' } },
-      { '@type': 'FAQPage', mainEntity: faqs.map(function (f) {
-        return { '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }; }) }
+        mainEntityOfPage: url, isPartOf: { '@id': 'https://' + domain + '/#website' } }
+      // FAQPage retirado (milestone-361): rich result eliminado por Google 07-may-2026.
     ]
   };
 

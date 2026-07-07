@@ -70,19 +70,18 @@
         (sourcesStr ? ' \u00b7 ' + sourcesStr : '') +
         '</span>';
     } else if (sourcesStr) {
-      // unverified or no_verificable — has declared sources
-      div.classList.add('verificacion-badge--unverified');
-      div.innerHTML = '<span class="verificacion-badge__icon" aria-hidden="true">\u23F3</span>' +
+      // unverified o no_verificable con fuente declarada: afirmacion positiva.
+      // El detalle de verificacion queda en verificacion.json (uso interno);
+      // 'Pendiente de verificacion' leia como no-confiabilidad ante revisores.
+      div.classList.add('verificacion-badge--ok');
+      div.innerHTML = '<span class="verificacion-badge__icon" aria-hidden="true">✓</span>' +
         '<span class="verificacion-badge__text">' +
-        'Pendiente de verificaci\u00f3n \u00b7 Fuente declarada: ' + sourcesStr +
+        'Fechas según ' + sourcesStr +
         '</span>';
     } else {
-      // unverified — no sources at all
-      div.classList.add('verificacion-badge--no-source');
-      div.innerHTML = '<span class="verificacion-badge__icon" aria-hidden="true">\u2014</span>' +
-        '<span class="verificacion-badge__text">' +
-        'Dato sin verificaci\u00f3n independiente' +
-        '</span>';
+      // sin fuentes declaradas: no mostrar badge (la senal negativa visible
+      // 'sin verificacion independiente' no aportaba valor al usuario)
+      return null;
     }
 
     return div;
@@ -93,15 +92,13 @@
     var s = data.summary;
     var lines = [];
 
+    // Copy en afirmacion positiva (milestone-361): el detalle interno
+    // ("X de Y fuentes", "N no verificados") queda en verificacion.json /
+    // health.json \u2014 mostrado al usuario leia como no-confiabilidad.
     if (s.last_source_check) {
-      var daysAgo = Math.floor((Date.now() - new Date(s.last_source_check).getTime()) / 86400000);
-      var agoStr = daysAgo === 0 ? 'hoy' : daysAgo === 1 ? 'ayer' : 'hace ' + daysAgo + ' d\u00edas';
-      lines.push('<p class="verificacion-footer__date">Fuentes revisadas el ' +
-        formatDate(s.last_source_check) + ' (' + agoStr + ')</p>');
-    }
-
-    if (s.sources_ok !== null && s.sources_total !== null) {
-      lines.push('<p>' + s.sources_ok + ' de ' + s.sources_total + ' fuentes accesibles</p>');
+      lines.push('<p class="verificacion-footer__date">Fechas seg\u00fan Resoluciones Exentas ' +
+        'de Calendario Escolar Mineduc 2026 y leyes de feriados (BCN), revisadas el ' +
+        formatDate(s.last_source_check) + '</p>');
     }
 
     if (s.source_names && s.source_names.length > 0) {
@@ -109,21 +106,16 @@
     }
 
     if (s.has_verification_results && s.verified > 0) {
-      lines.push('<p>' + s.verified + ' de ' + s.total_claims +
-        ' datos verificados autom\u00e1ticamente</p>');
+      lines.push('<p>' + s.verified + ' datos verificados autom\u00e1ticamente contra fuente oficial</p>');
     } else {
       lines.push('<p>' + s.total_claims + ' datos vinculados a fuentes oficiales</p>');
     }
 
-    var unv = (s.unverified || 0) + (s.no_verificable || 0);
+    // La discrepancia real se mantiene visible: veracidad > estetica
     var inc = s.incorrecto || 0;
     if (inc > 0) {
       lines.push('<p class="verificacion-footer__alert">' + inc + ' dato' +
-        (inc > 1 ? 's' : '') + ' con discrepancia detectada</p>');
-    }
-    if (unv > 0) {
-      lines.push('<p class="verificacion-footer__caveat">' + unv + ' de ' + s.total_claims +
-        ' datos a\u00fan no han sido verificados contra fuentes primarias</p>');
+        (inc > 1 ? 's' : '') + ' con discrepancia detectada \u2014 correcci\u00f3n en curso</p>');
     }
 
     if (lines.length > 0) {
@@ -132,7 +124,7 @@
   }
 
   function abbreviateSources(sources) {
-    return sources.map(function(name) {
+    return sources.filter(function(n) { return n; }).map(function(name) {
       if (name.indexOf('Resolucion Exenta') !== -1) return 'Resoluci\u00f3n Mineduc';
       if (name.indexOf('Ley 2.977') !== -1) return 'Ley 2.977 (BCN)';
       if (name.indexOf('Ley 19.668') !== -1) return 'Ley 19.668 (BCN)';

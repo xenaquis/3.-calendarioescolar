@@ -18,7 +18,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "27 de julio"
+    "inicioSegundoSemestre": "27 de julio",
+    "resolucion": {
+      "numero": "1224",
+      "fecha": "2025-12-15",
+      "url": "https://arica.mineduc.cl/wp-content/uploads/sites/2/2025/12/CER-2026_-Arica.pdf"
+    },
+    "notaRegional": [
+      "El calendario 2026 de Arica y Parinacota fue fijado por la Resolución Exenta N° 1224, emitida por la Seremi de Educación el 15 de diciembre de 2025. Su rasgo más distintivo es el receso de invierno tardío: del 13 al 24 de julio, dos semanas después de la pauta de la zona central. La resolución recoge las recomendaciones sanitarias sobre circulación viral invernal, pero las ajusta expresamente «al contexto y realidad territorial» del extremo norte.",
+      "En lo demás la región sigue el marco nacional: ingreso de estudiantes el miércoles 4 de marzo, término de clases JEC el viernes 4 de diciembre y 18 de diciembre para los establecimientos sin JEC. Los cuartos medios pueden cerrar su año dos semanas antes de la rendición de la PAES."
+    ],
+    "comparativa": "Arica y Parinacota comparte su receso de invierno únicamente con Tarapacá (13 al 24 de julio); ninguna otra región parte tan tarde. Sus fechas de inicio y término de año coinciden con las 14 regiones de pauta nacional, a diferencia de Aysén y Magallanes."
   },
   {
     "slug": "region/tarapaca",
@@ -39,7 +49,18 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "27 de julio"
+    "inicioSegundoSemestre": "27 de julio",
+    "resolucion": {
+      "numero": "687",
+      "fecha": "2025-12-15",
+      "url": "https://tarapaca.mineduc.cl/wp-content/uploads/sites/4/2025/12/CER-Tarapaca-2026-y-RES.-EXENTA-693-16.12.2025.pdf",
+      "nota": "Rectificada por la REX N° 693 del 16-12-2025 (Día del Profesor: sin clases y sin recuperación)."
+    },
+    "notaRegional": [
+      "El calendario de Tarapacá tiene una historia administrativa particular: la Resolución Exenta N° 687 del 15 de diciembre de 2025 fue rectificada al día siguiente por la REX N° 693, que corrigió una «omisión involuntaria» sobre el Día del Profesor — quedó como día sin clases y sin recuperación, cuando la versión original lo listaba como recuperable junto al Día de la Educadora de Párvulos.",
+      "Junto con Arica y Parinacota, Tarapacá tiene el receso de invierno más tardío del país: del 13 al 24 de julio, con regreso a clases el lunes 27. El resto de sus hitos sigue la pauta nacional: ingreso de estudiantes el 4 de marzo, cierre JEC el 4 de diciembre y 18 de diciembre para establecimientos sin JEC."
+    ],
+    "comparativa": "Solo Arica y Parinacota acompaña a Tarapacá en el receso de julio tardío. Frente a las regiones australes, la diferencia es doble: Aysén y Magallanes suman recesos largos y término de año extendido, mientras Tarapacá solo desplaza sus vacaciones."
   },
   {
     "slug": "region/antofagasta",
@@ -60,7 +81,18 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "893",
+      "fecha": "2025-12-15",
+      "url": "https://antofagasta.mineduc.cl/wp-content/uploads/sites/5/2026/01/REX-CER-Antofagasta-2026-y-adecuacion-CER.pdf",
+      "nota": "Complementada por la REX N° 46 del 28-01-2026, que autoriza fechas distintas a establecimientos específicos (anexo por RBD)."
+    },
+    "notaRegional": [
+      "Antofagasta fijó su calendario con la Resolución Exenta N° 893 del 15 de diciembre de 2025, complementada en enero por la REX N° 46 de 2026: una resolución de «adecuación» que autoriza a establecimientos específicos — identificados por RBD en un anexo de más de 30 páginas — a operar con fechas, regímenes o vacaciones distintas del calendario regional. Si tu colegio está en esta región, conviene verificar si aparece en ese anexo.",
+      "A diferencia de Arica y Tarapacá, Antofagasta adoptó el receso de invierno de la pauta central: del 22 de junio al 3 de julio, con regreso el lunes 6. El año lectivo cierra el 4 de diciembre para la jornada escolar completa y el 18 de diciembre para el resto."
+    ],
+    "comparativa": "Sus fechas calzan con las de la zona central (Atacama, Coquimbo, Valparaíso, Metropolitana y seis más), no con las de sus vecinas del norte grande: Arica y Tarapacá salen de vacaciones tres semanas más tarde."
   },
   {
     "slug": "region/atacama",
@@ -81,7 +113,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "888",
+      "fecha": "2025-12-15",
+      "url": "https://atacama.mineduc.cl/wp-content/uploads/sites/6/2025/12/CER-Atacama-2026.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 888 del 15 de diciembre de 2025 fijó para Atacama un receso de invierno del 22 de junio al 3 de julio, siguiendo las recomendaciones del Ministerio de Salud sobre las semanas críticas de circulación viral. Incluye además una cláusula expresa: ante «criterios regionales distintos, acorde a variables territoriales», la Seremi puede reprogramar el receso por resolución — la misma vía que Aysén usó para mover el suyo.",
+      "El resto del calendario es el nacional: estudiantes entran el miércoles 4 de marzo, las clases JEC terminan el viernes 4 de diciembre y los establecimientos sin JEC continúan hasta el 18 de diciembre, con término anticipado de dos semanas para cuartos medios por la PAES."
+    ],
+    "comparativa": "Atacama corre con el bloque mayoritario de 11 regiones (receso 22 de junio al 3 de julio y fin de año el 4 de diciembre). Sus vecinas inmediatas divergen en direcciones opuestas: Antofagasta comparte fechas, pero Arica y Tarapacá parten vacaciones el 13 de julio."
   },
   {
     "slug": "region/coquimbo",
@@ -102,7 +144,18 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "2233",
+      "fecha": "2025-12-15",
+      "url": "https://coquimbo.mineduc.cl/wp-content/uploads/sites/7/2025/12/01_CER-COQUIMBO.pdf",
+      "nota": "Incluye resolución modificatoria del 16-12-2025 (Día del Profesor excluido de los días recuperables)."
+    },
+    "notaRegional": [
+      "Coquimbo aprobó su calendario con la Resolución Exenta N° 2233 del 15 de diciembre de 2025 y lo ajustó al día siguiente con una modificatoria: el Día del Profesor salió de los ejemplos de días recuperables del artículo 4°, porque el calendario 2026 ya lo fija derechamente como día sin clases.",
+      "Un detalle único en el país: Coquimbo conmemora el Día de la Educación Rural el martes 7 de abril, mientras las demás regiones lo asignan al lunes 6. En las fechas estructurales sigue la pauta nacional — ingreso el 4 de marzo, receso de invierno del 22 de junio al 3 de julio y cierre JEC el 4 de diciembre."
+    ],
+    "comparativa": "Forma parte del bloque central de 11 regiones con receso el 22 de junio. Quien se traslada al norte debe considerar que desde Tarapacá hacia Arica las vacaciones caen en julio, y en el extremo sur (Aysén, Magallanes) el año escolar se extiende hasta la última quincena de diciembre."
   },
   {
     "slug": "region/valparaiso",
@@ -123,7 +176,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "2881",
+      "fecha": "2025-12-15",
+      "url": "https://valparaiso.mineduc.cl/wp-content/uploads/sites/8/2026/01/calendarioescolar2026completo.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 2881 del 15 de diciembre de 2025 es el documento más extenso entre los 16 calendarios regionales: además de las fechas, incluye anexos operativos con los formularios de modificación que los sostenedores tramitan vía Zona Privada, y fija el 30 de enero como plazo para solicitar suspensiones por interferiados. También regula los microcentros rurales y los cursos combinados.",
+      "Las fechas son las de la pauta nacional: ingreso de estudiantes el miércoles 4 de marzo, receso de invierno del 22 de junio al 3 de julio con regreso el lunes 6, término JEC el viernes 4 de diciembre y 18 de diciembre para establecimientos sin jornada escolar completa."
+    ],
+    "comparativa": "Valparaíso, la Metropolitana y otras nueve regiones comparten el calendario tipo del Mineduc. Las excepciones 2026 están en los extremos: Arica y Tarapacá (receso 13-24 de julio), Los Lagos (6-17 de julio), Aysén (6-24 de julio) y Magallanes (29 de junio-17 de julio)."
   },
   {
     "slug": "region/metropolitana",
@@ -144,7 +207,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "2803",
+      "fecha": "2025-12-15",
+      "url": "https://metropolitana.mineduc.cl/wp-content/uploads/sites/9/2025/12/DD_4079499_251215_P.pdf"
+    },
+    "notaRegional": [
+      "El calendario de la Región Metropolitana quedó fijado por la Resolución Exenta N° 2803 del 15 de diciembre de 2025. Es un calendario deliberadamente estándar: sus considerandos no invocan justificaciones climáticas ni eventos regionales y sus fechas calzan una a una con las orientaciones de la División de Educación General del Mineduc.",
+      "Las solicitudes de modificación — suspensiones por interferiados, días adicionales en Fiestas Patrias — se canalizan con el «Formulario A» hasta el 30 de enero. Para las familias, lo operativo: clases desde el miércoles 4 de marzo, vacaciones de invierno del 22 de junio al 3 de julio y último día JEC el viernes 4 de diciembre."
+    ],
+    "comparativa": "Santiago marca la pauta que replican otras diez regiones. Si tus hijos estudian en la RM pero la familia viaja al sur en invierno, ojo con el desfase: Los Lagos y Aysén están de vacaciones recién desde el 6 de julio, cuando en la RM ya se vuelve a clases."
   },
   {
     "slug": "region/ohiggins",
@@ -165,7 +238,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "1198",
+      "fecha": "2025-12-15",
+      "url": "https://ohiggins.mineduc.cl/wp-content/uploads/sites/10/2025/12/CER_ohiggins.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 1198, firmada en Rancagua y timbrada el 15 de diciembre de 2025, fija para O’Higgins el calendario de pauta nacional. Una particularidad administrativa: la firma corresponde a una autoridad subrogante, según el decreto de subrogancia citado en sus vistos.",
+      "Su artículo 4° es más flexible que el promedio: admite solicitudes de inicio anticipado o tardío del año lectivo, además de las clásicas suspensiones por interferiados. Las fechas operativas: ingreso el miércoles 4 de marzo, receso del 22 de junio al 3 de julio, cierre JEC el 4 de diciembre y sin JEC el 18 de diciembre."
+    ],
+    "comparativa": "O’Higgins se mueve en bloque con la zona central: mismas vacaciones que la Metropolitana, Valparaíso y el Maule. El contraste está en los extremos del país — el norte grande (Arica, Tarapacá) y la Patagonia (Aysén, Magallanes) manejan ventanas de invierno propias."
   },
   {
     "slug": "region/maule",
@@ -186,7 +269,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "1642",
+      "fecha": "2025-12-15",
+      "url": "https://maule.mineduc.cl/wp-content/uploads/sites/11/2025/12/CER-Maule.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 1642 del 15 de diciembre de 2025 tiene un rasgo que la distingue en la zona central: su VISTO invoca el Plan de Prevención y Descontaminación Atmosférica del Maule — el mismo tipo de consideración ambiental que en Aysén terminó moviendo las vacaciones de invierno. En el Maule no alteró las fechas, pero deja constancia de que la calidad del aire es un factor en la planificación escolar regional.",
+      "Los cuartos medios pueden adelantar su término dos semanas antes de la PAES solo si no tienen recuperaciones de clases pendientes, condición explícita de esta resolución. El resto es pauta nacional: ingreso el 4 de marzo, receso del 22 de junio al 3 de julio, cierre JEC el 4 de diciembre."
+    ],
+    "comparativa": "El Maule comparte todas sus fechas estructurales con el bloque central de 11 regiones. Sus diferencias con Ñuble y Biobío no están en las fechas sino en los articulados (convenios y protocolos propios de cada Seremi)."
   },
   {
     "slug": "region/nuble",
@@ -207,7 +300,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "1398",
+      "fecha": "2025-12-12",
+      "url": "https://xn--uble-fqa.mineduc.cl/wp-content/uploads/sites/112/2025/12/CER_nuble.pdf"
+    },
+    "notaRegional": [
+      "Con la Resolución Exenta N° 1398 — firmada en Chillán el 11 de diciembre y numerada el 12 de diciembre de 2025 — Ñuble fue de las primeras regiones del país en tener su calendario 2026, tres días antes que la mayoría. La región más joven de Chile tramitó rápido.",
+      "El receso de invierno (22 de junio al 3 de julio, reinicio el lunes 6) sigue las semanas de mayor circulación viral definidas por el Ministerio de Salud, con la reserva habitual de que variables territoriales permiten fijar criterios distintos. Ingreso de estudiantes el miércoles 4 de marzo; término JEC el viernes 4 de diciembre y sin JEC el 18 de diciembre."
+    ],
+    "comparativa": "Ñuble calza con el calendario tipo de la zona centro-sur: mismas fechas que Biobío y La Araucanía. La frontera real del calendario está más al sur — desde Los Lagos hacia la Patagonia cambian receso y término de año."
   },
   {
     "slug": "region/biobio",
@@ -228,7 +331,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "2159",
+      "fecha": "2025-12-12",
+      "url": "https://biobio.mineduc.cl/wp-content/uploads/sites/12/2025/12/REX-2159-Calendario-Escolar-Regional-2026-Biobio.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta folio N° 2159, recepcionada en Concepción el 12 de diciembre de 2025, incluye dos artículos que distinguen al Biobío: el de educación rural, que organiza los microcentros — reuniones técnico-pedagógicas mensuales de hasta 8 horas para docentes de escuelas multigrado —, y el del convenio con el Ejército de Chile, que permite a los establecimientos que atienden personal militar iniciar su año lectivo cuando los conscriptos se incorporan a sus unidades, extendible hasta la segunda quincena de mayo.",
+      "Los cuartos medios de la región tienen fecha explícita de término por la PAES: hasta el viernes 13 de noviembre. Las fechas generales siguen la pauta: ingreso el 4 de marzo, receso del 22 de junio al 3 de julio, cierre JEC el 4 de diciembre."
+    ],
+    "comparativa": "Biobío comparte fechas con Ñuble, La Araucanía y el resto del bloque central. Su vecina Araucanía tiene idéntico esqueleto de fechas pero protocolos distintos; el quiebre real aparece en Los Lagos, que ya corre con receso de julio."
   },
   {
     "slug": "region/araucania",
@@ -249,7 +362,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "2088",
+      "fecha": "2025-12-15",
+      "url": "https://araucania.mineduc.cl/wp-content/uploads/sites/13/2025/12/CER-2026_araucania.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 2088 del 15 de diciembre de 2025, firmada en Temuco, dedica un articulado expreso a las suspensiones excepcionales de clases — catástrofes naturales, cortes de energía eléctrica o de suministro de agua — siempre con recuperación obligatoria: un protocolo relevante en una región donde los temporales de invierno interrumpen clases con cierta regularidad.",
+      "El receso de invierno va del 22 de junio al 3 de julio según las recomendaciones sanitarias del período, pese a la latitud: La Araucanía mantiene la pauta central, a diferencia de Los Lagos y Aysén que la desplazaron a julio. Cierre JEC el viernes 4 de diciembre; establecimientos sin JEC hasta el 18 de diciembre."
+    ],
+    "comparativa": "Es la región más austral del bloque de fechas centrales: hacia el sur, todas sus vecinas (Los Ríos exceptuada) modifican el receso. Los Ríos y La Araucanía son las últimas dos regiones «de pauta» antes de la zona austral."
   },
   {
     "slug": "region/los-rios",
@@ -270,7 +393,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "6 de julio"
+    "inicioSegundoSemestre": "6 de julio",
+    "resolucion": {
+      "numero": "1345",
+      "fecha": "2025-12-15",
+      "url": "https://losrios.mineduc.cl/wp-content/uploads/sites/14/2025/12/CER-2026_losrios.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 1345 del 15 de diciembre de 2025, firmada en Valdivia, tiene una decisión llamativa: siendo zona sur, Los Ríos mantiene el receso de invierno temprano de la pauta central (22 de junio al 3 de julio), mientras sus vecinas Los Lagos y Aysén lo movieron a julio. Es la región lluviosa que no corrió sus vacaciones.",
+      "Para las familias que cruzan de región — por trabajo o estudios entre Valdivia, Osorno y Puerto Montt — el desfase importa: cuando Los Ríos vuelve a clases el lunes 6 de julio, Los Lagos recién comienza sus vacaciones ese mismo día. El año cierra el 4 de diciembre (JEC) y el 18 de diciembre (sin JEC)."
+    ],
+    "comparativa": "Los Ríos es la excepción austral que juega con las reglas del centro: receso idéntico al de Santiago. La frontera del calendario pasa exactamente por su límite sur, donde Los Lagos (6-17 de julio) inaugura los recesos desplazados de la Patagonia."
   },
   {
     "slug": "region/los-lagos",
@@ -291,7 +424,17 @@
     "finAnoEPJA": "20 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "20 de julio"
+    "inicioSegundoSemestre": "20 de julio",
+    "resolucion": {
+      "numero": "1738",
+      "fecha": "2025-12-16",
+      "url": "https://loslagos.mineduc.cl/wp-content/uploads/sites/15/2025/12/CALENDARIO-ESCOLAR-LOS-LAGOS-2026-1.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 1738 del 16 de diciembre de 2025, firmada en Puerto Montt, define dos particularidades. La primera: el receso de invierno va del 6 al 17 de julio — dos semanas desplazadas respecto de la zona central, con cierre del primer semestre el jueves 2 de julio y regreso el lunes 20.",
+      "La segunda es única en el país: los estudiantes de educación de personas jóvenes y adultas (EPJA) ingresan el martes 10 de marzo, seis días después que el resto de los estudiantes — ninguna otra región fijó un ingreso EPJA posterior al 4 de marzo. El término de año es el nacional: 4 de diciembre JEC, 18 de diciembre sin JEC."
+    ],
+    "comparativa": "Su receso (6-17 de julio) coincide en el inicio con Aysén, pero dura una semana menos: Aysén sigue hasta el 24. Con Magallanes se solapa solo parcialmente (29 de junio-17 de julio). Al norte, Los Ríos ya está de vuelta en clases cuando Los Lagos recién sale."
   },
   {
     "slug": "region/aysen",
@@ -312,7 +455,18 @@
     "finAnoEPJA": "27 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "20 de julio"
+    "inicioSegundoSemestre": "20 de julio",
+    "resolucion": {
+      "numero": "618",
+      "fecha": "2025-12-16",
+      "url": "https://aysen.mineduc.cl/wp-content/uploads/sites/16/2026/03/REX-MODIFICACI%C3%93N-CALENDARIO-ESCOLAR-2026.pdf",
+      "nota": "Modificada por la REX N° 632 del 22-12-2025: receso de invierno movido al 6-24 de julio por calidad del aire en Coyhaique."
+    },
+    "notaRegional": [
+      "Aysén es el caso que mejor ilustra por qué los calendarios escolares se modifican durante el año: la Resolución Exenta N° 618 del 16 de diciembre de 2025 fue modificada seis días después por la REX N° 632, que movió el receso de invierno a la ventana del 6 al 24 de julio. La razón consta en el Oficio N° 7130 de la Seremi de Medio Ambiente: los episodios críticos de calidad del aire en Coyhaique se concentran históricamente en las semanas 26, 27 y 28 del año — exactamente las semanas del nuevo receso.",
+      "El receso rige igual para los regímenes semestral y trimestral: tres semanas completas. El año escolar también termina distinto: las clases JEC cierran el viernes 11 de diciembre y los establecimientos sin JEC el 23 de diciembre, una a tres semanas después que el resto del país."
+    ],
+    "comparativa": "Solo Magallanes acompaña a Aysén en el término extendido (11 de diciembre JEC, 23 sin JEC). En el receso de invierno nadie la iguala: 6 al 24 de julio es la ventana más larga y tardía de Chile, tres semanas contra las dos de la pauta central."
   },
   {
     "slug": "region/magallanes",
@@ -333,6 +487,16 @@
     "finAnoEPJA": "27 de noviembre",
     "cierreActas4Medio": "20 de noviembre",
     "diaProfesor": "16 de octubre",
-    "inicioSegundoSemestre": "20 de julio"
+    "inicioSegundoSemestre": "20 de julio",
+    "resolucion": {
+      "numero": "711",
+      "fecha": "2025-12-15",
+      "url": "https://magallanes.mineduc.cl/wp-content/uploads/sites/17/2025/12/CER-Magallanes.pdf"
+    },
+    "notaRegional": [
+      "La Resolución Exenta N° 711 del 15 de diciembre de 2025, firmada en Punta Arenas, fija para Magallanes un receso de invierno de tres semanas — del 29 de junio al 17 de julio — con cierre del primer semestre el jueves 25 de junio y regreso a clases el lunes 20 de julio. Es, junto con Aysén, el receso más largo del país.",
+      "El término del año también es austral: clases JEC hasta el viernes 11 de diciembre y establecimientos sin JEC hasta el 23 de diciembre, cuando en 14 regiones el año JEC ya cerró el 4 de diciembre. Los cuartos medios adelantan su cierre por la PAES según la regla nacional."
+    ],
+    "comparativa": "Magallanes y Aysén forman el bloque austral: mismo término de año (11 y 23 de diciembre), recesos de tres semanas. Difieren en la ventana: Magallanes parte una semana antes (29 de junio) y Aysén termina una semana después (24 de julio)."
   }
 ]
