@@ -93,13 +93,45 @@ function diaSemanaDe(fechaTexto) {
   return DIAS_SEMANA[new Date(Date.UTC(dataYear, mes, parseInt(m[1], 10))).getUTCDay()];
 }
 
+// Seccion "Particularidades" por region: prosa unica (notaRegional) +
+// comparativa + cita de la REX oficial con link al PDF. Es LA remediacion
+// del thin content (16 paginas eran 96% boilerplate — auditoria 06-jul).
+function escHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function buildParticularidades(page) {
+  if (!page.notaRegional || !page.notaRegional.length) return '';
+  var out = '<section class="section" id="particularidades" aria-label="Particularidades del calendario de ' + escHtml(page.region) + '">\n';
+  out += '        <h2>Particularidades de ' + escHtml(page.region) + ' en 2026</h2>\n';
+  page.notaRegional.forEach(function (parrafo) {
+    out += '        <p>' + escHtml(parrafo) + '</p>\n';
+  });
+  if (page.comparativa) {
+    out += '        <p>' + escHtml(page.comparativa) + '</p>\n';
+  }
+  if (page.resolucion && page.resolucion.numero) {
+    var r = page.resolucion;
+    out += '        <p class="card__meta">Fuente oficial: <a href="' + r.url +
+      '" rel="noopener noreferrer" target="_blank">Resoluci&oacute;n Exenta N&deg; ' +
+      escHtml(r.numero) + ' (' + escHtml(r.fecha) + ') &mdash; Seremi de Educaci&oacute;n ' +
+      escHtml(page.region) + ' (PDF)</a>' +
+      (r.nota ? '. ' + escHtml(r.nota) : '') + '</p>\n';
+  }
+  out += '      </section>';
+  return out;
+}
+
 // Generar cada página
 pages.forEach(function (page) {
   if (!page.slug) return;
 
   var html = template;
-  // Reemplazar todos los {{key}} con valores del objeto
+  // Placeholders compuestos primero (evita que el loop de keys pise objetos)
+  html = html.replace(/\{\{particularidadesHtml\}\}/g, buildParticularidades(page));
+  html = html.replace(/\{\{rexClaimKey\}\}/g, 'rex_' + String(page.regionSlug || '').replace(/-/g, '_'));
+  // Reemplazar todos los {{key}} con valores del objeto (solo valores string)
   Object.keys(page).forEach(function (key) {
+    if (typeof page[key] === 'object') return;
     var re = new RegExp('\\{\\{' + key + '\\}\\}', 'g');
     html = html.replace(re, page[key] || '');
   });

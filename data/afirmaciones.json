@@ -1043,6 +1043,294 @@
       "last_verified": null,
       "last_verified_by": null,
       "status": "no_verificable"
+    },
+    {
+      "id": "rex-arica-y-parinacota",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Arica y Parinacota fue fijado por la Resolucion Exenta N° 1224 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 1224/2025",
+      "data_key": "rex_arica_y_parinacota",
+      "data_path": "pages.json → resolucion (arica-y-parinacota)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://arica.mineduc.cl/wp-content/uploads/sites/2/2025/12/CER-2026_-Arica.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-tarapaca",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Tarapacá fue fijado por la Resolucion Exenta N° 687 del 2025-12-15 de la Seremi de Educacion — Rectificada por la REX N° 693 del 16-12-2025 (Día del Profesor: sin clases y sin recuperación).",
+      "displayed_value": "REX 687/2025",
+      "data_key": "rex_tarapaca",
+      "data_path": "pages.json → resolucion (tarapaca)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://tarapaca.mineduc.cl/wp-content/uploads/sites/4/2025/12/CER-Tarapaca-2026-y-RES.-EXENTA-693-16.12.2025.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-antofagasta",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Antofagasta fue fijado por la Resolucion Exenta N° 893 del 2025-12-15 de la Seremi de Educacion — Complementada por la REX N° 46 del 28-01-2026, que autoriza fechas distintas a establecimientos específicos (anexo por RBD).",
+      "displayed_value": "REX 893/2025",
+      "data_key": "rex_antofagasta",
+      "data_path": "pages.json → resolucion (antofagasta)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://antofagasta.mineduc.cl/wp-content/uploads/sites/5/2026/01/REX-CER-Antofagasta-2026-y-adecuacion-CER.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-atacama",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Atacama fue fijado por la Resolucion Exenta N° 888 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 888/2025",
+      "data_key": "rex_atacama",
+      "data_path": "pages.json → resolucion (atacama)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://atacama.mineduc.cl/wp-content/uploads/sites/6/2025/12/CER-Atacama-2026.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-coquimbo",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Coquimbo fue fijado por la Resolucion Exenta N° 2233 del 2025-12-15 de la Seremi de Educacion — Incluye resolución modificatoria del 16-12-2025 (Día del Profesor excluido de los días recuperables).",
+      "displayed_value": "REX 2233/2025",
+      "data_key": "rex_coquimbo",
+      "data_path": "pages.json → resolucion (coquimbo)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://coquimbo.mineduc.cl/wp-content/uploads/sites/7/2025/12/01_CER-COQUIMBO.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-valparaiso",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Valparaíso fue fijado por la Resolucion Exenta N° 2881 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 2881/2025",
+      "data_key": "rex_valparaiso",
+      "data_path": "pages.json → resolucion (valparaiso)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://valparaiso.mineduc.cl/wp-content/uploads/sites/8/2026/01/calendarioescolar2026completo.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-metropolitana",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Metropolitana fue fijado por la Resolucion Exenta N° 2803 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 2803/2025",
+      "data_key": "rex_metropolitana",
+      "data_path": "pages.json → resolucion (metropolitana)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://metropolitana.mineduc.cl/wp-content/uploads/sites/9/2025/12/DD_4079499_251215_P.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-ohiggins",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de O’Higgins fue fijado por la Resolucion Exenta N° 1198 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 1198/2025",
+      "data_key": "rex_ohiggins",
+      "data_path": "pages.json → resolucion (ohiggins)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://ohiggins.mineduc.cl/wp-content/uploads/sites/10/2025/12/CER_ohiggins.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-maule",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Maule fue fijado por la Resolucion Exenta N° 1642 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 1642/2025",
+      "data_key": "rex_maule",
+      "data_path": "pages.json → resolucion (maule)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://maule.mineduc.cl/wp-content/uploads/sites/11/2025/12/CER-Maule.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-nuble",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Ñuble fue fijado por la Resolucion Exenta N° 1398 del 2025-12-12 de la Seremi de Educacion",
+      "displayed_value": "REX 1398/2025",
+      "data_key": "rex_nuble",
+      "data_path": "pages.json → resolucion (nuble)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://xn--uble-fqa.mineduc.cl/wp-content/uploads/sites/112/2025/12/CER_nuble.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-biobio",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Biobío fue fijado por la Resolucion Exenta N° 2159 del 2025-12-12 de la Seremi de Educacion",
+      "displayed_value": "REX 2159/2025",
+      "data_key": "rex_biobio",
+      "data_path": "pages.json → resolucion (biobio)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://biobio.mineduc.cl/wp-content/uploads/sites/12/2025/12/REX-2159-Calendario-Escolar-Regional-2026-Biobio.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-araucania",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de La Araucanía fue fijado por la Resolucion Exenta N° 2088 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 2088/2025",
+      "data_key": "rex_araucania",
+      "data_path": "pages.json → resolucion (araucania)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://araucania.mineduc.cl/wp-content/uploads/sites/13/2025/12/CER-2026_araucania.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-los-rios",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Los Ríos fue fijado por la Resolucion Exenta N° 1345 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 1345/2025",
+      "data_key": "rex_los_rios",
+      "data_path": "pages.json → resolucion (los-rios)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://losrios.mineduc.cl/wp-content/uploads/sites/14/2025/12/CER-2026_losrios.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-los-lagos",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Los Lagos fue fijado por la Resolucion Exenta N° 1738 del 2025-12-16 de la Seremi de Educacion",
+      "displayed_value": "REX 1738/2025",
+      "data_key": "rex_los_lagos",
+      "data_path": "pages.json → resolucion (los-lagos)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://loslagos.mineduc.cl/wp-content/uploads/sites/15/2025/12/CALENDARIO-ESCOLAR-LOS-LAGOS-2026-1.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-aysen",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Aysén fue fijado por la Resolucion Exenta N° 618 del 2025-12-16 de la Seremi de Educacion — Modificada por la REX N° 632 del 22-12-2025: receso de invierno movido al 6-24 de julio por calidad del aire en Coyhaique.",
+      "displayed_value": "REX 618/2025",
+      "data_key": "rex_aysen",
+      "data_path": "pages.json → resolucion (aysen)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://aysen.mineduc.cl/wp-content/uploads/sites/16/2026/03/REX-MODIFICACI%C3%93N-CALENDARIO-ESCOLAR-2026.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
+    },
+    {
+      "id": "rex-magallanes",
+      "tags": [
+        "fechas_escolares",
+        "resolucion_regional"
+      ],
+      "claim": "El calendario escolar 2026 de Magallanes fue fijado por la Resolucion Exenta N° 711 del 2025-12-15 de la Seremi de Educacion",
+      "displayed_value": "REX 711/2025",
+      "data_key": "rex_magallanes",
+      "data_path": "pages.json → resolucion (magallanes)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "https://magallanes.mineduc.cl/wp-content/uploads/sites/17/2025/12/CER-Magallanes.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (PDF oficial Seremi leido y verificado)",
+      "status": "correcto"
     }
   ]
 }
