@@ -1,5 +1,5 @@
 /* claims-data.js — generado automaticamente por scripts/generate-pages.js
-   NO EDITAR DIRECTAMENTE — editar claims en el Sheet y ejecutar: npm run generate */
+   NO EDITAR DIRECTAMENTE — editar data/claims.json y ejecutar: npm run generate */
 window.CLAIMS_DATA = {
   "fecha-inicio-clases": {
     "id": "fecha-inicio-clases",

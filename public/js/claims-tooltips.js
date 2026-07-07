@@ -1,5 +1,5 @@
 /* claims-tooltips.js — Popula tooltips BCN desde CLAIMS_DATA
-   Generado por generate-pages.js, datos desde claims.json via Sheet */
+   Generado por generate-pages.js, datos desde data/claims.json */
 ;(function() {
   'use strict';
   document.addEventListener('DOMContentLoaded', function() {

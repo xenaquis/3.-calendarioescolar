@@ -274,7 +274,7 @@ async function runMonitor(env, request) {
         '2. Extraer fechas de inicio, vacaciones invierno, fin de ano\n' +
         '3. Calcular Corpus Christi ' + NEXT_YEAR + ' con algoritmo Pascua (NO copiar ' + CURRENT_YEAR + ')\n' +
         '4. Verificar San Pedro y San Pablo: si cae sabado/domingo → mover al lunes\n' +
-        '5. Actualizar Google Sheet → disparar sync-deploy.yml',
+        '5. Editar data/calendar-config.json y data/pages.json en el repo; el push a main deploya',
         'CRITICAL',
         env,
         null

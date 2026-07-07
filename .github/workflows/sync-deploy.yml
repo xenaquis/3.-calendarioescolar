@@ -4,13 +4,10 @@ name: Verificación diaria + Deploy
 # También disponible como trigger manual desde GitHub Actions UI
 # NUNCA disparado por push (eso lo maneja deploy.yml)
 #
-# 2026-06-12: SYNC DESDE GOOGLE SHEET DESACTIVADO (decisión: el repo es la
-# fuente de verdad de datos; el Sheet quedó desactualizado — tenía 14 feriados
-# vs los 16 correctos — y un sync lo habría sobreescrito). El script
-# scripts/sync-from-sheet.js sigue disponible para uso manual si se reactiva,
-# previa actualización de la celda feriadosCompletos del Sheet.
+# Los datos viven en el repo (data/*.json); no hay fuentes externas de sync.
+# (El nombre de archivo "sync-deploy" es histórico — milestone 362.)
 #
-# Qué hace este workflow ahora:
+# Qué hace este workflow:
 #   1. check-feriados.js — verificación determinística de feriados contra
 #      las reglas legales codificadas (sin red, no puede flakear)
 #   2. generate + validate + build

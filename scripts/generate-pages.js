@@ -403,7 +403,7 @@ if (claimsData && claimsData.claims) {
   });
 
   var claimsDataJs = '/* claims-data.js — generado automaticamente por scripts/generate-pages.js\n' +
-    '   NO EDITAR DIRECTAMENTE — editar claims en el Sheet y ejecutar: npm run generate */\n' +
+    '   NO EDITAR DIRECTAMENTE — editar data/claims.json y ejecutar: npm run generate */\n' +
     'window.CLAIMS_DATA = ' + JSON.stringify(claimsDataMap, null, 2) + ';\n';
   var claimsDataJsPath = path.join(OUTPUT_DIR, 'js', 'claims-data.js');
   fs.writeFileSync(claimsDataJsPath, claimsDataJs);
@@ -411,7 +411,7 @@ if (claimsData && claimsData.claims) {
 
   // Generar public/js/claims-tooltips.js — popula tooltips BCN desde CLAIMS_DATA en el DOM
   var claimsTooltipsJs = '/* claims-tooltips.js — Popula tooltips BCN desde CLAIMS_DATA\n' +
-    '   Generado por generate-pages.js, datos desde claims.json via Sheet */\n' +
+    '   Generado por generate-pages.js, datos desde data/claims.json */\n' +
     ';(function() {\n' +
     '  \'use strict\';\n' +
     '  document.addEventListener(\'DOMContentLoaded\', function() {\n' +
