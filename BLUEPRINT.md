@@ -336,11 +336,12 @@ Implementación completa del backlog de la auditoría 360 (`AUDITORIA-360-2026-0
 - **Hallazgos que contradicen registros previos**: la Ley 21.357 NO tiene anexo de fechas de solsticio (verificado vía API BCN — extender la tabla SOLSTICIO requiere fuente oficial anual); /proximo-feriado YA tenía JSON-LD (la auditoría decía CERO).
 - **Pendiente dic-2026 (Ley 21.719)**: plan de banner de consentimiento de cookies; el CMP de Google (Privacy & messaging, tráfico EEA) se activa en el panel AdSense tras la aprobación — la CSP ya lo permite.
 
-## Milestone 362 (2026-07-07) — Google Sheet ELIMINADO: autonomía total
+## Milestone 362 (2026-07-07) — Google Sheet ELIMINADO: autonomía total — MERGEADA y DESPLEGADA
 
 Decisión del dueño: el Sheet "Páginas Chicas — Control" deja de existir como pieza del sistema.
 El repo git es la ÚNICA fuente de verdad de datos Y de estado. Plan completo en `MILESTONE-362.md`.
-Rama `milestone-362` (merge decidido por el humano).
+Mergeada a main y desplegada el 2026-07-07 (deploy run 28842277415 success; producción verificada:
+home 200, health.json dataYear 2026).
 
 - **Eliminados** (~1.040 líneas): `scripts/sync-from-sheet.js`, `scripts/claims-to-sheet.js`,
   `data/SHEET-SETUP.md`, bloque `sheet` de config.json, warning PLACEHOLDER_SHEET_ID en validate.js.
@@ -356,9 +357,10 @@ Rama `milestone-362` (merge decidido por el humano).
   con freshness, pipeline PDF Mineduc (feb/may/dic).
 - **`GOOGLE_API_KEY` se CONSERVA**: hoy lo consume Gemini (extract-visual.js) en extract-pdf.yml.
   Su uso para Sheets murió con sync-from-sheet.js. NO eliminar ni renombrar el secret.
-- **Pendiente [HUMANO]**: archivar/eliminar el spreadsheet en Google Drive (ID
-  `160WyrLOm6nV2MAg1cusYvSbVzOWnqYWIt8O5MgXRvF4` — si otros sitios lo usan, solo el tab de
-  calendarioescolar); revisar `gh secret list` y eliminar `GOOGLE_SERVICE_ACCOUNT_KEY` si existe.
+- **Secret `GOOGLE_SERVICE_ACCOUNT_KEY`**: verificado con `gh secret list` — NO existía, nada que eliminar.
+- **Pendiente [HUMANO] (único restante)**: archivar/eliminar el spreadsheet en Google Drive (ID
+  `160WyrLOm6nV2MAg1cusYvSbVzOWnqYWIt8O5MgXRvF4` — si otros sitios "Páginas Chicas" lo usan, solo
+  el tab de calendarioescolar). Intento automatizado 07-jul bloqueado por login Google (sesión cerrada).
 
 ## Auditoría 360 AdSense/feriados/crons (2026-07-06)
 
