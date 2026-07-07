@@ -375,6 +375,38 @@ if (claimsData && claimsData.claims && claimsData.sources) {
     Object.keys(declaredKeys).length + ' data_keys en HTML');
 }
 
+// ── Consistencia finAno regional: pages.json vs contenido curado de meses ──
+// Bug histórico (auditoría 06-jul): /feriados/diciembre-2026 decía "Aysén
+// (23 de diciembre)" cuando pages.json (verificado con REX 632) dice que el
+// término JEC es 11-dic (23-dic es solo sin-JEC). Check mínimo: si la página
+// de diciembre menciona una región con término posterior al nacional, debe
+// mencionar también su finAno de pages.json.
+(function () {
+  var dicPath = path.join(ROOT, 'public', 'feriados', 'diciembre-2026', 'index.html');
+  if (!fs.existsSync(dicPath) || !fs.existsSync(pagesPath)) return;
+  var dicHtml;
+  var pagesJson;
+  try {
+    dicHtml = fs.readFileSync(dicPath, 'utf8');
+    pagesJson = JSON.parse(fs.readFileSync(pagesPath, 'utf8'));
+  } catch (e) { return; }
+  // Normalizar entidades comunes para comparar texto plano
+  var plano = dicHtml.replace(/&eacute;/g, 'é').replace(/&aacute;/g, 'á')
+    .replace(/&iacute;/g, 'í').replace(/&oacute;/g, 'ó').replace(/&uacute;/g, 'ú')
+    .replace(/&ntilde;/g, 'ñ');
+  pagesJson.forEach(function (p) {
+    if (!p.region || !p.finAno) return;
+    // Solo regiones con término distinto al nacional (4 de diciembre)
+    if (p.finAno === '4 de diciembre') return;
+    var nombreCorto = p.region.replace(/^Región de /i, '');
+    if (plano.indexOf(nombreCorto) === -1) return; // no mencionada, OK
+    if (plano.indexOf(p.finAno) === -1) {
+      error('feriados/diciembre-2026: menciona "' + nombreCorto + '" pero no su finAno de pages.json ("' +
+        p.finAno + '") — posible contradicción factual (verificar REX regional)');
+    }
+  });
+})();
+
 // ── Reporte final ──────────────────────────────────────────────────────────
 console.log('\n=== Validacion de datos ===\n');
 

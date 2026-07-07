@@ -178,10 +178,10 @@ var MES_EXTRA = {
   diciembre: {
     claimKeys: ['schoolEnd'],
     contexto: '<p>Diciembre 2026 tiene dos feriados: la <strong>Inmaculada Concepci&oacute;n, martes 8 de diciembre</strong>, y <strong>Navidad, viernes 25 de diciembre</strong> (irrenunciable).</p>' +
-      '<p>El <strong>&uacute;ltimo d&iacute;a de clases JEC es el viernes 4 de diciembre</strong> en la mayor&iacute;a de las regiones, por lo que el 8 de diciembre afecta principalmente a establecimientos con calendario extendido (sin JEC, EPJA) y a las regiones con t&eacute;rmino posterior: <a href="/region/magallanes/">Magallanes</a> (11 de diciembre) y <a href="/region/aysen/">Ays&eacute;n</a> (23 de diciembre).</p>',
+      '<p>El <strong>&uacute;ltimo d&iacute;a de clases JEC es el viernes 4 de diciembre</strong> en la mayor&iacute;a de las regiones, por lo que el 8 de diciembre afecta principalmente a establecimientos con calendario extendido y a las regiones con t&eacute;rmino posterior: en <a href="/region/aysen/">Ays&eacute;n</a> y <a href="/region/magallanes/">Magallanes</a> las clases JEC terminan el <strong>viernes 11 de diciembre</strong>, y los establecimientos sin JEC (40 semanas) el <strong>23 de diciembre</strong> (REX 632/2025 Ays&eacute;n).</p>',
     faqs: [
       { q: '¿Hasta cuándo hay clases en diciembre 2026?',
-        a: 'El último día de clases JEC es el viernes 4 de diciembre en la mayoría de las regiones. Magallanes termina el 11 de diciembre y Aysén el 23 de diciembre, según sus resoluciones regionales.' },
+        a: 'El último día de clases JEC es el viernes 4 de diciembre en la mayoría de las regiones. En Aysén y Magallanes las clases JEC terminan el viernes 11 de diciembre, y los establecimientos sin JEC (40 semanas) el 23 de diciembre, según sus resoluciones regionales.' },
       { q: '¿El lunes 7 de diciembre de 2026 es feriado?',
         a: 'No. El feriado es solo el martes 8 (Inmaculada Concepción). El lunes 7 queda como día "sándwich": es hábil, aunque algunos empleadores y establecimientos lo otorgan con cargo a recuperación.' }
     ]

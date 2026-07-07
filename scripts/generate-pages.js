@@ -79,6 +79,20 @@ STATIC_PAGES.forEach(function (p) {
   }
 });
 
+// Dia de la semana real de una fecha "4 de marzo" — evita hardcodear "Lunes"
+// en el template cuando el inicio real cae otro dia (bug detectado: 4-mar-2026
+// es miercoles y el template decia "Lunes · 2026").
+var MESES_NUM = { enero: 0, febrero: 1, marzo: 2, abril: 3, mayo: 4, junio: 5, julio: 6, agosto: 7, septiembre: 8, octubre: 9, noviembre: 10, diciembre: 11 };
+var DIAS_SEMANA = ['Domingo', 'Lunes', 'Martes', 'Mi&eacute;rcoles', 'Jueves', 'Viernes', 'S&aacute;bado'];
+var dataYear = (calConfig && calConfig.year) || 2026;
+function diaSemanaDe(fechaTexto) {
+  var m = /^(\d{1,2}) de ([a-záéíóúñ]+)/i.exec(String(fechaTexto || '').trim());
+  if (!m) return '';
+  var mes = MESES_NUM[m[2].toLowerCase()];
+  if (mes === undefined) return '';
+  return DIAS_SEMANA[new Date(Date.UTC(dataYear, mes, parseInt(m[1], 10))).getUTCDay()];
+}
+
 // Generar cada página
 pages.forEach(function (page) {
   if (!page.slug) return;
@@ -89,6 +103,8 @@ pages.forEach(function (page) {
     var re = new RegExp('\\{\\{' + key + '\\}\\}', 'g');
     html = html.replace(re, page[key] || '');
   });
+  // Placeholder calculado: dia de la semana del inicio de clases regional
+  html = html.replace(/\{\{inicioDiaSemana\}\}/g, diaSemanaDe(page.inicio));
   // Reemplazar {{domain}}, {{siteName}} y {{buildDate}} (freshness automatica)
   html = html.replace(/\{\{domain\}\}/g, domain);
   html = html.replace(/\{\{siteName\}\}/g, config.siteName || 'SITENAME');
