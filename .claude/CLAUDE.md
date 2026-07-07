@@ -18,16 +18,15 @@ data/
   pages.json             -> 16 regiones con fechas escolares (FUENTE DE VERDAD regional)
   calendar-config.json   -> Fechas del año escolar + feriados (FUENTE DE VERDAD temporal)
   template.html          -> Plantilla HTML para paginas de region
-  SHEET-SETUP.md         -> Instrucciones para configurar el Google Sheet
 scripts/
   generate-pages.js      -> pages.json + calendar-config.json → HTML + JS + health.json
   validate.js            -> Valida integridad de datos (bloquea build si hay errores)
-  sync-from-sheet.js     -> Lee Google Sheet via REST API → actualiza los JSON
-  build.sh               -> validate.js + verificaciones
+  check-feriados.js      -> Motor deterministico: recalcula feriados desde reglas legales
+  build.sh               -> validate.js + check-feriados.js + verificaciones
 .github/workflows/
   deploy.yml             -> push a main → build → deploy
-  sync-deploy.yml        -> cron semanal + manual: sync Sheet → generate → validate → deploy
-config.json              -> Configuracion del sitio (IDs servicios, Sheet structure)
+  sync-deploy.yml        -> cron diario: check-feriados → generate → validate → deploy
+config.json              -> Configuracion del sitio (IDs servicios)
 ```
 
 ## Paginas del sitio
@@ -39,10 +38,9 @@ config.json              -> Configuracion del sitio (IDs servicios, Sheet struct
 - **contacto.html**, **privacidad.html** — Paginas legales
 
 ## Fuente de datos
-- Google Sheet (fuente de verdad operativa) → sync automatico via GitHub Action
-- Mineduc Chile (fuente primaria, PDF anual ~noviembre)
-- Datos locales: data/pages.json + data/calendar-config.json
-- Actualizacion anual: editar Sheet → GitHub Action sincroniza y deploya
+- Repo git (fuente de verdad operativa): data/pages.json + data/calendar-config.json
+- Mineduc Chile (fuente primaria, PDF anual ~noviembre) → pipeline extract-pdf.yml
+- Actualizacion anual: editar los JSON (o pipeline PDF con --fix) → push a main deploya
 
 ## Cross-links
 - dolaruf.cl (valor UF, UTM para multas)
@@ -66,14 +64,13 @@ config.json              -> Configuracion del sitio (IDs servicios, Sheet struct
 - `npm run build`    -> validate.js + verificaciones de integridad (bloquea si hay errores)
 - `npm run deploy`   -> deploy a Cloudflare Pages
 - `node scripts/validate.js`        -> solo validacion de datos (exit 0=OK, 1=error)
-- `node scripts/sync-from-sheet.js` -> sync manual desde Sheet (requiere GOOGLE_API_KEY)
+- `node scripts/check-feriados.js`  -> verificacion deterministica de feriados (exit 0=OK, 1=discrepancia)
 - `update-blueprint` -> No es un script — es una instruccion: actualizar BLUEPRINT.md despues de cada cambio importante
 
 ## Fuente de verdad
-El Google Sheet "Páginas Chicas — Control" es la fuente de verdad para estado,
-tracking y decisiones. El ID del spreadsheet está en config.json → sheet.spreadsheetId.
-Cada sitio tiene su propio tab en el Sheet.
-Cualquier cambio de estado debe reflejarse en el Sheet.
+El repo git es la ÚNICA fuente de verdad: datos (data/*.json), estado y decisiones
+(BLUEPRINT.md). El Google Sheet "Páginas Chicas — Control" fue ELIMINADO del sistema
+en 2026-07 (milestone 362).
 
 ## Sistema de validacion de afirmaciones
 - Cada pagina con datos factuales DEBE incluir `<meta name="claim-data" content="key1,key2,...">` listando los data_keys que consume.
