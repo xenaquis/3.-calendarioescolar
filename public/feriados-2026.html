@@ -619,6 +619,38 @@
         </div>
       </section>
 
+      <!-- Verbatim legal BCN + SHA-256 (diferenciador E-E-A-T: nadie mas en la SERP transcribe y verifica el texto legal) -->
+      <section class="section" id="texto-legal" aria-label="Texto legal verificado de los feriados">
+        <h2>El texto legal, verificado</h2>
+        <p>Estos feriados no salen de una lista copiada: provienen del texto vigente de las leyes en la
+           <a href="https://www.bcn.cl/leychile/" rel="noopener noreferrer" target="_blank">Biblioteca del Congreso Nacional (BCN)</a>.
+           Transcribimos los art&iacute;culos clave y publicamos el <strong>hash SHA-256</strong> de cada texto:
+           un monitor autom&aacute;tico lo recalcula cada semana contra BCN y nos alerta si la ley cambia.</p>
+
+        <details>
+          <summary>Ley 2.977 (1915) &mdash; la lista base de feriados</summary>
+          <p>&laquo;ARTICULO PRIMERO.- Desde la fecha de la presente lei, s&oacute;lo se considerar&aacute;n como feriados los dias siguientes; 1&deg; Los Domingos de todo el a&ntilde;o. 2&deg; Los festivos correspondientes al 1&deg; de Enero, [&hellip;] 15 de Agosto, 1&deg; de Noviembre, 8 i 25 de Diciembre [&hellip;]&raquo;</p>
+          <p class="card__meta">SHA-256: <code>6af996a86e7cd0f1</code>&hellip; &middot; <a href="https://www.bcn.cl/leychile/navegar?idNorma=23639" rel="noopener noreferrer" target="_blank">Texto completo en BCN</a></p>
+        </details>
+
+        <details>
+          <summary>Ley 19.668 (2000) &mdash; los traslados a lunes</summary>
+          <p>&laquo;Art&iacute;culo &uacute;nico.- Trasl&aacute;danse los feriados correspondientes al 29 de junio, d&iacute;a de San Pedro y San Pablo; 12 de octubre, d&iacute;a del descubrimiento de dos mundos; a los d&iacute;as lunes de la semana en que ocurren, en caso de corresponder a d&iacute;a martes, mi&eacute;rcoles o jueves, o los d&iacute;as lunes de la semana siguiente, en caso de corresponder a d&iacute;a viernes.&raquo;</p>
+          <p class="card__meta">SHA-256: <code>0a525c531bc05ef9</code>&hellip; &middot; <a href="https://www.bcn.cl/leychile/navegar?idNorma=160270" rel="noopener noreferrer" target="_blank">Texto completo en BCN</a> &middot; En 2026 el 29 de junio cae lunes: no hay traslado.</p>
+        </details>
+
+        <details>
+          <summary>Ley 20.148 (2007) &mdash; Virgen del Carmen reemplaza a Corpus Christi</summary>
+          <p>&laquo;Art&iacute;culo 1&ordm;.- Decl&aacute;rase feriado el d&iacute;a 16 de julio de cada a&ntilde;o, en que se celebra y honra a la Virgen del Carmen, en reemplazo del feriado correspondiente a Corpus Christi.&raquo;</p>
+          <p class="card__meta">SHA-256: <code>684672aeb8515f46</code>&hellip; &middot; <a href="https://www.bcn.cl/leychile/navegar?idNorma=257080" rel="noopener noreferrer" target="_blank">Texto completo en BCN</a> &middot; Por eso <a href="/corpus-christi-2026">Corpus Christi no es feriado</a>.</p>
+        </details>
+
+        <details>
+          <summary>Ley 21.357 (2021) &mdash; el feriado que se mueve con el sol</summary>
+          <p>&laquo;Art&iacute;culo &uacute;nico.- Decl&aacute;rase feriado legal el d&iacute;a del solsticio de invierno de cada a&ntilde;o en el hemisferio sur, D&iacute;a Nacional de los Pueblos Ind&iacute;genas.&raquo;</p>
+          <p class="card__meta">SHA-256: <code>0e50a44a501faed4</code>&hellip; &middot; <a href="https://www.bcn.cl/leychile/navegar?idNorma=1161743" rel="noopener noreferrer" target="_blank">Texto completo en BCN</a> &middot; En 2026 el solsticio cae el domingo 21 de junio.</p>
+        </details>
+      </section>
 
       <!-- FAQ -->
       <section class="section" id="faq">
