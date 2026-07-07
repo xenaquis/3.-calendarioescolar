@@ -6,12 +6,9 @@
   "description": "Calendario escolar 2026 Chile: fechas de inicio de clases, vacaciones de invierno y fin de año por región. Fuente oficial Mineduc.",
   "themeColor": "#7c3aed",
   "adsense": {
-    "client": "ca-pub-XXXXXXXXXXXXXXXX",
-    "slots": {
-      "top": "1234567890",
-      "mid": "0987654321",
-      "bottom": "1122334455"
-    }
+    "_nota": "CONFIG MUERTA: generate-pages.js NO lee este bloque. Los <ins> placeholder fueron eliminados del sitio (milestone-361). Al aprobar AdSense: crear unidades reales en el panel y agregar los <ins> con slot IDs reales en templates/standalones (ads.js es el unico cargador y solo activa con >=1 slot real).",
+    "client": "ca-pub-2859628961076196",
+    "slots": {}
   },
   "analytics": {
     "ga4": "G-6FVLKF6PFQ"

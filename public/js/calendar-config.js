@@ -216,5 +216,5 @@ window.CALENDAR_CONFIG = {
       "nota": null
     }
   ],
-  "generatedDate": "2026-06-17"
+  "generatedDate": "2026-07-07"
 };
