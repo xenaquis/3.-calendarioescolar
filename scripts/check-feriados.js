@@ -26,7 +26,14 @@ var path = require('path');
 
 var ROOT = path.join(__dirname, '..');
 
-// Fechas del feriado del solsticio (Ley 21.357, tabla oficial) — extender anualmente
+// Fechas del feriado del solsticio (Ley 21.357) — extender anualmente.
+// VERIFICADO 2026-07-06 contra la API BCN (idNorma 1161743): la ley NO tiene
+// anexo con tabla de fechas futuras — solo el articulo unico (dia del
+// solsticio) y un transitorio para 2021 (21-jun). Estas fechas provienen del
+// calculo astronomico oficial anunciado cada año; extender SOLO con fecha
+// confirmada por fuente oficial (Diario Oficial / anuncio de Gobierno).
+// El fail-a-proposito para años fuera de tabla es intencional: fuerza la
+// verificacion humana antes de cargar un año nuevo.
 var SOLSTICIO = {
   2024: '06-20',
   2025: '06-20',

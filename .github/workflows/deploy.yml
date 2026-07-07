@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
 
+# Mismo grupo que sync-deploy.yml: un push durante la ventana del cron diario
+# producia dos deploys en carrera.
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -12,10 +18,10 @@ jobs:
       deployments: write
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
 

@@ -69,7 +69,6 @@ var STATIC_PAGES = [
   { file: 'vacaciones-invierno-2026.html',   pri: '0.9', freq: 'monthly' },
   { file: 'cuando-empiezan-clases-2026.html',pri: '0.9', freq: 'monthly' },
   { file: 'about.html',                      pri: '0.3', freq: 'monthly' },
-  { file: 'quienes-somos.html',             pri: '0.4', freq: 'monthly' },
   { file: 'contacto.html',                   pri: '0.3', freq: 'yearly' }
 ];
 STATIC_PAGES.forEach(function (p) {
