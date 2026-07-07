@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-07T03:20:55.602Z",
+  "generated_at": "2026-07-07T03:23:15.794Z",
   "summary": {
-    "total_claims": 71,
+    "total_claims": 75,
     "verified": 46,
-    "unverified": 20,
+    "unverified": 24,
     "incorrecto": 0,
     "no_verificable": 5,
     "fuente_inaccesible": 0,
@@ -21,12 +21,14 @@
     "school-dates": {
       "id": "school-dates",
       "status": "no_verificable",
-      "claims_count": 41,
+      "claims_count": 45,
       "sources": [
-        "Resolucion Exenta Calendario Escolar 2026"
+        "Resolucion Exenta Calendario Escolar 2026",
+        null
       ],
       "source_ids": [
-        "mineduc-resolucion-2026"
+        "mineduc-resolucion-2026",
+        "mineduc-historico"
       ],
       "last_verified": "2026-06-15T15:34:16.376Z"
     },

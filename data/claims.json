@@ -66,6 +66,11 @@
       "tier": 2,
       "url": "https://centroestudios.mineduc.cl/",
       "notas": "Datos de cobertura escolar, numero de estudiantes. No utilizada actualmente por ninguna claim."
+    },
+    "mineduc-historico": {
+      "nombre": "Mineduc — comunicados y resoluciones de calendario escolar de anos anteriores",
+      "url": "https://www.mineduc.cl/",
+      "tipo": "html"
     }
   },
   "claims": [
@@ -1947,6 +1952,94 @@
       "respuesta": "Los docentes ingresan el lunes 2 de marzo de 2026; la jornada de planificacion es el 2 y 3 de marzo, y los estudiantes entran el miercoles 4 de marzo",
       "fuente_url": "https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/",
       "fuente_tipo": "pdf"
+    },
+    {
+      "id": "inicio-clases-2022",
+      "tags": [
+        "fechas_escolares",
+        "historico"
+      ],
+      "claim": "El ingreso de estudiantes del ano escolar 2022 en Chile fue el miercoles 2 de marzo de 2022 (mayoria de las regiones)",
+      "displayed_value": "miercoles 2 de marzo de 2022",
+      "data_key": "inicio_clases_2022",
+      "data_path": "contenido curado cuando-empiezan-clases-2026.html (tabla historica)",
+      "source_id": "mineduc-historico",
+      "source_reference": "https://www.mineduc.cl/en-marzo-del-2022-la-asistencia-a-clases-presenciales-sera-obligatoria/",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (verificado contra comunicados oficiales Mineduc via web)",
+      "status": "correcto",
+      "pregunta": "Cuando empezaron las clases en Chile en 2022?",
+      "respuesta": "El ingreso de estudiantes del ano escolar 2022 en Chile fue el miercoles 2 de marzo de 2022 (mayoria de las regiones)",
+      "fuente_url": "https://www.mineduc.cl/en-marzo-del-2022-la-asistencia-a-clases-presenciales-sera-obligatoria/",
+      "fuente_tipo": "html"
+    },
+    {
+      "id": "inicio-clases-2023",
+      "tags": [
+        "fechas_escolares",
+        "historico"
+      ],
+      "claim": "El ingreso de estudiantes del ano escolar 2023 en Chile fue el viernes 3 de marzo de 2023 (ano escolar inicio el miercoles 1 con docentes) (mayoria de las regiones)",
+      "displayed_value": "viernes 3 de marzo de 2023 (ano escolar inicio el miercoles 1 con docentes)",
+      "data_key": "inicio_clases_2023",
+      "data_path": "contenido curado cuando-empiezan-clases-2026.html (tabla historica)",
+      "source_id": "mineduc-historico",
+      "source_reference": "https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2023/",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (verificado contra comunicados oficiales Mineduc via web)",
+      "status": "correcto",
+      "pregunta": "Cuando empezaron las clases en Chile en 2023?",
+      "respuesta": "El ingreso de estudiantes del ano escolar 2023 en Chile fue el viernes 3 de marzo de 2023 (ano escolar inicio el miercoles 1 con docentes) (mayoria de las regiones)",
+      "fuente_url": "https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2023/",
+      "fuente_tipo": "html"
+    },
+    {
+      "id": "inicio-clases-2024",
+      "tags": [
+        "fechas_escolares",
+        "historico"
+      ],
+      "claim": "El ingreso de estudiantes del ano escolar 2024 en Chile fue el martes 5 de marzo de 2024 (docentes el viernes 1 de marzo) (mayoria de las regiones)",
+      "displayed_value": "martes 5 de marzo de 2024 (docentes el viernes 1 de marzo)",
+      "data_key": "inicio_clases_2024",
+      "data_path": "contenido curado cuando-empiezan-clases-2026.html (tabla historica)",
+      "source_id": "mineduc-historico",
+      "source_reference": "https://www.mineduc.cl/wp-content/uploads/sites/19/2023/12/REX-ESCOLAR-DEFINITIVO.pdf",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (verificado contra comunicados oficiales Mineduc via web)",
+      "status": "correcto",
+      "pregunta": "Cuando empezaron las clases en Chile en 2024?",
+      "respuesta": "El ingreso de estudiantes del ano escolar 2024 en Chile fue el martes 5 de marzo de 2024 (docentes el viernes 1 de marzo) (mayoria de las regiones)",
+      "fuente_url": "https://www.mineduc.cl/wp-content/uploads/sites/19/2023/12/REX-ESCOLAR-DEFINITIVO.pdf",
+      "fuente_tipo": "html"
+    },
+    {
+      "id": "inicio-clases-2025",
+      "tags": [
+        "fechas_escolares",
+        "historico"
+      ],
+      "claim": "El ingreso de estudiantes del ano escolar 2025 en Chile fue el miercoles 5 de marzo de 2025 (docentes el lunes 3; Aysen con fecha propia) (mayoria de las regiones)",
+      "displayed_value": "miercoles 5 de marzo de 2025 (docentes el lunes 3; Aysen con fecha propia)",
+      "data_key": "inicio_clases_2025",
+      "data_path": "contenido curado cuando-empiezan-clases-2026.html (tabla historica)",
+      "source_id": "mineduc-historico",
+      "source_reference": "https://www.mineduc.cl/ministerio-de-educacion-oficializa-el-calendario-escolar-2025/",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (verificado contra comunicados oficiales Mineduc via web)",
+      "status": "correcto",
+      "pregunta": "Cuando empezaron las clases en Chile en 2025?",
+      "respuesta": "El ingreso de estudiantes del ano escolar 2025 en Chile fue el miercoles 5 de marzo de 2025 (docentes el lunes 3; Aysen con fecha propia) (mayoria de las regiones)",
+      "fuente_url": "https://www.mineduc.cl/ministerio-de-educacion-oficializa-el-calendario-escolar-2025/",
+      "fuente_tipo": "html"
     }
   ]
 }

@@ -540,5 +540,29 @@ window.CLAIMS_DATA = {
     "pregunta": "Cuando ingresan los docentes en 2026?",
     "respuesta": "Los docentes ingresan el lunes 2 de marzo de 2026; la jornada de planificacion es el 2 y 3 de marzo, y los estudiantes entran el miercoles 4 de marzo",
     "status": "correcto"
+  },
+  "inicio-clases-2022": {
+    "id": "inicio-clases-2022",
+    "pregunta": "Cuando empezaron las clases en Chile en 2022?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2022 en Chile fue el miercoles 2 de marzo de 2022 (mayoria de las regiones)",
+    "status": "correcto"
+  },
+  "inicio-clases-2023": {
+    "id": "inicio-clases-2023",
+    "pregunta": "Cuando empezaron las clases en Chile en 2023?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2023 en Chile fue el viernes 3 de marzo de 2023 (ano escolar inicio el miercoles 1 con docentes) (mayoria de las regiones)",
+    "status": "correcto"
+  },
+  "inicio-clases-2024": {
+    "id": "inicio-clases-2024",
+    "pregunta": "Cuando empezaron las clases en Chile en 2024?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2024 en Chile fue el martes 5 de marzo de 2024 (docentes el viernes 1 de marzo) (mayoria de las regiones)",
+    "status": "correcto"
+  },
+  "inicio-clases-2025": {
+    "id": "inicio-clases-2025",
+    "pregunta": "Cuando empezaron las clases en Chile en 2025?",
+    "respuesta": "El ingreso de estudiantes del ano escolar 2025 en Chile fue el miercoles 5 de marzo de 2025 (docentes el lunes 3; Aysen con fecha propia) (mayoria de las regiones)",
+    "status": "correcto"
   }
 };
