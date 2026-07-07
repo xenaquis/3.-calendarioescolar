@@ -19,12 +19,10 @@ if ! node scripts/check-feriados.js; then
   exit 1
 fi
 
-# Actualizar fecha en sitemap
-TODAY=$(date +%Y-%m-%d)
-if [ -f public/sitemap.xml ]; then
-  sed -i "s|<lastmod>[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}</lastmod>|<lastmod>${TODAY}</lastmod>|g" public/sitemap.xml
-  echo "  Sitemap: fechas actualizadas a ${TODAY}"
-fi
+# Sitemap: el lastmod es SELECTIVO y lo maneja generate-pages.js
+# (hash de contenido en data/sitemap-lastmod.json). NO re-estampar aqui:
+# el sed global anterior invalidaba la senal ante Google (lastmod debe
+# ser "consistently and verifiably accurate").
 
 # Contar archivos
 HTML_COUNT=$(find public -name "*.html" | wc -l)

@@ -175,22 +175,63 @@ if (calConfig) {
   sitemapUrls.push(generateEfemerides(calConfig, OUTPUT_DIR, domain));
 }
 
-// Generar sitemap
+// Generar sitemap — lastmod SELECTIVO (Google ignora lastmod si no es
+// "consistently and verifiably accurate"; el deploy diario re-estampaba
+// TODO el sitio). Regla: lastmod solo avanza si el hash del HTML cambio
+// (normalizando fechas ISO para que el stamp de frescura diario no lo
+// invalide) o si la pagina es genuinamente dinamica (/proximo-feriado).
+var crypto = require('crypto');
+var MANIFEST_FILE = path.join(__dirname, '..', 'data', 'sitemap-lastmod.json');
+var lastmodManifest = {};
+try { lastmodManifest = JSON.parse(fs.readFileSync(MANIFEST_FILE, 'utf8')); } catch (e) { /* primer run */ }
+var DYNAMIC_LOCS = ['/proximo-feriado'];
+
+function fileForLoc(loc) {
+  var p = loc.replace(/^https:\/\/[^/]+/, '');
+  if (p === '/' || p === '') return path.join(OUTPUT_DIR, 'index.html');
+  p = p.replace(/^\//, '');
+  if (/\/$/.test(p)) return path.join(OUTPUT_DIR, p, 'index.html');
+  return path.join(OUTPUT_DIR, p + '.html');
+}
+function contentHash(file) {
+  var s = fs.readFileSync(file, 'utf8');
+  s = s.replace(/\d{4}-\d{2}-\d{2}/g, 'D'); // fechas ISO = stamps de frescura, no contenido
+  return crypto.createHash('sha256').update(s).digest('hex');
+}
+
 var today = new Date().toISOString().slice(0, 10);
+var lastmodChanged = 0;
 var sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n';
 sitemap += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
 sitemapUrls.forEach(function (u) {
+  var locPath = u.loc.replace(/^https:\/\/[^/]+/, '');
+  var lastmod = today;
+  if (DYNAMIC_LOCS.indexOf(locPath) === -1) {
+    var file = fileForLoc(u.loc);
+    if (fs.existsSync(file)) {
+      var h = contentHash(file);
+      var prev = lastmodManifest[u.loc];
+      if (prev && prev.hash === h && prev.lastmod) {
+        lastmod = prev.lastmod; // sin cambios: conservar el lastmod anterior
+      } else {
+        lastmodChanged++;
+      }
+      lastmodManifest[u.loc] = { hash: h, lastmod: lastmod };
+    }
+  }
   sitemap += '  <url>\n';
   sitemap += '    <loc>' + u.loc + '</loc>\n';
-  sitemap += '    <lastmod>' + today + '</lastmod>\n';
+  sitemap += '    <lastmod>' + lastmod + '</lastmod>\n';
   if (u.changefreq) sitemap += '    <changefreq>' + u.changefreq + '</changefreq>\n';
   sitemap += '    <priority>' + u.priority + '</priority>\n';
   sitemap += '  </url>\n';
 });
 sitemap += '</urlset>\n';
 fs.writeFileSync(SITEMAP_FILE, sitemap);
+fs.writeFileSync(MANIFEST_FILE, JSON.stringify(lastmodManifest, null, 2) + '\n');
 
-console.log('Generadas ' + generated + ' paginas + sitemap (' + sitemapUrls.length + ' URLs)');
+console.log('Generadas ' + generated + ' paginas + sitemap (' + sitemapUrls.length + ' URLs, ' +
+  lastmodChanged + ' lastmod actualizados)');
 
 // Generar public/js/regions-data.js
 var regionsData = {};
