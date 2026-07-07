@@ -1,12 +1,12 @@
 {
-  "generatedAt": "2026-07-07T03:41:27.011Z",
+  "generatedAt": "2026-07-07T04:21:54.017Z",
   "generatedDate": "2026-07-07",
   "dataYear": 2026,
   "regionsCount": 16,
   "pagesCount": 16,
   "sitemap": "38 URLs",
   "dataFingerprint": {
-    "pagesJson": "3df0fa7f0fc84f6ea128ad73ad776fd8",
+    "pagesJson": "b03badd22eb4cb5b013c460a1669187b",
     "calendarConfigJson": "b2650228c355402bbfb5e8423d93c76c"
   },
   "calendarConfig": {
@@ -18,7 +18,7 @@
   },
   "status": "ok",
   "sourceHealth": {
-    "lastChecked": "2026-06-15T15:33:50.859Z",
+    "lastChecked": "2026-07-06T13:35:38.972Z",
     "totalSources": 6,
     "ok": 2,
     "broken": 0,
