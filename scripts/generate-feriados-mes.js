@@ -318,17 +318,10 @@ function buildSchema(mes, slug, title, description, faqs, domain, today) {
         publisher: { '@id': 'https://' + domain + '/#org' },
         mainEntityOfPage: url,
         isPartOf: { '@id': 'https://' + domain + '/#website' }
-      },
-      {
-        '@type': 'FAQPage',
-        mainEntity: faqs.map(function (f) {
-          return {
-            '@type': 'Question',
-            name: f.q,
-            acceptedAnswer: { '@type': 'Answer', text: f.a }
-          };
-        })
       }
+      // FAQPage retirado (milestone-361): Google elimino el rich result FAQ
+      // de la busqueda el 07-may-2026. El texto FAQ visible se conserva
+      // (lo leen usuarios y AI Overviews).
     ]
   };
   return JSON.stringify(schema, null, 2);

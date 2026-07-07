@@ -97,9 +97,8 @@ module.exports = function generateProximoFeriado(calConfig, outputDir, domain) {
       { '@type': 'Article', headline: title.replace(/¿/g, '').replace(/á/g, 'a').replace(/ó/g, 'o'),
         description: desc, url: url, inLanguage: 'es-CL', datePublished: buildDate, dateModified: buildDate,
         author: { '@id': 'https://' + domain + '/#author' }, publisher: { '@id': 'https://' + domain + '/#org' },
-        mainEntityOfPage: url, isPartOf: { '@id': 'https://' + domain + '/#website' } },
-      { '@type': 'FAQPage', mainEntity: faqs.map(function (f) {
-        return { '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } }; }) }
+        mainEntityOfPage: url, isPartOf: { '@id': 'https://' + domain + '/#website' } }
+      // FAQPage retirado (milestone-361): rich result eliminado por Google 07-may-2026.
     ]
   };
 
