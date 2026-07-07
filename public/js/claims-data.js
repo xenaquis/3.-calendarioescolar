@@ -516,5 +516,29 @@ window.CLAIMS_DATA = {
     "pregunta": "Que resolucion fija el calendario escolar 2026 de Magallanes?",
     "respuesta": "El calendario escolar 2026 de Magallanes fue fijado por la Resolucion Exenta N° 711 del 2025-12-15 de la Seremi de Educacion",
     "status": "correcto"
+  },
+  "paes-regular-2026": {
+    "id": "paes-regular-2026",
+    "pregunta": "Cuando se rinde la PAES regular 2026?",
+    "respuesta": "La PAES regular (admision 2027) se rinde del 30 de noviembre al 2 de diciembre de 2026",
+    "status": "correcto"
+  },
+  "paes-invierno-2026": {
+    "id": "paes-invierno-2026",
+    "pregunta": "Cuando es la PAES de invierno 2026?",
+    "respuesta": "La PAES de invierno 2026 se aplica del 15 al 17 de junio; inscripcion del 4 al 17 de marzo; puntajes el 17 de julio de 2026",
+    "status": "correcto"
+  },
+  "paes-admision-2027": {
+    "id": "paes-admision-2027",
+    "pregunta": "Cuando se publican los puntajes PAES para la admision 2027?",
+    "respuesta": "Para la admision 2027, los puntajes PAES se publican el 4 de enero de 2027 y las postulaciones van del 4 al 7 de enero de 2027",
+    "status": "correcto"
+  },
+  "inicio-docentes-2026": {
+    "id": "inicio-docentes-2026",
+    "pregunta": "Cuando ingresan los docentes en 2026?",
+    "respuesta": "Los docentes ingresan el lunes 2 de marzo de 2026; la jornada de planificacion es el 2 y 3 de marzo, y los estudiantes entran el miercoles 4 de marzo",
+    "status": "correcto"
   }
 };

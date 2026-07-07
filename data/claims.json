@@ -1859,6 +1859,94 @@
       "respuesta": "El calendario escolar 2026 de Magallanes fue fijado por la Resolucion Exenta N° 711 del 2025-12-15 de la Seremi de Educacion",
       "fuente_url": "https://magallanes.mineduc.cl/wp-content/uploads/sites/17/2025/12/CER-Magallanes.pdf",
       "fuente_tipo": "pdf"
+    },
+    {
+      "id": "paes-regular-2026",
+      "tags": [
+        "fechas_escolares",
+        "hitos_nacionales"
+      ],
+      "claim": "La PAES regular (admision 2027) se rinde del 30 de noviembre al 2 de diciembre de 2026",
+      "displayed_value": "2026-11-30 al 2026-12-02",
+      "data_key": "paes_regular_2026",
+      "data_path": "REX regionales 2026 (contenido curado MES_EXTRA)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "REX regionales 2026, seccion Calendario PAES / tabla de hitos (verificado en PDFs oficiales de las 16 Seremis, p.ej. REX 632/2025 Aysen y REX 2803/2025 RM)",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (tabla PAES leida en PDFs oficiales)",
+      "status": "correcto",
+      "pregunta": "Cuando se rinde la PAES regular 2026?",
+      "respuesta": "La PAES regular (admision 2027) se rinde del 30 de noviembre al 2 de diciembre de 2026",
+      "fuente_url": "https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/",
+      "fuente_tipo": "pdf"
+    },
+    {
+      "id": "paes-invierno-2026",
+      "tags": [
+        "fechas_escolares",
+        "hitos_nacionales"
+      ],
+      "claim": "La PAES de invierno 2026 se aplica del 15 al 17 de junio; inscripcion del 4 al 17 de marzo; puntajes el 17 de julio de 2026",
+      "displayed_value": "2026-06-15 al 2026-06-17",
+      "data_key": "paes_invierno_2026",
+      "data_path": "REX regionales 2026 (contenido curado MES_EXTRA)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "REX regionales 2026, seccion Calendario PAES / tabla de hitos (verificado en PDFs oficiales de las 16 Seremis, p.ej. REX 632/2025 Aysen y REX 2803/2025 RM)",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (tabla PAES leida en PDFs oficiales)",
+      "status": "correcto",
+      "pregunta": "Cuando es la PAES de invierno 2026?",
+      "respuesta": "La PAES de invierno 2026 se aplica del 15 al 17 de junio; inscripcion del 4 al 17 de marzo; puntajes el 17 de julio de 2026",
+      "fuente_url": "https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/",
+      "fuente_tipo": "pdf"
+    },
+    {
+      "id": "paes-admision-2027",
+      "tags": [
+        "fechas_escolares",
+        "hitos_nacionales"
+      ],
+      "claim": "Para la admision 2027, los puntajes PAES se publican el 4 de enero de 2027 y las postulaciones van del 4 al 7 de enero de 2027",
+      "displayed_value": "2027-01-04",
+      "data_key": "paes_admision_2027",
+      "data_path": "REX regionales 2026 (contenido curado MES_EXTRA)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "REX regionales 2026, seccion Calendario PAES / tabla de hitos (verificado en PDFs oficiales de las 16 Seremis, p.ej. REX 632/2025 Aysen y REX 2803/2025 RM)",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (tabla PAES leida en PDFs oficiales)",
+      "status": "correcto",
+      "pregunta": "Cuando se publican los puntajes PAES para la admision 2027?",
+      "respuesta": "Para la admision 2027, los puntajes PAES se publican el 4 de enero de 2027 y las postulaciones van del 4 al 7 de enero de 2027",
+      "fuente_url": "https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/",
+      "fuente_tipo": "pdf"
+    },
+    {
+      "id": "inicio-docentes-2026",
+      "tags": [
+        "fechas_escolares",
+        "hitos_nacionales"
+      ],
+      "claim": "Los docentes ingresan el lunes 2 de marzo de 2026; la jornada de planificacion es el 2 y 3 de marzo, y los estudiantes entran el miercoles 4 de marzo",
+      "displayed_value": "2026-03-02",
+      "data_key": "inicio_docentes_2026",
+      "data_path": "REX regionales 2026 (contenido curado MES_EXTRA)",
+      "source_id": "mineduc-resolucion-2026",
+      "source_reference": "REX regionales 2026, seccion Calendario PAES / tabla de hitos (verificado en PDFs oficiales de las 16 Seremis, p.ej. REX 632/2025 Aysen y REX 2803/2025 RM)",
+      "verification_method": "manual",
+      "verification_tier": 0,
+      "last_verified": "2026-07-06T00:00:00.000Z",
+      "last_verified_by": "milestone-361 (tabla PAES leida en PDFs oficiales)",
+      "status": "correcto",
+      "pregunta": "Cuando ingresan los docentes en 2026?",
+      "respuesta": "Los docentes ingresan el lunes 2 de marzo de 2026; la jornada de planificacion es el 2 y 3 de marzo, y los estudiantes entran el miercoles 4 de marzo",
+      "fuente_url": "https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-2026/",
+      "fuente_tipo": "pdf"
     }
   ]
 }
