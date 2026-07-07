@@ -69,16 +69,40 @@ module.exports = function generateProximoFeriado(calConfig, outputDir, domain) {
   var desc = 'El próximo feriado en Chile es ' + esc(proxNombre) + ' (' + esc(proxFechaTxt) +
     '). Cuenta regresiva y lista de los ' + nRestantes + ' feriados que quedan en ' + year + '. Fuente legal BCN.';
 
-  // --- FAQ ---
+  // --- FAQ (formato Q&A completo: irrenunciable / clases / comercio / mañana) ---
+  // Todo determinístico desde calendar-config.json; la página se regenera en
+  // cada deploy diario, así que "mañana" siempre es correcto en producción.
+  var manana = new Date(hoy.getTime() + 86400000);
+  var mananaISO = manana.getFullYear() + '-' +
+    String(manana.getMonth() + 1).padStart(2, '0') + '-' +
+    String(manana.getDate()).padStart(2, '0');
+  var feriadoManana = feriados.filter(function (f) { return f.date === mananaISO; })[0] || null;
+
   var faqs = [
     { q: '¿Cuál es el próximo feriado en Chile?',
       a: 'El próximo feriado en Chile es ' + proxNombre + ', el ' + proxFechaTxt.toLowerCase() + '. Faltan ' + (proxDias === 0 ? 'cero días (es hoy)' : proxDias + ' días') + '.' },
+    { q: '¿Mañana es feriado en Chile?',
+      a: feriadoManana
+        ? 'Sí: mañana es ' + feriadoManana.nombre + (feriadoManana.irrenunciable ? ', feriado irrenunciable' : '') + '.'
+        : 'No, mañana no es feriado en Chile. El próximo feriado es ' + proxNombre + ', el ' + proxFechaTxt.toLowerCase() + '.' },
     { q: '¿Cuántos feriados quedan en ' + year + '?',
       a: 'Quedan ' + nRestantes + ' feriados en lo que resta de ' + year + ' en Chile, contando desde hoy. La lista completa con fechas está en esta página.' },
     { q: '¿El próximo feriado suspende las clases?',
       a: prox && prox.contexto === 'en-clases'
         ? proxNombre + ' cae en día lectivo, por lo que suspende las clases en la mayoría de las regiones.'
         : (prox ? proxNombre + ' no suspende clases: ' + (prox.notaContexto ? prox.notaContexto.toLowerCase() : 'cae en fin de semana o período de vacaciones') + '.' : 'No quedan feriados este año.') },
+    { q: '¿' + (prox ? proxNombre : 'El próximo feriado') + ' es irrenunciable?',
+      a: prox
+        ? (prox.irrenunciable
+          ? 'Sí. ' + proxNombre + ' es feriado irrenunciable para los trabajadores del comercio (Leyes 19.973 y 20.629).'
+          : 'No. ' + proxNombre + ' es feriado legal, pero no irrenunciable: los trabajadores del comercio pueden ser convocados a trabajar ese día. Los irrenunciables del año son el 1 de enero, 1 de mayo, 18 y 19 de septiembre y 25 de diciembre.')
+        : 'No quedan feriados este año.' },
+    { q: '¿Abre el comercio el próximo feriado?',
+      a: prox
+        ? (prox.irrenunciable
+          ? 'En general no: al ser irrenunciable, el comercio que atiende con trabajadores dependientes debe cerrar. Se exceptúan farmacias de turno, estaciones de servicio, restaurantes y comercio atendido por sus propios dueños.'
+          : 'Sí. Al no ser feriado irrenunciable, supermercados, malls y comercio en general pueden abrir con normalidad el día de ' + proxNombre + '.')
+        : 'No quedan feriados este año.' },
     { q: '¿Los feriados de esta página son oficiales?',
       a: 'Sí. Se calculan de forma determinística desde la Ley 2.977 y sus modificaciones (BCN), incluyendo traslados de la Ley 19.668 y el solsticio de la Ley 21.357. La cuenta regresiva se actualiza sola cada día.' }
   ];
