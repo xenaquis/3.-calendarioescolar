@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-07-07 (MILESTONE 361 mergeada a main y desplegada; repo publico; ver seccion "Milestone 361")
+Ultimo update de este blueprint: 2026-07-07 (MILESTONE 362: Google Sheet eliminado del sistema — el repo git es la única fuente de verdad; ver seccion "Milestone 362")
 
 ---
 
@@ -21,9 +21,9 @@ Ultimo update de este blueprint: 2026-07-07 (MILESTONE 361 mergeada a main y des
 | OG Image              | ACTIVO          | Archivo `public/icons/og-image.png` existe (verificado 2026-03-24) |
 | Bot Fight Mode        | DOCUMENTADO     | Guia de activacion en seccion "Bot Fight Mode" abajo |
 | Datos Mineduc 2026    | CORREGIDOS      | 2026-06-11: Aysén = 6-24 jul (REX 632 modifica REX 618). Magallanes 29 jun-17 jul. Los Lagos 6-17 jul. Arica/Tarapacá 13-24 jul. Inicio = 4 mar. Las resoluciones SE MODIFICAN durante el año — ver PDFs en data/resoluciones-modificatorias/ |
-| Google Sheet Sync     | PENDIENTE       | Configurar: ver data/SHEET-SETUP.md                |
+| Google Sheet Sync     | ELIMINADO 2026-07 | Milestone 362: repo git = única fuente de verdad (datos + estado). Reemplazos: check-feriados diario, monitor BCN, verify-content mensual, pipeline PDF |
 | Frontend              | COMPLETADO      | Auditoría 360° 2026-04-08: SVG dark mode fix, ads.css collapse, CSP fix (CF Insights + AdSense quality), hero padding, mini-fact/panel borders, zebra table, placeholder icon |
-| Backend               | REFACTORIZADO   | Fechas centralizadas, validación, sync Sheet (2026-03-12) |
+| Backend               | REFACTORIZADO   | Fechas centralizadas, validación (2026-03-12); sin sync externo desde 2026-07 |
 | SEO / Anti-IA         | COMPLETADO      | Auditoría 360° 2026-03-17: E-E-A-T, llms.txt, schemas, cache — commit 3df7917 |
 | Validación Robusta    | 4 FASES + RAG   | Auditoría empírica 2026-03-18: fiabilidad B+ (82/100). Ver sección Validación abajo |
 | RAG Pipeline          | OPERATIVO       | extract-from-pdf.js v3 (catalog-first) + OCR. Cron: 15 may + 31 dic. 11/16 regiones OK |
@@ -69,7 +69,6 @@ Ultimo update de este blueprint: 2026-07-07 (MILESTONE 361 mergeada a main y des
 │   ├── pages.json                  -> FUENTE DE VERDAD regional: 16 regiones, fechas por region
 │   ├── calendar-config.json        -> FUENTE DE VERDAD temporal: fechas del año escolar, feriados
 │   ├── template.html               -> Plantilla HTML para paginas de region (usa {{variables}})
-│   ├── SHEET-SETUP.md              -> Instrucciones para configurar el Google Sheet
 │   ├── FUENTES-VERDAD.md           -> Auditoría de fuentes oficiales, protocolo anual, riesgos
 │   └── legal-articles.json         -> GENERADO por bcn-extractor.py — articulos verbatim de 15 claims feriado con SHA256
 │
@@ -82,7 +81,6 @@ Ultimo update de este blueprint: 2026-07-07 (MILESTONE 361 mergeada a main y des
 │   ├── generate-verificacion.js    -> Genera public/data/verificacion.json para badges frontend
 │   ├── check-sources.js            -> Fase 2: HTTP health check de 6 fuentes oficiales
 │   ├── extract-from-pdf.js         -> RAG pipeline v3: extrae datos de PDFs Mineduc (DeepSeek + OCR)
-│   ├── sync-from-sheet.js          -> Lee Google Sheet via REST API → actualiza pages.json + calendar-config.json
 │   ├── bcn-extractor.py            -> Extrae articulos legales BCN.cl (4 leyes) → data/legal-articles.json con SHA256 + DeepSeek ID
 │   ├── glm-ocr-local.py            -> OCR local (Ollama + GLM-OCR): extraccion sin API keys + cross-check vs pipeline visual
 │   └── build.sh                    -> Corre validate.js + verificaciones + cuenta archivos
@@ -90,7 +88,7 @@ Ultimo update de este blueprint: 2026-07-07 (MILESTONE 361 mergeada a main y des
 ├── .github/
 │   └── workflows/
 │       ├── deploy.yml              -> CI/CD: push a main → build → deploy a Cloudflare Pages
-│       ├── sync-deploy.yml         -> Cron semanal + manual: sync Sheet → generate → validate → deploy
+│       ├── sync-deploy.yml         -> Cron diario: check-feriados → generate → validate → deploy (nombre histórico)
 │       ├── verify-content.yml      -> Cron mensual: verificación IA + alerta Telegram si INCORRECTO
 │       └── extract-pdf.yml         -> Cron bianual (15 may + 31 dic): RAG extracción PDFs Mineduc
 │
@@ -105,7 +103,7 @@ Ultimo update de este blueprint: 2026-07-07 (MILESTONE 361 mergeada a main y des
 │   └── calendar-monitor/
 │       ├── index.js                -> Cloudflare Worker: monitoreo automatico semanal
 │       └── wrangler.toml           -> Config del worker (cron, KV binding)
-├── config.json                     -> Config del sitio (URLs, IDs de servicios, AdSense, GA4, Sheet)
+├── config.json                     -> Config del sitio (URLs, IDs de servicios, AdSense, GA4)
 ├── BLUEPRINT.md                    -> Este archivo
 └── .claude/
     ├── CLAUDE.md                   -> Instrucciones para Claude Code
@@ -253,7 +251,7 @@ Revisar GSC semanalmente:
 | Tabs hub | 15/7/8 | 16/6/10 |
 
 ### Auto-mantenimiento (2026-06-12) — página que se mantiene sola
-- **Sync Google Sheet DESACTIVADO** en sync-deploy.yml (decisión usuario): el repo es la fuente de verdad. El Sheet quedó con los 14 feriados viejos y un sync los habría restaurado. `scripts/sync-from-sheet.js` sigue disponible para uso manual; si se reactiva, actualizar ANTES la celda feriadosCompletos del Sheet.
+- **Sync Google Sheet DESACTIVADO** en sync-deploy.yml (decisión usuario): el repo es la fuente de verdad. El Sheet quedó con los 14 feriados viejos y un sync los habría restaurado. (2026-07: el Sheet y sync-from-sheet.js fueron ELIMINADOS definitivamente — milestone 362.)
 - **APIs de feriados evaluadas (2026-06-12): NINGUNA viable para CI.** apis.digital.gob.cl/fl/feriados muerta; feriadosapp.com/api redirige a api.boostr.cl; boostr está detrás de bot-protection Cloudflare (403 a curl/node). NO construir dependencias sobre estas APIs.
 - **Solución: motor determinístico propio** — `scripts/check-feriados.js` recalcula los 16 feriados desde reglas legales codificadas (Pascua Meeus → VS/SS; traslados lunes Ley 19.668 para 29-jun/12-oct; traslado viernes Ley 20.299 para 31-oct; tabla solsticio Ley 21.357 2024-2028; irrenunciables 19.973/20.629) y compara contra calendar-config.json. Sin red, no flakea. Mutation-tested (detecta faltantes/sobrantes/Corpus/flags). Corre en build.sh (cada push) + workflow diario.
 - **TABLA SOLSTICIO**: extender en check-feriados.js antes de cargar un año nuevo (falla a propósito si el año no está — fuerza verificación humana contra anexo Ley 21.357 BCN).
@@ -337,6 +335,30 @@ Implementación completa del backlog de la auditoría 360 (`AUDITORIA-360-2026-0
 - **Worker calendar-monitor**: SITE_FERIADOS corregido (fuera Corpus Christi, entra Virgen del Carmen), fechas sincronizadas con calendar-config, watchdog 3 días, cron THU — **desplegado a Cloudflare** (versión 8c3484d9).
 - **Hallazgos que contradicen registros previos**: la Ley 21.357 NO tiene anexo de fechas de solsticio (verificado vía API BCN — extender la tabla SOLSTICIO requiere fuente oficial anual); /proximo-feriado YA tenía JSON-LD (la auditoría decía CERO).
 - **Pendiente dic-2026 (Ley 21.719)**: plan de banner de consentimiento de cookies; el CMP de Google (Privacy & messaging, tráfico EEA) se activa en el panel AdSense tras la aprobación — la CSP ya lo permite.
+
+## Milestone 362 (2026-07-07) — Google Sheet ELIMINADO: autonomía total
+
+Decisión del dueño: el Sheet "Páginas Chicas — Control" deja de existir como pieza del sistema.
+El repo git es la ÚNICA fuente de verdad de datos Y de estado. Plan completo en `MILESTONE-362.md`.
+Rama `milestone-362` (merge decidido por el humano).
+
+- **Eliminados** (~1.040 líneas): `scripts/sync-from-sheet.js`, `scripts/claims-to-sheet.js`,
+  `data/SHEET-SETUP.md`, bloque `sheet` de config.json, warning PLACEHOLDER_SHEET_ID en validate.js.
+- **Referencias limpiadas**: notify-telegram.js (links "Abrir Google Sheet" → link al repo +
+  "editar data/*.json y push a main"), worker calendar-monitor (alerta Mineduc ya no instruye
+  actualizar Sheet — **redesplegado a Cloudflare**, versión 2771d35e), comentarios estampados por
+  generate-pages.js, cabecera de sync-deploy.yml, protocolo anual de FUENTES-VERDAD.md.
+- **sync-deploy.yml conserva su nombre de archivo** (histórico): el rename a daily-deploy.yml se
+  omitió porque el filename está referenciado en comentarios de 4 workflows + 2 scripts; el
+  `name:` del workflow ("Verificación diaria + Deploy") ya es correcto.
+- **Reemplazos del Sheet ya operativos** (desde jun-2026): check-feriados.js determinístico
+  (build + cron diario), monitor legal BCN semanal (worker), verify-content mensual, deploy diario
+  con freshness, pipeline PDF Mineduc (feb/may/dic).
+- **`GOOGLE_API_KEY` se CONSERVA**: hoy lo consume Gemini (extract-visual.js) en extract-pdf.yml.
+  Su uso para Sheets murió con sync-from-sheet.js. NO eliminar ni renombrar el secret.
+- **Pendiente [HUMANO]**: archivar/eliminar el spreadsheet en Google Drive (ID
+  `160WyrLOm6nV2MAg1cusYvSbVzOWnqYWIt8O5MgXRvF4` — si otros sitios lo usan, solo el tab de
+  calendarioescolar); revisar `gh secret list` y eliminar `GOOGLE_SERVICE_ACCOUNT_KEY` si existe.
 
 ## Auditoría 360 AdSense/feriados/crons (2026-07-06)
 
@@ -491,13 +513,13 @@ Prioridad: facilidad de búsqueda y lectura primero, estética segundo.
 ## Flujo de datos
 
 ```
-Google Sheet (fuente de verdad — editar aquí)
-      |
-      v  (GitHub Action: sync-deploy.yml — cron lunes 06:00 UTC o trigger manual)
-scripts/sync-from-sheet.js
+Repo git (fuente de verdad — editar aquí)
       |
       |---> data/pages.json           (16 regiones con fechas)
       |---> data/calendar-config.json (fechas año escolar + feriados)
+      |         ^
+      |         | (opcional: pipeline PDF Mineduc extract-pdf.yml con --fix,
+      |         |  cron 15-feb / 15-may / 31-dic)
       |
       v  (npm run generate)
 scripts/generate-pages.js
@@ -510,10 +532,10 @@ scripts/generate-pages.js
       |
       v  (npm run build = scripts/build.sh)
       |   → scripts/validate.js (bloquea build si hay errores criticos)
-      |   → actualiza fechas en sitemap.xml
+      |   → scripts/check-feriados.js (verificación legal determinística)
       |   → verifica archivos y placeholders
       v
-Cloudflare Pages (deploy)
+Cloudflare Pages (deploy — push a main o cron diario sync-deploy.yml)
 ```
 
 ### Herramienta local: GLM-OCR (no CI, solo dev/testing)
@@ -531,7 +553,7 @@ python scripts/glm-ocr-local.py --dry-run              # ver que se procesaria
 - Precision: 108/112 campos = pipeline visual (4 gaps por cobertura de snapshots, 0 discrepancias)
 - NO reemplaza extract-visual.js en CI — Ollama no corre en GitHub Actions
 
-**Regla**: editar datos SOLO en el Google Sheet (o en `data/pages.json` + `data/calendar-config.json` si se prefiere manual).
+**Regla**: editar datos SOLO en `data/pages.json` + `data/calendar-config.json` (el repo es la única fuente de verdad).
 Las páginas en `public/region/` y `public/js/` son artefactos generados — nunca editar a mano.
 
 ---
@@ -564,7 +586,7 @@ Las páginas en `public/region/` y `public/js/` son artefactos generados — nun
 ### ~~DEUDA — FECHAS HARDCODEADAS EN app.js~~ RESUELTO (2026-03-12)
 - Todas las fechas del año escolar están en `data/calendar-config.json`
 - `app.js` lee `window.CALENDAR_CONFIG` generado automáticamente
-- Actualización anual = solo editar el Google Sheet
+- Actualización anual = editar los JSON en data/ (desde 2026-07, sin Sheet)
 
 ---
 
@@ -576,10 +598,7 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 
 2. ~~**Configurar DNS en Cloudflare**~~ COMPLETADO — dominio en producción
 
-3. **Configurar Google Sheet + API Key** ← SIGUIENTE
-   - Seguir instrucciones en `data/SHEET-SETUP.md`
-   - Agregar GitHub Secret: `GOOGLE_API_KEY`
-   - Actualizar `config.json` → `sheet.spreadsheetId`
+3. ~~**Configurar Google Sheet + API Key**~~ OBSOLETO — el Sheet fue eliminado del sistema (milestone 362, 2026-07). El secret `GOOGLE_API_KEY` existe y se CONSERVA solo para Gemini (extract-visual.js en extract-pdf.yml).
 
 4. ~~**Crear propiedad GA4**~~ COMPLETADO (2026-03-24) — ID `G-6FVLKF6PFQ` activo en todas las paginas
 
@@ -653,7 +672,7 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 4. **Verificar Corpus Christi** con algoritmo Pascua (NO copiar del año anterior — bug histórico)
 5. **Verificar San Pedro y San Pablo** (29 jun: si cae sáb/dom → mover al lunes)
 6. **Verificar regiones sur** — Aysén y Magallanes tienen fechas diferentes (vacaciones extendidas)
-7. Actualizar `data/calendar-config.json` + `data/pages.json` (o Google Sheet)
+7. Actualizar `data/calendar-config.json` + `data/pages.json`
 8. Actualizar **FAQ hardcodeadas** en `public/index.html` (texto dentro de `<details>`)
 9. Actualizar **Schema.org JSON-LD** en `public/index.html` (fechas en `acceptedAnswer`)
 10. `npm run generate` → `node scripts/validate.js` → `node scripts/verify-content.js`
@@ -664,8 +683,8 @@ Estas acciones NO puede hacerlas Claude — requieren acceso humano a servicios 
 - "Inicio del año escolar" (2 mar) ≠ "Ingreso de estudiantes" (4 mar) — el sitio muestra **ingreso de estudiantes**
 - "Último día clases JEC 38 sem" (4 dic) ≠ "Término año escolar" (31 dic) — el sitio muestra **último día clases JEC**
 
-**Sin Google Sheet (fallback manual):**
-Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` → `node scripts/validate.js` → deploy
+**Flujo manual directo:**
+Editar `data/pages.json` + `data/calendar-config.json` → `npm run generate` → `node scripts/validate.js` → `node scripts/check-feriados.js` → push a main (deploya)
 
 ### Monitoreo automatico — Calendar Monitor Worker
 - **Archivo**: `workers/calendar-monitor/index.js` (v1.2.0)
@@ -884,8 +903,8 @@ npm run build           # Valida datos + verificaciones de integridad
 npm run deploy          # Deploy a Cloudflare Pages
 
 node scripts/validate.js          # Solo validación de datos (0=OK, 1=error)
+node scripts/check-feriados.js    # Verificación determinística de feriados (0=OK, 1=discrepancia)
 node scripts/verify-content.js    # Verificación Fase 3 (determinística + IA). Con FORCE_ALL=true recalcula todo
-node scripts/sync-from-sheet.js   # Solo sync desde Sheet (requiere GOOGLE_API_KEY env var)
 npm run extract-pdf               # RAG: extrae datos de PDFs Mineduc (requiere DEEPSEEK_API_KEY)
 npm run verify-pdf                # RAG: solo PDFs locales (--local)
 

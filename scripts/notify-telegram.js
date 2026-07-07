@@ -33,8 +33,7 @@
   var url   = require('url');
 
   // ── Constantes ───────────────────────────────────────────────────────────
-  var SHEET_ID   = '160WyrLOm6nV2MAg1cusYvSbVzOWnqYWIt8O5MgXRvF4';
-  var SHEET_URL  = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID;
+  var REPO_URL   = 'https://github.com/xenaquis/3.-calendarioescolar';
   var MAX_MSG    = 4096;
   var TRUNCATE   = 300; // chars maximos por bloque de texto
 
@@ -129,7 +128,7 @@
       blocks.push(block);
     }
 
-    var footer = '\n<a href="' + SHEET_URL + '">Abrir Google Sheet</a>';
+    var footer = '\nAccion: editar data/*.json y push a main. <a href="' + REPO_URL + '">Abrir repo</a>';
 
     return header + blocks.join('') + footer;
   }
@@ -151,7 +150,7 @@
       + '<b>Claims revisados:</b> ' + totalChecked + '\n'
       + '<b>Cambios:</b> ' + changes.length + '\n'
       + '\u26a0\ufe0f Mensaje dividido por longitud — ver siguientes mensajes para detalles.\n'
-      + '<a href="' + SHEET_URL + '">Abrir Google Sheet</a>';
+      + 'Accion: editar data/*.json y push a main. <a href="' + REPO_URL + '">Abrir repo</a>';
 
     var msgs = [summary];
 
@@ -174,7 +173,7 @@
         + '<pre>' + escapeHtml(textBefore) + '</pre>\n\n'
         + '<b>Texto actual (BCN):</b>\n'
         + '<pre>' + escapeHtml(textAfter) + '</pre>\n'
-        + '<a href="' + SHEET_URL + '">Abrir Google Sheet</a>';
+        + 'Accion: editar data/*.json y push a main. <a href="' + REPO_URL + '">Abrir repo</a>';
 
       msgs.push(detail);
     }

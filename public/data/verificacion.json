@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-07-07T03:41:27.026Z",
+  "generated_at": "2026-07-07T04:28:42.423Z",
   "summary": {
     "total_claims": 75,
-    "verified": 46,
-    "unverified": 24,
+    "verified": 70,
+    "unverified": 0,
     "incorrecto": 0,
     "no_verificable": 5,
     "fuente_inaccesible": 0,
     "sources_ok": 2,
     "sources_total": 6,
-    "last_source_check": "2026-06-15T15:33:50.859Z",
-    "last_source_check_formatted": "15 de junio de 2026",
+    "last_source_check": "2026-07-06T13:35:38.972Z",
+    "last_source_check_formatted": "6 de julio de 2026",
     "source_names": [
       "Mineduc",
       "Biblioteca del Congreso Nacional"
@@ -30,7 +30,7 @@
         "mineduc-resolucion-2026",
         "mineduc-historico"
       ],
-      "last_verified": "2026-06-15T15:34:16.376Z"
+      "last_verified": "2026-07-07T04:08:00.675Z"
     },
     "holidays": {
       "id": "holidays",
@@ -48,7 +48,7 @@
         "bcn-ley-20148",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-06-15T15:34:16.375Z"
+      "last_verified": "2026-07-07T04:08:00.672Z"
     },
     "context": {
       "id": "context",
@@ -64,7 +64,7 @@
         "bcn-ley-2977",
         "bcn-ley-19668"
       ],
-      "last_verified": "2026-06-15T15:34:16.376Z"
+      "last_verified": "2026-07-07T04:08:00.674Z"
     },
     "stats": {
       "id": "stats",
@@ -72,7 +72,7 @@
       "claims_count": 5,
       "sources": [],
       "source_ids": [],
-      "last_verified": "2026-06-15T15:34:16.376Z"
+      "last_verified": "2026-07-07T04:08:00.674Z"
     }
   }
 }

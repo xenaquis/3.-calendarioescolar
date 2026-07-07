@@ -247,16 +247,7 @@ if (fs.existsSync(indexPath)) {
   }
 }
 
-// ── 5. No placeholders criticos en config.json ─────────────────────────────
-var configPath = path.join(ROOT, 'config.json');
-if (fs.existsSync(configPath)) {
-  var configStr = fs.readFileSync(configPath, 'utf8');
-  if (configStr.indexOf('PLACEHOLDER_SHEET_ID') !== -1) {
-    warn('config.json: sheet.spreadsheetId es placeholder — actualizar con ID real del Google Sheet');
-  }
-}
-
-// ── 6. Heartbeat: source-health.json no debe estar stale (>14 dias) ──────
+// ── 5. Heartbeat: source-health.json no debe estar stale (>14 dias) ──────
 var sourceHealthPath = path.join(ROOT, 'data', 'source-health.json');
 if (fs.existsSync(sourceHealthPath)) {
   try {
@@ -273,7 +264,7 @@ if (fs.existsSync(sourceHealthPath)) {
   }
 }
 
-// ── 7. Validacion de claims (JSON-03, JSON-04) ────────────────────────────
+// ── 6. Validacion de claims (JSON-03, JSON-04) ────────────────────────────
 var claimsPath = path.join(ROOT, 'data', 'claims.json');
 var afirmacionesPath = path.join(ROOT, 'data', 'afirmaciones.json');
 var claimsData = null;

@@ -142,10 +142,9 @@ Nivel 2 (publicación oficial derivada):
       → PDFs regionales en [region].mineduc.cl
       → ayudamineduc.cl/ficha/calendarios-escolares-regionales
 
-Nivel 3 (fuente operativa interna):
-  └── Google Sheet "Páginas Chicas — Control" (editado manualmente)
-      → data/pages.json
-      → data/calendar-config.json
+Nivel 3 (fuente operativa interna — el repo git):
+  └── data/pages.json (editado directamente, o vía pipeline PDF con --fix)
+      data/calendar-config.json
 
 Nivel 4 (artefactos generados, NUNCA editar):
   └── public/js/regions-data.js
@@ -172,12 +171,12 @@ GET https://www.mineduc.cl/resoluciones-de-calendarios-escolares-regionales-{AÑ
 - [ ] Verificar Corpus Christi = Pascua + 60 (usar algoritmo, no copiar del año anterior)
 - [ ] Verificar San Pedro y San Pablo: ¿cae sáb/dom? → mover al lunes
 - [ ] Verificar qué feriados "secundarios" caen en días de clases ese año nuevo
-- [ ] Actualizar tab "Regiones" del Google Sheet
-- [ ] Actualizar tab "Config" del Google Sheet (year, fechas, feriados)
+- [ ] Actualizar `data/pages.json` (16 regiones) — directo o vía pipeline PDF (`extract-pdf.yml` con --fix)
+- [ ] Actualizar `data/calendar-config.json` (year, fechas, feriados) + extender tabla SOLSTICIO en check-feriados.js
 - [ ] Actualizar FAQ hardcodeadas en index.html (fechas en texto de `<details>`)
 - [ ] Actualizar Schema.org JSON-LD en index.html (fechas en `acceptedAnswer`)
 - [ ] Actualizar landings estáticas: vacaciones-invierno-{AÑO}.html, cuando-empiezan-clases-{AÑO}.html
-- [ ] Disparar GitHub Action "Sync desde Sheet + Deploy"
+- [ ] `npm run generate` + `node scripts/validate.js` + `node scripts/check-feriados.js` → push a main (deploya)
 - [ ] Verificar health.json: dataYear correcto
 
 ---
@@ -242,8 +241,7 @@ Los 4 feriados que inicialmente parecían "faltantes" (Pueblos Indígenas, Asunc
 | Circular regional modifica fechas post-PDF | Baja | Alto | Revisar portales regionales además del central |
 | Corpus Christi calculado de año anterior | Alta | Alto | Validación algorítmica automática en validate.js |
 | Nuevo feriado por ley del Congreso | Muy baja | Medio | Suscribirse a alertas BCN |
-| Google Sheet eliminado accidentalmente | Muy baja | Crítico | Mantener backup en data/pages.json + data/calendar-config.json |
-| GOOGLE_API_KEY expira | Media | Alto | Monitorear health.json + fecha de generación |
+| GOOGLE_API_KEY (Gemini) expira | Media | Alto | Monitorear health.json + fecha de generación |
 | Nueva región creada por ley | Muy baja | Medio | Revisión anual de estructura geopolítica |
 | Sitio publica dato incorrecto a usuarios | Media | Crítico | Validación en validate.js + disclaimer en footer |
 
