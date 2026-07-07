@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write        # Alerta de fallo via issue + GITHUB_TOKEN
     steps:
       - uses: actions/checkout@v5
 
