@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-06-12 (ESTRATEGIA FERIADOS post-análisis GSC: ver sección "Estrategia Feriados" abajo. FIX datos: feriadosCompletos 14→16 — faltaban 15-ago Asunción y 1-nov Todos los Santos; flag irrenunciable agregado. FIX legal hub: lista de irrenunciables estaba incorrecta. 12 páginas nuevas /feriados/[mes]-2026/ + /corpus-christi-2026 + feriados-2027 con fechas reales).
+Ultimo update de este blueprint: 2026-07-06 (MILESTONE 361 ejecutada en rama milestone-361 — ver seccion "Milestone 361". Pendiente: merge a main por el humano.)
 
 ---
 
@@ -321,9 +321,26 @@ exit 2) y bloqueaba el deploy (también el cron diario). Normalizado a LF + `.gi
 **Acción humana:** pegar slot IDs reales de AdSense; verificar "Always Use HTTPS" en Cloudflare; tras deploy
 re-enviar sitemap + Request Indexing en GSC; opcional: actualizar actions/checkout+setup-node a Node 24.
 
+## Milestone 361 (2026-07-06) — EJECUTADA en rama `milestone-361` (pendiente merge)
+
+Implementación completa del backlog de la auditoría 360 (`AUDITORIA-360-2026-07.md`), plan en `MILESTONE-361.md` (checkboxes al día). 12 commits atómicos. **NO mergeada a main** — el merge y deploy los decide el humano. Resumen:
+
+- **Alertas resucitadas**: check-sources / verify-content / extract-pdf → issue+GITHUB_TOKEN (los TELEGRAM_* no existen); check-bcn-changes.py solo persiste el hash si la notificación salió (antes un cambio legal se perdía para siempre).
+- **AdSense limpio**: cero loaders en dead-end, cero `<ins>` placeholder (eran 72), meta de cuenta solo en index, ads.js único cargador, CSP lista para sodar/CMP. `config.json → adsense` documentado como config muerta.
+- **Veracidad**: contradicción Aysén resuelta con REX 632 (JEC 11-dic / sin JEC 23-dic — pages.json estaba bien, el texto de diciembre estaba invertido); `{{inicioDiaSemana}}` calculado (el "Lunes" hardcodeado era falso: 4-mar-2026 es miércoles); check de consistencia en validate.js; tildes.
+- **Schema**: FAQPage/HowTo/Event retirados de todo el sitio (muertos/no elegibles); Dataset agregado al home; texto FAQ visible se conserva.
+- **16 regiones diferenciadas** (remediación thin content): 16/16 REX verificadas leyendo los PDF oficiales de cada Seremi (números en pages.json → `resolucion`), `notaRegional` (2 párrafos únicos por región) + `comparativa` + sección "Particularidades" con link al PDF. 16 claims rex_* nuevos (claims: 51 → 75 al cierre). Unicidad 16-20 → 34-55 tokens únicos por par.
+- **Meses flacos** (ene/feb/mar/nov) profundizados con PAES oficial, plazos administrativos, EPJA; ángulo competitivo "¿hay clases?" en title/H1 de los 12 meses; landing cuando-empiezan-clases con historial verificado 2022-2026; /proximo-feriado con Q&A completo (irrenunciable/comercio/¿mañana?); verbatim legal BCN + SHA-256 visible en /feriados-2026#texto-legal.
+- **Sitemap lastmod selectivo** por hash de contenido (manifest `data/sitemap-lastmod.json`; build.sh ya no re-estampa); señales de verificación en positivo (verificacion.js).
+- **Institucional**: quienes-somos fusionada en /about (301); Person JSON-LD reducido a lo visible ("Carlos S."); privacidad con partner-sites + web beacons/IPs.
+- **Crons**: extract-pdf con paso de descarga de PDFs (desde pages.json → resolucion.url) + cron 15-feb; concurrency pages-deploy; dedup check-feriados; actions v5/v6.
+- **Worker calendar-monitor**: SITE_FERIADOS corregido (fuera Corpus Christi, entra Virgen del Carmen), fechas sincronizadas con calendar-config, watchdog 3 días, cron THU — **desplegado a Cloudflare** (versión 8c3484d9).
+- **Hallazgos que contradicen registros previos**: la Ley 21.357 NO tiene anexo de fechas de solsticio (verificado vía API BCN — extender la tabla SOLSTICIO requiere fuente oficial anual); /proximo-feriado YA tenía JSON-LD (la auditoría decía CERO).
+- **Pendiente dic-2026 (Ley 21.719)**: plan de banner de consentimiento de cookies; el CMP de Google (Privacy & messaging, tráfico EEA) se activa en el panel AdSense tras la aprobación — la CSP ya lo permite.
+
 ## Auditoría 360 AdSense/feriados/crons (2026-07-06)
 
-Workflow multi-agente Fable (22 agentes, verificación adversarial + BrowserOS). **Informe completo y backlog P0-P3 en `AUDITORIA-360-2026-07.md`** (raíz). **Plan de ejecución autónomo: `MILESTONE-361.md`** (raíz — incluye el prompt de arranque para sesión limpia; rama `milestone-361`, PENDIENTE de ejecutar). Resumen:
+Workflow multi-agente Fable (22 agentes, verificación adversarial + BrowserOS). **Informe completo y backlog P0-P3 en `AUDITORIA-360-2026-07.md`** (raíz). **Plan de ejecución autónomo: `MILESTONE-361.md`** (raíz — EJECUTADO, ver sección Milestone 361 arriba). Resumen:
 
 - **Causa del rechazo AdSense "low value content"**: 16 páginas región = 96% boilerplate (16-20 palabras únicas) con 3 ad-units placeholder c/u; loader adsbygoogle en páginas dead-end (contacto/privacidad/avisolegal/about/quienes-somos); 72 `<ins>` con slots falsos. Arreglable: fix de contenido (diferenciar regiones con REX + notaRegional en pages.json), no técnico.
 - **Infra de alertas MUERTA**: secrets TELEGRAM_* no existen (no-ops silenciosos en 4 workflows); apagón total de crons 23-30 jun por billing del repo privado, sin alerta. check-bcn-changes sobreescribe hash aunque la alerta falle → cambios legales se pierden permanentemente. extract-pdf.yml roto (falló 15-may, PDFs gitignoreados, alerta nunca dispara).
