@@ -84,9 +84,9 @@
       "notas": "Datos de cobertura escolar, numero de estudiantes. No utilizada actualmente por ninguna claim."
     },
     "mineduc-historico": {
-      "nombre": "Mineduc — comunicados y resoluciones de calendario escolar de anos anteriores",
       "url": "https://www.mineduc.cl/",
-      "tipo": "html"
+      "tipo": "html",
+      "name": "Mineduc (comunicados de años anteriores)"
     }
   },
   "claims": [

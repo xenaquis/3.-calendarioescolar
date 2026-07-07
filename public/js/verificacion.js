@@ -124,7 +124,7 @@
   }
 
   function abbreviateSources(sources) {
-    return sources.map(function(name) {
+    return sources.filter(function(n) { return n; }).map(function(name) {
       if (name.indexOf('Resolucion Exenta') !== -1) return 'Resoluci\u00f3n Mineduc';
       if (name.indexOf('Ley 2.977') !== -1) return 'Ley 2.977 (BCN)';
       if (name.indexOf('Ley 19.668') !== -1) return 'Ley 19.668 (BCN)';

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T03:38:23.432Z",
+  "generated_at": "2026-07-07T03:41:27.026Z",
   "summary": {
     "total_claims": 75,
     "verified": 46,
@@ -24,7 +24,7 @@
       "claims_count": 45,
       "sources": [
         "Resolucion Exenta Calendario Escolar 2026",
-        null
+        "Mineduc (comunicados de años anteriores)"
       ],
       "source_ids": [
         "mineduc-resolucion-2026",
