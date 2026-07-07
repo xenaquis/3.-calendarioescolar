@@ -4,7 +4,7 @@
 
 Sitio utility chileno: calendario escolar 2026 por region.
 Arquetipo B (Catalogo Estatico). Vanilla HTML/CSS/JS. Cloudflare Pages. Sin frameworks, sin bundlers, sin dependencias npm.
-Ultimo update de este blueprint: 2026-07-06 (MILESTONE 361 ejecutada en rama milestone-361 — ver seccion "Milestone 361". Pendiente: merge a main por el humano.)
+Ultimo update de este blueprint: 2026-07-07 (MILESTONE 361 mergeada a main y desplegada; repo publico; ver seccion "Milestone 361")
 
 ---
 
@@ -321,9 +321,9 @@ exit 2) y bloqueaba el deploy (también el cron diario). Normalizado a LF + `.gi
 **Acción humana:** pegar slot IDs reales de AdSense; verificar "Always Use HTTPS" en Cloudflare; tras deploy
 re-enviar sitemap + Request Indexing en GSC; opcional: actualizar actions/checkout+setup-node a Node 24.
 
-## Milestone 361 (2026-07-06) — EJECUTADA en rama `milestone-361` (pendiente merge)
+## Milestone 361 (2026-07-06) — MERGEADA a main y DESPLEGADA (2026-07-07)
 
-Implementación completa del backlog de la auditoría 360 (`AUDITORIA-360-2026-07.md`), plan en `MILESTONE-361.md` (checkboxes al día). 12 commits atómicos. **NO mergeada a main** — el merge y deploy los decide el humano. Resumen:
+Implementación completa del backlog de la auditoría 360 (`AUDITORIA-360-2026-07.md`), plan en `MILESTONE-361.md` (checkboxes al día). 15 commits. Mergeada y desplegada el 2026-07-07; verificada en producción (Particularidades, títulos "¿hay clases?", 301 quienes-somos→about, texto-legal). **Repo GitHub ahora PÚBLICO** (elimina la clase de apagón por billing). Workflows check-sources y extract-pdf despachados post-merge para validar alertas. Issue #8 (alerta stale de junio) cerrada. Resumen:
 
 - **Alertas resucitadas**: check-sources / verify-content / extract-pdf → issue+GITHUB_TOKEN (los TELEGRAM_* no existen); check-bcn-changes.py solo persiste el hash si la notificación salió (antes un cambio legal se perdía para siempre).
 - **AdSense limpio**: cero loaders en dead-end, cero `<ins>` placeholder (eran 72), meta de cuenta solo en index, ads.js único cargador, CSP lista para sodar/CMP. `config.json → adsense` documentado como config muerta.
