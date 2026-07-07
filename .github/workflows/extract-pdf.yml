@@ -63,6 +63,7 @@ jobs:
         continue-on-error: true
 
       - name: Validate extraction
+        id: validate
         run: node scripts/validate-extraction.js --strict
 
       - name: Commit snapshots and report
@@ -96,11 +97,15 @@ jobs:
           git pull --rebase --autostash origin main
           git push
 
-      - name: Alert on discrepancies
-        if: steps.extract.outcome == 'failure'
+      # Alerta via issue + GITHUB_TOKEN (patrón probado de sync-deploy.yml).
+      # Antes: curl-Telegram con secrets inexistentes, condicionado a
+      # steps.extract.outcome (con continue-on-error) → quedaba SKIPPED en
+      # casi cualquier fallo real (p.ej. el del 15-may fue en Generate PNGs).
+      - name: Alert on failure (issue)
+        if: failure() || steps.extract.outcome == 'failure'
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           MISMATCHES=$(node -e "
             var fs = require('fs');
@@ -110,20 +115,25 @@ jobs:
               var failedRegions = Object.keys(r.per_region || {}).filter(function(k) { return !r.per_region[k].passed; });
               failedRegions.slice(0, 10).forEach(function(region) {
                 var errs = r.per_region[region].errors || [];
-                errs.forEach(function(e) { console.log('• ' + region + ': ' + e); });
+                errs.forEach(function(e) { console.log('- ' + region + ': ' + e); });
               });
               if (failedRegions.length > 10) console.log('... y ' + (failedRegions.length - 10) + ' regiones mas');
             } catch(e) { process.exit(1); }
-          " 2>/dev/null) || exit 0
+          " 2>/dev/null) || true
 
-          if [ -z "$MISMATCHES" ]; then exit 0; fi
+          BODY="El pipeline de extracción visual de PDFs Mineduc falló el $(date -u +%Y-%m-%d\ %H:%M) UTC.
 
-          MSG=$(printf '📄 *Errores extraccion visual — calendarioescolar.cl*\n\n%s\n\nRevisar data/extraction-validation-report.json' "$MISMATCHES")
+          ${MISMATCHES:-Sin reporte de discrepancias disponible — el fallo fue antes de la validación (revisar el log).}
 
-          curl -s -X POST \
-            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -H "Content-Type: application/json" \
-            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+          Log del run: $RUN_URL"
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --search "ALERTA extraccion PDF in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$BODY"
+          else
+            gh issue create --repo "${{ github.repository }}" \
+              --title "ALERTA extraccion PDF fallo $(date -u +%Y-%m-%d)" \
+              --body "$BODY"
+          fi
 
       - name: Summary
         if: always()

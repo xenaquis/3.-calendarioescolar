@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      issues: write        # Alertas via issue + GITHUB_TOKEN (los secrets TELEGRAM_* no existen)
     # Solo correr si fue disparado manualmente, por cron, o si el check de fuentes tuvo exito
     if: >
       github.event_name == 'schedule' ||
@@ -50,27 +51,37 @@ jobs:
           git pull --rebase --autostash origin main
           git push
 
-      - name: Alert on INCORRECTO
+      # Alerta via issue + GITHUB_TOKEN (patrón probado de sync-deploy.yml).
+      # El curl-Telegram anterior era no-op silencioso: secrets inexistentes.
+      - name: Alert on INCORRECTO (issue)
         if: steps.verify.outcome == 'failure'
         env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           INCORRECTOS=$(node -e "
             var r = require('./data/verification-results.json');
             r.results.filter(function(c) { return c.verdict === 'INCORRECTO'; }).forEach(function(c) {
-              console.log('• ' + c.id + ': ' + c.evidence);
+              console.log('- ' + c.id + ': ' + c.evidence);
             });
           " 2>/dev/null) || exit 0
 
           if [ -z "$INCORRECTOS" ]; then exit 0; fi
 
-          MSG=$(printf '🚨 *DATOS INCORRECTOS — calendarioescolar.cl*\n\n%s\n\nAccion requerida: verificar y corregir datos.' "$INCORRECTOS")
+          BODY="DATOS INCORRECTOS detectados por verify-content el $(date -u +%Y-%m-%d\ %H:%M) UTC:
 
-          curl -s -X POST \
-            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
-            -H "Content-Type: application/json" \
-            -d "$(printf '{"chat_id":"%s","text":"%s","parse_mode":"Markdown"}' "$TELEGRAM_CHAT_ID" "$(echo "$MSG" | sed 's/"/\\"/g' | sed ':a;N;$!ba;s/\n/\\n/g')")"
+          $INCORRECTOS
+
+          Acción requerida: verificar y corregir datos.
+          Log del run: $RUN_URL"
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --search "ALERTA datos incorrectos in:title" --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$BODY"
+          else
+            gh issue create --repo "${{ github.repository }}" \
+              --title "ALERTA datos incorrectos $(date -u +%Y-%m-%d)" \
+              --body "$BODY"
+          fi
 
       - name: Summary
         if: always()
